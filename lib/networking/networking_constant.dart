@@ -11,5 +11,9 @@ abstract class NetworkingConstant {
 
   // after login or regster new user give ottp and emil in body
   final String endVerify = "/auth/verify";
+
+  final String endProfile = "/user/profile";
+
+
   
 }

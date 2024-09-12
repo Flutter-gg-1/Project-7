@@ -60,7 +60,7 @@ mixin AuthMethodApi on NetworkingConstant {
 
 
 
-
+// form here take token
   verifyPost({required String email, required String otp}) async{
 
 
