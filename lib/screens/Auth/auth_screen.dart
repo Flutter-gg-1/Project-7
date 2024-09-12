@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_management_app/screens/Auth/login_screen.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -12,7 +13,8 @@ class AuthScreen extends StatelessWidget {
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color(0xFF4129B7),
+                  Color(0xFFA380FF),
+                  Color(0xFF2F1E84),
                   Color(0xff1D1251),
                 ],
                 begin: Alignment.topCenter,
@@ -39,7 +41,13 @@ class AuthScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 50),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>  LoginScreen()),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 100, vertical: 9),
