@@ -1,95 +1,103 @@
+import 'package:project_management_app/models/image_model.dart';
+import 'package:project_management_app/models/link_model.dart';
+import 'package:project_management_app/models/user_model.dart';
+
 class ProjectModel {
-  String projectId;
-  String? projectName;
-  String? bootcampName;
-  String? startDate;
-  String? endDate;
-  String? presentationDate;
-  String? projectDescription;
-  String? logoUrl;
-  String? presentationUrl;
-  String userId;
-  String adminId;
-  String timeEndEdit;
-  bool allowEdit;
-  bool isPublic;
-  String createAt;
-  String? updateAt;
-  String type;
-  List<dynamic> imagesProject;
-  List<dynamic> linksProject;
-  List<dynamic> membersProject;
+  late final String projectId;
+  late final String type;
+  late final String projectName;
+  late final String bootcampName;
+  late final String startDate;
+  late final String endDate;
+  late final String presentationDate;
+  late final String projectDescription;
+  late final String logoUrl;
+  late final String presentationUrl;
+  late final String userId;
+  late final String adminId;
+  late final String timeEndEdit;
+  late final bool allowEdit;
+  late final bool isPublic;
+  late final String createAt;
+  late final String updateAt;
+  late final List<ImageModel> imagesProject;
+  late final List<LinkModel> linksProject;
+  late final List<UserModel> membersProject;
 
   ProjectModel({
     required this.projectId,
-    this.projectName,
-    this.bootcampName,
-    this.startDate,
-    this.endDate,
-    this.presentationDate,
-    this.projectDescription,
-    this.logoUrl,
-    this.presentationUrl,
+    required this.type,
+    required this.projectName,
+    required this.bootcampName,
+    required this.startDate,
+    required this.endDate,
+    required this.presentationDate,
+    required this.projectDescription,
+    required this.logoUrl,
+    required this.presentationUrl,
     required this.userId,
     required this.adminId,
     required this.timeEndEdit,
-    this.allowEdit = false,
-    this.isPublic = false,
+    required this.allowEdit,
+    required this.isPublic,
     required this.createAt,
-    this.updateAt,
-    required this.type,
+    required this.updateAt,
     required this.imagesProject,
     required this.linksProject,
     required this.membersProject,
   });
 
-  factory ProjectModel.fromJson(Map<String, dynamic> json) {
-    return ProjectModel(
-      projectId: json['project_id'] as String,
-      projectName: json['project_name'] as String?,
-      bootcampName: json['bootcamp_name'] as String?,
-      startDate: json['start_date'] as String?,
-      endDate: json['end_date'] as String?,
-      presentationDate: json['presentation_date'] as String?,
-      projectDescription: json['project_description'] as String?,
-      logoUrl: json['logo_url'] as String?,
-      presentationUrl: json['presentation_url'] as String?,
-      userId: json['user_id'] as String,
-      adminId: json['admin_id'] as String,
-      timeEndEdit: json['time_end_edit'] as String,
-      allowEdit: json['allow_edit'] as bool,
-      isPublic: json['is_public'] as bool,
-      createAt: json['create_at'] as String,
-      updateAt: json['update_at'] as String?,
-      type: json['type'] as String,
-      imagesProject: List.from(json['images_project'] as List),
-      linksProject: List.from(json['links_project'] as List),
-      membersProject: List.from(json['members_project'] as List),
-    );
+  ProjectModel.fromJson(Map<String, dynamic> json) {
+    projectId = json['project_id'];
+    type = json['type'];
+    projectName = json['project_name'];
+    bootcampName = json['bootcamp_name'];
+    startDate = json['start_date'];
+    endDate = json['end_date'];
+    presentationDate = json['presentation_date'];
+    projectDescription = json['project_description'];
+    logoUrl = json['logo_url'];
+    presentationUrl = json['presentation_url'];
+    userId = json['user_id'];
+    adminId = json['admin_id'];
+    timeEndEdit = json['time_end_edit'];
+    allowEdit = json['allow_edit'];
+    isPublic = json['is_public'];
+    createAt = json['create_at'];
+    updateAt = json['update_at'];
+    imagesProject = List.from(json['images_project'])
+        .map((e) => ImageModel.fromJson(e))
+        .toList();
+    linksProject = List.from(json['links_project'])
+        .map((e) => LinkModel.fromJson(e))
+        .toList();
+    membersProject = List.from(json['members_project'])
+        .map((e) => UserModel.fromJson(e))
+        .toList();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final data = <String, dynamic>{};
     data['project_id'] = projectId;
-    data['project_name'] = projectName.toString();
-    data['bootcamp_name'] = bootcampName.toString();
-    data['start_date'] = startDate.toString();
-    data['end_date'] = endDate.toString();
-    data['presentation_date'] = presentationDate.toString();
-    data['project_description'] = projectDescription.toString();
-    data['logo_url'] = logoUrl.toString();
-    data['presentation_url'] = presentationUrl.toString();
+    data['type'] = type;
+    data['project_name'] = projectName;
+    data['bootcamp_name'] = bootcampName;
+    data['start_date'] = startDate;
+    data['end_date'] = endDate;
+    data['presentation_date'] = presentationDate;
+    data['project_description'] = projectDescription;
+    data['logo_url'] = logoUrl;
+    data['presentation_url'] = presentationUrl;
     data['user_id'] = userId;
     data['admin_id'] = adminId;
     data['time_end_edit'] = timeEndEdit;
     data['allow_edit'] = allowEdit;
     data['is_public'] = isPublic;
     data['create_at'] = createAt;
-    data['update_at'] = updateAt.toString();
-    data['type'] = type;
-    data['images_project'] = imagesProject;
-    data['links_project'] = linksProject;
-    data['members_project'] = membersProject;
+    data['update_at'] = updateAt;
+    data['images_project'] = imagesProject.map((e) => e.toJson()).toList();
+    data['links_project'] = linksProject.map((e) => e.toJson()).toList();
+    data['members_project'] = membersProject.map((e) => e.toJson()).toList();
     return data;
   }
 }

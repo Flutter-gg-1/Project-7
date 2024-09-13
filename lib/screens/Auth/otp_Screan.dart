@@ -29,7 +29,7 @@ class OtpScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
@@ -67,6 +67,7 @@ class OtpScreen extends StatelessWidget {
                   EdgeInsets.symmetric(horizontal: 8.w), // Adjust using Sizer
               child: Center(
                 child: Pinput(
+                  keyboardType: TextInputType.number,
                   length: 6,
                   defaultPinTheme: defaultPinTheme,
                   submittedPinTheme: submittedPinTheme,
