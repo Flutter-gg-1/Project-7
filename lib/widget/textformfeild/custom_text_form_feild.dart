@@ -6,9 +6,10 @@ class CustomTextFormFeild extends StatelessWidget {
   final bool isArabic;
   final Icon icon;
   final String arabicTitle,englishTitle;
+  final TextEditingController? controller;
   const CustomTextFormFeild({
     super.key,
-    required this.isArabic, required this.icon, required this.arabicTitle, required this.englishTitle,
+    required this.isArabic, required this.icon, required this.arabicTitle, required this.englishTitle, this.controller,
   });
 
   @override
@@ -21,6 +22,7 @@ class CustomTextFormFeild extends StatelessWidget {
           color: Colors.white,
           boxShadow: kElevationToShadow[4]),
       child: TextFormField(
+        controller: controller,
         decoration: InputDecoration(
           hintTextDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
           border: InputBorder.none,

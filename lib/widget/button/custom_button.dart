@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
@@ -6,18 +5,21 @@ import 'package:tuwaiq_project/services/setup.dart';
 
 class CustomButton extends StatelessWidget {
   final String arabicTitle, englishTitle;
-   bool? arabic = false;
+  bool? arabic = false;
+  final Function() onPressed;
   CustomButton({
     super.key,
     required this.englishTitle,
-    this.arabic, required this.arabicTitle,
+    this.arabic,
+    required this.arabicTitle,
+    required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     final language = languageLocaitor.get<LanguageLayer>();
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
           fixedSize: Size(context.getWidth(multiply: 0.5),
               context.getHeight(multiply: 0.05)),

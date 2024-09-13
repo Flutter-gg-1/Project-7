@@ -5,13 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/screens/auth/bloc/auth_bloc.dart';
-import 'package:tuwaiq_project/screens/auth/signup_screen.dart';
+import 'package:tuwaiq_project/screens/auth/login_screen.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 import 'package:tuwaiq_project/widget/button/custom_button.dart';
 import 'package:tuwaiq_project/widget/textformfeild/custom_text_form_feild.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatelessWidget {
+  const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +34,6 @@ class LoginScreen extends StatelessWidget {
                     Stack(
                       clipBehavior: Clip.none,
                       children: [
-                        Positioned(
-                            left: context.getWidth(multiply: 0.2),
-                            top: context.getHeight(multiply: 0.15),
-                            child: Image.asset('assets/image/login.png')),
                         CustomPaint(
                           size: Size(context.getWidth(multiply: 1),
                               context.getHeight(multiply: 0.1)),
@@ -67,7 +63,9 @@ class LoginScreen extends StatelessWidget {
                             left: context.getWidth(multiply: 0.35),
                             top: context.getHeight(multiply: 0.25),
                             child: Text(
-                              !state.isArabic ? 'Greeting' : 'حياك       ',
+                              !state.isArabic
+                                  ? 'Create account'
+                                  : 'انشاء حساب       ',
                               textAlign: TextAlign.center,
                               textDirection: TextDirection.rtl,
                               style: const TextStyle(
@@ -83,32 +81,44 @@ class LoginScreen extends StatelessWidget {
                                 icon: const Icon(Icons.email),
                                 isArabic: state.isArabic,
                               ),
-                              context.addSpacer(multiply: 0.2),
+                              context.addSpacer(multiply: 0.03),
+                              CustomTextFormFeild(
+                                arabicTitle: 'الاسم الاول',
+                                englishTitle: 'first name',
+                                icon: const Icon(Icons.person),
+                                isArabic: state.isArabic,
+                              ),
+                              context.addSpacer(multiply: 0.03),
+                              CustomTextFormFeild(
+                                arabicTitle: 'الاسم الاخير',
+                                englishTitle: 'last name',
+                                icon: const Icon(Icons.person),
+                                isArabic: state.isArabic,
+                              ),
+                              context.addSpacer(multiply: 0.06),
                               CustomButton(
                                 arabic: state.isArabic,
-                                onPressed: () {
-                                  log('message');
-                                },
-                                arabicTitle: 'تسجيل الدخول',
-                                englishTitle: 'Login',
+                                onPressed: () {},
+                                arabicTitle: 'انشاء حساب',
+                                englishTitle: 'Signup',
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: !state.isArabic
                                     ? [
                                         Text(state.isArabic
-                                            ? 'ليس لديك حساب؟'
-                                            : 'Don’t have an account?'),
+                                            ? ' لديك حساب؟'
+                                            : 'Do you have account?'),
                                         TextButton(
                                             onPressed: () =>
                                                 Navigator.pushReplacement(
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            const SignupScreen())),
+                                                            const LoginScreen())),
                                             child: Text(state.isArabic
-                                                ? 'انشاء حساب'
-                                                : 'Create'))
+                                                ? 'تسجيل الدخول'
+                                                : 'Login'))
                                       ]
                                     : [
                                         TextButton(
@@ -117,13 +127,13 @@ class LoginScreen extends StatelessWidget {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            const SignupScreen())),
+                                                            const LoginScreen())),
                                             child: Text(state.isArabic
-                                                ? 'انشاء حساب'
-                                                : 'Create')),
+                                                ? 'تسجيل الدخول'
+                                                : 'Login')),
                                         Text(state.isArabic
-                                            ? 'ليس لديك حساب؟'
-                                            : 'Don’t have an account?'),
+                                            ? ' لديك حساب؟'
+                                            : 'Do you have account?'),
                                       ],
                               )
                             ],
@@ -137,10 +147,6 @@ class LoginScreen extends StatelessWidget {
                   return Stack(
                     clipBehavior: Clip.none,
                     children: [
-                      Positioned(
-                          left: context.getWidth(multiply: 0.2),
-                          top: context.getHeight(multiply: 0.15),
-                          child: Image.asset('assets/image/login.png')),
                       CustomPaint(
                         size: Size(context.getWidth(multiply: 1),
                             context.getHeight(multiply: 0.1)),
@@ -168,12 +174,12 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                          left: context.getWidth(multiply: 0.33),
-                          top: context.getHeight(multiply: 0.4),
+                          left: context.getWidth(multiply: 0.2),
+                          top: context.getHeight(multiply: 0.25),
                           child: Text(
                             !bloc.language.isArabic
-                                ? 'Greeting'
-                                : 'حياك       ',
+                                ? 'Create account'
+                                : 'انشاء حساب       ',
                             textAlign: TextAlign.center,
                             textDirection: TextDirection.rtl,
                             style: const TextStyle(
@@ -182,39 +188,51 @@ class LoginScreen extends StatelessWidget {
                       Center(
                         child: Column(
                           children: [
-                            context.addSpacer(multiply: 0.5),
+                            context.addSpacer(multiply: 0.38),
                             CustomTextFormFeild(
                               arabicTitle: 'الايميل',
                               englishTitle: 'E-mail',
                               icon: const Icon(Icons.email),
                               isArabic: bloc.language.isArabic,
                             ),
+                            context.addSpacer(multiply: 0.03),
+                            CustomTextFormFeild(
+                              arabicTitle: 'الاسم الاول',
+                              englishTitle: 'first name',
+                              icon: const Icon(Icons.person),
+                              isArabic: bloc.language.isArabic,
+                            ),
+                            context.addSpacer(multiply: 0.03),
+                            CustomTextFormFeild(
+                              arabicTitle: 'الاسم الاخير',
+                              englishTitle: 'last name',
+                              icon: const Icon(Icons.person),
+                              isArabic: bloc.language.isArabic,
+                            ),
                             context.addSpacer(multiply: 0.06),
                             CustomButton(
-                              onPressed: () {
-                                print('object');
-                              },
+                              onPressed: () {},
                               arabic: bloc.language.isArabic,
-                              arabicTitle: 'تسجيل الدخول',
-                              englishTitle: 'Login',
+                              arabicTitle: 'انشاء حساب',
+                              englishTitle: 'Signup',
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: !bloc.language.isArabic
                                   ? [
                                       Text(bloc.language.isArabic
-                                          ? 'ليس لديك حساب؟'
-                                          : 'Don’t have an account?'),
+                                          ? ' لديك حساب؟'
+                                          : 'Do you have account?'),
                                       TextButton(
                                           onPressed: () =>
                                               Navigator.pushReplacement(
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          const SignupScreen())),
+                                                          const LoginScreen())),
                                           child: Text(bloc.language.isArabic
-                                              ? 'انشاء حساب'
-                                              : 'Create'))
+                                              ? 'تسجيل الدخول'
+                                              : 'Login'))
                                     ]
                                   : [
                                       TextButton(
@@ -223,13 +241,13 @@ class LoginScreen extends StatelessWidget {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          const SignupScreen())),
+                                                          const LoginScreen())),
                                           child: Text(bloc.language.isArabic
-                                              ? 'انشاء حساب'
-                                              : 'Create')),
+                                              ? 'تسجيل الدخول'
+                                              : 'Login')),
                                       Text(bloc.language.isArabic
-                                          ? 'ليس لديك حساب؟'
-                                          : 'Don’t have an account?'),
+                                          ? ' لديك حساب؟'
+                                          : 'Do you have account?'),
                                     ],
                             )
                           ],
