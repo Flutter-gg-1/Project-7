@@ -1,18 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:project_management_app/screens/Auth/auth_screen.dart';
-import 'package:project_management_app/screens/Auth/login_screen.dart';
+import 'package:sizer/sizer.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // MediaQuery for screen dimensions
-    final mediaQuery = MediaQuery.of(context);
-    final screenWidth = mediaQuery.size.width;
-    final screenHeight = mediaQuery.size.height;
-
     return Scaffold(
       body: Stack(
         children: [
@@ -27,7 +22,7 @@ class SignupScreen extends StatelessWidget {
 
           Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.07),
+              padding: EdgeInsets.symmetric(horizontal: 7.w),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -35,12 +30,12 @@ class SignupScreen extends StatelessWidget {
                   Text(
                     'Register',
                     style: TextStyle(
-                      fontSize: screenHeight * 0.04, // 4% of screen height
+                      fontSize: 4.h, // 4% of screen height
                       fontWeight: FontWeight.bold,
                       color: const Color(0xffA380FF),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.03), // 3% of screen height
+                  SizedBox(height: 3.h), // 3% of screen height
 
                   // Email Input Field
                   Container(
@@ -66,7 +61,7 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.02), // 2% of screen height
+                  SizedBox(height: 2.h), // 2% of screen height
 
                   // First Name Input Field
                   Container(
@@ -92,7 +87,7 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.02),
+                  SizedBox(height: 2.h),
 
                   // Last Name Input Field
                   Container(
@@ -118,12 +113,12 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.03),
+                  SizedBox(height: 3.h),
                   Padding(
-                    padding: EdgeInsets.only(bottom: screenHeight * 0.08),
+                    padding: EdgeInsets.only(bottom: 8.h),
                     child: SizedBox(
                       width: double.infinity,
-                      height: screenHeight * 0.06,
+                      height: 6.h,
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
@@ -142,7 +137,7 @@ class SignupScreen extends StatelessWidget {
                           'Sign Up',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: screenHeight * 0.025,
+                            fontSize: 2.5.h,
                           ),
                         ),
                       ),
@@ -160,10 +155,10 @@ class SignupScreen extends StatelessWidget {
             right: 0,
             child: Column(
               children: [
-                const SizedBox(height: 10),
+                SizedBox(height: 1.h),
                 Image.asset(
                   'assets/Tuwaiq_mounten 2.png',
-                  width: screenWidth,
+                  width: 100.w,
                   fit: BoxFit.contain,
                 ),
               ],

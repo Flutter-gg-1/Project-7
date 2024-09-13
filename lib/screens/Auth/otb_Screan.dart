@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:sizer/sizer.dart';
 
 class OtbScreen extends StatelessWidget {
   const OtbScreen({super.key});
@@ -8,10 +9,10 @@ class OtbScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Define the default PinTheme
     final defaultPinTheme = PinTheme(
-      width: 50,
-      height: 50,
-      textStyle: const TextStyle(
-        fontSize: 20,
+      width: 12.w, // 12% of screen width
+      height: 7.h, // 7% of screen height
+      textStyle: TextStyle(
+        fontSize: 3.h, // 3% of screen height
         fontWeight: FontWeight.bold,
       ),
       decoration: BoxDecoration(
@@ -35,36 +36,36 @@ class OtbScreen extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.only(top: 80, bottom: 30),
+            padding:
+                EdgeInsets.only(top: 10.h, bottom: 5.h), // Adjust using Sizer
             child: Image.asset(
               'assets/logo-h 2 (1).png',
-              height: 100,
+              height: 12.h, // 12% of screen height
               fit: BoxFit.contain,
             ),
           ),
-          const SizedBox(height: 30),
-          const Text(
+          SizedBox(height: 4.h), // 4% of screen height
+          Text(
             'Enter the OTP sent to your phone',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 2.5.h, // 2.5% of screen height
               fontWeight: FontWeight.bold,
-              color: Color(0xff57E3D8),
+              color: const Color(0xff57E3D8),
             ),
           ),
-          const SizedBox(
-            height: 32,
-          ),
-          const Text(
+          SizedBox(height: 4.h), // Adjust spacing with Sizer
+          Text(
             'We have sent the OTP code to [email]',
             style: TextStyle(
-              fontSize: 13,
+              fontSize: 1.6.h, // 1.6% of screen height
               fontWeight: FontWeight.bold,
-              color: Color(0xff4129B7),
+              color: const Color(0xff4129B7),
             ),
           ),
-          const SizedBox(height: 100),
+          SizedBox(height: 10.h), // 10% of screen height
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            padding:
+                EdgeInsets.symmetric(horizontal: 8.w), // Adjust using Sizer
             child: Center(
               child: Pinput(
                 length: 6,
@@ -77,21 +78,22 @@ class OtbScreen extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 30),
-          const Text(
+          SizedBox(height: 5.h), // 5% of screen height
+          Text(
             'Resend OTP',
             style: TextStyle(
-              fontSize: 15,
-              color: Color(0xff4129B7),
+              fontSize: 2.h, // 2% of screen height
+              color: const Color(0xff4129B7),
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 30),
+          SizedBox(height: 5.h), // Adjust spacing with Sizer
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding:
+                EdgeInsets.symmetric(horizontal: 5.w), // Adjust using Sizer
             child: SizedBox(
-              width: 370,
-              height: 50,
+              width: 90.w, // 90% of screen width
+              height: 7.h, // 7% of screen height
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
@@ -100,11 +102,11 @@ class OtbScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   'Submit',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 2.5.h, // 2.5% of screen height
                   ),
                 ),
               ),

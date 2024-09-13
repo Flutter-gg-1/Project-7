@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart'; // Import Sizer package
 import 'package:project_management_app/screens/Auth/login_screen.dart';
 import 'package:project_management_app/screens/Auth/signup_screen.dart';
 
@@ -8,10 +9,6 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
-    final screenHeight = mediaQuery.size.height;
-    final screenWidth = mediaQuery.size.width;
-
     return Scaffold(
       body: Stack(
         children: [
@@ -36,8 +33,8 @@ class AuthScreen extends StatelessWidget {
             child: Image.asset(
               'assets/Tuwaiq_mounten 1.png',
               fit: BoxFit.cover,
-              height: screenHeight * 0.3, // 30% of screen height
-              width: screenWidth, // Full width of the screen
+              height: 30.h, // 30% of screen height using Sizer
+              width: 100.w, // Full width of the screen using Sizer
             ),
           ),
 
@@ -49,9 +46,9 @@ class AuthScreen extends StatelessWidget {
                 // Logo
                 Image.asset(
                   'assets/logo-h-white.png',
-                  height: screenHeight * 0.15, // 15% of screen height
+                  height: 15.h, // 15% of screen height using Sizer
                 ),
-                SizedBox(height: screenHeight * 0.05), // 5% of screen height
+                SizedBox(height: 5.h), // 5% of screen height using Sizer
 
                 // Sign Up button
                 ElevatedButton(
@@ -64,8 +61,8 @@ class AuthScreen extends StatelessWidget {
                   },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(
-                      horizontal: screenWidth * 0.25, // 25% of screen width
-                      vertical: screenHeight * 0.015, // 1.5% of screen height
+                      horizontal: 25.w, // 25% of screen width using Sizer
+                      vertical: 1.5.h, // 1.5% of screen height using Sizer
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -80,7 +77,7 @@ class AuthScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: screenHeight * 0.03), // 3% of screen height
+                SizedBox(height: 3.h), // 3% of screen height using Sizer
 
                 RichText(
                   text: TextSpan(
@@ -123,20 +120,23 @@ class AuthScreen extends StatelessWidget {
             ),
           ),
 
+          // Top right icon
           Positioned(
-            top: screenHeight * 0.1,
-            right: screenWidth * 0.0001,
+            top: 10.h, // 10% from the top using Sizer
+            right: 0.1.w, // Adjusted position using Sizer
             child: Image.asset(
               'assets/Group 10.png',
-              height: screenHeight * 0.1,
+              height: 10.h, // 10% of screen height using Sizer
             ),
           ),
+
+          // Bottom left icon
           Positioned(
-            bottom: screenHeight * 0.1,
-            left: screenWidth * 0.0001,
+            bottom: 10.h, // 10% from the bottom using Sizer
+            left: 0.1.w, // Adjusted position using Sizer
             child: Image.asset(
               'assets/Group 10 (1).png',
-              height: screenHeight * 0.15,
+              height: 15.h, // 15% of screen height using Sizer
             ),
           ),
         ],
