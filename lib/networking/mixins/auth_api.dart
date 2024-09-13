@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 mixin AuthApi on ConstantsApi{
 
 
-  verifyOtp(){}
 
   resendOtp(){}
 
