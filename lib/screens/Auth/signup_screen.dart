@@ -9,6 +9,8 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:
+          false, // Prevent the layout from adjusting when the keyboard appears
       body: Stack(
         children: [
           // Top Image
