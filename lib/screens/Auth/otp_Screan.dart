@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:project_management_app/Bottom_Nav/bottom_nav.dart';
 import 'package:sizer/sizer.dart';
 
-class OtbScreen extends StatelessWidget {
-  const OtbScreen({super.key});
+class OtpScreen extends StatelessWidget {
+  const OtpScreen({super.key, required this.email});
+  final String email;
 
   @override
   Widget build(BuildContext context) {
-    // Define the default PinTheme
     final defaultPinTheme = PinTheme(
-      width: 12.w, // 12% of screen width
-      height: 7.h, // 7% of screen height
+      width: 12.w,
+      height: 7.h,
       textStyle: TextStyle(
-        fontSize: 3.h, // 3% of screen height
+        fontSize: 3.h,
         fontWeight: FontWeight.bold,
       ),
       decoration: BoxDecoration(
@@ -22,7 +23,6 @@ class OtbScreen extends StatelessWidget {
       ),
     );
 
-    // Define the submitted PinTheme (green color)
     final submittedPinTheme = defaultPinTheme.copyWith(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -31,20 +31,19 @@ class OtbScreen extends StatelessWidget {
     );
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Column(
         children: [
           Container(
             width: double.infinity,
-            padding:
-                EdgeInsets.only(top: 10.h, bottom: 5.h), // Adjust using Sizer
+            padding: EdgeInsets.only(top: 10.h, bottom: 5.h),
             child: Image.asset(
-              'assets/logo-h 2 (1).png',
-              height: 12.h, // 12% of screen height
-              fit: BoxFit.contain,
+              'assets/TA.png',
+              height: 12.h, 
             ),
           ),
-          SizedBox(height: 4.h), // 4% of screen height
+          SizedBox(height: 4.h), 
           Text(
             'Enter the OTP sent to your phone',
             style: TextStyle(
@@ -55,7 +54,7 @@ class OtbScreen extends StatelessWidget {
           ),
           SizedBox(height: 4.h), // Adjust spacing with Sizer
           Text(
-            'We have sent the OTP code to [email]',
+            'We have sent the OTP code to $email',
             style: TextStyle(
               fontSize: 1.6.h, // 1.6% of screen height
               fontWeight: FontWeight.bold,
@@ -95,7 +94,12 @@ class OtbScreen extends StatelessWidget {
               width: 90.w, // 90% of screen width
               height: 7.h, // 7% of screen height
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const BottomNav()),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xff57E3D8),
                   shape: RoundedRectangleBorder(
