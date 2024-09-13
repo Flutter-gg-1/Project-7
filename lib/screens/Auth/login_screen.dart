@@ -10,24 +10,24 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          // Background image
-          Positioned(
-            left: 0,
-            right: 0,
-            child: Container(
+      resizeToAvoidBottomInset:
+          true, // This will ensure screen adjusts for the keyboard
+      body: SingleChildScrollView(
+        // Ensures the screen is scrollable when keyboard appears
+        child: Column(
+          children: [
+            // Background image
+            Container(
               width: 100.w, // 100% of screen width using Sizer
-              child: Image.asset(
-                'assets/Group 12.png',
-                fit: BoxFit.cover,
+              height: 40.h, // Adjust height as needed
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/Group 12.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-
-          // Center content (Text, Email field, Button)
-          Center(
-            child: Padding(
+            Padding(
               padding:
                   EdgeInsets.symmetric(horizontal: 10.w), // 10% of screen width
               child: Column(
@@ -102,45 +102,39 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
+            SizedBox(height: 10.h), // Add some spacing
 
-          // "I'm already an account" text at the bottom
-          Positioned(
-            bottom: 20.h, // 20% from the bottom using Sizer
-            left: 0,
-            right: 0,
-            child: Center(
-              child: RichText(
-                text: TextSpan(
-                  text: "I'm already an account ",
-                  style: TextStyle(
-                    fontSize: 2.h, // 2% of screen height using Sizer
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'Sign In',
-                      style: TextStyle(
-                        fontSize: 2.h, // 2% of screen height using Sizer
-                        fontWeight: FontWeight.bold,
-                        color: const Color(0xffFF8181),
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignupScreen()),
-                          );
-                        },
-                    ),
-                  ],
+            // "I'm already an account" text at the bottom
+            RichText(
+              text: TextSpan(
+                text: "I'm already an account ",
+                style: TextStyle(
+                  fontSize: 2.h, // 2% of screen height using Sizer
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: 'Sign In',
+                    style: TextStyle(
+                      fontSize: 2.h, // 2% of screen height using Sizer
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xffFF8181),
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignupScreen()),
+                        );
+                      },
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
