@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:project_management_app/screens/Auth/otb_Screan.dart';
+import 'package:project_management_app/screens/Auth/signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -54,6 +55,7 @@ class LoginScreen extends StatelessWidget {
                     child: const TextField(
                       decoration: InputDecoration(
                         hintText: 'Email',
+                        hintStyle: TextStyle(color: Color(0xff4129B7)),
                         border: InputBorder.none,
                         contentPadding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 15),
@@ -114,8 +116,11 @@ class LoginScreen extends StatelessWidget {
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          // Handle "Sign In" tap
-                          print("Sign In tapped");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignupScreen()),
+                          );
                         },
                     ),
                   ],
