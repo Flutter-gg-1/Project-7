@@ -8,11 +8,15 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    // MediaQuery to get screen dimensions
+    final mediaQuery = MediaQuery.of(context);
+    final screenHeight = mediaQuery.size.height;
+    final screenWidth = mediaQuery.size.width;
 
     return Scaffold(
       body: Stack(
         children: [
+          // Background image
           Positioned(
             left: 0,
             right: 0,
@@ -24,21 +28,26 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
           ),
+
+          // Center content (Text, Email field, Button)
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  // Welcome Text
+                  Text(
                     'Welcome Back',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: screenHeight * 0.04, // 4% of screen height
                       fontWeight: FontWeight.bold,
-                      color: Color(0xffA380FF),
+                      color: const Color(0xffA380FF),
                     ),
                   ),
-                  const SizedBox(height: 70),
+                  SizedBox(height: screenHeight * 0.07), // 7% of screen height
+
+                  // Email input field
                   Container(
                     decoration: BoxDecoration(
                       color: const Color(0xffd9d4f1).withOpacity(0.8),
@@ -52,20 +61,24 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: const TextField(
+                    child: TextField(
                       decoration: InputDecoration(
                         hintText: 'Email',
-                        hintStyle: TextStyle(color: Color(0xff4129B7)),
+                        hintStyle: const TextStyle(color: Color(0xff4129B7)),
                         border: InputBorder.none,
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: screenWidth * 0.05, // 5% of screen width
+                          vertical: screenHeight * 0.02, // 2% of screen height
+                        ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 51),
+                  SizedBox(height: screenHeight * 0.05), // 5% of screen height
+
+                  // Login Button
                   SizedBox(
                     width: double.infinity,
-                    height: 50,
+                    height: screenHeight * 0.06, 
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.push(
@@ -80,11 +93,12 @@ class LoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: const Text(
+                      child: Text(
                         'Login',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 18,
+                          fontSize:
+                              screenHeight * 0.025, // 2.5% of screen height
                         ),
                       ),
                     ),
@@ -93,26 +107,28 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
           ),
+
+          // "I'm already an account" text at the bottom
           Positioned(
-            bottom: 180,
+            bottom: screenHeight * 0.2, // 20% from bottom
             left: 0,
             right: 0,
             child: Center(
               child: RichText(
                 text: TextSpan(
                   text: "I'm already an account ",
-                  style: const TextStyle(
-                    fontSize: 16,
+                  style: TextStyle(
+                    fontSize: screenHeight * 0.02, // 2% of screen height
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                   children: <TextSpan>[
                     TextSpan(
                       text: 'Sign In',
-                      style: const TextStyle(
-                        fontSize: 16,
+                      style: TextStyle(
+                        fontSize: screenHeight * 0.02, // 2% of screen height
                         fontWeight: FontWeight.bold,
-                        color: Color(0xffFF8181),
+                        color: const Color(0xffFF8181),
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {

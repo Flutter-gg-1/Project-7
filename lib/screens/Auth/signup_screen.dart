@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:project_management_app/screens/Auth/auth_screen.dart';
 import 'package:project_management_app/screens/Auth/login_screen.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -7,11 +8,15 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    // MediaQuery for screen dimensions
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+    final screenHeight = mediaQuery.size.height;
 
     return Scaffold(
       body: Stack(
         children: [
+          // Top Image
           Positioned(
             left: 0,
             right: 0,
@@ -19,22 +24,25 @@ class SignupScreen extends StatelessWidget {
               'assets/logo-h 2 (1).png',
             ),
           ),
+
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.07),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  // Register Text
+                  Text(
                     'Register',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: screenHeight * 0.04, // 4% of screen height
                       fontWeight: FontWeight.bold,
-                      color: Color(0xffA380FF),
+                      color: const Color(0xffA380FF),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  SizedBox(height: screenHeight * 0.03), // 3% of screen height
 
+                  // Email Input Field
                   Container(
                     decoration: BoxDecoration(
                       color: const Color(0xffd9d4f1).withOpacity(0.8),
@@ -58,8 +66,9 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: screenHeight * 0.02), // 2% of screen height
 
+                  // First Name Input Field
                   Container(
                     decoration: BoxDecoration(
                       color: const Color(0xffd9d4f1).withOpacity(0.8),
@@ -74,7 +83,6 @@ class SignupScreen extends StatelessWidget {
                       ],
                     ),
                     child: const TextField(
-                      obscureText: true,
                       decoration: InputDecoration(
                         hintText: 'First name',
                         hintStyle: TextStyle(color: Color(0xff4129B7)),
@@ -84,10 +92,9 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  SizedBox(height: screenHeight * 0.02),
 
-                  SizedBox(
-                    height: 20,
-                  ),
+                  // Last Name Input Field
                   Container(
                     decoration: BoxDecoration(
                       color: const Color(0xffd9d4f1).withOpacity(0.8),
@@ -102,7 +109,6 @@ class SignupScreen extends StatelessWidget {
                       ],
                     ),
                     child: const TextField(
-                      obscureText: true,
                       decoration: InputDecoration(
                         hintText: 'Last name',
                         hintStyle: TextStyle(color: Color(0xff4129B7)),
@@ -112,15 +118,19 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 51),
+                  SizedBox(height: screenHeight * 0.05), // 5% of screen height
 
-                  // Login button
+                  // Sign Up Button
                   SizedBox(
                     width: double.infinity,
-                    height: 50,
+                    height: screenHeight * 0.06, // 6% of screen height
                     child: ElevatedButton(
                       onPressed: () {
-                        // Action for login button
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AuthScreen()),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF321f8d),
@@ -128,11 +138,12 @@ class SignupScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: const Text(
+                      child: Text(
                         'Sign Up',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 18,
+                          fontSize:
+                              screenHeight * 0.025, // 2.5% of screen height
                         ),
                       ),
                     ),
@@ -142,34 +153,33 @@ class SignupScreen extends StatelessWidget {
             ),
           ),
 
-          // Text at the bottom
           Positioned(
-            bottom: 100,
+            bottom: screenHeight * 0.15, // 15% from the bottom
             left: 0,
             right: 0,
             child: Center(
               child: RichText(
                 text: TextSpan(
                   text: "I'm already an account ",
-                  style: const TextStyle(
-                    fontSize: 16,
+                  style: TextStyle(
+                    fontSize: screenHeight * 0.02, // 2% of screen height
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                   children: <TextSpan>[
                     TextSpan(
                       text: 'Sign In',
-                      style: const TextStyle(
-                        fontSize: 16,
+                      style: TextStyle(
+                        fontSize: screenHeight * 0.02, // 2% of screen height
                         fontWeight: FontWeight.bold,
-                        color: Color(0xffFF8181),
+                        color: const Color(0xffFF8181),
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const LoginScreen()),
+                                builder: (context) => const AuthScreen()),
                           );
                         },
                     ),
@@ -179,6 +189,7 @@ class SignupScreen extends StatelessWidget {
             ),
           ),
 
+          // Bottom Image
           Positioned(
             bottom: 0,
             left: 0,
@@ -186,12 +197,10 @@ class SignupScreen extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 10),
-                Container(
+                Image.asset(
+                  'assets/Tuwaiq_mounten 2.png',
                   width: screenWidth,
-                  child: Image.asset(
-                    'assets/Tuwaiq_mounten 2.png',
-                    fit: BoxFit.cover,
-                  ),
+                  fit: BoxFit.contain,
                 ),
               ],
             ),
