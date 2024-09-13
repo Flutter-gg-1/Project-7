@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:project_management_app/Bottom_Nav/bottom_nav.dart';
 import 'package:sizer/sizer.dart';
 
 class OtpScreen extends StatelessWidget {
@@ -86,12 +87,18 @@ class OtpScreen extends StatelessWidget {
           ),
           SizedBox(height: 5.h), // Adjust spacing with Sizer
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5.w), // Adjust using Sizer
+            padding:
+                EdgeInsets.symmetric(horizontal: 5.w), // Adjust using Sizer
             child: SizedBox(
               width: 90.w, // 90% of screen width
               height: 7.h, // 7% of screen height
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const BottomNav()),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xff57E3D8),
                   shape: RoundedRectangleBorder(
