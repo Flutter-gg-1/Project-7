@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:project_management_app/screens/Auth/otb_Screan.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -17,7 +18,7 @@ class LoginScreen extends StatelessWidget {
             child: Container(
               width: screenWidth,
               child: Image.asset(
-                'assets/Group 11.png',
+                'assets/Group 12.png',
                 fit: BoxFit.cover,
               ),
             ),
@@ -31,7 +32,7 @@ class LoginScreen extends StatelessWidget {
                   const Text(
                     'Welcome Back',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Color(0xffA380FF),
                     ),
@@ -41,12 +42,12 @@ class LoginScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: const Color(0xffd9d4f1).withOpacity(0.8),
                       borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           color: Colors.black12,
                           spreadRadius: 2,
                           blurRadius: 5,
-                          offset: const Offset(0, 3),
+                          offset: Offset(0, 3),
                         ),
                       ],
                     ),
@@ -64,7 +65,13 @@ class LoginScreen extends StatelessWidget {
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const OtbScreen()),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF321f8d),
                         shape: RoundedRectangleBorder(
@@ -85,31 +92,34 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 706,
-            left: 107,
-            child: RichText(
-              text: TextSpan(
-                text: "I'm already an account ",
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: 'Sign In',
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xffFF8181), 
-                    ),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        // Handle "Sign In" tap
-                        print("Sign In tapped");
-                      },
+            bottom: 180,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: RichText(
+                text: TextSpan(
+                  text: "I'm already an account ",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
-                ],
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'Sign In',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xffFF8181),
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          // Handle "Sign In" tap
+                          print("Sign In tapped");
+                        },
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
