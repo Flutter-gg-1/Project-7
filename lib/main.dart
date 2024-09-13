@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tuwaiq_project/networking/networking_api.dart';
 import 'package:tuwaiq_project/screens/auth/login_screen.dart';
+import 'package:tuwaiq_project/screens/auth/otp_screen.dart';
 import 'package:tuwaiq_project/screens/splach_screen.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 

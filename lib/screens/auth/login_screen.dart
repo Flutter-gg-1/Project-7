@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/screens/auth/bloc/auth_bloc.dart';
+import 'package:tuwaiq_project/screens/auth/otp_screen.dart';
 import 'package:tuwaiq_project/screens/auth/signup_screen.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 import 'package:tuwaiq_project/widget/button/custom_button.dart';
@@ -27,113 +28,9 @@ class LoginScreen extends StatelessWidget {
                   fit: BoxFit.cover)),
           child: Scaffold(
             backgroundColor: Colors.transparent,
-            body: SafeArea(
+            body: SingleChildScrollView(
               child: BlocBuilder<AuthBloc, AuthState>(
                 builder: (context, state) {
-                  if (state is ArabicState) {
-                    Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Positioned(
-                            left: context.getWidth(multiply: 0.2),
-                            top: context.getHeight(multiply: 0.15),
-                            child: Image.asset('assets/image/login.png')),
-                        CustomPaint(
-                          size: Size(context.getWidth(multiply: 1),
-                              context.getHeight(multiply: 0.1)),
-                          painter: AuthShape(),
-                        ),
-                        Positioned(
-                          left: context.getWidth(multiply: 0.85),
-                          top: context.getHeight(multiply: 0.1),
-                          child: Column(
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  bloc.add(LanguageChangeEvent());
-                                },
-                                icon: const Icon(Icons.translate_sharp),
-                                color:
-                                    state.isArabic ? Colors.blue : Colors.grey,
-                              ),
-                              Text(
-                                state.isArabic ? 'عربي' : 'English',
-                                textDirection: TextDirection.rtl,
-                              )
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                            left: context.getWidth(multiply: 0.35),
-                            top: context.getHeight(multiply: 0.25),
-                            child: Text(
-                              !state.isArabic ? 'Greeting' : 'حياك       ',
-                              textAlign: TextAlign.center,
-                              textDirection: TextDirection.rtl,
-                              style: const TextStyle(
-                                  fontSize: 36, fontWeight: FontWeight.bold),
-                            )),
-                        Center(
-                          child: Column(
-                            children: [
-                              context.addSpacer(multiply: 0.38),
-                              CustomTextFormFeild(
-                                arabicTitle: 'الايميل',
-                                englishTitle: 'E-mail',
-                                icon: const Icon(Icons.email),
-                                isArabic: state.isArabic,
-                              ),
-                              context.addSpacer(multiply: 0.2),
-                              CustomButton(
-                                arabic: state.isArabic,
-                                onPressed: () {
-                                  log('message');
-                                },
-                                arabicTitle: 'تسجيل الدخول',
-                                englishTitle: 'Login',
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: !state.isArabic
-                                    ? [
-                                        Text(state.isArabic
-                                            ? 'ليس لديك حساب؟'
-                                            : 'Don’t have an account?'),
-                                        TextButton(
-                                            onPressed: () =>
-                                                Navigator.pushReplacement(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            const SignupScreen())),
-                                            child: Text(state.isArabic
-                                                ? 'انشاء حساب'
-                                                : 'Create'))
-                                      ]
-                                    : [
-                                        TextButton(
-                                            onPressed: () =>
-                                                Navigator.pushReplacement(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            const SignupScreen())),
-                                            child: Text(state.isArabic
-                                                ? 'انشاء حساب'
-                                                : 'Create')),
-                                        Text(state.isArabic
-                                            ? 'ليس لديك حساب؟'
-                                            : 'Don’t have an account?'),
-                                      ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
-                  }
-
-                  ///=================default==========================
                   return Stack(
                     clipBehavior: Clip.none,
                     children: [
@@ -192,7 +89,11 @@ class LoginScreen extends StatelessWidget {
                             context.addSpacer(multiply: 0.06),
                             CustomButton(
                               onPressed: () {
-                                print('object');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const OtpScreen(),
+                                    ));
                               },
                               arabic: bloc.language.isArabic,
                               arabicTitle: 'تسجيل الدخول',
