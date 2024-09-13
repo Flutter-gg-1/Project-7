@@ -16,6 +16,8 @@ dependencies:
   dot_curved_bottom_nav: ^0.0.2
   flutter_bloc: ^8.1.6
   get_it: ^7.7.0
+  get_storage: ^2.1.1
+  dio: ^5.7.0
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,8 @@
+import 'package:dio/dio.dart';
+
 abstract class ConstantsApi {
-  
+    final dio = Dio();
+
   final String baseUrl = 'https://tuwaiq-gallery.onrender.com';
 
   // Auth

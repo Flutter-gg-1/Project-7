@@ -4,7 +4,8 @@ import 'package:project_management_app/Bottom_Nav/bottom_nav.dart';
 import 'package:sizer/sizer.dart';
 
 class OtpScreen extends StatelessWidget {
-  const OtpScreen({super.key});
+  const OtpScreen({super.key, required this.email});
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class OtpScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      resizeToAvoidBottomInset: false, // لمنع تأثير الكيبورد على التخطيط
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Column(
         children: [
@@ -39,10 +40,10 @@ class OtpScreen extends StatelessWidget {
             padding: EdgeInsets.only(top: 10.h, bottom: 5.h),
             child: Image.asset(
               'assets/TA.png',
-              height: 12.h, // 12% of screen height
+              height: 12.h, 
             ),
           ),
-          SizedBox(height: 4.h), // 4% of screen height
+          SizedBox(height: 4.h), 
           Text(
             'Enter the OTP sent to your phone',
             style: TextStyle(
@@ -53,7 +54,7 @@ class OtpScreen extends StatelessWidget {
           ),
           SizedBox(height: 4.h), // Adjust spacing with Sizer
           Text(
-            'We have sent the OTP code to [email]',
+            'We have sent the OTP code to $email',
             style: TextStyle(
               fontSize: 1.6.h, // 1.6% of screen height
               fontWeight: FontWeight.bold,

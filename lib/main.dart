@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project_management_app/screens/Auth/auth_screen.dart';
+import 'package:project_management_app/services/setup.dart';
 import 'package:sizer/sizer.dart';
 
-void main() {
+void main() async{
+    await setup();
+
   runApp(MainApp());
 }
 
