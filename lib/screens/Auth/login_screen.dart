@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart'; // Import Sizer package
-import 'package:project_management_app/screens/Auth/otb_Screan.dart';
+import 'package:project_management_app/screens/Auth/otp_Screan.dart';
 import 'package:project_management_app/screens/Auth/signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -81,7 +81,7 @@ class LoginScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const OtbScreen()),
+                              builder: (context) => const OtpScreen()),
                         );
                       },
                       style: ElevatedButton.styleFrom(
