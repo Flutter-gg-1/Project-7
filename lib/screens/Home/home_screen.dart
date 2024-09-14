@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen>
     return Sizer(
       builder: (context, orientation, deviceType) {
         return Scaffold(
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Column(
@@ -64,15 +64,14 @@ class _HomeScreenState extends State<HomeScreen>
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10
-                                      .sp), // استخدم sp للوحدات المستجيبة للنصوص
+                                  borderRadius: BorderRadius.circular(10.sp),
                                   borderSide: BorderSide.none,
                                 ),
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(width: 4.w), // استخدم w لتباعد متجاوب
+                        SizedBox(width: 4.w),
                         Image.asset(
                           scale: 3,
                           'assets/Group 10 (1).png',
@@ -80,7 +79,8 @@ class _HomeScreenState extends State<HomeScreen>
                       ],
                     ),
                   ),
-                  SizedBox(height: 3.h), // استخدم h للوحدات المستجيبة للارتفاع
+                  SizedBox(height: 3.h),
+
                   const Center(child: ImageSlider()), // Image Slider
                   SizedBox(height: 2.h),
 
@@ -94,7 +94,6 @@ class _HomeScreenState extends State<HomeScreen>
                         borderRadius: BorderRadius.circular(10.sp),
                       ),
                       labelColor: Colors.white,
-                      dividerHeight: 0,
                       unselectedLabelColor: Colors.purple,
                       tabs: [
                         _buildTab("All", context),
@@ -107,24 +106,29 @@ class _HomeScreenState extends State<HomeScreen>
 
                   // TabBarView Section
                   Container(
-                    height: 60.h,
+                    height: 45.h,
                     child: TabBarView(
                       controller: _tabController,
-                      children: const [
+                      children: [
                         // Center the content vertically and horizontally
-                        Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment
-                                .center, // Vertically center the items
-                            children: [
-                              Projects(),
-                              Projects(),
-                              Projects(),
-                            ],
+                        SingleChildScrollView(
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Projects(),
+                                Projects(),
+                                Projects(),
+                                Projects(),
+                                Projects(),
+                                Projects(),
+                              ],
+                            ),
                           ),
                         ),
-                        Center(child: Text('Content 2')),
-                        Center(child: Text('Content 3')),
+                        const Center(child: Text('Content 2')),
+                        const Center(child: Text('Content 3')),
                       ],
                     ),
                   ),
@@ -132,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen>
                   SizedBox(height: 4.h),
 
                   // New Programs Section
-                  Botcamps(),
+                  const Botcamps(),
                   SizedBox(height: 2.h),
 
                   // Outstanding Students Section
@@ -143,15 +147,16 @@ class _HomeScreenState extends State<HomeScreen>
                       child: Text(
                         'Outstanding students ..',
                         style: TextStyle(
-                            color: Color(0xff4129B7),
-                            fontSize: 18.sp, // استخدم sp لحجم النص
-                            fontWeight: FontWeight.bold),
+                          color: const Color(0xff4129B7),
+                          fontSize: 18.sp, // استخدم sp لحجم النص
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
                   SizedBox(height: 4.h),
 
-                  Out_Standing_Student(),
+                  const Out_Standing_Student(),
                 ],
               ),
             ),
@@ -164,7 +169,9 @@ class _HomeScreenState extends State<HomeScreen>
   Widget _buildTab(String label, BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-          vertical: 1.h, horizontal: 5.w), // استخدم h و w للتجاوب
+        vertical: 1.h,
+        horizontal: 5.w,
+      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.sp),
       ),

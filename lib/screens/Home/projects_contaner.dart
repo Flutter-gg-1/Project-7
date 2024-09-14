@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class Projects extends StatelessWidget {
   const Projects({
@@ -8,12 +9,13 @@ class Projects extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, top: 20),
+      padding: const EdgeInsets.all(19),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
-            height: 100,
-            width: 100,
+            height: 15.h,
+            width: 24.w,
             decoration: BoxDecoration(
               color: const Color(0xffD9D4F1), // لون الحاوية
               borderRadius: BorderRadius.circular(10), // جعل الحواف دائرية
@@ -34,8 +36,8 @@ class Projects extends StatelessWidget {
           const SizedBox(width: 10), // مسافة بين الحاويتين
 
           Container(
-            height: 100,
-            width: 250,
+            height: 15.h,
+            width: 60.w,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: const Color(0xffD9D4F1), // لون الحاوية للنصوص
