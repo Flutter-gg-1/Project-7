@@ -1,5 +1,5 @@
-import 'package:project_management_app/models/link_model.dart';
 import 'package:project_management_app/models/project_model.dart';
+import 'link_model.dart';
 
 class Profile {
   String id;

@@ -1,22 +1,32 @@
+
 class LinkModel {
-  late final String? url;
-  late final String type;
+  late final String github;
+  late final String linkedin;
+  late final String resume;
+  late final String bindlink;
 
   LinkModel({
-    this.url,
-    required this.type,
+    required this.github,
+    required this.linkedin,
+    required this.resume,
+    required this.bindlink,
   });
 
-  LinkModel.fromJson(Map<String, dynamic> json) {
-    url = null;
-    type = json['type'];
+  factory LinkModel.fromJson(Map<String, dynamic> json) {
+    return LinkModel(
+      github: json['github'],
+      linkedin: json['linkedin'],
+      resume: json['resume'],
+      bindlink: json['bindlink'],
+    );
   }
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    data['url'] = url;
-    data['type'] = type;
+    data['github'] = github;
+    data['linkedin'] = linkedin;
+    data['resume'] = resume;
+    data['bindlink'] = bindlink;
     return data;
   }
 }
-

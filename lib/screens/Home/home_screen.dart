@@ -106,10 +106,8 @@ class _HomeScreenState extends State<HomeScreen>
                   SizedBox(height: 2.h),
 
                   // TabBarView Section
-                  // TabBarView Section
                   Container(
-                    height: 45.h,
-                    width: 60.w, // Specific height for the tab view
+                    height: 60.h,
                     child: TabBarView(
                       controller: _tabController,
                       children: const [

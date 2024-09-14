@@ -1,5 +1,5 @@
 import 'package:project_management_app/models/image_model.dart';
-import 'package:project_management_app/models/link_model.dart';
+import 'package:project_management_app/models/project_link.dart';
 import 'package:project_management_app/models/user_model.dart';
 
 class ProjectModel {
@@ -21,7 +21,7 @@ class ProjectModel {
   late final String createAt;
   late final String updateAt;
   late final List<ImageModel> imagesProject;
-  late final List<LinkModel> linksProject;
+  late final List<ProjectLink> linksProject;
   late final List<UserModel> membersProject;
 
   ProjectModel({
@@ -69,7 +69,7 @@ class ProjectModel {
         .map((e) => ImageModel.fromJson(e))
         .toList();
     linksProject = List.from(json['links_project'])
-        .map((e) => LinkModel.fromJson(e))
+        .map((e) => ProjectLink.fromJson(e))
         .toList();
     membersProject = List.from(json['members_project'])
         .map((e) => UserModel.fromJson(e))
