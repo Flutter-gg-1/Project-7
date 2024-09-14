@@ -9,56 +9,53 @@ class Projects extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-          bottom: 2.h, left: 2.w, right: 2.w), // استخدم Sizer لتحديد المسافات
+      padding: EdgeInsets.only(bottom: 1.4.h, left: 9.w, right: 1.4.w),
       child: Row(
         children: [
-          // جعل الحاوية الأولى قابلة للتكيف
           Flexible(
-            flex: 3, // توزيع المساحة بشكل مناسب
+            flex: 3,
             child: Container(
-              height: 15.h, // استخدم 15% من ارتفاع الشاشة للحاوية
+              height: 7.5.h,
+              width: 7.5.h,
               decoration: BoxDecoration(
                 color: const Color(0xffD9D4F1),
-                borderRadius:
-                    BorderRadius.circular(2.h), // زاوية دائرية تناسب الشاشة
+                borderRadius: BorderRadius.circular(1.4.h), // زاوية دائرية أصغر
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: const Offset(0, 3),
+                    spreadRadius: 1.4, // تقليل الظل
+                    blurRadius: 3.5, // تقليل الضبابية
+                    offset: const Offset(0, 2), // تقليل موضع الظل
                   ),
                 ],
               ),
               child: const Center(
                 child: Icon(Icons.image,
-                    size: 40, color: Colors.white), // أيقونة بدلاً من الصورة
+                    size: 28, color: Colors.white), // تقليل حجم الأيقونة
               ),
             ),
           ),
-          SizedBox(width: 5.w), // مسافة بين الحاويتين باستخدام Sizer
+          SizedBox(width: 3.5.w), // تقليل المسافة بين الحاويتين
 
-          // جعل الحاوية الثانية قابلة للتكيف
           Flexible(
-            flex: 7, // توزيع المساحة بشكل مناسب
+            flex: 7,
             child: Container(
-              height: 15.h, // نفس ارتفاع الحاوية السابقة
+              height: 10.5.h, // تقليل الارتفاع بنسبة 30%
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: const Color(0xffD9D4F1), // لون الحاوية للنصوص
-                borderRadius: BorderRadius.circular(2.h), // زاوية دائرية مناسبة
+                color: const Color(0xffD9D4F1),
+                borderRadius: BorderRadius.circular(1.4.h), // زاوية دائرية أصغر
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: const Offset(0, 3),
+                    spreadRadius: 1.4, // تقليل الظل
+                    blurRadius: 3.5, // تقليل الضبابية
+                    offset: const Offset(0, 2), // تقليل موضع الظل
                   ),
                 ],
               ),
               child: Padding(
-                padding: EdgeInsets.all(2.h),
+                padding: EdgeInsets.all(1.4.h), // تقليل المسافات الداخلية
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -66,18 +63,18 @@ class Projects extends StatelessWidget {
                       "Project Name",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 12.sp,
+                        fontSize: 8.4.sp, // تقليل حجم الخط بنسبة 30%
                       ),
                     ),
-                    SizedBox(height: 1.h),
+                    SizedBox(height: 0.7.h), // تقليل المسافة الداخلية
                     Text(
                       "Bootcamp: Flutter Bootcamp",
-                      style: TextStyle(fontSize: 10.sp),
+                      style: TextStyle(fontSize: 7.sp), // تقليل حجم الخط
                     ),
-                    SizedBox(height: 1.h),
+                    SizedBox(height: 0.7.h), // تقليل المسافة الداخلية
                     Text(
                       "Type: Mobile App",
-                      style: TextStyle(fontSize: 10.sp),
+                      style: TextStyle(fontSize: 7.sp), // تقليل حجم الخط
                     ),
                   ],
                 ),

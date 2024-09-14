@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class Botcamps extends StatelessWidget {
@@ -10,7 +9,7 @@ class Botcamps extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: const Color(0xff4129B7),
+      color: Color.fromARGB(255, 255, 255, 255),
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
@@ -20,7 +19,7 @@ class Botcamps extends StatelessWidget {
               Text(
                 "New programs..",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.purple,
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
@@ -28,7 +27,7 @@ class Botcamps extends StatelessWidget {
               Text(
                 "See more ..>",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.purple,
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
@@ -36,7 +35,7 @@ class Botcamps extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 20),
-    
+
           // First Row of Containers
           Row(
             children: [

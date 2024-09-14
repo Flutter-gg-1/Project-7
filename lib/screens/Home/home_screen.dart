@@ -106,12 +106,12 @@ class _HomeScreenState extends State<HomeScreen>
 
                   // TabBarView Section
                   Container(
-                    height: 115.h,
+                    height: 80.h,
                     child: TabBarView(
                       controller: _tabController,
                       clipBehavior: Clip.none,
                       children: [
-                        Column(
+                        const Column(
                           children: [
                             Projects(),
                             Projects(),
@@ -121,19 +121,27 @@ class _HomeScreenState extends State<HomeScreen>
                             Projects(),
                           ],
                         ),
-                        Center(child: Text('Content 2')),
-                        Center(child: Text('Content 3')),
+                        const Center(child: Text('Content 2')),
+                        const Center(child: Text('Content 3')),
                       ],
                     ),
                   ),
-
+                  const Divider(
+                    height: 5,
+                    thickness: 7,
+                    color: Color.fromARGB(255, 232, 225, 225),
+                  ),
                   SizedBox(height: 4.h),
 
                   // New Programs Section
                   const Botcamps(),
                   SizedBox(height: 2.h),
 
-                  // Outstanding Students Section
+                  const Divider(
+                    height: 5,
+                    thickness: 7,
+                    color: Color.fromARGB(255, 232, 225, 225),
+                  ),
                   Padding(
                     padding: EdgeInsets.only(left: 2.w),
                     child: Align(
@@ -141,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen>
                       child: Text(
                         'Outstanding students ..',
                         style: TextStyle(
-                          color: const Color(0xff4129B7),
+                          color: Colors.purple,
                           fontSize: 18.sp, // استخدم sp لحجم النص
                           fontWeight: FontWeight.bold,
                         ),

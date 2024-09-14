@@ -19,6 +19,7 @@ class BottomNav extends StatelessWidget {
       create: (context) => BottomNavBloc(),
       child: Builder(builder: (context) {
         return Scaffold(
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
           extendBody: true,
 
           body: BlocBuilder<BottomNavBloc, BottomNavState>(
@@ -38,15 +39,7 @@ class BottomNav extends StatelessWidget {
           ),
 
           // Floating Action Button
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {},
-            backgroundColor: const Color(0xffFFDB5E),
-            child: const Icon(Icons.support_agent),
-          ),
 
-          // Animated Bottom Navigation Bar
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.miniStartFloat,
           bottomNavigationBar: BlocBuilder<BottomNavBloc, BottomNavState>(
             builder: (context, state) {
               final bloc = BlocProvider.of<BottomNavBloc>(context);

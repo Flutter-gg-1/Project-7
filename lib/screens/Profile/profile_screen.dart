@@ -7,8 +7,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> labels = ['github', 'BlindLink','LinkedIn', 'Resume'];
-    List<String> urls = ['Add Links', 'Add Links','Add Links', 'Add Links'];
+    List<String> labels = ['github', 'BlindLink', 'LinkedIn', 'Resume'];
+    List<String> urls = ['Add Links', 'Add Links', 'Add Links', 'Add Links'];
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -49,18 +49,21 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-
-              ...List.generate(4, (index){
-                return CustomProfileLinks(label: labels[index],url: urls[index],);
+              ...List.generate(4, (index) {
+                return CustomProfileLinks(
+                  label: labels[index],
+                  url: urls[index],
+                );
               }),
               const SizedBox(
                 height: 20,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     padding: const EdgeInsets.only(left: 5),
+                    margin: EdgeInsets.only(left: 5),
                     height: 41,
                     width: 144,
                     decoration: BoxDecoration(
@@ -77,15 +80,30 @@ class ProfileScreen extends StatelessWidget {
                         )),
                   ),
                   TextButton(
-                      onPressed: () {}, child: const Text('see more..>')),
+                    onPressed: () {
+                      // Action for adding a project
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: const Color(0xff4129B7),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                    ),
+                    child: Row(
+                      children: const [
+                        Icon(Icons.add, size: 20), // أيقونة الإضافة
+                        SizedBox(width: 5), // مسافة صغيرة بين الأيقونة والنص
+                        Text('Add Project'),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               ...List.generate(3, (_) {
                 return const Projects();
-              })
+              }),
+              SizedBox(
+                height: 30,
+              )
             ],
           ),
         ),
