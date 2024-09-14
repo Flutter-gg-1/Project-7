@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_judge/components/buttons/custom_elevated_button.dart';
+import 'package:project_judge/components/text_field/custom_text_form_field.dart';
 import 'package:project_judge/screens/auth/cubit/auth_cubit.dart';
 import 'package:project_judge/screens/auth/verify_screen.dart';
-import 'package:project_judge/services/extension/size_extension.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -43,19 +44,9 @@ class LoginScreen extends StatelessWidget {
             body: Stack(
               children: [
                 Positioned.fill(
-                  child: Transform.translate(
-                    offset: const Offset(-10, 0),
-                    child: OverflowBox(
-                      alignment: Alignment.center,
-                      minWidth: 0,
-                      minHeight: 0,
-                      maxHeight: double.infinity,
-                      maxWidth: double.infinity,
-                      child: Image.asset(
-                        "assets/images/loginImage.png",
-                        fit: BoxFit.contain,
-                      ),
-                    ),
+                  child: Image.asset(
+                    "assets/images/loginImage.png",
+                    fit: BoxFit.cover,
                   ),
                 ),
                 Align(
@@ -85,7 +76,15 @@ class LoginScreen extends StatelessWidget {
                             child: Center(
                               child: Image.asset("assets/images/logo-h 2.png"),
                             ),
-                          ))
+                          )),
+                      const Positioned(
+                        top: 90,
+                        left: 170,
+                        child: Text(
+                          "Log in",
+                          style: TextStyle(color: Colors.white, fontSize: 32),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -93,14 +92,48 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextFormField(
-                        controller: cubit.emailLoginController,
+                      const SizedBox(
+                        height: 180,
                       ),
-                      ElevatedButton(
-                          onPressed: () {
-                            cubit.checkLogin();
-                          },
-                          child: const Text("Log in"))
+                      CustomTextFormField(
+                        controller: cubit.emailLoginController,
+                        hintText: "Example@example.com",
+                        icon: Icons.email_outlined,
+                        validator: (value) {
+                          if (value == null ||
+                              value.isEmpty ||
+                              !value.contains('@')) {
+                            return 'Please enter a valid email';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 111,
+                      ),
+                      CustomElevatedButton(
+                        backgroundColor: const Color(0xff4D2EB4),
+                        text: "Get OTP",
+                        textcolor: Colors.white,
+                        onPressed: () {
+                          cubit.checkLogin();
+                        },
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Don’t have an account?",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          TextButton(
+                              onPressed: () {},
+                              child: const Text(
+                                "Create an account",
+                                style: TextStyle(color: Color(0xff57E3D8)),
+                              ))
+                        ],
+                      )
                     ],
                   ),
                 ),

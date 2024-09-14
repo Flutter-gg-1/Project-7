@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_judge/screens/auth/cubit/auth_cubit.dart';
 import 'package:project_judge/screens/auth/verify_screen.dart';
 
+import '../../components/buttons/custom_elevated_button.dart';
+import '../../components/text_field/custom_text_form_field.dart';
+
 class CreateAccountScreen extends StatelessWidget {
   const CreateAccountScreen({super.key});
 
@@ -22,7 +25,6 @@ class CreateAccountScreen extends StatelessWidget {
                       ));
             }
             if (state is SuccessState) {
-              
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -41,29 +43,132 @@ class CreateAccountScreen extends StatelessWidget {
               FocusScope.of(context).unfocus();
             },
             child: Scaffold(
-              body: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextFormField(
-                        controller: bloc.emailController,
-                      ),
-                      TextFormField(
-                        controller: bloc.fNameController,
-                      ),
-                      TextFormField(
-                        controller: bloc.lNameController,
-                      ),
-                      ElevatedButton(
-                          onPressed: () async {
+              body: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Image.asset(
+                      "assets/images/loginImage.png",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Container(
+                          constraints: BoxConstraints(
+                              maxHeight:
+                                  MediaQuery.of(context).size.height - 136),
+                          decoration: const BoxDecoration(
+                              color: Color(0x65000000),
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(40),
+                                  topLeft: Radius.circular(40))),
+                        ),
+                        Positioned(
+                            top: -50,
+                            left: MediaQuery.of(context).size.width / 2 - 50,
+                            child: Container(
+                              height: 100,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(100)),
+                              child: Center(
+                                child:
+                                    Image.asset("assets/images/logo-h 2.png"),
+                              ),
+                            )),
+                        const Positioned(
+                          top: 90,
+                          left: 160,
+                          child: Text(
+                            "Sign up",
+                            style: TextStyle(color: Colors.white, fontSize: 32),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          height: 150,
+                        ),
+                        CustomTextFormField(
+                          controller: bloc.emailLoginController,
+                          hintText: "Example@example.com",
+                          icon: Icons.email_outlined,
+                          validator: (value) {
+                            if (value == null ||
+                                value.isEmpty ||
+                                !value.contains('@')) {
+                              return 'Please enter a valid email';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 46,
+                        ),
+                        CustomTextFormField(
+                          controller: bloc.fNameController,
+                          hintText: "First Name",
+                          icon: Icons.person_outline_rounded,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your first name';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 46,
+                        ),
+                        CustomTextFormField(
+                          controller: bloc.lNameController,
+                          hintText: "Last Name",
+                          icon: Icons.person_outline_rounded,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your last name';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 46,
+                        ),
+                        CustomElevatedButton(
+                          backgroundColor: const Color(0xff4D2EB4),
+                          text: "Get OTP",
+                          textcolor: Colors.white,
+                          onPressed: () {
                             bloc.checkAccounts();
                           },
-                          child: const Icon(Icons.add))
-                    ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Already have an account?",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            TextButton(
+                                onPressed: () {},
+                                child: const Text(
+                                  "Log in",
+                                  style: TextStyle(color: Color(0xff57E3D8)),
+                                ))
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
           ),
