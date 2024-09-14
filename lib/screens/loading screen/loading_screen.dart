@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_judge/screens/auth/create_account_screen.dart';
+import 'package:project_judge/screens/auth/login_screen.dart';
 import 'package:project_judge/screens/home_screen.dart';
 import 'package:project_judge/screens/loading%20screen/cubit/loading_screen_cubit.dart';
 
@@ -10,7 +11,7 @@ class LoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoadingScreenCubit(),
+      create: (context) => LoadingScreenCubit()..checkToken(),
       child: Builder(builder: (context) {
         return BlocListener<LoadingScreenCubit, LoadingScreenState>(
           listener: (context, state) {
@@ -25,7 +26,7 @@ class LoadingScreen extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const CreateAccountScreen()));
+                      builder: (context) => const LoginScreen()));
             }
           },
           child: const Scaffold(

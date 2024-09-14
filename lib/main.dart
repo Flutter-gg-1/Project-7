@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_judge/screens/auth/create_account_screen.dart';
 import 'package:project_judge/screens/loading%20screen/loading_screen.dart';
 import 'package:project_judge/setup/init_setup.dart';
 

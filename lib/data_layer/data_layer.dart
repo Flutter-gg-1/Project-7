@@ -9,15 +9,20 @@ class DataLayer {
 
   final box = GetStorage();
 
+  DataLayer() {
+    loadData();
+  }
+
   saveUserAuth({required AuthModel auth}) {
     authUser = auth;
 
-    box.write("auth", authUser);
+    box.write("auth", auth.toJson());
   }
 
-  loadData(){
-    if (box.hasData("auth")){
-      authUser = box.read("auth");
+  loadData() {
+    if (box.hasData("auth")) {
+      Map<String, dynamic> loadedData = box.read("auth");
+      authUser = AuthModel.fromJson(loadedData);
     }
   }
 }

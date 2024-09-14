@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:project_judge/network/api_netowrok.dart';
 
 part 'auth_state.dart';
@@ -8,6 +7,7 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   ApiNetowrok api = ApiNetowrok();
   TextEditingController emailController = TextEditingController();
+  TextEditingController emailLoginController = TextEditingController();
   TextEditingController fNameController = TextEditingController();
   TextEditingController lNameController = TextEditingController();
   TextEditingController otpController = TextEditingController();
@@ -26,7 +26,7 @@ class AuthCubit extends Cubit<AuthState> {
     } on FormatException catch (e) {
       emit(ErrorState(msg: e.message));
     } catch (e) {
-      print("errorrr $e");
+      emit(ErrorState(msg: e.toString()));
     }
   }
 
@@ -38,7 +38,20 @@ class AuthCubit extends Cubit<AuthState> {
     } on FormatException catch (e) {
       emit(ErrorState(msg: e.message));
     } catch (e) {
-      print("roewkrowe$e");
+      emit(ErrorState(msg: e.toString()));
+    }
+  }
+
+  checkLogin() async {
+    emit(LoadingState());
+    try {
+      await api.loginMethod(email: emailLoginController.text);
+
+      emit(SuccessState());
+    } on FormatException catch (e) {
+      emit(ErrorState(msg: e.message));
+    } catch (e) {
+      emit(ErrorState(msg: e.toString()));
     }
   }
 }
