@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
@@ -12,6 +14,7 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final language = languageLocaitor.get<LanguageLayer>();
   final api = NetworkingApi();
+  String? otp;
   TextEditingController? controllerEmail =
       TextEditingController(text: "dev@gmail.com");
   TextEditingController? controllerFName = TextEditingController(text: "basel");
@@ -56,7 +59,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<VerfieyEvent>((event, emit) async {
     try {
       emit(LoadingState());
-      final userAuth = await api.verifyOtp(email: event.email, otp: event.otp);
+      log('loading');
+      final userAuth = await api.verifyOtp(email: event.email, otp: otp!);
+      log('2');
       await authLocator.get<AuthLayerData>().saveAuth(authData: userAuth);
       emit(SuccessState());
     } catch (error) {

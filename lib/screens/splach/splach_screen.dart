@@ -10,9 +10,10 @@ class SplachScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SplachCubit(),
+      create: (context) => SplachCubit()..checkLogin(),
       child: BlocListener<SplachCubit, SplachState>(
-        listener: (context, state) {
+        listener: (context, state) async{
+           await Future.delayed(const Duration(seconds: 2));
           if (state is LoginUserState) {
             Navigator.pushReplacement(
                 context,
@@ -47,11 +48,12 @@ class SplachScreen extends StatelessWidget {
                   image: AssetImage('assets/image/splach_background.png'),
                   fit: BoxFit.cover)),
           child: const Scaffold(
-            backgroundColor: Colors.transparent,
-            body: Center(
-              child: CircularProgressIndicator(color: Colors.white,),
-            )
-          ),
+              backgroundColor: Colors.transparent,
+              body: Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              )),
         ),
       ),
     );

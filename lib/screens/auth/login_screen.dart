@@ -36,8 +36,8 @@ class LoginScreen extends StatelessWidget {
 
             if (state is SuccessState) {
               Navigator.pop(context);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) =>  OtpScreen(email: bloc.controllerEmail!.text)));
             }
             if (state is ErrorState) {
               Navigator.pop(context);
