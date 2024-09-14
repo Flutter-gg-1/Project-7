@@ -1,10 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project_management_app/screens/Auth/auth_screen.dart';
-import 'package:project_management_app/screens/Auth/bloc/auth_bloc.dart';
-import 'package:project_management_app/screens/Auth/otp_Screan.dart';
-import 'package:sizer/sizer.dart';
+import 'package:project_management_app/screens/Auth/login_screen.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
