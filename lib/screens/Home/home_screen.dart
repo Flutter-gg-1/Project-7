@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart'; // استيراد sizer
 import 'package:project_management_app/screens/Home/boot_camps.dart';
 import 'package:project_management_app/screens/Home/image_slider.dart';
 import 'package:project_management_app/screens/Home/out_Standing_student.dart';
 import 'package:project_management_app/screens/Home/projects_contaner.dart';
+import 'package:sizer/sizer.dart'; // استيراد sizer
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen>
     return Sizer(
       builder: (context, orientation, deviceType) {
         return Scaffold(
-          backgroundColor: Color(0xffececec),
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Column(
@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen>
                             ),
                           ),
                         ),
-                        SizedBox(width: 2.w), // استخدم w لتباعد متجاوب
+                        SizedBox(width: 4.w), // استخدم w لتباعد متجاوب
                         Image.asset(
                           scale: 3,
                           'assets/Group 10 (1).png',
@@ -106,23 +106,31 @@ class _HomeScreenState extends State<HomeScreen>
                   SizedBox(height: 2.h),
 
                   // TabBarView Section
-                  SizedBox(
-                    height: 45.h, // استخدم h لحجم الطول
+                  // TabBarView Section
+                  Container(
+                    height: 45.h,
+                    width: 60.w, // Specific height for the tab view
                     child: TabBarView(
                       controller: _tabController,
-                      children: [
-                        Column(
-                          children: [
-                            Projects(),
-                            Projects(),
-                            Projects(),
-                          ],
+                      children: const [
+                        // Center the content vertically and horizontally
+                        Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment
+                                .center, // Vertically center the items
+                            children: [
+                              Projects(),
+                              Projects(),
+                              Projects(),
+                            ],
+                          ),
                         ),
-                        const Center(child: Text('Content 2')),
-                        const Center(child: Text('Content 3')),
+                        Center(child: Text('Content 2')),
+                        Center(child: Text('Content 3')),
                       ],
                     ),
                   ),
+
                   SizedBox(height: 4.h),
 
                   // New Programs Section
