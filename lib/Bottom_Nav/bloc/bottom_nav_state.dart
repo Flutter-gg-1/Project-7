@@ -10,3 +10,6 @@ class SuccessChangeViewState extends BottomNavState {
   final int currentPageIndex;
   SuccessChangeViewState(this.currentPageIndex);
 }
+class HideBottomNavState extends BottomNavState {}
+
+class ShowBottomNavState extends BottomNavState {}
