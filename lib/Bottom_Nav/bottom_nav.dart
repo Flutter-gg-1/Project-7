@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dot_curved_bottom_nav/dot_curved_bottom_nav.dart';
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:project_management_app/Bottom_Nav/bloc/bottom_nav_bloc.dart';
 
 class BottomNav extends StatelessWidget {
@@ -8,10 +8,19 @@ class BottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<IconData> iconList = [
+      Icons.home,
+      Icons.notification_add,
+      Icons.settings,
+      Icons.person,
+    ];
+
     return BlocProvider(
       create: (context) => BottomNavBloc(),
       child: Builder(builder: (context) {
         return Scaffold(
+          extendBody: true,
+
           body: BlocBuilder<BottomNavBloc, BottomNavState>(
             builder: (context, state) {
               final bloc = BlocProvider.of<BottomNavBloc>(context);
@@ -27,6 +36,17 @@ class BottomNav extends StatelessWidget {
               );
             },
           ),
+
+          // Floating Action Button
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: const Color(0xffFFDB5E),
+            child: const Icon(Icons.support_agent),
+          ),
+
+          // Animated Bottom Navigation Bar
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.miniStartFloat,
           bottomNavigationBar: BlocBuilder<BottomNavBloc, BottomNavState>(
             builder: (context, state) {
               final bloc = BlocProvider.of<BottomNavBloc>(context);
@@ -36,41 +56,44 @@ class BottomNav extends StatelessWidget {
                 currentPageIndex = state.currentPageIndex;
               }
 
-              return DotCurvedBottomNav(
-                selectedIndex: currentPageIndex,
-                indicatorColor: Colors.white,
-                backgroundColor: Color(0xff4129B7),
-                height: 70,
+              return AnimatedBottomNavigationBar.builder(
+                itemCount: iconList.length,
+                tabBuilder: (int index, bool isActive) {
+                  final color =
+                      isActive ? const Color(0xffFFDB5E) : Colors.white;
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        iconList[index],
+                        size: 30,
+                        color: color,
+                      ),
+                      if (isActive)
+                        Container(
+                          margin: const EdgeInsets.only(top: 5),
+                          height: 5,
+                          width: 20,
+                          decoration: BoxDecoration(
+                            color: color,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                    ],
+                  );
+                },
+                backgroundColor: const Color(0xff4129B7),
+                height: 40,
+                activeIndex: currentPageIndex,
+                gapLocation: GapLocation.none,
+                leftCornerRadius: 32,
+                rightCornerRadius: 32,
+                notchSmoothness: NotchSmoothness.verySmoothEdge,
                 onTap: (index) {
                   BlocProvider.of<BottomNavBloc>(context)
                       .add(ChangeEvent(index: index));
                 },
-                items: [
-                  Icon(
-                    Icons.home,
-                    color: currentPageIndex == 0
-                        ? Color(0xffFFDB5E)
-                        : Colors.white,
-                  ),
-                  Icon(
-                    Icons.notification_add,
-                    color: currentPageIndex == 1
-                        ? Color(0xffFFDB5E)
-                        : Colors.white,
-                  ),
-                  Icon(
-                    Icons.settings,
-                    color: currentPageIndex == 2
-                        ? Color(0xffFFDB5E)
-                        : Colors.white,
-                  ),
-                  Icon(
-                    Icons.person,
-                    color: currentPageIndex == 3
-                        ? Color(0xffFFDB5E)
-                        : Colors.white,
-                  ),
-                ],
               );
             },
           ),
