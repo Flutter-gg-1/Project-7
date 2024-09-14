@@ -40,8 +40,7 @@ class _HomeScreenState extends State<HomeScreen>
                 children: [
                   // Search Bar Section
                   Padding(
-                    padding:
-                        EdgeInsets.all(4.w), // استخدم w للوحدات المستجيبة للعرض
+                    padding: EdgeInsets.all(4.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -86,13 +85,14 @@ class _HomeScreenState extends State<HomeScreen>
 
                   // Tab Bar Section
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 2.w),
+                    padding: EdgeInsets.symmetric(horizontal: 1.w),
                     child: TabBar(
                       controller: _tabController,
                       indicator: BoxDecoration(
                         color: Colors.redAccent.withOpacity(0.6),
                         borderRadius: BorderRadius.circular(10.sp),
                       ),
+                      dividerHeight: 0,
                       labelColor: Colors.white,
                       unselectedLabelColor: Colors.purple,
                       tabs: [
@@ -106,29 +106,23 @@ class _HomeScreenState extends State<HomeScreen>
 
                   // TabBarView Section
                   Container(
-                    height: 45.h,
+                    height: 115.h,
                     child: TabBarView(
                       controller: _tabController,
+                      clipBehavior: Clip.none,
                       children: [
-                        // Center the content vertically and horizontally
-                        SingleChildScrollView(
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Projects(),
-                                Projects(),
-                                Projects(),
-                                Projects(),
-                                Projects(),
-                                Projects(),
-                              ],
-                            ),
-                          ),
+                        Column(
+                          children: [
+                            Projects(),
+                            Projects(),
+                            Projects(),
+                            Projects(),
+                            Projects(),
+                            Projects(),
+                          ],
                         ),
-                        const Center(child: Text('Content 2')),
-                        const Center(child: Text('Content 3')),
+                        Center(child: Text('Content 2')),
+                        Center(child: Text('Content 3')),
                       ],
                     ),
                   ),
