@@ -12,7 +12,6 @@ class AuthScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Gradient background
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -26,19 +25,15 @@ class AuthScreen extends StatelessWidget {
               ),
             ),
           ),
-
-          // Background image at the bottom
           Align(
             alignment: Alignment.bottomCenter,
             child: Image.asset(
               'assets/Tuwaiq_mounten 1.png',
               fit: BoxFit.cover,
-              height: 30.h, // 30% of screen height using Sizer
-              width: 100.w, // Full width of the screen using Sizer
+              height: 30.h,
+              width: 100.w,
             ),
           ),
-
-          // Center content (Logo, Buttons, and Text)
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -46,9 +41,9 @@ class AuthScreen extends StatelessWidget {
                 // Logo
                 Image.asset(
                   'assets/logo-h-white.png',
-                  height: 15.h, // 15% of screen height using Sizer
+                  height: 15.h,
                 ),
-                SizedBox(height: 5.h), // 5% of screen height using Sizer
+                SizedBox(height: 5.h),
 
                 // Sign Up button
                 ElevatedButton(
@@ -61,8 +56,8 @@ class AuthScreen extends StatelessWidget {
                   },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(
-                      horizontal: 25.w, // 25% of screen width using Sizer
-                      vertical: 1.5.h, // 1.5% of screen height using Sizer
+                      horizontal: 25.w,
+                      vertical: 1.5.h,
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -77,11 +72,11 @@ class AuthScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 3.h), // 3% of screen height using Sizer
+                SizedBox(height: 3.h),
 
                 RichText(
                   text: TextSpan(
-                    text: "I'm already an account ",
+                    text: "I already have an account",
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -122,21 +117,19 @@ class AuthScreen extends StatelessWidget {
 
           // Top right icon
           Positioned(
-            top: 10.h, // 10% from the top using Sizer
-            right: 0.1.w, // Adjusted position using Sizer
+            top: 10.h,
+            right: 0.1.w,
             child: Image.asset(
               'assets/Group 10.png',
-              height: 10.h, // 10% of screen height using Sizer
+              height: 10.h,
             ),
           ),
-
-          // Bottom left icon
           Positioned(
-            bottom: 10.h, // 10% from the bottom using Sizer
-            left: 0.1.w, // Adjusted position using Sizer
+            bottom: 10.h,
+            left: 0.1.w,
             child: Image.asset(
               'assets/Group 10 (1).png',
-              height: 15.h, // 15% of screen height using Sizer
+              height: 15.h,
             ),
           ),
         ],

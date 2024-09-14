@@ -21,7 +21,6 @@ class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState>  {
       CreateEvent event, Emitter<CreateAccountState> emit) async {
     try {
       emit(LoadingState());
-
       final emailCreate = await api.createNewAccount(
           email: controllerEmail!.text,
           firstName: controllerFName!.text,
