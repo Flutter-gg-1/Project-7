@@ -23,7 +23,6 @@ mixin ProfileApi on ConstantsApi {
     }
   }
   
-  
   Future<void> updateProfile({
     required String token,
     required String firstName,
