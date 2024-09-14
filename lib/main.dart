@@ -8,10 +8,12 @@ import 'package:device_preview/device_preview.dart';
 void main() async {
   await setup();
 
-  runApp(DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => const MainApp(), // Wrap your app
-  ),);
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const MainApp(), // Wrap your app
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
