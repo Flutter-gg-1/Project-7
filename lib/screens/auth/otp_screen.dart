@@ -21,56 +21,73 @@ class OtpScreen extends StatelessWidget {
                   fit: BoxFit.cover)),
           child: Scaffold(
             backgroundColor: Colors.transparent,
-            body: Center(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: context.getWidth(multiply: 0.045)),
-                child: Column(
-                  children: [
-                    context.addSpacer(multiply: 0.16),
-                    Image.asset('assets/image/otp_image.png'),
-                    Row(
-                      mainAxisAlignment: bloc.language.isArabic
-                          ? MainAxisAlignment.end
-                          : MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          bloc.language.isArabic
-                              ? ':رمز التحقق'
-                              : 'OTP Verification: ',
-                          style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w600),
-                        ),
-                        const Text(
-                          '*',
-                          style: TextStyle(color: Colors.red, fontSize: 18),
-                        )
-                      ],
-                    ),
-                    context.addSpacer(multiply: 0.02),
-                    const Pinput(
-                      length: 6,
-                    ),
-                    context.addSpacer(multiply: 0.02),
-                    Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          bloc.language.isArabic
-                              ? 'اعادة ارسال رمز التحقق'
-                              : 'resend OTP',
-                          style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xff57E3D8)),
-                        )),
-                    context.addSpacer(multiply: 0.06),
-                    CustomButton(
-                      englishTitle: 'Verify',
-                      arabicTitle: 'تحقق',
-                      onPressed: () {},
-                      arabic: bloc.language.isArabic,
-                    )
-                  ],
+            body: SingleChildScrollView(
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: context.getWidth(multiply: 0.045)),
+                  child: Column(
+                    children: [
+                      context.addSpacer(multiply: 0.08),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: IconButton(
+                            style: ButtonStyle(
+                              padding: WidgetStateProperty.all(EdgeInsets.zero),
+                            ),
+                            onPressed: () => Navigator.pop(context),
+                            icon: const Icon(Icons.arrow_back_ios_new_rounded)),
+                      ),
+                      Image.asset('assets/image/otp_image.png'),
+                      Row(
+                        mainAxisAlignment: bloc.language.isArabic
+                            ? MainAxisAlignment.end
+                            : MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            bloc.language.isArabic
+                                ? ':رمز التحقق'
+                                : 'OTP Verification: ',
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600),
+                          ),
+                          const Text(
+                            '*',
+                            style: TextStyle(color: Colors.red, fontSize: 18),
+                          )
+                        ],
+                      ),
+                      context.addSpacer(multiply: 0.02),
+                      const Pinput(
+                        length: 6,
+                      ),
+                      context.addSpacer(multiply: 0.01),
+                      Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            style: ButtonStyle(
+                              padding: WidgetStateProperty.all(EdgeInsets.zero),
+                            ),
+                            onPressed: () {},
+                            child: Text(
+                              bloc.language.isArabic
+                                  ? 'اعادة ارسال رمز التحقق'
+                                  : 'resend OTP',
+                              style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xff57E3D8)),
+                            ),
+                          )),
+                      context.addSpacer(multiply: 0.06),
+                      CustomButton(
+                        englishTitle: 'Verify',
+                        arabicTitle: 'تحقق',
+                        onPressed: () {},
+                        arabic: bloc.language.isArabic,
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
