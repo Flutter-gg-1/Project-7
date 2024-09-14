@@ -42,50 +42,40 @@ class UserProjectScreen extends StatelessWidget {
                   imagePath: 'assets/image/flutter.png',
                   onTap: (){},
                 ),
-                BootcampColumn(
-                  imagePath: 'assets/image/cyber.png',
-                  title: 'Cyber Security',
-                  onTap: () {},
-                ),
-                BootcampColumn(
-                  imagePath: 'assets/image/flutter.png',
-                  title: 'Flutter App Dev',
-                  onTap: () {},
-                ),
-                BootcampColumn(
+                 ProjectContainer(
+                  projectName: 'Clothes app',
+                  rate: '4.5',
+                  bootcamp: 'Flutter bootcamp',
                   imagePath: 'assets/image/data_science.png',
-                  title: 'Data science',
-                  onTap: () {},
+                  onTap: (){},
                 ),
-                BootcampColumn(
+                 ProjectContainer(
+                  projectName: 'Clothes app',
+                  rate: '4.5',
+                  bootcamp: 'Flutter bootcamp',
                   imagePath: 'assets/image/AI.png',
-                  title: 'AI',
-                  onTap: () {},
+                  onTap: (){},
                 ),
-                BootcampColumn(
-                  imagePath: 'assets/image/AI.png',
-                  title: 'AI',
-                  onTap: () {},
+                 ProjectContainer(
+                  projectName: 'Clothes app',
+                  rate: '4.5',
+                  bootcamp: 'Flutter bootcamp',
+                  imagePath: 'assets/image/cyber.png',
+                  onTap: (){},
                 ),
-                BootcampColumn(
-                  imagePath: 'assets/image/AI.png',
-                  title: 'AI',
-                  onTap: () {},
+                 ProjectContainer(
+                  projectName: 'Clothes app',
+                  rate: '4.5',
+                  bootcamp: 'Flutter bootcamp',
+                  imagePath: 'assets/image/flutter.png',
+                  onTap: (){},
                 ),
-                BootcampColumn(
-                  imagePath: 'assets/image/AI.png',
-                  title: 'AI',
-                  onTap: () {},
-                ),
-                BootcampColumn(
-                  imagePath: 'assets/image/AI.png',
-                  title: 'AI',
-                  onTap: () {},
-                ),
-                BootcampColumn(
-                  imagePath: 'assets/image/AI.png',
-                  title: 'AI',
-                  onTap: () {},
+                 ProjectContainer(
+                  projectName: 'Clothes app',
+                  rate: '4.5',
+                  bootcamp: 'Flutter bootcamp',
+                  imagePath: 'assets/image/cyber.png',
+                  onTap: (){},
                 ),
               ],
             ),
