@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:project_management_app/Bottom_Nav/bottom_nav.dart';
 import 'package:project_management_app/services/setup.dart';
@@ -6,7 +8,10 @@ import 'package:sizer/sizer.dart';
 void main() async {
   await setup();
 
-  runApp(const MainApp());
+  runApp(DevicePreview(
+    enabled: !kReleaseMode,
+    builder: (context) => const MainApp(), // Wrap your app
+  ),);
 }
 
 class MainApp extends StatelessWidget {
