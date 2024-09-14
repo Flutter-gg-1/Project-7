@@ -14,6 +14,4 @@ abstract class NetworkingConstant {
 
   final String endProfile = "/user/profile";
 
-
-  
 }
