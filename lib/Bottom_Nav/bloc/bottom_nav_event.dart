@@ -7,3 +7,6 @@ class ChangeEvent extends BottomNavEvent {
   final int index;
   ChangeEvent({required this.index});
 }
+class HideBottomNavEvent extends BottomNavEvent {}
+
+class ShowBottomNavEvent extends BottomNavEvent {}
