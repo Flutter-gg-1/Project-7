@@ -5,13 +5,15 @@ class CustomSlider extends StatefulWidget {
   final int min;
   final int max;
   final bool fullWidth;
+  final int index;
 
   const CustomSlider(
       {super.key,
       this.sliderHeight = 48,
       this.max = 10,
       this.min = 0,
-      this.fullWidth = false});
+      this.fullWidth = false,
+      required this.index});
 
   @override
   State<CustomSlider> createState() => _CustomSliderState();
@@ -19,24 +21,29 @@ class CustomSlider extends StatefulWidget {
 
 class _CustomSliderState extends State<CustomSlider> {
   double _value = 0;
+  double paddingFactor = 0.2;
+  List<Color> colors = const [
+    Color(0xffFF9191),
+    Color(0xffA380FF),
+    Color(0xff57E3D8),
+    Color(0xffFFDB5E),
+    Color(0xffF4A664),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    double paddingFactor = 0.2;
-
     if (widget.fullWidth) paddingFactor = 0.3;
-
     return Container(
-      width: widget.fullWidth ? double.infinity : (widget.sliderHeight) * 5.5,
+      width: widget.fullWidth ? double.infinity : (widget.sliderHeight) * 5,
       height: (widget.sliderHeight),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
-          Radius.circular((25)),
+          Radius.circular((5)),
         ),
         gradient: LinearGradient(
             colors: [
-              const Color(0xffF4A664).withOpacity(0.7),
-              const Color(0xffF4A664),
+              colors[widget.index].withOpacity(0.7),
+              colors[widget.index]
             ],
             begin: const FractionalOffset(0.0, 0.0),
             end: const FractionalOffset(1.0, 1.00),
@@ -56,16 +63,17 @@ class _CustomSliderState extends State<CustomSlider> {
                     inactiveTrackColor: Colors.white.withOpacity(0.5),
                     trackHeight: 6.0,
                     thumbShape: CustomSliderTheme(
-                      thumbRadius: widget.sliderHeight * 0.4,
-                      min: widget.min,
-                      max: widget.max,
-                    ),
+                        thumbRadius: widget.sliderHeight * 0.4,
+                        min: widget.min,
+                        max: widget.max,
+                        thumbColor: colors[widget.index]),
                     overlayColor: Colors.white.withOpacity(0.4),
                     activeTickMarkColor: Colors.white,
                     inactiveTickMarkColor: Colors.red.withOpacity(.7),
                   ),
                   child: Slider(
                       thumbColor: Colors.black,
+                      activeColor: colors[widget.index],
                       value: _value,
                       onChanged: (value) {
                         setState(() {
@@ -78,15 +86,6 @@ class _CustomSliderState extends State<CustomSlider> {
             SizedBox(
               width: widget.sliderHeight * .1,
             ),
-            Text(
-              '${widget.max}',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: widget.sliderHeight * .3,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-            ),
           ],
         ),
       ),
@@ -98,12 +97,13 @@ class CustomSliderTheme extends SliderComponentShape {
   final double thumbRadius;
   final int min;
   final int max;
+  final Color thumbColor;
 
-  const CustomSliderTheme({
-    required this.thumbRadius,
-    this.min = 0,
-    this.max = 10,
-  });
+  const CustomSliderTheme(
+      {required this.thumbRadius,
+      this.min = 0,
+      this.max = 10,
+      required this.thumbColor});
 
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) {
@@ -126,16 +126,28 @@ class CustomSliderTheme extends SliderComponentShape {
     required Size sizeWithOverflow,
   }) {
     final Canvas canvas = context.canvas;
-
-    final paint = Paint()
-      ..color = Colors.white //Thumb Background Color
+    final thumbPaint = Paint()
+      ..color = thumbColor.withOpacity(0.8)
       ..style = PaintingStyle.fill;
 
+    // Border
+    final borderPaint = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2;
+
+    // Draw border
+    canvas.drawCircle(center, thumbRadius * 0.9, borderPaint);
+
+    // Draw circle
+    canvas.drawCircle(center, thumbRadius * 0.9, thumbPaint);
+
+    // Draw value
     TextSpan span = TextSpan(
       style: TextStyle(
-        fontSize: thumbRadius * .8,
+        fontSize: thumbRadius * 0.8,
         fontWeight: FontWeight.w700,
-        color: sliderTheme.thumbColor, //Text Color of Value on Thumb
+        color: sliderTheme.thumbColor,
       ),
       text: getValue(value),
     );
@@ -148,7 +160,6 @@ class CustomSliderTheme extends SliderComponentShape {
     Offset textCenter =
         Offset(center.dx - (tp.width / 2), center.dy - (tp.height / 2));
 
-    canvas.drawCircle(center, thumbRadius * .9, paint);
     tp.paint(canvas, textCenter);
   }
 
