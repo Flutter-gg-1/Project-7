@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:project_management_app/screens/Home/home_screen.dart';
+import 'package:project_management_app/screens/Profile/profile_screen.dart';
 import 'package:project_management_app/screens/Project/evaluation_screen.dart';
 
 part 'bottom_nav_event.dart';
@@ -13,7 +14,7 @@ class BottomNavBloc extends Bloc<BottomNavEvent, BottomNavState> {
     const HomeScreen(),
     const EvaluationScreen(),
     Container(color: Colors.pink, child: const Center(child: Text("Settings"))),
-    Container(color: Colors.green, child: const Center(child: Text("Profile"))),
+    const ProfileScreen()
   ];
 
   int currentIndex = 0;
