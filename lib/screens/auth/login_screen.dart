@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +6,6 @@ import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/screens/auth/bloc/auth_bloc.dart';
 import 'package:tuwaiq_project/screens/auth/otp_screen.dart';
 import 'package:tuwaiq_project/screens/auth/signup_screen.dart';
-import 'package:tuwaiq_project/screens/home_screen.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 import 'package:tuwaiq_project/widget/button/custom_button.dart';
 import 'package:tuwaiq_project/widget/textformfeild/custom_text_form_feild.dart';
