@@ -46,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                   FlashyTabBarItem(
                     icon: const Icon(
                       Iconsax.home_bold,
-                      color: Color.fromARGB(255, 116, 200, 249),
+                      color: Color(0x889B37FF),
                       size: 30,
                     ),
                     title: const Text('Home'),
@@ -54,15 +54,15 @@ class HomeScreen extends StatelessWidget {
                   FlashyTabBarItem(
                     icon: const Icon(
                       Iconsax.card_add_bold,
-                      color: Color.fromARGB(121, 10, 96, 209),
+                      color: Color(0x889B37FF),
                       size: 30,
                     ),
                     title: const Text('my project'),
                   ),
                   FlashyTabBarItem(
                     icon: const Icon(
-                      Iconsax.profile_2user_bold,
-                      color: Colors.blueGrey,
+                      LineAwesome.search_solid,
+                      color: Color(0x889B37FF),
                       size: 30,
                     ),
                     title: const Text('Search'),
@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                   FlashyTabBarItem(
                     icon: const Icon(
                       Iconsax.profile_2user_bold,
-                      color: Colors.indigo,
+                      color: Color(0x889B37FF),
                       size: 30,
                     ),
                     title: const Text('Profile'),
