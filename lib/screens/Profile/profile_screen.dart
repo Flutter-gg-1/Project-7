@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:project_management_app/screens/Home/projects_contaner.dart';
+import 'package:project_management_app/screens/Profile/custom_profile_links.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    List<String> labels = ['github', 'BlindLink','LinkedIn', 'Resume'];
+    List<String> urls = ['Add Links', 'Add Links','Add Links', 'Add Links'];
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -46,96 +49,10 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              ListTile(
-                minLeadingWidth: 80,
-                leading: const Text(
-                  'github: ',
-                  style: TextStyle(fontSize: 14, color: Color(0xff4129B7)),
-                ),
-                title: Container(
-                  padding: const EdgeInsets.only(left: 5),
-                  height: 33,
-                  width: 250,
-                  decoration: BoxDecoration(
-                      color: const Color(0xffD9D4F1),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'add links:',
-                        style: TextStyle(
-                            fontSize: 11,
-                            color: const Color(0xff4129B7).withOpacity(0.5),
-                            fontWeight: FontWeight.bold),
-                      )),
-                ),
-              ),
-              ListTile(
-                minLeadingWidth: 80,
-                leading: const Text('blindLink: ',
-                    style: TextStyle(fontSize: 14, color: Color(0xff4129B7))),
-                title: Container(
-                  padding: const EdgeInsets.only(left: 5),
-                  height: 33,
-                  width: 250,
-                  decoration: BoxDecoration(
-                      color: const Color(0xffD9D4F1),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'add links:',
-                        style: TextStyle(
-                            fontSize: 11,
-                            color: const Color(0xff4129B7).withOpacity(0.5),
-                            fontWeight: FontWeight.bold),
-                      )),
-                ),
-              ),
-              ListTile(
-                minLeadingWidth: 80,
-                leading: const Text('LinkedIn: ',
-                    style: TextStyle(fontSize: 14, color: Color(0xff4129B7))),
-                title: Container(
-                  padding: const EdgeInsets.only(left: 5),
-                  height: 33,
-                  width: 250,
-                  decoration: BoxDecoration(
-                      color: const Color(0xffD9D4F1),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'add links:',
-                        style: TextStyle(
-                            fontSize: 11,
-                            color: const Color(0xff4129B7).withOpacity(0.5),
-                            fontWeight: FontWeight.bold),
-                      )),
-                ),
-              ),
-              ListTile(
-                minLeadingWidth: 80,
-                leading: const Text('resume: ',
-                    style: TextStyle(fontSize: 14, color: Color(0xff4129B7))),
-                title: Container(
-                  padding: const EdgeInsets.only(left: 5),
-                  height: 33,
-                  width: 250,
-                  decoration: BoxDecoration(
-                      color: const Color(0xffD9D4F1),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'add links:',
-                        style: TextStyle(
-                            fontSize: 11,
-                            color: const Color(0xff4129B7).withOpacity(0.5),
-                            fontWeight: FontWeight.bold),
-                      )),
-                ),
-              ),
+
+              ...List.generate(4, (index){
+                return CustomProfileLinks(label: labels[index],url: urls[index],);
+              }),
               const SizedBox(
                 height: 20,
               ),

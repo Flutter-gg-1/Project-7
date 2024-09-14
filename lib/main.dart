@@ -1,10 +1,9 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:project_management_app/Bottom_Nav/bottom_nav.dart';
-import 'package:project_management_app/screens/Profile/profile_screen.dart';
 import 'package:project_management_app/services/setup.dart';
 import 'package:sizer/sizer.dart';
+import 'package:device_preview/device_preview.dart';
 
 void main() async {
   await setup();
