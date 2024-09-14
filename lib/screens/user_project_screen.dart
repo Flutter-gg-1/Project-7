@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/services/setup.dart';
-import 'package:tuwaiq_project/widget/column/bootcamp_column.dart';
 import 'package:tuwaiq_project/widget/container/project_container.dart';
 
 class UserProjectScreen extends StatelessWidget {
@@ -35,60 +34,51 @@ class UserProjectScreen extends StatelessWidget {
                 childAspectRatio: 0.7,
               ),
               children: [
-                 ProjectContainer(
+                ProjectContainer(
                   projectName: 'Clothes app',
                   rate: '4.5',
                   bootcamp: 'Flutter bootcamp',
                   imagePath: 'assets/image/flutter.png',
-                  onTap: (){},
+                  onTap: () {},
                 ),
-                 ProjectContainer(
+                ProjectContainer(
                   projectName: 'Clothes app',
                   rate: '4.5',
                   bootcamp: 'Flutter bootcamp',
                   imagePath: 'assets/image/data_science.png',
-                  onTap: (){},
+                  onTap: () {},
                 ),
-                 ProjectContainer(
+                ProjectContainer(
                   projectName: 'Clothes app',
                   rate: '4.5',
                   bootcamp: 'Flutter bootcamp',
                   imagePath: 'assets/image/AI.png',
-                  onTap: (){},
+                  onTap: () {},
                 ),
-                 ProjectContainer(
+                ProjectContainer(
                   projectName: 'Clothes app',
                   rate: '4.5',
                   bootcamp: 'Flutter bootcamp',
                   imagePath: 'assets/image/cyber.png',
-                  onTap: (){},
+                  onTap: () {},
                 ),
-                 ProjectContainer(
+                ProjectContainer(
                   projectName: 'Clothes app',
                   rate: '4.5',
                   bootcamp: 'Flutter bootcamp',
                   imagePath: 'assets/image/flutter.png',
-                  onTap: (){},
+                  onTap: () {},
                 ),
-                 ProjectContainer(
+                ProjectContainer(
                   projectName: 'Clothes app',
                   rate: '4.5',
                   bootcamp: 'Flutter bootcamp',
                   imagePath: 'assets/image/cyber.png',
-                  onTap: (){},
+                  onTap: () {},
                 ),
               ],
             ),
           ),
-          // Column(
-          //   children: [
-          //     Image.asset('assets/image/cyber.png'),
-          //     const Text(
-          //       'Cyber Security',
-          //       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          //     )
-          //   ],
-          // )
         ],
       ),
     );
