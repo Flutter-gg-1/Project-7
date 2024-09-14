@@ -10,3 +10,8 @@ final class ArabicState extends AuthState {
 
   ArabicState({required this.isArabic});
 }
+final class LoadingState extends AuthState {}
+
+final class SuccessState extends AuthState {}
+
+final class ErrorState extends AuthState {}

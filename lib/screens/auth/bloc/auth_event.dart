@@ -5,3 +5,5 @@ sealed class AuthEvent {}
 
 
 class LanguageChangeEvent extends AuthEvent{}
+
+class CreateAccountEvent extends AuthEvent{}
