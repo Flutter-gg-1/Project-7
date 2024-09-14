@@ -1,18 +1,14 @@
-import 'dart:developer';
 
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:tuwaiq_project/data_layer/auth_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/screens/all_project_screen.dart';
-import 'package:tuwaiq_project/screens/auth/login_screen.dart';
 import 'package:tuwaiq_project/screens/bottomNavBloc/bottomnav_bloc.dart';
 import 'package:tuwaiq_project/screens/profile_screen.dart';
 import 'package:tuwaiq_project/screens/search_screen.dart';
 import 'package:tuwaiq_project/screens/user_project_screen.dart';
-import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 
 class HomeScreen extends StatelessWidget {
