@@ -26,5 +26,9 @@ abstract class NetworkingConstant {
   final String endProjectImgEdit = "/user/edit/project/images/";
   final String endProjectLinksEdit = "/user/edit/project/link/";
   final String endProjectMembersEdit = "/user/edit/project/members/";
+  final String endProjectCreate = "/supervisor/create/project";
+  final String endProjectChangeState = "/supervisor/change/status/";
+
+  final String endProjectDel = "/supervisor/delete/project/";
 
 }

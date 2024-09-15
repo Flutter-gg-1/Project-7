@@ -15,7 +15,6 @@ mixin ProjectMix on NetworkingConstant {
     } on DioException catch (err) {
       print(err.response?.data);
     } catch (err) {
-
       throw Exception;
     }
   }
@@ -48,7 +47,6 @@ mixin ProjectMix on NetworkingConstant {
     } on DioException catch (err) {
       print(err.response?.data);
     } catch (err) {
-
       throw Exception;
     }
   }
@@ -67,7 +65,6 @@ mixin ProjectMix on NetworkingConstant {
     } on DioException catch (err) {
       print(err.response?.data);
     } catch (err) {
-
       throw Exception;
     }
   }
@@ -125,4 +122,6 @@ mixin ProjectMix on NetworkingConstant {
       throw Exception;
     }
   }
+
+  
 }
