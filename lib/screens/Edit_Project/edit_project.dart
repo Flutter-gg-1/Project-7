@@ -12,6 +12,8 @@ class EditProjectScreen extends StatelessWidget {
   final TextEditingController projectTypeController =
       TextEditingController(text: "App");
 
+  EditProjectScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
