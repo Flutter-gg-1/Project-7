@@ -9,14 +9,13 @@ import 'package:device_preview/device_preview.dart';
 void main() async {
   await setup();
 
-  runApp(
-    const MainApp()
- 
-    // DevicePreview(
-    //   enabled: !kReleaseMode,
-    //   builder: (context) => const MainApp(), // Wrap your app
-    // ),
-  );
+  runApp(const MainApp()
+
+      // DevicePreview(
+      //   enabled: !kReleaseMode,
+      //   builder: (context) => const MainApp(), // Wrap your app
+      // ),
+      );
 }
 
 class MainApp extends StatelessWidget {
@@ -27,7 +26,7 @@ class MainApp extends StatelessWidget {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return const MaterialApp(
-          home: EditProfileScreen(),
+          home: BottomNav(),
         );
       },
     );
