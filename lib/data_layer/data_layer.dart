@@ -22,6 +22,10 @@ class DataLayer {
     box.write("auth", auth.toJson());
   }
 
+  getUserProfile() async {
+    userInfo = await api.getUserProfile(token: authUser!.token);
+  }
+
   loadData() {
     if (box.hasData("auth")) {
       Map<String, dynamic> loadedData = box.read("auth");

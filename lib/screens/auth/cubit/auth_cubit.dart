@@ -34,7 +34,6 @@ class AuthCubit extends Cubit<AuthState> {
     emit(LoadingState());
     try {
       await api.verifyAccount(email: email, otp: int.parse(otpController.text));
-      await api.getUserProfile();
       emit(SuccessState());
     } on FormatException catch (e) {
       emit(ErrorState(msg: e.message));

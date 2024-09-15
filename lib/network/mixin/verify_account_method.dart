@@ -23,15 +23,14 @@ mixin VerifyAccountMethod on ConstantNetwork {
     }
   }
 
-   getUserProfile() async {
+  Future<UserModel> getUserProfile({required String token}) async {
     try {
       final responseUser = await dio.get(baseurl + getProfileEndPoint,
-          options: Options(headers: {
-            "Authorization": "Bearer ${getIt.get<DataLayer>().authUser?.token}"
-          }));
-      getIt.get<DataLayer>().userInfo =
-          UserModel.fromJson(responseUser.data['data']);
-      
+          options: Options(headers: {"Authorization": "Bearer $token"}));
+
+      UserModel userModel = UserModel.fromJson(responseUser.data["data"]);
+
+      return userModel;
     } on DioException catch (e) {
       throw FormatException(e.response?.data['data']);
     } catch (e) {
