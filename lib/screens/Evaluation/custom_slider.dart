@@ -9,7 +9,7 @@ class CustomSlider extends StatefulWidget {
 
   const CustomSlider(
       {super.key,
-      this.sliderHeight = 48,
+      this.sliderHeight = 35,
       this.max = 10,
       this.min = 0,
       this.fullWidth = false,
@@ -28,13 +28,14 @@ class _CustomSliderState extends State<CustomSlider> {
     Color(0xff57E3D8),
     Color(0xffFFDB5E),
     Color(0xffF4A664),
+    Color(0xffFF9191),
   ];
 
   @override
   Widget build(BuildContext context) {
     if (widget.fullWidth) paddingFactor = 0.3;
     return Container(
-      width: widget.fullWidth ? double.infinity : (widget.sliderHeight) * 5,
+      width: widget.fullWidth ? double.infinity : (widget.sliderHeight) * 7,
       height: (widget.sliderHeight),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
@@ -82,9 +83,6 @@ class _CustomSliderState extends State<CustomSlider> {
                       }),
                 ),
               ),
-            ),
-            SizedBox(
-              width: widget.sliderHeight * .1,
             ),
           ],
         ),
