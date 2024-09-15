@@ -1,6 +1,6 @@
 import 'package:project_management_app/models/image_model.dart';
 import 'package:project_management_app/models/project_link.dart';
-import 'package:project_management_app/models/user_model.dart';
+import 'member_model.dart';
 
 class ProjectModel {
   late final String projectId;
@@ -22,7 +22,7 @@ class ProjectModel {
   late final String updateAt;
   late final List<ImageModel> imagesProject;
   late final List<ProjectLink> linksProject;
-  late final List<UserModel> membersProject;
+  late final List<MemberModel> membersProject;
 
   ProjectModel({
     required this.projectId,
@@ -72,7 +72,7 @@ class ProjectModel {
         .map((e) => ProjectLink.fromJson(e))
         .toList();
     membersProject = List.from(json['members_project'])
-        .map((e) => UserModel.fromJson(e))
+        .map((e) => MemberModel.fromJson(e))
         .toList();
   }
 

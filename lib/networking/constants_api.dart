@@ -35,4 +35,5 @@ abstract class ConstantsApi {
   // Public
   final String getProjectEndpoint = '/v1/project';
   final String getProjectsListEndpoint = '/v1/projects';
+  final String searchProjectsEndpoint = '/v1/search/projects';
 }
