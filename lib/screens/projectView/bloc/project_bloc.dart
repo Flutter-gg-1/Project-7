@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -7,25 +6,47 @@ part 'project_event.dart';
 part 'project_state.dart';
 
 class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
-   File? profileImage;
-   File? logoImage;
-   File? projectImage;
-   File? presentationImage;
-  ProjectBloc() : super(ProjectInitial()) {
-    on<ProjectEvent>((event, emit) {});
+  File? profileImage;
+  File? logoImage;
+  File? projectImage;
+  File? presentationImage;
 
+  ProjectBloc() : super(ProjectInitial()) {
     on<ProfileImageChangeEvent>((event, emit) {
-      emit(SuccessImageChangeState(selectedImage: profileImage!));
+      profileImage = event.selectedImage;
+      emit(ProjectImagesState(
+        profileImage: profileImage,
+        logoImage: logoImage,
+        projectImage: projectImage,
+        presentationImage: presentationImage,
+      ));
     });
     on<LogoImageChangeEvent>((event, emit) {
-      emit(SuccessImageChangeState(selectedImage: logoImage!));
+      logoImage = event.selectedImage;
+      emit(ProjectImagesState(
+        profileImage: profileImage,
+        logoImage: logoImage,
+        projectImage: projectImage,
+        presentationImage: presentationImage,
+      ));
     });
     on<PresentationImageChangeEvent>((event, emit) {
-      emit(SuccessImageChangeState(selectedImage: presentationImage!));
+      presentationImage = event.selectedImage;
+      emit(ProjectImagesState(
+        profileImage: profileImage,
+        logoImage: logoImage,
+        projectImage: projectImage,
+        presentationImage: presentationImage,
+      ));
     });
     on<ProjectImageChangeEvent>((event, emit) {
-      emit(SuccessImageChangeState(selectedImage: projectImage!));
+      projectImage = event.selectedImage;
+      emit(ProjectImagesState(
+        profileImage: profileImage,
+        logoImage: logoImage,
+        projectImage: projectImage,
+        presentationImage: presentationImage,
+      ));
     });
-
   }
 }

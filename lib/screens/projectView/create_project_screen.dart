@@ -8,6 +8,7 @@ import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/screens/projectView/bloc/project_bloc.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
+import 'package:tuwaiq_project/widget/column/images_coulmn.dart';
 import 'package:tuwaiq_project/widget/row/date_row.dart';
 import 'package:tuwaiq_project/widget/textformfeild/normal_text_form_feild.dart';
 
@@ -20,12 +21,16 @@ class CreateProjectScreen extends StatelessWidget {
       create: (context) => ProjectBloc(),
       child: Builder(builder: (context) {
         final bloc = context.read<ProjectBloc>();
-        Future<void> pickImage() async {
+        Future<void> pickImage({
+          required ProjectEvent Function(File) createEvent,
+          required Function(File) updateImage,
+        }) async {
           final ImagePicker picker = ImagePicker();
           XFile? image = await picker.pickImage(source: ImageSource.gallery);
           if (image != null) {
-            bloc.profileImage = File(image.path);
-            bloc.add(ProfileImageChangeEvent());
+            final selectedImage = File(image.path);
+            updateImage(selectedImage);
+            bloc.add(createEvent(selectedImage));
           }
         }
 
@@ -46,12 +51,18 @@ class CreateProjectScreen extends StatelessWidget {
                       width: double.infinity,
                       height: context.getHeight(multiply: 0.12),
                       decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: Color.fromARGB(255, 228, 226, 226)),
-                      child: state is SuccessImageChangeState
-                          ? Image.file(state.selectedImage)
+                          shape: BoxShape.circle,
+                          color: Color.fromARGB(255, 228, 226, 226)),
+                      child: state is ProjectImagesState &&
+                              state.profileImage != null
+                          ? Image.file(state.profileImage!)
                           : IconButton(
                               onPressed: () {
-                                pickImage();
+                                pickImage(
+                                    updateImage: (p0) {},
+                                    createEvent: (image) =>
+                                        ProfileImageChangeEvent(
+                                            selectedImage: image));
                               },
                               icon: const Icon(
                                 Icons.camera_alt,
@@ -71,7 +82,9 @@ class CreateProjectScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          languageLayer.isArabic ? 'اسم المشروع' : 'Project name',
+                          languageLayer.isArabic
+                              ? 'اسم المشروع'
+                              : 'Project name',
                           style: const TextStyle(
                               fontSize: 13, fontWeight: FontWeight.w500),
                         ),
@@ -106,13 +119,16 @@ class CreateProjectScreen extends StatelessWidget {
                           hintText: 'Write Project Description',
                           minLines: 4,
                         ),
-                 
+                        ImagesCoulmn(languageLayer: languageLayer),
                       ],
                     ),
                   ),
                 ),
               ),
-              const Icon(Icons.arrow_circle_down,color: Color(0xffA2A0A0),)
+              const Icon(
+                Icons.arrow_circle_down,
+                color: Color(0xffA2A0A0),
+              )
             ],
           ),
         );

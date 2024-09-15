@@ -5,8 +5,16 @@ sealed class ProjectState {}
 
 final class ProjectInitial extends ProjectState {}
 
-final class SuccessImageChangeState extends ProjectState {
-  final File selectedImage;
+final class ProjectImagesState extends ProjectState {
+  final File? profileImage;
+  final File? logoImage;
+  final File? projectImage;
+  final File? presentationImage;
 
-  SuccessImageChangeState({required this.selectedImage});
+  ProjectImagesState({
+    this.profileImage,
+    this.logoImage,
+    this.projectImage,
+    this.presentationImage,
+  });
 }
