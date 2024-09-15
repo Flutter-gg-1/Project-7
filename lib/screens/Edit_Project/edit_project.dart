@@ -12,11 +12,23 @@ class EditProjectScreen extends StatelessWidget {
   final TextEditingController projectTypeController =
       TextEditingController(text: "App");
 
-  EditProjectScreen({super.key});
+  // Controllers for the new links section
+  final TextEditingController githubController = TextEditingController();
+  final TextEditingController playStoreController = TextEditingController();
+  final TextEditingController appStoreController = TextEditingController();
+  final TextEditingController figmaController = TextEditingController();
+  final TextEditingController webLinkController = TextEditingController();
+  final TextEditingController pinterestController = TextEditingController();
+
+  // Controllers for members
+  final TextEditingController member1Controller = TextEditingController();
+  final TextEditingController member2Controller = TextEditingController();
+  final TextEditingController member3Controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("Edit Project"),
         backgroundColor: const Color(0xff4129B7),
@@ -33,6 +45,7 @@ class EditProjectScreen extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
+                  color: Color(0xff4129B7), // لون النص
                 ),
               ),
               const SizedBox(height: 10),
@@ -42,11 +55,25 @@ class EditProjectScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: const Color(0xffD9D4F1),
                   borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 4,
+                      blurRadius: 10,
+                      offset: const Offset(5, 5), // الإزاحة للظل
+                    ),
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 4,
+                      blurRadius: 10,
+                      offset: const Offset(-5, 5), // ظل من اليسار
+                    ),
+                  ],
                 ),
                 child: const Icon(
                   Icons.upload_file,
                   size: 50,
-                  color: Colors.white,
+                  color: Color(0xff57E3D8),
                 ),
               ),
               const SizedBox(height: 20),
@@ -57,6 +84,7 @@ class EditProjectScreen extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
+                  color: Color(0xff4129B7),
                 ),
               ),
               const SizedBox(height: 10),
@@ -66,11 +94,25 @@ class EditProjectScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: const Color(0xffD9D4F1),
                   borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 4,
+                      blurRadius: 10,
+                      offset: const Offset(5, 5), // ظل من اليمين
+                    ),
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 4,
+                      blurRadius: 10,
+                      offset: const Offset(-5, 5), // ظل من اليسار
+                    ),
+                  ],
                 ),
                 child: const Icon(
                   Icons.upload_file,
                   size: 50,
-                  color: Colors.white,
+                  color: Color(0xff57E3D8),
                 ),
               ),
               const SizedBox(height: 30),
@@ -94,6 +136,46 @@ class EditProjectScreen extends StatelessWidget {
                   isMultiline: true),
               const SizedBox(height: 20),
 
+              // Links Section
+              const Text(
+                "Links: ",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff4129B7), // لون النص
+                  fontSize: 18,
+                ),
+              ),
+              const SizedBox(height: 10),
+              _buildTextField("GitHub", githubController),
+              const SizedBox(height: 10),
+              _buildTextField("Play Store", playStoreController),
+              const SizedBox(height: 10),
+              _buildTextField("App Store", appStoreController),
+              const SizedBox(height: 10),
+              _buildTextField("Figma", figmaController),
+              const SizedBox(height: 10),
+              _buildTextField("Web Link", webLinkController),
+              const SizedBox(height: 10),
+              _buildTextField("Pinterest", pinterestController),
+              const SizedBox(height: 30),
+
+              // Members Section
+              const Text(
+                "Members",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Color(0xff4129B7), // لون النص
+                ),
+              ),
+              const SizedBox(height: 10),
+              _buildTextField("Member 1", member1Controller),
+              const SizedBox(height: 10),
+              _buildTextField("Member 2", member2Controller),
+              const SizedBox(height: 10),
+              _buildTextField("Member 3", member3Controller),
+              const SizedBox(height: 20),
+
               // Save Button
               Center(
                 child: ElevatedButton(
@@ -108,14 +190,10 @@ class EditProjectScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: const Text(
-                    "Save",
-                  ),
+                  child: const Text("Save"),
                 ),
               ),
-              SizedBox(
-                height: 70,
-              )
+              const SizedBox(height: 70),
             ],
           ),
         ),
@@ -133,21 +211,40 @@ class EditProjectScreen extends StatelessWidget {
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
+            color: Color(0xff4129B7), // لون النص
           ),
         ),
         const SizedBox(height: 8),
-        TextField(
-          controller: controller,
-          maxLines: isMultiline ? 5 : 1,
-          keyboardType: isDate ? TextInputType.datetime : TextInputType.text,
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: Colors.white,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide.none,
+        Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.4),
+                spreadRadius: 0,
+                blurRadius: 4,
+                offset: const Offset(5, 5),
+              ),
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.4),
+                spreadRadius: 4,
+                blurRadius: 10,
+                offset: const Offset(-20, 10), // ظل من اليسار
+              ),
+            ],
+          ),
+          child: TextField(
+            controller: controller,
+            maxLines: isMultiline ? 5 : 1,
+            keyboardType: isDate ? TextInputType.datetime : TextInputType.text,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide.none,
+              ),
+              hintText: isDate ? "Select a date" : "",
             ),
-            hintText: isDate ? "Select a date" : "",
           ),
         ),
       ],
