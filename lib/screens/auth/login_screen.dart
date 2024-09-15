@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:project_judge/components/buttons/custom_elevated_button.dart';
 import 'package:project_judge/components/text_field/custom_text_form_field.dart';
 import 'package:project_judge/screens/auth/create_account_screen.dart';
 import 'package:project_judge/screens/auth/cubit/auth_cubit.dart';
 import 'package:project_judge/screens/auth/verify_screen.dart';
+import 'package:project_judge/services/extension/size_extension.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -20,8 +22,10 @@ class LoginScreen extends StatelessWidget {
             if (state is LoadingState) {
               showDialog(
                   context: context,
-                  builder: (context) => const AlertDialog(
-                        content: CircularProgressIndicator(),
+                  builder: (context) => AlertDialog(
+                        backgroundColor: Colors.transparent,
+                        content:
+                            Lottie.asset("assets/json/Loading animation.json"),
                       ));
             }
             if (state is SuccessState) {
@@ -37,6 +41,7 @@ class LoginScreen extends StatelessWidget {
               showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
+                        backgroundColor: Colors.transparent,
                         contentPadding: EdgeInsets.zero,
                         content: Container(
                           height: 421,
@@ -84,22 +89,31 @@ class LoginScreen extends StatelessWidget {
                               const SizedBox(
                                 height: 33,
                               ),
-                              ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                    minimumSize: const Size(313, 63),
-                                    maximumSize: const Size(313, 63),
-                                    shape: ContinuousRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8)),
-                                    backgroundColor: Colors.white),
-                                child: const Center(
-                                  child: Text(
-                                    "Done",
-                                    style: TextStyle(
-                                        fontSize: 20, color: Color(0xff4F2AB8)),
-                                  ),
-                                ),
-                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        backgroundColor: Colors.white,
+                                        fixedSize: Size(
+                                            MediaQuery.of(context).size.width,
+                                            63)),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Center(
+                                      child: Text(
+                                        "Done",
+                                        style: TextStyle(
+                                            color: Color(0xff4F2AB8),
+                                            fontSize: 20),
+                                      ),
+                                    )),
+                              )
                             ],
                           ),
                         ),
@@ -161,7 +175,7 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(
                         height: 180,
                       ),
-                      CustomTextFormField(
+                      CustomTextFormField(floatingLabelBehavior: FloatingLabelBehavior.never,
                         controller: cubit.emailLoginController,
                         hintText: "Example@example.com",
                         icon: Icons.email_outlined,
@@ -178,6 +192,8 @@ class LoginScreen extends StatelessWidget {
                         height: 111,
                       ),
                       CustomElevatedButton(
+                        minimumSize:
+                            Size(MediaQuery.of(context).size.width, 63),
                         backgroundColor: const Color(0xff4D2EB4),
                         text: "Get OTP",
                         textcolor: Colors.white,

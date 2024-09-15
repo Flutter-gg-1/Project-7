@@ -6,11 +6,13 @@ class CustomTextFormField extends StatelessWidget {
       this.controller,
       required this.hintText,
       required this.icon,
-      this.validator});
+      this.validator,
+      this.floatingLabelBehavior});
   final TextEditingController? controller;
   final String hintText;
   final IconData icon;
   final String? Function(String?)? validator;
+  final FloatingLabelBehavior? floatingLabelBehavior;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class CustomTextFormField extends StatelessWidget {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: controller,
         decoration: InputDecoration(
+            floatingLabelBehavior: floatingLabelBehavior,
             filled: true,
             fillColor: const Color(0xffEDEDED),
             hintText: hintText,

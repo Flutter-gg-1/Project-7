@@ -17,7 +17,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void _navigateToPage(int pageIndex) {
     _pageController.animateToPage(
       pageIndex,
-      duration: const Duration(milliseconds: 3000),
+      duration: const Duration(milliseconds: 800),
       curve: Curves.easeInOut,
     );
   }
@@ -55,6 +55,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           CustomElevatedButton(
+                            minimumSize:
+                                Size(MediaQuery.of(context).size.width, 63),
                             backgroundColor: const Color(0xff4D2EB4),
                             text: "Log in",
                             textcolor: Colors.white,
@@ -66,6 +68,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             height: 16,
                           ),
                           CustomElevatedButton(
+                            minimumSize:
+                                Size(MediaQuery.of(context).size.width, 63),
                             backgroundColor: Colors.white,
                             text: "Sign up",
                             textcolor: const Color(0xff4D2EB4),

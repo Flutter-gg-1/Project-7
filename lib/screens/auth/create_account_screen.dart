@@ -99,7 +99,7 @@ class CreateAccountScreen extends StatelessWidget {
                         const SizedBox(
                           height: 150,
                         ),
-                        CustomTextFormField(
+                        CustomTextFormField(floatingLabelBehavior: FloatingLabelBehavior.never,
                           controller: bloc.emailLoginController,
                           hintText: "Example@example.com",
                           icon: Icons.email_outlined,
@@ -115,7 +115,7 @@ class CreateAccountScreen extends StatelessWidget {
                         const SizedBox(
                           height: 46,
                         ),
-                        CustomTextFormField(
+                        CustomTextFormField(floatingLabelBehavior: FloatingLabelBehavior.never,
                           controller: bloc.fNameController,
                           hintText: "First Name",
                           icon: Icons.person_outline_rounded,
@@ -129,7 +129,7 @@ class CreateAccountScreen extends StatelessWidget {
                         const SizedBox(
                           height: 46,
                         ),
-                        CustomTextFormField(
+                        CustomTextFormField(floatingLabelBehavior: FloatingLabelBehavior.never,
                           controller: bloc.lNameController,
                           hintText: "Last Name",
                           icon: Icons.person_outline_rounded,
@@ -144,6 +144,8 @@ class CreateAccountScreen extends StatelessWidget {
                           height: 46,
                         ),
                         CustomElevatedButton(
+                          minimumSize:
+                              Size(MediaQuery.of(context).size.width, 63),
                           backgroundColor: const Color(0xff4D2EB4),
                           text: "Get OTP",
                           textcolor: Colors.white,

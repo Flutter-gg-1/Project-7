@@ -7,11 +7,13 @@ class CustomElevatedButton extends StatelessWidget {
       required this.backgroundColor,
       required this.text,
       required this.textcolor,
-      this.onPressed});
+      this.onPressed,
+      this.minimumSize});
   final Color backgroundColor;
   final String text;
   final Color textcolor;
   final Function()? onPressed;
+  final Size? minimumSize;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,8 @@ class CustomElevatedButton extends StatelessWidget {
             child: ElevatedButton(
               onPressed: onPressed,
               style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(420, 63),
+                  minimumSize: minimumSize,
+                  maximumSize: minimumSize,
                   backgroundColor: backgroundColor,
                   shape: ContinuousRectangleBorder(
                       borderRadius: BorderRadius.circular(8))),
