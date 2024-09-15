@@ -16,11 +16,11 @@ class LoadingScreen extends StatelessWidget {
         return BlocListener<LoadingScreenCubit, LoadingScreenState>(
           listener: (context, state) {
             if (state is LoggedInState) {
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const HomeScreen()));
             }
             if (state is NotLoggedInState) {
-              Navigator.pushReplacement(
+              Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => const WelcomeScreen()));
