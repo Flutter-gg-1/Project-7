@@ -16,7 +16,6 @@ mixin VerifyAccountMethod on ConstantNetwork {
 
       return authUser;
     } on DioException catch (e) {
-      print(e);
       throw FormatException(e.response?.data['data']);
     } catch (e) {
       throw FormatException("unkown error $e");

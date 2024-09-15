@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_judge/components/buttons/custom_elevated_button.dart';
+import 'package:project_judge/components/text_field/custom_text_form_field.dart';
+import 'package:project_judge/screens/auth/create_account_screen.dart';
 import 'package:project_judge/screens/auth/cubit/auth_cubit.dart';
 import 'package:project_judge/screens/auth/verify_screen.dart';
 
@@ -34,7 +37,72 @@ class LoginScreen extends StatelessWidget {
               showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                        content: Text(state.msg),
+                        contentPadding: EdgeInsets.zero,
+                        content: Container(
+                          height: 421,
+                          width: 346,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: const Color(0xff4F2AB8)),
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 60,
+                              ),
+                              Container(
+                                height: 103,
+                                width: 103,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        width: 12,
+                                        color: const Color(0x48FFFFFF))),
+                                child: const Icon(
+                                  Icons.close,
+                                  size: 55,
+                                  color: Color(0xff4F2AB8),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              const Text(
+                                "An error occured",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 32),
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              Text(
+                                textAlign: TextAlign.center,
+                                state.msg,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 12),
+                              ),
+                              const SizedBox(
+                                height: 33,
+                              ),
+                              ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                    minimumSize: const Size(313, 63),
+                                    maximumSize: const Size(313, 63),
+                                    shape: ContinuousRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8)),
+                                    backgroundColor: Colors.white),
+                                child: const Center(
+                                  child: Text(
+                                    "Done",
+                                    style: TextStyle(
+                                        fontSize: 20, color: Color(0xff4F2AB8)),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ));
             }
           },
@@ -42,19 +110,9 @@ class LoginScreen extends StatelessWidget {
             body: Stack(
               children: [
                 Positioned.fill(
-                  child: Transform.translate(
-                    offset: const Offset(-10, 0),
-                    child: OverflowBox(
-                      alignment: Alignment.center,
-                      minWidth: 0,
-                      minHeight: 0,
-                      maxHeight: double.infinity,
-                      maxWidth: double.infinity,
-                      child: Image.asset(
-                        "assets/images/loginImage.png",
-                        fit: BoxFit.contain,
-                      ),
-                    ),
+                  child: Image.asset(
+                    "assets/images/loginImage.png",
+                    fit: BoxFit.cover,
                   ),
                 ),
                 Align(
@@ -84,7 +142,15 @@ class LoginScreen extends StatelessWidget {
                             child: Center(
                               child: Image.asset("assets/images/logo-h 2.png"),
                             ),
-                          ))
+                          )),
+                      const Positioned(
+                        top: 90,
+                        left: 170,
+                        child: Text(
+                          "Log in",
+                          style: TextStyle(color: Colors.white, fontSize: 32),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -92,14 +158,54 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextFormField(
-                        controller: cubit.emailLoginController,
+                      const SizedBox(
+                        height: 180,
                       ),
-                      ElevatedButton(
-                          onPressed: () {
-                            cubit.checkLogin();
-                          },
-                          child: const Text("Log in"))
+                      CustomTextFormField(
+                        controller: cubit.emailLoginController,
+                        hintText: "Example@example.com",
+                        icon: Icons.email_outlined,
+                        validator: (value) {
+                          if (value == null ||
+                              value.isEmpty ||
+                              !value.contains('@')) {
+                            return 'Please enter a valid email';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 111,
+                      ),
+                      CustomElevatedButton(
+                        backgroundColor: const Color(0xff4D2EB4),
+                        text: "Get OTP",
+                        textcolor: Colors.white,
+                        onPressed: () {
+                          cubit.checkLogin();
+                        },
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Don’t have an account?",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const CreateAccountScreen()));
+                              },
+                              child: const Text(
+                                "Create an account",
+                                style: TextStyle(color: Color(0xff57E3D8)),
+                              ))
+                        ],
+                      )
                     ],
                   ),
                 ),

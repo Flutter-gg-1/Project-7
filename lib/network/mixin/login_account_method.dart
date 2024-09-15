@@ -6,8 +6,8 @@ mixin LoginAccountMethod on ConstantNetwork {
     try {
       await dio.post(baseurl + loginAccountEndPoint, data: {"email": email});
     } on DioException catch (e) {
-      throw FormatException("Dio error: ${e.response.toString()}");
-    } catch (e){
+      throw FormatException(e.response!.data['data'].toString());
+    } catch (e) {
       throw FormatException(e.toString());
     }
   }

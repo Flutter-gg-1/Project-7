@@ -17,7 +17,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void _navigateToPage(int pageIndex) {
     _pageController.animateToPage(
       pageIndex,
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
   }

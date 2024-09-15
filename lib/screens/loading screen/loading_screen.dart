@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project_judge/screens/auth/login_screen.dart';
+import 'package:lottie/lottie.dart';
 import 'package:project_judge/screens/home_screen.dart';
 import 'package:project_judge/screens/loading%20screen/cubit/loading_screen_cubit.dart';
+import 'package:project_judge/screens/welcome_screen/welcome_screen.dart';
 
 class LoadingScreen extends StatelessWidget {
   const LoadingScreen({super.key});
@@ -14,9 +15,6 @@ class LoadingScreen extends StatelessWidget {
       child: Builder(builder: (context) {
         return BlocListener<LoadingScreenCubit, LoadingScreenState>(
           listener: (context, state) {
-            if (state is LoadingState) {
-              const CircularProgressIndicator();
-            }
             if (state is LoggedInState) {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => const HomeScreen()));
@@ -25,12 +23,12 @@ class LoadingScreen extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const LoginScreen()));
+                      builder: (context) => const WelcomeScreen()));
             }
           },
-          child: const Scaffold(
+          child: Scaffold(
             body: Center(
-              child: CircularProgressIndicator(),
+              child: Lottie.asset("assets/json/Loading animation.json"),
             ),
           ),
         );

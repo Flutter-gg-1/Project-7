@@ -35,20 +35,94 @@ class VerifyScreen extends StatelessWidget {
             }
           },
           child: Scaffold(
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(email),
-                  Pinput(
-                      controller: cubit.otpController,
-                      length: 6,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      onCompleted: (pin) {
-                        cubit.checkAuth(email: email);
-                      }),
-                ],
-              ),
+            body: Stack(
+              children: [
+                Positioned.fill(
+                  child: Image.asset(
+                    "assets/images/loginImage.png",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Container(
+                        constraints: BoxConstraints(
+                            maxHeight:
+                                MediaQuery.of(context).size.height - 136),
+                        decoration: const BoxDecoration(
+                            color: Color(0x65000000),
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(40),
+                                topLeft: Radius.circular(40))),
+                      ),
+                      Positioned(
+                          top: -50,
+                          left: MediaQuery.of(context).size.width / 2 - 50,
+                          child: Container(
+                            height: 100,
+                            width: 100,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(100)),
+                            child: Center(
+                              child: Image.asset("assets/images/logo-h 2.png"),
+                            ),
+                          )),
+                      const Positioned(
+                        top: 90,
+                        left: 80,
+                        child: Text(
+                          "Verification code",
+                          style: TextStyle(color: Colors.white, fontSize: 32),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 318,
+                        height: 48,
+                        child: RichText(
+                          text: TextSpan(children: [
+                            const TextSpan(
+                              text:
+                                  "Please enter the code that has been sent to the email ",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            TextSpan(
+                              text: email,
+                              style: const TextStyle(
+                                color: Color(0xff57E3D8),
+                              ),
+                            )
+                          ]),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 130,
+                      ),
+                      Pinput(
+                          controller: cubit.otpController,
+                          length: 6,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          onCompleted: (pin) {
+                            cubit.checkAuth(email: email);
+                          }),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         );

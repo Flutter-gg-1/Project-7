@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
-import 'package:project_judge/screens/welcome%20screen/welcome_screen.dart';
+import 'package:project_judge/screens/first%20screen/first_screen.dart';
+import 'package:project_judge/screens/loading%20screen/loading_screen.dart';
+import 'package:project_judge/screens/welcome_screen/welcome_screen.dart';
 import 'package:project_judge/setup/init_setup.dart';
 
 void main() async {
@@ -15,7 +16,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: WelcomeScreen(),
+      home: FirstScreen(),
     );
   }
 }

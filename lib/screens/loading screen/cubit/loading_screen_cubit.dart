@@ -10,9 +10,7 @@ class LoadingScreenCubit extends Cubit<LoadingScreenState> {
   final userAuth = getIt.get<DataLayer>().authUser;
 
   Future<void> checkToken() async {
-    print("----------here i am");
-    await Future.delayed(Duration.zero);
-    emit(LoadingState());
+    await Future.delayed(const Duration(seconds: 2));
 
     if (userAuth != null) {
       emit(LoggedInState());
