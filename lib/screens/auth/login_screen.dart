@@ -6,7 +6,6 @@ import 'package:project_judge/components/text_field/custom_text_form_field.dart'
 import 'package:project_judge/screens/auth/create_account_screen.dart';
 import 'package:project_judge/screens/auth/cubit/auth_cubit.dart';
 import 'package:project_judge/screens/auth/verify_screen.dart';
-import 'package:project_judge/services/extension/size_extension.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -36,6 +35,7 @@ class LoginScreen extends StatelessWidget {
                       builder: (context) => VerifyScreen(
                           email: cubit.emailLoginController.text)));
             }
+            
             if (state is ErrorState) {
               Navigator.pop(context);
               showDialog(
@@ -175,7 +175,8 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(
                         height: 180,
                       ),
-                      CustomTextFormField(floatingLabelBehavior: FloatingLabelBehavior.never,
+                      CustomTextFormField(
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
                         controller: cubit.emailLoginController,
                         hintText: "Example@example.com",
                         icon: Icons.email_outlined,
@@ -198,7 +199,8 @@ class LoginScreen extends StatelessWidget {
                         text: "Get OTP",
                         textcolor: Colors.white,
                         onPressed: () {
-                          cubit.checkLogin();
+                          cubit.checkLogin(
+                              email: cubit.emailLoginController.text);
                         },
                       ),
                       Row(

@@ -34,6 +34,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(LoadingState());
     try {
       await api.verifyAccount(email: email, otp: int.parse(otpController.text));
+      await api.getUserProfile();
       emit(SuccessState());
     } on FormatException catch (e) {
       emit(ErrorState(msg: e.message));
@@ -42,12 +43,23 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  checkLogin() async {
+  void checkLogin({required String email}) async {
     emit(LoadingState());
     try {
-      await api.loginMethod(email: emailLoginController.text);
-
+      await api.loginMethod(email: email);
       emit(SuccessState());
+    } on FormatException catch (e) {
+      emit(ErrorState(msg: e.message));
+    } catch (e) {
+      emit(ErrorState(msg: e.toString()));
+    }
+  }
+
+  void resendOTP({required String email}) async {
+    emit(LoadingState());
+    try {
+      await api.loginMethod(email: email);
+      emit(ResendOtpState());
     } on FormatException catch (e) {
       emit(ErrorState(msg: e.message));
     } catch (e) {

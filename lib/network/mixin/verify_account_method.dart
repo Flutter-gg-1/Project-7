@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:project_judge/data_layer/data_layer.dart';
 import 'package:project_judge/models/auth_model.dart';
+import 'package:project_judge/models/user_model.dart';
 import 'package:project_judge/network/constant_network.dart';
 import 'package:project_judge/setup/init_setup.dart';
 
@@ -15,6 +16,22 @@ mixin VerifyAccountMethod on ConstantNetwork {
       getIt.get<DataLayer>().saveUserAuth(auth: authUser);
 
       return authUser;
+    } on DioException catch (e) {
+      throw FormatException(e.response?.data['data']);
+    } catch (e) {
+      throw FormatException("unkown error $e");
+    }
+  }
+
+   getUserProfile() async {
+    try {
+      final responseUser = await dio.get(baseurl + getProfileEndPoint,
+          options: Options(headers: {
+            "Authorization": "Bearer ${getIt.get<DataLayer>().authUser?.token}"
+          }));
+      getIt.get<DataLayer>().userInfo =
+          UserModel.fromJson(responseUser.data['data']);
+      
     } on DioException catch (e) {
       throw FormatException(e.response?.data['data']);
     } catch (e) {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
+import 'package:project_judge/components/text/custom_text.dart';
 import 'package:project_judge/screens/auth/cubit/auth_cubit.dart';
 import 'package:project_judge/screens/home_screen.dart';
 
@@ -20,18 +22,101 @@ class VerifyScreen extends StatelessWidget {
             if (state is LoadingState) {
               showDialog(
                   context: context,
-                  builder: (context) => const AlertDialog(
-                        content: CircularProgressIndicator(),
+                  builder: (context) => AlertDialog(
+                        backgroundColor: Colors.transparent,
+                        content:
+                            Lottie.asset("assets/json/Loading animation.json"),
                       ));
             }
             if (state is SuccessState) {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const HomeScreen()));
             }
+            if (state is ResendOtpState) {
+              Navigator.pop(context);
+            }
             if (state is ErrorState) {
               Navigator.pop(context);
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(state.msg)));
+              showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                        backgroundColor: Colors.transparent,
+                        contentPadding: EdgeInsets.zero,
+                        content: Container(
+                          height: 421,
+                          width: 346,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: const Color(0xff4F2AB8)),
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 60,
+                              ),
+                              Container(
+                                height: 103,
+                                width: 103,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        width: 12,
+                                        color: const Color(0x48FFFFFF))),
+                                child: const Icon(
+                                  Icons.close,
+                                  size: 55,
+                                  color: Color(0xff4F2AB8),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              const Text(
+                                "An error occured",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 32),
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              Text(
+                                textAlign: TextAlign.center,
+                                state.msg,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 12),
+                              ),
+                              const SizedBox(
+                                height: 33,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        backgroundColor: Colors.white,
+                                        fixedSize: Size(
+                                            MediaQuery.of(context).size.width,
+                                            63)),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Center(
+                                      child: Text(
+                                        "Done",
+                                        style: TextStyle(
+                                            color: Color(0xff4F2AB8),
+                                            fontSize: 20),
+                                      ),
+                                    )),
+                              )
+                            ],
+                          ),
+                        ),
+                      ));
             }
           },
           child: Scaffold(
@@ -119,6 +204,21 @@ class VerifyScreen extends StatelessWidget {
                           onCompleted: (pin) {
                             cubit.checkAuth(email: email);
                           }),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            cubit.otpController.clear();
+
+                            cubit.resendOTP(email: email);
+                          },
+                          child: const CustomText(
+                            text: "Resend OTP",
+                            size: 24,
+                            color: Colors.white,
+                            weight: FontWeight.w700,
+                          ))
                     ],
                   ),
                 ),

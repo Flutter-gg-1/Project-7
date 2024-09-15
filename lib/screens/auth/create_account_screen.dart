@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:project_judge/screens/auth/cubit/auth_cubit.dart';
 import 'package:project_judge/screens/auth/login_screen.dart';
 import 'package:project_judge/screens/auth/verify_screen.dart';
@@ -21,8 +22,10 @@ class CreateAccountScreen extends StatelessWidget {
             if (state is LoadingState) {
               showDialog(
                   context: context,
-                  builder: (context) => const AlertDialog(
-                        content: LinearProgressIndicator(),
+                  builder: (context) => AlertDialog(
+                        backgroundColor: Colors.transparent,
+                        content:
+                            Lottie.asset("assets/json/Loading animation.json"),
                       ));
             }
             if (state is SuccessState) {
@@ -35,8 +38,86 @@ class CreateAccountScreen extends StatelessWidget {
             }
             if (state is ErrorState) {
               Navigator.pop(context);
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(state.msg)));
+              showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                        backgroundColor: Colors.transparent,
+                        contentPadding: EdgeInsets.zero,
+                        content: Container(
+                          height: 421,
+                          width: 346,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: const Color(0xff4F2AB8)),
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 60,
+                              ),
+                              Container(
+                                height: 103,
+                                width: 103,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        width: 12,
+                                        color: const Color(0x48FFFFFF))),
+                                child: const Icon(
+                                  Icons.close,
+                                  size: 55,
+                                  color: Color(0xff4F2AB8),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              const Text(
+                                "An error occured",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 32),
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              Text(
+                                textAlign: TextAlign.center,
+                                state.msg,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 12),
+                              ),
+                              const SizedBox(
+                                height: 33,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        backgroundColor: Colors.white,
+                                        fixedSize: Size(
+                                            MediaQuery.of(context).size.width,
+                                            63)),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Center(
+                                      child: Text(
+                                        "Done",
+                                        style: TextStyle(
+                                            color: Color(0xff4F2AB8),
+                                            fontSize: 20),
+                                      ),
+                                    )),
+                              )
+                            ],
+                          ),
+                        ),
+                      ));
             }
           },
           child: GestureDetector(
@@ -99,8 +180,9 @@ class CreateAccountScreen extends StatelessWidget {
                         const SizedBox(
                           height: 150,
                         ),
-                        CustomTextFormField(floatingLabelBehavior: FloatingLabelBehavior.never,
-                          controller: bloc.emailLoginController,
+                        CustomTextFormField(
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          controller: bloc.emailController,
                           hintText: "Example@example.com",
                           icon: Icons.email_outlined,
                           validator: (value) {
@@ -115,7 +197,8 @@ class CreateAccountScreen extends StatelessWidget {
                         const SizedBox(
                           height: 46,
                         ),
-                        CustomTextFormField(floatingLabelBehavior: FloatingLabelBehavior.never,
+                        CustomTextFormField(
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
                           controller: bloc.fNameController,
                           hintText: "First Name",
                           icon: Icons.person_outline_rounded,
@@ -129,7 +212,8 @@ class CreateAccountScreen extends StatelessWidget {
                         const SizedBox(
                           height: 46,
                         ),
-                        CustomTextFormField(floatingLabelBehavior: FloatingLabelBehavior.never,
+                        CustomTextFormField(
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
                           controller: bloc.lNameController,
                           hintText: "Last Name",
                           icon: Icons.person_outline_rounded,
