@@ -10,6 +10,7 @@ class EvaluationScreen extends StatelessWidget {
       'Idea',
       'Design',
       'Tools',
+      'Practices',
       'Presentation',
       'Investment'
     ];
@@ -126,7 +127,7 @@ class EvaluationScreen extends StatelessWidget {
                             height: 5,
                           ),
                           Container(
-                              height: 115,
+                              height: 80,
                               width: 307,
                               decoration: BoxDecoration(
                                   color:

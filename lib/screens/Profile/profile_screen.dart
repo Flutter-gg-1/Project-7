@@ -63,7 +63,7 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Container(
                     padding: const EdgeInsets.only(left: 5),
-                    margin: EdgeInsets.only(left: 5),
+                    margin: const EdgeInsets.only(left: 5),
                     height: 41,
                     width: 144,
                     decoration: BoxDecoration(
@@ -87,8 +87,8 @@ class ProfileScreen extends StatelessWidget {
                       foregroundColor: const Color(0xff4129B7),
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                     ),
-                    child: Row(
-                      children: const [
+                    child: const Row(
+                      children: [
                         Icon(Icons.add, size: 20), // أيقونة الإضافة
                         SizedBox(width: 5), // مسافة صغيرة بين الأيقونة والنص
                         Text('Add Project'),
@@ -101,7 +101,7 @@ class ProfileScreen extends StatelessWidget {
               ...List.generate(3, (_) {
                 return const Projects();
               }),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               )
             ],

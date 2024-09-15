@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
-import 'package:project_management_app/Bottom_Nav/bottom_nav.dart';
-import 'package:project_management_app/screens/Auth/cubit/verify_cubit.dart';
+import 'package:project_management_app/screens/Bottom_Nav/bottom_nav.dart';
+import 'package:project_management_app/screens/Auth/verify_cubit/verify_cubit.dart';
 import 'package:sizer/sizer.dart';
 
 class OtpScreen extends StatelessWidget {

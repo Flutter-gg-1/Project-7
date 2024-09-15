@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:project_management_app/Bottom_Nav/bloc/bottom_nav_bloc.dart';
+import 'package:project_management_app/screens/Bottom_Nav/bottom_nav_bloc/bottom_nav_bloc.dart';
 
 class BottomNav extends StatelessWidget {
   const BottomNav({super.key});

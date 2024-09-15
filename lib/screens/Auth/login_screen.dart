@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart'; // Import Sizer package
-import 'package:project_management_app/screens/Auth/otp_Screan.dart';
 import 'package:project_management_app/screens/Auth/signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
