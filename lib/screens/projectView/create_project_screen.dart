@@ -1,0 +1,123 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:tuwaiq_project/data_layer/language_layer.dart';
+import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
+import 'package:tuwaiq_project/screens/projectView/bloc/project_bloc.dart';
+import 'package:tuwaiq_project/services/setup.dart';
+import 'package:tuwaiq_project/shape/auth_shape.dart';
+import 'package:tuwaiq_project/widget/row/date_row.dart';
+import 'package:tuwaiq_project/widget/textformfeild/custom_text_form_feild.dart';
+import 'package:tuwaiq_project/widget/textformfeild/normal_text_form_feild.dart';
+
+class CreateProjectScreen extends StatelessWidget {
+  const CreateProjectScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => ProjectBloc(),
+      child: Builder(builder: (context) {
+        final bloc = context.read<ProjectBloc>();
+        Future<void> pickImage() async {
+          final ImagePicker picker = ImagePicker();
+          XFile? image = await picker.pickImage(source: ImageSource.gallery);
+          if (image != null) {
+            bloc.image = File(image.path);
+            bloc.add(ImageChangeEvent());
+          }
+        }
+
+        var languageLayer = languageLocaitor.get<LanguageLayer>();
+        return Scaffold(
+          backgroundColor: Colors.white,
+          body: Column(
+            children: [
+              CustomPaint(
+                size: Size(context.getWidth(multiply: 1),
+                    context.getHeight(multiply: 0.1)),
+                painter: AuthShape(),
+              ),
+              BlocBuilder<ProjectBloc, ProjectState>(
+                builder: (context, state) {
+                  return Container(
+                      //margin: const EdgeInsets.only(top: 7, bottom: 32),
+                      width: double.infinity,
+                      height: context.getHeight(multiply: 0.12),
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.circle, color: Color(0xff2e2e2e)),
+                      child: state is SuccessImageChangeState
+                          ? Image.file(state.selectedImage)
+                          : IconButton(
+                              onPressed: () {
+                                pickImage();
+                              },
+                              icon: const Icon(
+                                Icons.camera_alt,
+                                size: 65,
+                                color: Color(0xff969696),
+                              )));
+                },
+              ),
+              SizedBox(
+                height: context.getHeight(multiply: 0.74),
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: context.getWidth(multiply: 0.08)),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          languageLayer.isArabic ? 'اسم المشروع' : 'Project name',
+                          style: const TextStyle(
+                              fontSize: 13, fontWeight: FontWeight.w500),
+                        ),
+                        context.addSpacer(multiply: 0.008),
+                        const NormalTextFormFeild(
+                          hintText: 'Clothes app',
+                        ),
+                        context.addSpacer(multiply: 0.008),
+                        Text(
+                          languageLayer.isArabic
+                              ? 'اسم المعسكر'
+                              : 'Boot-Camp Name',
+                          style: const TextStyle(
+                              fontSize: 13, fontWeight: FontWeight.w500),
+                        ),
+                        context.addSpacer(multiply: 0.008),
+                        const NormalTextFormFeild(
+                          hintText: 'Flutter bootcamp',
+                        ),
+                        context.addSpacer(multiply: 0.02),
+                        const DateRow(),
+                        context.addSpacer(multiply: 0.02),
+                        Text(
+                          languageLayer.isArabic
+                              ? 'وصف المشروع'
+                              : 'Project Description',
+                          style: const TextStyle(
+                              fontSize: 13, fontWeight: FontWeight.w500),
+                        ),
+                        context.addSpacer(multiply: 0.008),
+                        const NormalTextFormFeild(
+                          hintText: 'Write Project Description',
+                          minLines: 4,
+                        ),
+                 
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const Icon(Icons.arrow_circle_down,color: Color(0xffA2A0A0),)
+            ],
+          ),
+        );
+      }),
+    );
+  }
+}
