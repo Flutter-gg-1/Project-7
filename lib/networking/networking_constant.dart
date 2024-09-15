@@ -13,5 +13,6 @@ abstract class NetworkingConstant {
   final String endVerify = "/auth/verify";
 
   final String endProfile = "/user/profile";
+  final String endProfileUpdate = "/user/update/profile";
 
 }
