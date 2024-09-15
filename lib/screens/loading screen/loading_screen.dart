@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project_judge/screens/auth/create_account_screen.dart';
 import 'package:project_judge/screens/auth/login_screen.dart';
 import 'package:project_judge/screens/home_screen.dart';
 import 'package:project_judge/screens/loading%20screen/cubit/loading_screen_cubit.dart';

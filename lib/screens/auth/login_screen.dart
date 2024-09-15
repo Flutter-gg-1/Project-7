@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_judge/screens/auth/cubit/auth_cubit.dart';
 import 'package:project_judge/screens/auth/verify_screen.dart';
-import 'package:project_judge/services/extension/size_extension.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
