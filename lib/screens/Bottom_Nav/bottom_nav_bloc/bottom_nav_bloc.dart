@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:project_management_app/screens/Edit_Project/edit_project.dart';
 import 'package:project_management_app/screens/Home/home_screen.dart';
 import 'package:project_management_app/screens/Profile/profile_screen.dart';
-import 'package:project_management_app/screens/Project/evaluation_screen.dart';
+import 'package:project_management_app/screens/Evaluation/evaluation_screen.dart';
 
 part 'bottom_nav_event.dart';
 part 'bottom_nav_state.dart';
