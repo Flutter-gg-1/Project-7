@@ -9,7 +9,6 @@ import 'package:tuwaiq_project/screens/projectView/bloc/project_bloc.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 import 'package:tuwaiq_project/widget/row/date_row.dart';
-import 'package:tuwaiq_project/widget/textformfeild/custom_text_form_feild.dart';
 import 'package:tuwaiq_project/widget/textformfeild/normal_text_form_feild.dart';
 
 class CreateProjectScreen extends StatelessWidget {
@@ -25,8 +24,8 @@ class CreateProjectScreen extends StatelessWidget {
           final ImagePicker picker = ImagePicker();
           XFile? image = await picker.pickImage(source: ImageSource.gallery);
           if (image != null) {
-            bloc.image = File(image.path);
-            bloc.add(ImageChangeEvent());
+            bloc.profileImage = File(image.path);
+            bloc.add(ProfileImageChangeEvent());
           }
         }
 
@@ -47,7 +46,7 @@ class CreateProjectScreen extends StatelessWidget {
                       width: double.infinity,
                       height: context.getHeight(multiply: 0.12),
                       decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: Color(0xff2e2e2e)),
+                          shape: BoxShape.circle, color: Color.fromARGB(255, 228, 226, 226)),
                       child: state is SuccessImageChangeState
                           ? Image.file(state.selectedImage)
                           : IconButton(
