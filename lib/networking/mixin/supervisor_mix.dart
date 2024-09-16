@@ -21,7 +21,9 @@ mixin SupervisorMix on NetworkingConstant {
 
       print(res.data);
     } on DioException catch (err) {
-      print(err.response?.data);
+      throw DioException(
+          requestOptions: RequestOptions(),
+          message: '${err.response?.data['data']}');
     } catch (err) {
       throw Exception;
     }
