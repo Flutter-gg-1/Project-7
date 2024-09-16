@@ -30,3 +30,5 @@ class IsEditEvent extends ProjectEvent {
 }
 
 class CreateProjectEvent extends ProjectEvent {}
+
+class DeleteProjectEvent extends ProjectEvent {}

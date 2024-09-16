@@ -60,68 +60,53 @@ class ManageProjectScreen extends StatelessWidget {
                   painter: AuthShape(),
                 ),
                 context.addSpacer(),
-                SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: context.getWidth(multiply: 0.1)),
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Manage project',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      const Divider(),
-                      const Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Option : Create',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.green),
-                          )),
-                      NormalTextFormFeild(
-                        hintText: 'Enter user ID',
-                        controller: bloc.userIdController,
-                      ),
-                      context.addSpacer(multiply: 0.04),
-                      NormalTextFormFeild(
-                        hintText: 'dd/mm/yyyy',
-                        controller: bloc.endDateController,
-                        keyboardType: TextInputType.datetime,
-                      ),
-                      context.addSpacer(multiply: 0.04),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Allow Editing',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                          BlocBuilder<ProjectBloc, ProjectState>(
-                            builder: (context, state) {
-                              return Checkbox(
-                                value: state is EditChangeState
-                                    ? state.isEdit
-                                    : bloc.isEdit,
-                                onChanged: (value) {
-                                  bloc.add(IsEditEvent(isEdit: value!));
-                                },
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                      context.addSpacer(multiply: 0.04),
-                      CustomButton(
-                          englishTitle: 'Create',
-                          arabicTitle: 'انشاء',
-                          arabic: languageLayer.isArabic,
-                          onPressed: () {
-                            bloc.add(CreateProjectEvent());
-                          })
-                    ],
+                SizedBox(
+                  height: context.getHeight(multiply: 0.8),
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: context.getWidth(multiply: 0.1)),
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Manage project',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        const Divider(),
+                        CreateColumn(bloc: bloc, languageLayer: languageLayer),
+                        context.addSpacer(multiply: 0.01),
+                        const Divider(),
+                        context.addSpacer(multiply: 0.01),
+                        Column(
+                          children: [
+                            const Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Option : Delete',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.red),
+                                )),
+                            context.addSpacer(multiply: 0.01),
+                            NormalTextFormFeild(
+                              hintText: 'Enter project ID',
+                              controller: bloc.projectIdController,
+                            ),
+                            context.addSpacer(multiply: 0.04),
+                            CustomButton(
+                                englishTitle: 'Delete',
+                                arabicTitle: 'حذف',
+                                arabic: languageLayer.isArabic,
+                                color:
+                                    const Color(0xffE12727).withOpacity(0.81),
+                                onPressed: () {
+                                  bloc.add(DeleteProjectEvent());
+                                })
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],
@@ -129,6 +114,73 @@ class ManageProjectScreen extends StatelessWidget {
           ),
         );
       }),
+    );
+  }
+}
+
+class CreateColumn extends StatelessWidget {
+  const CreateColumn({
+    super.key,
+    required this.bloc,
+    required this.languageLayer,
+  });
+
+  final ProjectBloc bloc;
+  final LanguageLayer languageLayer;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Option : Create',
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green),
+            )),
+        context.addSpacer(multiply: 0.01),
+        NormalTextFormFeild(
+          hintText: 'Enter user ID',
+          controller: bloc.userIdController,
+        ),
+        context.addSpacer(multiply: 0.04),
+        NormalTextFormFeild(
+          hintText: 'dd/mm/yyyy',
+          controller: bloc.endDateController,
+          keyboardType: TextInputType.datetime,
+        ),
+        context.addSpacer(multiply: 0.04),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'Allow Editing',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            BlocBuilder<ProjectBloc, ProjectState>(
+              builder: (context, state) {
+                return Checkbox(
+                  value: state is EditChangeState ? state.isEdit : bloc.isEdit,
+                  onChanged: (value) {
+                    bloc.add(IsEditEvent(isEdit: value!));
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+        context.addSpacer(multiply: 0.04),
+        CustomButton(
+            englishTitle: 'Create',
+            arabicTitle: 'انشاء',
+            arabic: languageLayer.isArabic,
+            onPressed: () {
+              bloc.add(CreateProjectEvent());
+            })
+      ],
     );
   }
 }
