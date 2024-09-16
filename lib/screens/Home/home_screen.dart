@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:project_management_app/models/project_model.dart';
+import 'package:project_management_app/networking/api_networking.dart';
 import 'package:project_management_app/screens/Home/boot_camps.dart';
 import 'package:project_management_app/screens/Home/image_slider.dart';
 import 'package:project_management_app/screens/Home/out_Standing_student.dart';
 import 'package:project_management_app/screens/Home/projects_contaner.dart';
-import 'package:sizer/sizer.dart'; // استيراد sizer
+import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,17 +17,54 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late Future<List<ProjectModel>> _allProjectsFuture;
+  final ApiNetworking apiNetworking = ApiNetworking();
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    _allProjectsFuture = apiNetworking.getAllPublicProjects();
   }
 
   @override
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  Widget _buildProjectsTab(Future<List<ProjectModel>> futureProjects) {
+    return FutureBuilder<List<ProjectModel>>(
+      future: futureProjects,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+              child:
+                  CircularProgressIndicator()); // عرض مؤشر التحميل عند انتظار البيانات
+        } else if (snapshot.hasError) {
+          return Center(
+              child: Text('Error: ${snapshot.error}')); // عرض رسالة الخطأ
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Center(
+              child: Text(
+                  'No projects available.')); // عرض رسالة عند عدم وجود بيانات
+        }
+
+        return ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: snapshot.data!.length,
+          itemBuilder: (context, index) {
+            final project = snapshot.data![index];
+            return Projects(
+              projectName: project.projectName ?? 'Untitled Project',
+              bootcampName: project.bootcampName ?? 'Unknown Bootcamp',
+              type: project.type ?? 'Unknown',
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -105,22 +144,13 @@ class _HomeScreenState extends State<HomeScreen>
                   SizedBox(height: 2.h),
 
                   // TabBarView Section
-                  Container(
+                  SizedBox(
                     height: 80.h,
                     child: TabBarView(
                       controller: _tabController,
                       clipBehavior: Clip.none,
                       children: [
-                        const Column(
-                          children: [
-                            // Projects(),
-                            // Projects(),
-                            // Projects(),
-                            // Projects(),
-                            // Projects(),
-                            // Projects(),
-                          ],
-                        ),
+                        _buildProjectsTab(_allProjectsFuture),
                         const Center(child: Text('Content 2')),
                         const Center(child: Text('Content 3')),
                       ],

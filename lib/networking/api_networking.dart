@@ -7,4 +7,4 @@ import 'package:project_management_app/networking/mixins/suppervisor_api.dart';
 import 'package:project_management_app/networking/mixins/user_api.dart';
 
 class ApiNetworking extends ConstantsApi
-    with AdminApi, AuthApi, ProfileApi, PublicApi, SuppervisorApi, UserApi {}
+    with AdminApi, AuthApi, ProfileApi, PublicApi, SupervisorApi, UserApi {}

@@ -82,17 +82,20 @@ class Projects extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            'Project Name: $projectName',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 8.4.sp,
+                          Flexible(
+                            flex: 10,
+                            child: Text(
+                              'Project Name: $projectName',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 8.4.sp,
+                              ),
                             ),
                           ),
                           Container(
                               height: 30,
                               decoration: BoxDecoration(
-                                  color: Color(0xff4129B7),
+                                  color: const Color(0xff4129B7),
                                   borderRadius: BorderRadius.circular(3)),
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
@@ -101,7 +104,7 @@ class Projects extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(3))),
                                   onPressed: () {},
-                                  child: Text(
+                                  child: const Text(
                                     'View',
                                     style: TextStyle(
                                         fontSize: 10, color: Colors.white),

@@ -4,11 +4,35 @@ import 'package:project_management_app/models/project_model.dart';
 import 'package:project_management_app/networking/constants_api.dart';
 
 mixin PublicApi on ConstantsApi {
+  getProject(String projectId) async {
+    final String projectIdEndpoint = '/$projectId';
+    try {
+      final response =
+          await dio.get('$baseUrl$getProjectEndpoint$projectIdEndpoint');
+
+      if (response.statusCode == 200) {
+        final projectsData =
+            List<Map<String, dynamic>>.from(response.data['projects']);
+        if (projectsData != null && projectsData is List) {
+          final projects = projectsData
+              .map((project) => ProjectModel.fromJson(project))
+              .toList();
+          return projects.where((project) => project.isPublic == true).toList();
+        }
+      } else {
+        throw Exception('Project not found');
+      }
+    } catch (e) {
+      throw const FormatException("Error occurred while getting project");
+    }
+  }
+
   Future<List<ProjectModel>> getAllPublicProjects() async {
     final response = await dio.get('$baseUrl$getProjectsListEndpoint');
+
     if (response.statusCode == 200) {
       final projectsData =
-          List<Map<String, dynamic>>.from(response.data['projects']);
+          List<Map<String, dynamic>>.from(response.data['data']['projects']); 
       if (projectsData != null && projectsData is List) {
         final projects = projectsData
             .map((project) => ProjectModel.fromJson(project))
@@ -26,7 +50,7 @@ mixin PublicApi on ConstantsApi {
     final response = await dio.get('$baseUrl$getProjectsListEndpoint');
     if (response.statusCode == 200) {
       final projectsData =
-          List<Map<String, dynamic>>.from(response.data['projects']);
+          List<Map<String, dynamic>>.from(response.data['data']['projects']);
       if (projectsData != null && projectsData is List) {
         final projects = projectsData
             .map((project) => ProjectModel.fromJson(project))
