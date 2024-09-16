@@ -4,7 +4,7 @@ import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 
 class CustomTextFormFeild extends StatelessWidget {
   final bool isArabic;
-  final Icon icon;
+  final Icon? icon;
   final String arabicTitle,englishTitle;
   final TextEditingController? controller;
   const CustomTextFormFeild({
