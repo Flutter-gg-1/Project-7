@@ -22,3 +22,13 @@ class PresentationImageChangeEvent extends ProjectEvent {
   final File selectedImage;
   PresentationImageChangeEvent({required this.selectedImage});
 }
+
+class IsEditEvent extends ProjectEvent {
+  final bool isEdit;
+
+  IsEditEvent({required this.isEdit});
+}
+
+class CreateProjectEvent extends ProjectEvent {}
+
+class DeleteProjectEvent extends ProjectEvent {}

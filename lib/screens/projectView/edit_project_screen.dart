@@ -15,8 +15,8 @@ import 'package:tuwaiq_project/widget/column/project_members_column.dart';
 import 'package:tuwaiq_project/widget/row/date_row.dart';
 import 'package:tuwaiq_project/widget/textformfeild/normal_text_form_feild.dart';
 
-class CreateProjectScreen extends StatelessWidget {
-  const CreateProjectScreen({super.key});
+class EditProjectScreen extends StatelessWidget {
+  const EditProjectScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
