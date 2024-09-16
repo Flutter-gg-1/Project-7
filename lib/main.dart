@@ -7,9 +7,9 @@ import 'package:tuwaiq_project/screens/splach/splach_screen.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 
 Future<void> main() async{
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await setup();
-  //  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  await setup();
+   runApp(const MyApp());
   // NetworkingApi().createUserPost(email: "ali@gmail.com", fName: "fName", lName: "lName");
   // NetworkingApi().profileGet(
   //     token:
