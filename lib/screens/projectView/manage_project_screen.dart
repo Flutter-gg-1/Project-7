@@ -52,17 +52,17 @@ class ManageProjectScreen extends StatelessWidget {
           },
           child: Scaffold(
             backgroundColor: Colors.white,
-            body: Column(
-              children: [
-                CustomPaint(
-                  size: Size(context.getWidth(multiply: 1),
-                      context.getHeight(multiply: 0.1)),
-                  painter: AuthShape(),
-                ),
-                context.addSpacer(),
-                SizedBox(
-                  height: context.getHeight(multiply: 0.8),
-                  child: SingleChildScrollView(
+            resizeToAvoidBottomInset: true,
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomPaint(
+                    size: Size(context.getWidth(multiply: 1),
+                        context.getHeight(multiply: 0.1)),
+                    painter: AuthShape(),
+                  ),
+                  context.addSpacer(),
+                  Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: context.getWidth(multiply: 0.1)),
                     child: Column(
@@ -107,9 +107,9 @@ class ManageProjectScreen extends StatelessWidget {
                         )
                       ],
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         );
