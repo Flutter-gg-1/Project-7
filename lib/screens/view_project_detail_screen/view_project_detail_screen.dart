@@ -23,9 +23,21 @@ class ViewProjectDetailScreen extends StatelessWidget {
       ),
       bottomNavigationBar: Stack(
         children: [
-          CustomPaint(
-            size: const Size(390, 48),
-            painter: bottomNavigationCustomPaint(),
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Positioned(
+                left: MediaQuery.of(context).size.width / 2.42,
+                bottom: 10,
+                child: CustomIconButton(
+                    onPressed: () {},
+                    icon: Image.asset("assets/images/barcode_icon.png")),
+              ),
+              CustomPaint(
+                size: const Size(390, 48),
+                painter: bottomNavigationCustomPaint(),
+              ),
+            ],
           ),
         ],
       ),
@@ -73,61 +85,64 @@ class ViewProjectDetailScreen extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CustomIconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  SimpleIcons.github,
-                  color: Colors.black,
-                ),
-              ),
-              CustomIconButton(
-                onPressed: () {},
-                icon: SvgPicture.asset(
-                  "assets/svg/figma_icon.svg",
-                  width: 28,
-                  height: 28,
-                ),
-              ),
-              CustomIconButton(
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CustomIconButton(
                   onPressed: () {},
                   icon: const Icon(
-                    SimpleIcons.youtube,
-                    color: Colors.red,
-                  )),
-              CustomIconButton(
+                    SimpleIcons.github,
+                    color: Colors.black,
+                  ),
+                ),
+                CustomIconButton(
+                  onPressed: () {},
+                  icon: SvgPicture.asset(
+                    "assets/svg/figma_icon.svg",
+                    width: 28,
+                    height: 28,
+                  ),
+                ),
+                CustomIconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      SimpleIcons.youtube,
+                      color: Colors.red,
+                    )),
+                CustomIconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      SimpleIcons.pinterest,
+                      color: Color.fromARGB(255, 193, 47, 37),
+                    )),
+                CustomIconButton(
+                  onPressed: () {},
+                  icon: SvgPicture.asset(
+                    "assets/svg/playstore_icon.svg",
+                    width: 22,
+                    height: 22,
+                  ),
+                ),
+                CustomIconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      SimpleIcons.appstore,
+                      color: Colors.blue,
+                    )),
+                CustomIconButton(
                   onPressed: () {},
                   icon: const Icon(
-                    SimpleIcons.pinterest,
-                    color: Color.fromARGB(255, 193, 47, 37),
-                  )),
-              CustomIconButton(
-                onPressed: () {},
-                icon: SvgPicture.asset(
-                  "assets/svg/playstore_icon.svg",
-                  width: 22,
-                  height: 22,
+                    SimpleIcons.android,
+                    color: Colors.green,
+                  ),
                 ),
-              ),
-              CustomIconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    SimpleIcons.appstore,
-                    color: Colors.blue,
-                  )),
-              CustomIconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  SimpleIcons.android,
-                  color: Colors.green,
-                ),
-              ),
-              CustomIconButton(
-                  onPressed: () {},
-                  icon: Image.asset("assets/images/web_icon.png"))
-            ],
+                CustomIconButton(
+                    onPressed: () {},
+                    icon: Image.asset("assets/images/web_icon.png"))
+              ],
+            ),
           ),
           const SizedBox(
             height: 10,
