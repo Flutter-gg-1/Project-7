@@ -4,7 +4,6 @@ import 'package:project_management_app/models/project_model.dart';
 import 'package:project_management_app/networking/constants_api.dart';
 
 mixin SupervisorApi on ConstantsApi {
-  
   Future<ProjectModel> createProject({
     required String token,
     required String userId,
@@ -17,7 +16,7 @@ mixin SupervisorApi on ConstantsApi {
         data: {
           'user_id': userId,
           'time_end_edit': timeEndEdit,
-          'edit': isEditable,
+          'edit': isEditable.toString(),
         },
         options: Options(
           headers: {
@@ -25,7 +24,8 @@ mixin SupervisorApi on ConstantsApi {
           },
         ),
       );
-      return ProjectModel.fromJson(Map<String, dynamic>.from(response.data['data']));
+      return ProjectModel.fromJson(
+          Map<String, dynamic>.from(response.data['data']));
     } on DioException catch (error) {
       log('DioException: ${error.message}');
       throw const FormatException('Unknown error occurred');
@@ -55,13 +55,15 @@ mixin SupervisorApi on ConstantsApi {
           },
         ),
       );
-      return ProjectModel.fromJson(Map<String, dynamic>.from(response.data['data']));
+      return ProjectModel.fromJson(
+          Map<String, dynamic>.from(response.data['data']));
     } on DioException catch (error) {
       log('DioException: ${error.message}');
       throw const FormatException('Unknown error occurred');
     } catch (error) {
       log('Unknown error: $error');
-      throw const FormatException('Error occurred while changing project status');
+      throw const FormatException(
+          'Error occurred while changing project status');
     }
   }
 

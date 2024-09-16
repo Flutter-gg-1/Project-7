@@ -7,6 +7,7 @@ import 'package:project_management_app/models/project_model.dart';
 import 'package:project_management_app/networking/api_networking.dart';
 import 'package:project_management_app/screens/Home/projects_contaner.dart';
 import 'package:project_management_app/screens/Profile/custom_profile_links.dart';
+import 'package:project_management_app/screens/Supervisor/add_project_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -168,7 +169,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 )),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      AddProjectScreen(), // Define your details screen here
+                                ),
+                              );
+                            },
                             style: TextButton.styleFrom(
                               foregroundColor: const Color(0xff4129B7),
                               padding:
