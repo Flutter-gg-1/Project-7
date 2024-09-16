@@ -3,7 +3,15 @@ import 'package:project_management_app/screens/Home/project_details.dart';
 import 'package:sizer/sizer.dart';
 
 class Projects extends StatelessWidget {
-  const Projects({super.key});
+  final String projectName;
+  final String bootcampName;
+  final String type;
+
+  const Projects(
+      {super.key,
+      required this.projectName,
+      required this.bootcampName,
+      required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +36,7 @@ class Projects extends StatelessWidget {
                 height: 7.5.h,
                 width: 7.5.h,
                 decoration: BoxDecoration(
-                  color: const Color(0xffD9D4F1),
+                  color: const Color(0xff4129B7),
                   borderRadius: BorderRadius.circular(1.4.h),
                   boxShadow: [
                     BoxShadow(
@@ -52,10 +60,10 @@ class Projects extends StatelessWidget {
             Flexible(
               flex: 7,
               child: Container(
-                height: 10.5.h,
+                height: 14.h,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: const Color(0xffD9D4F1),
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(1.4.h),
                   boxShadow: [
                     BoxShadow(
@@ -69,23 +77,45 @@ class Projects extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.all(1.4.h),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Project Name",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 8.4.sp,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Project Name: $projectName',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 8.4.sp,
+                            ),
+                          ),
+                          Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  color: Color(0xff4129B7),
+                                  borderRadius: BorderRadius.circular(3)),
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(3))),
+                                  onPressed: () {},
+                                  child: Text(
+                                    'View',
+                                    style: TextStyle(
+                                        fontSize: 10, color: Colors.white),
+                                  )))
+                        ],
                       ),
                       SizedBox(height: 0.7.h),
                       Text(
-                        "Bootcamp: Flutter Bootcamp",
+                        "Bootcamp: $bootcampName",
                         style: TextStyle(fontSize: 7.sp),
                       ),
                       SizedBox(height: 0.7.h),
                       Text(
-                        "Type: Mobile App",
+                        "Type: $type",
                         style: TextStyle(fontSize: 7.sp),
                       ),
                     ],

@@ -113,12 +113,12 @@ class _HomeScreenState extends State<HomeScreen>
                       children: [
                         const Column(
                           children: [
-                            Projects(),
-                            Projects(),
-                            Projects(),
-                            Projects(),
-                            Projects(),
-                            Projects(),
+                            // Projects(),
+                            // Projects(),
+                            // Projects(),
+                            // Projects(),
+                            // Projects(),
+                            // Projects(),
                           ],
                         ),
                         const Center(child: Text('Content 2')),

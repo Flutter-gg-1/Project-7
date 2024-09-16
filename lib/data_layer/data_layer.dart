@@ -3,13 +3,10 @@ import 'package:get_storage/get_storage.dart';
 
 class DataLayer {
 
-
-  DataLayer();
-
-AuthModel? auth;
+  AuthModel? auth;
   final box = GetStorage();
 
-  AuthLayerData() {
+  DataLayer() {
     loadDataAuth();
   }
 
@@ -29,5 +26,4 @@ AuthModel? auth;
     box.erase();
     auth = null;
   }
-
 }

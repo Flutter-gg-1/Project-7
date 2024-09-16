@@ -118,9 +118,9 @@ class AdminHomeScreen extends StatelessWidget {
                                         color: Color(0xff4129B7),
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  ...List.generate(6, (_){
-                                    return const Projects();
-                                  })
+                                  // ...List.generate(6, (_){
+                                  //   return const Projects();
+                                  // })
                    ],
                  ),
                 

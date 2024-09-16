@@ -1,6 +1,6 @@
 class ProjectLink {
   late final String? url;
-  late final String type;
+  late final String? type;
 
   ProjectLink({
     this.url,
@@ -8,7 +8,7 @@ class ProjectLink {
   });
 
   factory ProjectLink.fromJson(Map<String, dynamic> json) {
-    return ProjectLink(type: json['type'], url: json['url']);
+    return ProjectLink(type: json['type'].toString(), url: json['url'].toString());
   }
 
   Map<String, dynamic> toJson() {

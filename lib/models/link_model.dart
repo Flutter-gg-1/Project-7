@@ -5,19 +5,19 @@ class LinkModel {
   late final String resume;
   late final String bindlink;
 
-  LinkModel({
-    required this.github,
-    required this.linkedin,
-    required this.resume,
-    required this.bindlink,
-  });
+  LinkModel(
+     {required this.github,
+     required this.linkedin,
+     required this.resume,
+     required this.bindlink,}
+  );
 
   factory LinkModel.fromJson(Map<String, dynamic> json) {
     return LinkModel(
-      github: json['github'],
-      linkedin: json['linkedin'],
-      resume: json['resume'],
-      bindlink: json['bindlink'],
+      github: json['github'] ?? 'Empty',
+      linkedin: json['linkedin'] ?? 'Empty',
+      resume: json['resume'] ?? 'Empty',
+      bindlink: json['bindlink'] ?? 'Empty',
     );
   }
 

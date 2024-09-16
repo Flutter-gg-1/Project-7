@@ -9,7 +9,7 @@ class ImageModel {
 
   ImageModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    url = json['url'];
+    url = json['url'].toString();
   }
 
   Map<String, dynamic> toJson() {

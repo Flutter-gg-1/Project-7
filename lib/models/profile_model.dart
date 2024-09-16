@@ -29,22 +29,24 @@ class Profile {
   });
 
   factory Profile.fromJson(Map<String, dynamic> json) {
-    return Profile(
-      id: json['id'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
-      email: json['email'],
-      role: json['role'],
-      imageUrl: json['image_url'],
-      resumeUrl: json['resume_url'],
-      link: LinkModel.fromJson(json['link']),
-      projects: List.from(json['projects'])
-          .map((e) => ProjectModel.fromJson(e))
-          .toList(),
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
-    );
-  }
+  return Profile(
+    id: json['id'].toString(),
+    firstName: json['first_name'].toString(),
+    lastName: json['last_name'].toString(),
+    email: json['email'].toString(),
+    role: json['role'].toString(),
+    imageUrl: json['image_url'].toString(),
+    resumeUrl: json['resume_url'].toString(),
+    link: LinkModel.fromJson(json['link']),
+    projects: json['projects'] != null
+    ? List<Map<String, dynamic>>.from(json['projects'])
+        .map((e) => ProjectModel.fromJson(e))
+        .toList()
+    : [],
+    createdAt: json['created_at'].toString(),
+    updatedAt: json['updated_at'].toString(),
+  );
+}
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -55,8 +57,8 @@ class Profile {
     data['role'] = role;
     data['image_url'] = imageUrl;
     data['resume_url'] = resumeUrl;
-    data['link'] = link.toJson();
-    data['projects'] = projects.map((e) => e.toJson()).toList();
+    data['link'] = link?.toJson();
+    data['projects'] = projects?.map((e) => e.toJson()).toList();
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     return data;

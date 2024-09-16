@@ -57,9 +57,9 @@ class AddProjectScreen extends StatelessWidget {
           children: [
             const CustomAddCard(),
             const SizedBox(height: 40,),
-            ...List.generate(6, (_) {
-              return const Projects();
-            })
+            // ...List.generate(6, (_) {
+            //   return const Projects();
+            // })
           ],
         )))
       ]),

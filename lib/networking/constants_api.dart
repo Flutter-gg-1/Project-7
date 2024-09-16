@@ -12,8 +12,8 @@ abstract class ConstantsApi {
   final String resendOtpEndpoint = '/v1/auth/resend';
 
   // Profile
-  final String getProfileEndpoint = '/v1/auth/profile';
-  final String updateProfileEndpoint = '/v1/auth/update/profile';
+  final String getProfileEndpoint = '/v1/user/profile';
+  final String updateProfileEndpoint = '/v1/user/update/profile';
 
   // Admin
   final String changeRoleEndpoint = '/v1/admin/change/role/user';
@@ -33,7 +33,7 @@ abstract class ConstantsApi {
   final String deleteProjectEndpoint = '/v1/supervisor/delete/project';
 
   // Public
-  final String getProjectEndpoint = '/v1/project';
+  final String getProjectEndpoint = '/v1/get/project';
   final String getProjectsListEndpoint = '/v1/projects';
   final String searchProjectsEndpoint = '/v1/search/projects';
 }
