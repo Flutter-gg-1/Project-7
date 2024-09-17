@@ -7,12 +7,14 @@ class CustomText extends StatelessWidget {
       this.textAlign,
       required this.size,
       required this.color,
-      this.weight});
+      this.weight,
+      this.allowOverflow = false});
   final String text;
   final TextAlign? textAlign;
   final double size;
   final Color? color;
   final FontWeight? weight;
+  final bool allowOverflow;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,8 @@ class CustomText extends StatelessWidget {
         color: color,
         fontWeight: weight,
       ),
+      overflow:
+          allowOverflow == true ? TextOverflow.ellipsis : TextOverflow.visible,
     );
   }
 }
