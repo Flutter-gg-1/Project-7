@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 void showErrorDialog(BuildContext context, String message) {
   if (Navigator.of(context).canPop()) {
-    Navigator.pop(context); // Dismiss any existing dialogs
+    Navigator.pop(context); 
   }
   showDialog(
     context: context,

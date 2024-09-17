@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:project_judge/data_layer/data_layer.dart';
 import 'package:project_judge/network/api_netowrok.dart';
+import 'package:project_judge/setup/init_setup.dart';
 
 part 'auth_state.dart';
 
@@ -34,6 +36,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(LoadingState());
     try {
       await api.verifyAccount(email: email, otp: int.parse(otpController.text));
+      await getIt.get<DataLayer>().getUserr();
       emit(SuccessState());
     } on FormatException catch (e) {
       emit(ErrorState(msg: e.message));

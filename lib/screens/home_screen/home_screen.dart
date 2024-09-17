@@ -6,22 +6,31 @@ import 'package:project_judge/setup/init_setup.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit()..checkCurrentUser(),
-      child: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("${getIt.get<DataLayer>().userInfo?.firstName}"),
-              Text("hello")
-            ],
+      create: (context) => HomeCubit(),
+      child: Builder(builder: (context) {
+        final currentUser = getIt.get<DataLayer>().userInfo;
+
+        return Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(currentUser?.firstName ?? "null"),
+                Text(currentUser?.lastName ?? "null"),
+                Text(currentUser?.email ?? "null"),
+                Text(currentUser?.role ?? "null"),
+                Text(currentUser?.createdAt ?? "null"),
+                Text(
+                    textAlign: TextAlign.center,
+                    currentUser?.link!.toJson().toString() ?? "null"),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

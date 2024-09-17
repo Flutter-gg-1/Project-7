@@ -22,7 +22,7 @@ class DataLayer {
     box.write("auth", auth.toJson());
   }
 
-  getUserProfile() async {
+  Future<void> getUserr() async {
     userInfo = await api.getUserProfile(token: authUser!.token);
   }
 

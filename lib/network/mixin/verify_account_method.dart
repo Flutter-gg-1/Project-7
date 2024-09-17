@@ -1,3 +1,4 @@
+
 import 'package:dio/dio.dart';
 import 'package:project_judge/data_layer/data_layer.dart';
 import 'package:project_judge/models/auth_model.dart';
@@ -25,8 +26,12 @@ mixin VerifyAccountMethod on ConstantNetwork {
 
   Future<UserModel> getUserProfile({required String token}) async {
     try {
+      print(token);
       final responseUser = await dio.get(baseurl + getProfileEndPoint,
           options: Options(headers: {"Authorization": "Bearer $token"}));
+      print(responseUser.statusCode);
+
+      print(responseUser.data['data']);
 
       UserModel userModel = UserModel.fromJson(responseUser.data["data"]);
 
