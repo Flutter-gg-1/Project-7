@@ -40,47 +40,44 @@ class EditProjectScreen extends StatelessWidget {
         backgroundColor: AppColors.blueDark, // لون العلوم الأبيض
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Upload Logo Section
-            const Text(
-              "Upload Logo",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: AppColors.blueDark, // لون النص
-              ),
-            ),
-            const SizedBox(height: 10),
-            Container(
-              height: 150,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: const Color(0xffD9D4F1),
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.4),
-                    spreadRadius: 4,
-                    blurRadius: 10,
-                    offset: const Offset(5, 5), // الإزاحة للظل
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Upload Logo Section
+                  Column(
+                    children: [
+                      const Text(
+                        "Upload Logo",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Color(0xff4129B7), // لون النص
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      DottedBorder(
+                        color: const Color(0xffD9D9D9),
+                        strokeWidth: 1,
+                        child: Container(
+                            height: 76,
+                            width: 76,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(3)),
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.add,
+                                color: Colors.black,
+                              ),
+                            )),
+                      ),
+                    ],
                   ),
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.4),
-                    spreadRadius: 4,
-                    blurRadius: 10,
-                    offset: const Offset(-5, 5), // ظل من اليسار
-                  ),
-                ],
-              ),
-              child: const Icon(
-                Icons.upload_file,
-                size: 50,
-                color: Color(0xff57E3D8),
-              ),
-            ),
-            const SizedBox(height: 20),
 
             // Upload Presentation Section
             Column(
