@@ -65,6 +65,8 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
             isEdit: isEdit);
 
         emit(SucsessState(msg: 'Project create sucsessfuly'));
+        userIdController.clear();
+        endDateController.clear();
       } on DioException catch (error) {
         emit(ErrorState(msg: '${error.message}'));
       } catch (e) {
@@ -79,6 +81,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
             projectId: projectIdController.text.trim());
 
         emit(SucsessState(msg: 'Project delete sucsessfuly'));
+        projectIdController.clear();
       } on DioException catch (error) {
         emit(ErrorState(msg: '${error.message}'));
       } catch (e) {

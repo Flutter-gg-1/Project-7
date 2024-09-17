@@ -47,9 +47,11 @@ mixin ProjectMix on NetworkingConstant {
             "project_description": projectDescription
           });
 
-      print(res.data);
+      print('hhhhh${res.data}');
+      return res.data;
     } on DioException catch (err) {
       print(err.response?.data);
+      return err.response?.data['data'];
     } catch (err) {
       throw Exception;
     }

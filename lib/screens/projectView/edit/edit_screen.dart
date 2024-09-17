@@ -7,10 +7,13 @@ import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 
 import 'package:tuwaiq_project/screens/projectView/edit/bloc/edit_bloc.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/edit_base.dart';
 import 'package:tuwaiq_project/screens/projectView/edit/edit_logo.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 import 'package:tuwaiq_project/widget/button/custom_button.dart';
+import 'package:tuwaiq_project/widget/row/date_row.dart';
+import 'package:tuwaiq_project/widget/textformfeild/normal_text_form_feild.dart';
 
 class EditScreen extends StatelessWidget {
   const EditScreen({super.key});
@@ -55,11 +58,11 @@ class EditScreen extends StatelessWidget {
                   ),
                   const Divider(),
                   SizedBox(
-                    height: context.getHeight(multiply: 0.65),
+                    height: context.getHeight(multiply: 0.75),
                     child: PageView(
                       children: [
                         EditLogo(bloc: bloc, languageLayer: languageLayer),
-                        const Text('Edit Project Base'),
+                        EditBase(languageLayer: languageLayer, bloc: bloc),
                         const Text('Edit Project Presentation'),
                         const Text('Edit Project Images'),
                         const Text('Edit Project Links'),

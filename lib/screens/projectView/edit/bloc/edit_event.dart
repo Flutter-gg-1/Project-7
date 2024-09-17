@@ -18,4 +18,6 @@ class PresentationImageChangeEvent extends EditEvent {
   PresentationImageChangeEvent({required this.selectedImage});
 }
 
-class ChangeLogo extends EditEvent {}
+class ChangeLogoEvent extends EditEvent {}
+
+class ChangeBaseEvent extends EditEvent {}

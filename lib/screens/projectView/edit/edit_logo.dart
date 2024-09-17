@@ -115,7 +115,7 @@ class EditLogo extends StatelessWidget {
                 englishTitle: 'Edit Logo',
                 arabicTitle: 'تعديل الشعار',
                 onPressed: () {
-                  bloc.add(ChangeLogo());
+                  bloc.add(ChangeLogoEvent());
                 },
                 arabic: languageLayer.isArabic,
               ),
