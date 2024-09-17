@@ -29,7 +29,7 @@ class ViewProjectDetailScreen extends StatelessWidget {
             bottom: 10,
             child: CustomIconButton(
                 onPressed: () {},
-                icon: Image.asset("assets/images/barcode_icon.png")),
+                icon: SvgPicture.asset("assets/svg/bracode_icon.svg")),
           ),
           CustomPaint(
             size: const Size(390, 48),

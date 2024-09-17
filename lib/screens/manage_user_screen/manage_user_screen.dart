@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_judge/components/buttons/custom_icon_button.dart';
-import 'package:project_judge/components/containers/custom_manage_users_card.dart';
+import 'package:project_judge/components/containers/custom_manage_users_container.dart';
 import 'package:project_judge/components/text/custom_text.dart';
 import 'package:project_judge/components/text_field/custom_text_form_field.dart';
 
