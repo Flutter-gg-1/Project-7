@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_management_app/screens/Edit_Project/edit_project.dart';
 import 'package:project_management_app/theme/appcolors.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
@@ -12,7 +13,23 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: AppColors.blueDark),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: AppColors.blueDark,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => EditProjectScreen()));
+              },
+              icon: const Icon(
+                Icons.edit,
+                color: Colors.white,
+              ))
+        ],
+      ),
       body: ListView(
         children: [
           const SizedBox(
