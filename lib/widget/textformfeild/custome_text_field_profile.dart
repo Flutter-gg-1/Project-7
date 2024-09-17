@@ -25,7 +25,7 @@ class CustomeTextFormProfile extends StatelessWidget {
       ),
       child: Center(
         child: TextFormField(
-          initialValue: contentText,
+          // initialValue: contentText,
           validator: validator,
           controller: controller,
           decoration: InputDecoration(

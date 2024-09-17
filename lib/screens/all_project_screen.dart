@@ -24,7 +24,7 @@ class AllProjectScreen extends StatelessWidget {
           ),
           const Divider(),
           SizedBox(
-            height: context.getHeight(multiply: 0.69),
+            height: context.getHeight(multiply: 0.65),
             child: GridView(
               shrinkWrap: true,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -37,49 +37,48 @@ class AllProjectScreen extends StatelessWidget {
                 BootcampColumn(
                   imagePath: 'assets/image/cyber.png',
                   title: 'Cyber Security',
-                  onTap: (){},
+                  onTap: () {},
                 ),
                 BootcampColumn(
                   imagePath: 'assets/image/flutter.png',
                   title: 'Flutter App Dev',
-                  onTap: (){},
+                  onTap: () {},
                 ),
                 BootcampColumn(
                   imagePath: 'assets/image/data_science.png',
                   title: 'Data science',
-                  onTap: (){},
+                  onTap: () {},
                 ),
                 BootcampColumn(
                   imagePath: 'assets/image/AI.png',
                   title: 'AI',
-                  onTap: (){},
+                  onTap: () {},
                 ),
                 BootcampColumn(
                   imagePath: 'assets/image/AI.png',
                   title: 'AI',
-                  onTap: (){},
+                  onTap: () {},
                 ),
                 BootcampColumn(
                   imagePath: 'assets/image/AI.png',
                   title: 'AI',
-                  onTap: (){},
+                  onTap: () {},
                 ),
                 BootcampColumn(
                   imagePath: 'assets/image/AI.png',
                   title: 'AI',
-                  onTap: (){},
+                  onTap: () {},
                 ),
                 BootcampColumn(
                   imagePath: 'assets/image/AI.png',
                   title: 'AI',
-                  onTap: (){},
+                  onTap: () {},
                 ),
                 BootcampColumn(
                   imagePath: 'assets/image/AI.png',
                   title: 'AI',
-                  onTap: (){},
+                  onTap: () {},
                 ),
-            
               ],
             ),
           ),

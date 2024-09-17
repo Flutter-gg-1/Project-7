@@ -6,7 +6,7 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/screens/all_project_screen.dart';
 import 'package:tuwaiq_project/screens/bottomNavBloc/bottomnav_bloc.dart';
-import 'package:tuwaiq_project/screens/profile_screen.dart';
+import 'package:tuwaiq_project/screens/profile/profile_screen.dart';
 import 'package:tuwaiq_project/screens/search_screen.dart';
 import 'package:tuwaiq_project/screens/user_project_screen.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';

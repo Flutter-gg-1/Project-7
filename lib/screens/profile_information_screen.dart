@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
+import 'package:tuwaiq_project/models/profile_model.dart';
+import 'package:tuwaiq_project/screens/auth/login_screen.dart';
+import 'package:tuwaiq_project/screens/profile/cubit/profile_cubit.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 import 'package:tuwaiq_project/widget/button/custom_button.dart';
@@ -10,12 +14,37 @@ import 'package:tuwaiq_project/widget/links_profile/custome_links_profile.dart';
 import 'package:tuwaiq_project/widget/links_profile/custome_title_text_profile.dart';
 import 'package:tuwaiq_project/widget/textformfeild/custome_text_field_profile.dart';
 
-class ProfileInformationScreen extends StatelessWidget {
-  const ProfileInformationScreen({super.key});
+class ProfileInformationScreen extends StatefulWidget {
+  const ProfileInformationScreen({super.key, required this.profileModel});
+
+  final ProfileModel profileModel;
+
+  @override
+  State<ProfileInformationScreen> createState() =>
+      _ProfileInformationScreenState();
+}
+
+class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
+  final language = languageLocaitor.get<LanguageLayer>();
+
+  TextEditingController firstNameCon = TextEditingController();
+  TextEditingController lastNameCon = TextEditingController();
+  TextEditingController linkCon = TextEditingController();
+  TextEditingController gitCon = TextEditingController();
+  TextEditingController bidingCon = TextEditingController();
+
+  @override
+  void initState() {
+    firstNameCon.text = widget.profileModel.firstName;
+    lastNameCon.text = widget.profileModel.lastName;
+    linkCon.text = widget.profileModel.link.linkedin ?? "";
+    gitCon.text = widget.profileModel.link.github ?? "";
+    bidingCon.text = widget.profileModel.link.bindlink ?? "";
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final language = languageLocaitor.get<LanguageLayer>();
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -33,19 +62,19 @@ class ProfileInformationScreen extends StatelessWidget {
                   color: Color(0xffCACACA), shape: BoxShape.circle),
               child: Image.asset('assets/image/Search-amico(1).png'),
             ),
-            const Center(
+            Center(
               child: Column(
                 children: [
                   Text(
-                    'Itunuoluwa Abidoye',
-                    style: TextStyle(
+                    '${widget.profileModel.firstName} ${widget.profileModel.lastName}',
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                     ),
                   ),
                   Text(
-                    'Itunuoluwa@petra.africa',
-                    style: TextStyle(
+                    widget.profileModel.email,
+                    style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 14,
                     ),
@@ -56,7 +85,9 @@ class ProfileInformationScreen extends StatelessWidget {
             const CustomeTitleText(
               title: 'First Name',
             ),
-            const CustomeTextFormProfile(
+            CustomeTextFormProfile(
+              contentText: widget.profileModel.firstName,
+              controller: firstNameCon,
               hint: 'first name',
             ),
             SizedBox(
@@ -65,7 +96,9 @@ class ProfileInformationScreen extends StatelessWidget {
             const CustomeTitleText(
               title: 'Last Name',
             ),
-            const CustomeTextFormProfile(
+            CustomeTextFormProfile(
+              contentText: widget.profileModel.lastName,
+              controller: lastNameCon,
               hint: 'last name',
             ),
             SizedBox(
@@ -98,7 +131,8 @@ class ProfileInformationScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                   onTap: () {
-                    dialog(context: context, onDone: () {});
+                    dialog(
+                        context: context, onDone: () {}, controller: linkCon);
                   },
                 ),
                 CustomeLinksProfile(
@@ -107,7 +141,7 @@ class ProfileInformationScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                   onTap: () {
-                    dialog(context: context, onDone: () {});
+                    dialog(context: context, onDone: () {}, controller: gitCon);
                   },
                 ),
                 CustomeLinksProfile(
@@ -116,13 +150,17 @@ class ProfileInformationScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                   onTap: () {
-                    dialog(context: context, onDone: () {});
+                    dialog(
+                        context: context, onDone: () {}, controller: bidingCon);
                   },
                 ),
                 CustomeLinksProfile(
                   text: 'CV',
                   onTap: () {
-                    dialog(context: context, onDone: () {});
+                    dialog(
+                        context: context,
+                        onDone: () {},
+                        controller: TextEditingController());
                   },
                 ),
               ],
@@ -131,7 +169,22 @@ class ProfileInformationScreen extends StatelessWidget {
               height: context.getHeight(multiply: 0.035),
             ),
             CustomButton(
-              onPressed: () {},
+              onPressed: () {
+                print(firstNameCon.text);
+                print(lastNameCon.text);
+                print(gitCon.text);
+                print(linkCon.text);
+                print(bidingCon.text);
+
+                context.read<ProfileCubit>().updateProfile(
+                    firstName: firstNameCon.text,
+                    lastName: lastNameCon.text,
+                    bindLink: bidingCon.text,
+                    linkedinLink: linkCon.text,
+                    githubLink: gitCon.text);
+
+                // Navigator.of(context).pop();
+              },
               arabicTitle: 'تعديل',
               englishTitle: 'Update',
               arabic: language.isArabic,
