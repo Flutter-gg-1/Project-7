@@ -26,7 +26,11 @@ class CustomTextFormField extends StatelessWidget {
             filled: true,
             fillColor: const Color(0xffEDEDED),
             hintText: hintText,
-            prefixIcon: Icon(icon),
+            hintStyle: const TextStyle(color: Color(0xff848484)),
+            prefixIcon: Icon(
+              icon,
+              color: const Color(0xff848484),
+            ),
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
         validator: validator,
       ),

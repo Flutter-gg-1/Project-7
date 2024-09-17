@@ -22,22 +22,18 @@ class ViewProjectDetailScreen extends StatelessWidget {
         text: 'Project Details',
       ),
       bottomNavigationBar: Stack(
+        clipBehavior: Clip.none,
         children: [
-          Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Positioned(
-                left: MediaQuery.of(context).size.width / 2.42,
-                bottom: 10,
-                child: CustomIconButton(
-                    onPressed: () {},
-                    icon: Image.asset("assets/images/barcode_icon.png")),
-              ),
-              CustomPaint(
-                size: const Size(390, 48),
-                painter: bottomNavigationCustomPaint(),
-              ),
-            ],
+          Positioned(
+            left: MediaQuery.of(context).size.width / 2.42,
+            bottom: 10,
+            child: CustomIconButton(
+                onPressed: () {},
+                icon: Image.asset("assets/images/barcode_icon.png")),
+          ),
+          CustomPaint(
+            size: const Size(390, 48),
+            painter: bottomNavigationCustomPaint(),
           ),
         ],
       ),
