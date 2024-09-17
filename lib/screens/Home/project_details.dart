@@ -25,7 +25,10 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                 padding: EdgeInsets.only(right: 100.0),
                 child: Text(
                   ' Projects Details ..',
-                  style: TextStyle(fontSize: 21, color: Color(0xff57E3D8)),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 21,
+                      color: Color(0xff57E3D8)),
                 ),
               ),
               Image.asset('assets/Group 10 (1).png')
@@ -42,6 +45,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               Text(
                 'Project name :',
                 style: TextStyle(
+                  fontWeight: FontWeight.bold,
                   fontSize: 15,
                   color: Color(0xff4129B7),
                 ),
@@ -49,6 +53,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               Text(
                 'Project 7',
                 style: TextStyle(
+                  fontWeight: FontWeight.bold,
                   color: Color(0xffB8B8BB),
                 ),
               ),
@@ -63,6 +68,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               Text(
                 'BootCamp  :',
                 style: TextStyle(
+                  fontWeight: FontWeight.bold,
                   fontSize: 15,
                   color: Color(0xff4129B7),
                 ),
@@ -70,6 +76,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               Text(
                 'Project 7',
                 style: TextStyle(
+                  fontWeight: FontWeight.bold,
                   color: Color(0xffB8B8BB),
                 ),
               ),
@@ -84,6 +91,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               Text(
                 'Description :',
                 style: TextStyle(
+                  fontWeight: FontWeight.bold,
                   fontSize: 15,
                   color: Color(0xff4129B7),
                 ),
@@ -91,6 +99,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               Text(
                 'Project 7',
                 style: TextStyle(
+                  fontWeight: FontWeight.bold,
                   color: Color(0xffB8B8BB),
                 ),
               ),
@@ -105,6 +114,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               Text(
                 'Start Date  :',
                 style: TextStyle(
+                  fontWeight: FontWeight.bold,
                   fontSize: 15,
                   color: Color(0xff4129B7),
                 ),
@@ -112,6 +122,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               Text(
                 'Project 7',
                 style: TextStyle(
+                  fontWeight: FontWeight.bold,
                   color: Color(0xffB8B8BB),
                 ),
               ),
@@ -125,6 +136,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               Text(
                 'End Date  :',
                 style: TextStyle(
+                  fontWeight: FontWeight.bold,
                   fontSize: 15,
                   color: Color(0xff4129B7),
                 ),
@@ -132,6 +144,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               Text(
                 'Project 7',
                 style: TextStyle(
+                  fontWeight: FontWeight.bold,
                   color: Color(0xffB8B8BB),
                 ),
               ),
@@ -146,6 +159,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               Text(
                 'Presentaion Date :',
                 style: TextStyle(
+                  fontWeight: FontWeight.bold,
                   fontSize: 15,
                   color: Color(0xff4129B7),
                 ),
@@ -153,6 +167,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               Text(
                 'Project 7',
                 style: TextStyle(
+                  fontWeight: FontWeight.bold,
                   color: Color(0xffB8B8BB),
                 ),
               ),

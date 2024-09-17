@@ -90,9 +90,9 @@ class _HomeScreenState extends State<HomeScreen>
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 3),
+                                  spreadRadius: 1,
+                                  blurRadius: 3,
+                                  offset: const Offset(0, 2),
                                 ),
                               ],
                             ),
@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.sp),
+                                  borderRadius: BorderRadius.circular(5.sp),
                                   borderSide: BorderSide.none,
                                 ),
                               ),
@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                         SizedBox(width: 4.w),
                         Image.asset(
-                          scale: 3,
+                          scale: 1,
                           'assets/Group 10 (1).png',
                         ),
                       ],

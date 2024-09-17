@@ -20,13 +20,13 @@ class Projects extends StatelessWidget {
     return InkWell(
       onTap: () {
         // Navigate to Project Details Screen
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                ProjectDetailsScreen(), // Define your details screen here
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) =>
+        //         ProjectDetailsScreen(), // Define your details screen here
+        //   ),
+        // );
       },
       child: Padding(
         padding: EdgeInsets.only(bottom: 1.4.h, left: 9.w, right: 1.4.w),
@@ -106,7 +106,15 @@ class Projects extends StatelessWidget {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(3))),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProjectDetailsScreen(), // Define your details screen here
+                                      ),
+                                    );
+                                  },
                                   child: const Text(
                                     'View',
                                     style: TextStyle(
