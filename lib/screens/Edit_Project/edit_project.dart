@@ -81,6 +81,30 @@ class EditProjectScreen extends StatelessWidget {
                               ),
                             )),
                       ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Center(
+                        child: SizedBox(
+                          height: 30,
+                          width: 120,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // Action to save the project details
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xff4129B7),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child: const Text(
+                              "Save Logo",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
 
@@ -112,6 +136,30 @@ class EditProjectScreen extends StatelessWidget {
                               ),
                             )),
                       ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Center(
+                        child: SizedBox(
+                          height: 30,
+                          width: 120,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // Action to save the project details
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xff4129B7),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child: const Text(
+                              "Save File",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -137,6 +185,92 @@ class EditProjectScreen extends StatelessWidget {
               _buildTextField(
                   "Project Description", projectDescriptionController,
                   isMultiline: true),
+
+              const SizedBox(
+                height: 10,
+              ),
+              Center(
+                child: SizedBox(
+                  height: 30,
+                  width: 170,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xff4129B7),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: const Text(
+                      "Save Basic Info",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+              const Divider(),
+              const SizedBox(height: 20),
+
+              // upload project images
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Upload images",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Color(0xff4129B7), // لون النص
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Center(
+                    child: DottedBorder(
+                      color: const Color(0xffD9D9D9),
+                      strokeWidth: 1,
+                      child: Container(
+                          height: 100,
+                          width: 250,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3)),
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.add,
+                              color: Colors.black,
+                            ),
+                          )),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                    child: SizedBox(
+                      height: 30,
+                      width: 170,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Action to save the project details
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xff4129B7),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: const Text(
+                          "Save Images",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
 
               const SizedBox(height: 20),
               const Divider(),
@@ -165,6 +299,27 @@ class EditProjectScreen extends StatelessWidget {
               _buildTextField("Pinterest", pinterestController),
 
               const SizedBox(height: 20),
+              Center(
+                child: SizedBox(
+                  height: 30,
+                  width: 170,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xff4129B7),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: const Text(
+                      "Save Links",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 20),
               const Divider(),
               const SizedBox(height: 20),
 
@@ -185,23 +340,23 @@ class EditProjectScreen extends StatelessWidget {
               _buildTextField("Member 3", member3Controller),
               const SizedBox(height: 20),
 
-              // Save Button
+              const SizedBox(height: 20),
               Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Action to save the project details
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff4129B7),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                child: SizedBox(
+                  height: 30,
+                  width: 170,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xff4129B7),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                  ),
-                  child: const Text(
-                    "Save",
-                    style: TextStyle(color: Colors.white),
+                    child: const Text(
+                      "Save Members",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
               ),
