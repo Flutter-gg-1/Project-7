@@ -53,6 +53,7 @@ class EditProjectScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // Upload Logo Section
                   Column(
                     children: [
                       const Text(
