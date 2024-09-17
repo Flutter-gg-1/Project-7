@@ -14,7 +14,7 @@ abstract class NetworkingConstant {
 
   final String endProfile = "/user/profile";
   final String endProfileUpdate = "/user/update/profile";
-  final String endProjectLogoEdit = "/user/edit/project/base/";
+  final String endProjectLogoEdit = "/user/edit/project/logo/";
   // chnage this data 
 
   // "project_name" , "bootcamp_name" , type" "start_date" "end_date" "presentation_date" "project_description"

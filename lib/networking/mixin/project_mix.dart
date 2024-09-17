@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:tuwaiq_project/networking/networking_constant.dart';
 
@@ -12,6 +14,8 @@ mixin ProjectMix on NetworkingConstant {
       final res = await dio.put("$baseUrl$endProjectLogoEdit$projectId",
           options: Options(headers: {'Authorization': 'Bearer $token'}),
           data: {"logo": logoImg});
+      log(res.data);
+      return res.data;
     } on DioException catch (err) {
       print(err.response?.data);
     } catch (err) {
@@ -116,13 +120,10 @@ mixin ProjectMix on NetworkingConstant {
           data: {"members": members});
 
       print(res.data);
-      
     } on DioException catch (err) {
       print(err.response?.data);
     } catch (err) {
       throw Exception;
     }
   }
-
-  
 }
