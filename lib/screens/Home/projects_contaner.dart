@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:project_management_app/screens/Home/project_details.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../theme/appcolors.dart';
+
 class Projects extends StatelessWidget {
   final String projectName;
   final String bootcampName;
@@ -33,10 +35,10 @@ class Projects extends StatelessWidget {
             Flexible(
               flex: 3,
               child: Container(
-                height: 7.5.h,
-                width: 7.5.h,
+                height: 13.h,
+                width: 13.h,
                 decoration: BoxDecoration(
-                  color: const Color(0xff4129B7),
+                  color: AppColors.blueDark,
                   borderRadius: BorderRadius.circular(1.4.h),
                   boxShadow: [
                     BoxShadow(
@@ -87,6 +89,7 @@ class Projects extends StatelessWidget {
                             child: Text(
                               'Project Name: $projectName',
                               style: TextStyle(
+                                color: AppColors.blueDark,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 8.4.sp,
                               ),
@@ -95,11 +98,11 @@ class Projects extends StatelessWidget {
                           Container(
                               height: 30,
                               decoration: BoxDecoration(
-                                  color: const Color(0xff4129B7),
+                                  color: AppColors.blueDark,
                                   borderRadius: BorderRadius.circular(3)),
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.transparent,
+                                      backgroundColor: AppColors.blueDark,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(3))),
@@ -114,12 +117,12 @@ class Projects extends StatelessWidget {
                       SizedBox(height: 0.7.h),
                       Text(
                         "Bootcamp: $bootcampName",
-                        style: TextStyle(fontSize: 7.sp),
+                        style: TextStyle(fontSize: 7.sp, color: AppColors.grey),
                       ),
                       SizedBox(height: 0.7.h),
                       Text(
                         "Type: $type",
-                        style: TextStyle(fontSize: 7.sp),
+                        style: TextStyle(fontSize: 7.sp, color: AppColors.grey),
                       ),
                     ],
                   ),

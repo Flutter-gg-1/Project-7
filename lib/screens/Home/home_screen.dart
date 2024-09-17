@@ -5,6 +5,7 @@ import 'package:project_management_app/screens/Home/boot_camps.dart';
 import 'package:project_management_app/screens/Home/image_slider.dart';
 import 'package:project_management_app/screens/Home/out_Standing_student.dart';
 import 'package:project_management_app/screens/Home/projects_contaner.dart';
+import 'package:project_management_app/theme/appcolors.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -128,12 +129,12 @@ class _HomeScreenState extends State<HomeScreen>
                     child: TabBar(
                       controller: _tabController,
                       indicator: BoxDecoration(
-                        color: Colors.redAccent.withOpacity(0.6),
+                        color: AppColors.blueLight.withOpacity(0.6),
                         borderRadius: BorderRadius.circular(10.sp),
                       ),
                       dividerHeight: 0,
                       labelColor: Colors.white,
-                      unselectedLabelColor: Colors.purple,
+                      unselectedLabelColor: AppColors.blueDark,
                       tabs: [
                         _buildTab("All", context),
                         _buildTab("Recent", context),
@@ -157,9 +158,9 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                   ),
                   const Divider(
-                    height: 5,
-                    thickness: 7,
-                    color: Color.fromARGB(255, 232, 225, 225),
+                    height: 2,
+                    thickness: 2,
+                    color: Color.fromARGB(255, 245, 243, 243),
                   ),
                   SizedBox(height: 4.h),
 
@@ -168,9 +169,9 @@ class _HomeScreenState extends State<HomeScreen>
                   SizedBox(height: 2.h),
 
                   const Divider(
-                    height: 5,
-                    thickness: 7,
-                    color: Color.fromARGB(255, 232, 225, 225),
+                    height: 2,
+                    thickness: 2,
+                    color: Color.fromARGB(255, 245, 243, 243),
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 2.w),
@@ -179,14 +180,14 @@ class _HomeScreenState extends State<HomeScreen>
                       child: Text(
                         'Outstanding students ..',
                         style: TextStyle(
-                          color: Colors.purple,
+                          color: AppColors.blueLight,
                           fontSize: 18.sp, // استخدم sp لحجم النص
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 4.h),
+                  SizedBox(height: 10.h),
 
                   const Out_Standing_Student(),
                 ],
@@ -200,14 +201,17 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget _buildTab(String label, BuildContext context) {
     return Container(
+      width: 100.w,
+      height: 6.h,
       padding: EdgeInsets.symmetric(
         vertical: 1.h,
-        horizontal: 5.w,
+        horizontal: 2.w,
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.sp),
+        borderRadius: BorderRadius.circular(3.sp),
       ),
       child: Text(
+        textAlign: TextAlign.center,
         label,
         style: TextStyle(
           fontWeight: FontWeight.bold,

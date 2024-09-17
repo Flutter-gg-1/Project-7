@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_management_app/theme/appcolors.dart';
 
 class Botcamps extends StatelessWidget {
   const Botcamps({
@@ -19,7 +20,7 @@ class Botcamps extends StatelessWidget {
               Text(
                 "New programs..",
                 style: TextStyle(
-                  color: Colors.purple,
+                  color: AppColors.blueLight,
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
@@ -27,7 +28,7 @@ class Botcamps extends StatelessWidget {
               Text(
                 "See more ..>",
                 style: TextStyle(
-                  color: Colors.purple,
+                  color: AppColors.blueDark,
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
@@ -44,7 +45,7 @@ class Botcamps extends StatelessWidget {
                   height: 180,
                   margin: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEEEEEE),
+                    color: AppColors.white,
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: [
                       BoxShadow(
@@ -59,7 +60,7 @@ class Botcamps extends StatelessWidget {
                     child: Text(
                       'Container 1',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColors.blueLight,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -71,14 +72,22 @@ class Botcamps extends StatelessWidget {
                   height: 180,
                   margin: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.green,
+                    color: AppColors.white,
                     borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
                   ),
                   child: const Center(
                     child: Text(
                       'Container 2',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColors.blueLight,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -95,7 +104,7 @@ class Botcamps extends StatelessWidget {
                   height: 180,
                   margin: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEEEEEE),
+                    color: AppColors.white,
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: [
                       BoxShadow(
@@ -110,7 +119,7 @@ class Botcamps extends StatelessWidget {
                     child: Text(
                       'Container 3',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColors.blueLight,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -122,14 +131,22 @@ class Botcamps extends StatelessWidget {
                   height: 180,
                   margin: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.orange,
+                    color: AppColors.white,
                     borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
                   ),
                   child: const Center(
                     child: Text(
                       'Container 4',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColors.blueLight,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

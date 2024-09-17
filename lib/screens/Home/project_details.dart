@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_management_app/theme/appcolors.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
   @override
@@ -11,9 +12,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xff352197),
-      ),
+      appBar: AppBar(backgroundColor: AppColors.blueDark),
       body: ListView(
         children: [
           const SizedBox(
