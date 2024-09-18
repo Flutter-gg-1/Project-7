@@ -214,29 +214,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 )),
                           ),
                           if (profile.role == 'supervisor')
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AddProjectScreen(),
-                                  ),
-                                );
-                              },
-                              style: TextButton.styleFrom(
-                                foregroundColor: const Color(0xff4129B7),
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                              ),
-                              child: const Row(
-                                children: [
-                                  Icon(Icons.add, size: 20),
-                                  SizedBox(width: 5),
-                                  Text('Add Project'),
-                                ],
-                              ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AddProjectScreen(),
+                                ),
+                              );
+                            },
+                            style: TextButton.styleFrom(
+                              foregroundColor: const Color(0xff4129B7),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
                             ),
+                            child: const Row(
+                              children: [
+                                Icon(Icons.add, size: 20),
+                                SizedBox(width: 5),
+                                Text('Add Project'),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),

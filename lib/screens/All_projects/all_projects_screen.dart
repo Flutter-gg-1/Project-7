@@ -63,23 +63,23 @@ class _AllProjectsScreenState extends State<AllProjectsScreen>
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
-            icon: const Icon(Icons.add, color: Colors.white),
-            onPressed: () {
-              // Define the action for the "Add" button here
-              // For example, navigate to a new project creation screen
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        const AddProjectScreen()), // Replace with your desired screen
-              );
-            },
-          ),
+          // if (profile.role == 'supervisor')
+            IconButton(
+              icon: const Icon(Icons.add, color: Colors.white),
+              onPressed: () {
+                // Define the action for the "Add" button here
+                // For example, navigate to a new project creation screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const AddProjectScreen()), // Replace with your desired screen
+                );
+              },
+            ),
         ],
         title: const Text('All Projects',
             style: TextStyle(color: AppColors.white)),
