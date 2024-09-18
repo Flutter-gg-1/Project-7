@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,6 +10,7 @@ import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/models/profile_model.dart';
 import 'package:tuwaiq_project/screens/auth/login_screen.dart';
 import 'package:tuwaiq_project/screens/profile/cubit_profile/profile_cubit.dart';
+import 'package:tuwaiq_project/screens/profile/cv_handle_cubit/cv_handle_cubit.dart';
 import 'package:tuwaiq_project/screens/profile/img_handle_cubit/img_handle_cubit.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
@@ -39,7 +41,13 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
 
   @override
   void initState() {
-    context.read<ImgHandleCubit>().convortImgUrl(imgUrl:widget.profileModel.imageFile);
+    context
+        .read<ImgHandleCubit>()
+        .convortImgUrl(imgUrl: widget.profileModel.imageFile);
+
+         context
+        .read<CvHandleCubit>()
+        .cvfileConvort(cvUrl: widget.profileModel.resumeFile);
 
     firstNameCon.text = widget.profileModel.firstName;
     lastNameCon.text = widget.profileModel.lastName;
@@ -122,8 +130,54 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
             const CustomeTitleText(
               title: 'CV',
             ),
-            const CustomeTextFormProfile(
-              hint: 'Pitch_deck_final2.pdf',
+            Container(
+              width: 200,
+              height: 50,
+              color: Colors.grey,
+              child: BlocBuilder<CvHandleCubit, CvHandleState>(
+                builder: (context, state) {
+                  if (state is CvHereState) {
+                    return Row(
+                      children: [
+                        Text(state.cvName),
+                        IconButton(
+                            onPressed: () {
+                              context.read<CvHandleCubit>().cvDel();
+                            },
+                            icon: Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ))
+                      ],
+                    );
+                  }
+                  return Row(
+                    children: [
+                      Text("no file"),
+                      IconButton(
+                          onPressed: () async {
+                            final fileData =
+                                await FilePicker.platform.pickFiles(
+                              type: FileType.custom,
+                              allowedExtensions: ['pdf'],
+                            );
+
+                            if (fileData != null) {
+                              final file = fileData.files.first;
+                              final bytes = file.xFile;
+                              final fileName = file.name;
+
+                              // need late to check if byte not null
+                              context.read<CvHandleCubit>().cvAdd(
+                                  await bytes.readAsBytes(),
+                                  fileName.substring(0, 5));
+                            }
+                          },
+                          icon: Icon(FontAwesomeIcons.plus))
+                    ],
+                  );
+                },
+              ),
             ),
             SizedBox(
               height: context.getHeight(multiply: 0.035),
@@ -228,8 +282,8 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                     bindLink: bidingCon.text,
                     linkedinLink: linkCon.text,
                     githubLink: gitCon.text,
-                    imgCubitFile:  context.read<ImgHandleCubit>().imgCubitFile
-                    );
+                    imgCubitFile: context.read<ImgHandleCubit>().imgCubitFile,
+                    cvFile: context.read<CvHandleCubit>().cvCubitFile);
 
                 // Navigator.of(context).pop();
               },

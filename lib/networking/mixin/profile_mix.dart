@@ -34,19 +34,20 @@ mixin ProfileMix on NetworkingConstant {
       required String firstName,
       required String lastName,
       required List<int>? profileImg,
-      required List<int> cvImg,
+      required List<int>? cvImg,
       required String bindLink,
       required String linkedinLink,
       required String githubLink}) async {
     try {
-      print(profileImg);
+      // print(profileImg);
+      print(cvImg);
       final res = await dio.put("$baseUrl$endProfileUpdate",
           options: Options(headers: {'Authorization': 'Bearer $token'}),
           data: {
             "first_name": firstName,
             "last_name": lastName,
             "image": profileImg,
-            // "cv": cvImg,
+            "cv": cvImg,
             "accounts": {
               "bindlink": bindLink,
               "linkedin": linkedinLink,

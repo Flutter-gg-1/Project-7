@@ -23,7 +23,7 @@ class ProfileModel {
   late final List<Projects> projects;
   late final String createdAt;
   late final String updatedAt;
-  late final List<int>? resumeFile;
+  late final String? resumeFile;
 
   ProfileModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

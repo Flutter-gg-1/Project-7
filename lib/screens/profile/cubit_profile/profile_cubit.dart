@@ -41,13 +41,16 @@ class ProfileCubit extends Cubit<ProfileState> {
       required String bindLink,
       required String linkedinLink,
       required String githubLink,
-      required List<int>? imgCubitFile}) async {
+      required List<int>? imgCubitFile,
+      required List<int>? cvFile
+      
+      }) async {
     await NetworkingApi().updateProfile(
         token: token,
         firstName: firstName,
         lastName: lastName,
         profileImg: imgCubitFile,
-        cvImg: [12212],
+        cvImg: cvFile,
         bindLink: bindLink,
         linkedinLink: linkedinLink,
         githubLink: githubLink);
