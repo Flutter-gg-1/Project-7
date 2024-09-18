@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart'; // Import Sizer package
 import 'package:project_management_app/screens/Auth/login_screen.dart';
 import 'package:project_management_app/screens/Auth/signup_screen.dart';
 
@@ -29,33 +30,39 @@ class AuthScreen extends StatelessWidget {
             child: Image.asset(
               'assets/Tuwaiq_mounten 1.png',
               fit: BoxFit.cover,
-              height: 300,
-              width: double.infinity,
+              height: 30.h,
+              width: 100.w,
             ),
           ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Logo
                 Image.asset(
                   'assets/logo-h-white.png',
-                  height: 100,
+                  height: 15.h,
                 ),
-                const SizedBox(height: 50),
+                SizedBox(height: 5.h),
+
+                // Sign Up button
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const LoginScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 100, vertical: 9),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 25.w,
+                      vertical: 1.5.h,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    backgroundColor: Color(0xffFFFFFF).withOpacity(0.72),
+                    backgroundColor: const Color(0xffFFFFFF).withOpacity(0.72),
                   ),
                   child: const Text(
                     'Sign Up',
@@ -65,10 +72,11 @@ class AuthScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: 3.h),
+
                 RichText(
                   text: TextSpan(
-                    text: "I'm already an account ",
+                    text: "I already have an account",
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -106,9 +114,24 @@ class AuthScreen extends StatelessWidget {
               ],
             ),
           ),
+
+          // Top right icon
           Positioned(
-              top: 103, left: 350, child: Image.asset('assets/Group 10.png')),
-          Positioned(top: 620, child: Image.asset('assets/Group 10 (1).png')),
+            top: 10.h,
+            right: 0.1.w,
+            child: Image.asset(
+              'assets/Group 10.png',
+              height: 10.h,
+            ),
+          ),
+          Positioned(
+            bottom: 10.h,
+            left: 0.1.w,
+            child: Image.asset(
+              'assets/Group 10 (1).png',
+              height: 15.h,
+            ),
+          ),
         ],
       ),
     );

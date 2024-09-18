@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:project_management_app/screens/Auth/otb_Screan.dart';
+import 'package:sizer/sizer.dart'; // Import Sizer package
 import 'package:project_management_app/screens/Auth/signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -8,37 +8,42 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-            left: 0,
-            right: 0,
-            child: Container(
-              width: screenWidth,
-              child: Image.asset(
-                'assets/Group 12.png',
-                fit: BoxFit.cover,
+      resizeToAvoidBottomInset:
+          true, // This will ensure screen adjusts for the keyboard
+      body: SingleChildScrollView(
+        // Ensures the screen is scrollable when keyboard appears
+        child: Column(
+          children: [
+            // Background image
+            Container(
+              width: 100.w, // 100% of screen width using Sizer
+              height: 40.h, // Adjust height as needed
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/Group 12.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: 10.w), // 10% of screen width
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  // Welcome Text
+                  Text(
                     'Welcome Back',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 4.h, // 4% of screen height using Sizer
                       fontWeight: FontWeight.bold,
-                      color: Color(0xffA380FF),
+                      color: const Color(0xffA380FF),
                     ),
                   ),
-                  const SizedBox(height: 70),
+                  SizedBox(height: 7.h), // 7% of screen height using Sizer
+
+                  // Email input field
                   Container(
                     decoration: BoxDecoration(
                       color: const Color(0xffd9d4f1).withOpacity(0.8),
@@ -52,27 +57,31 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: const TextField(
+                    child: TextField(
                       decoration: InputDecoration(
                         hintText: 'Email',
-                        hintStyle: TextStyle(color: Color(0xff4129B7)),
+                        hintStyle: const TextStyle(color: Color(0xff4129B7)),
                         border: InputBorder.none,
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 5.w, // 5% of screen width using Sizer
+                          vertical: 2.h, // 2% of screen height using Sizer
+                        ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 51),
+                  SizedBox(height: 5.h), // 5% of screen height using Sizer
+
+                  // Login Button
                   SizedBox(
                     width: double.infinity,
-                    height: 50,
+                    height: 6.h, // 6% of screen height using Sizer
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const OtbScreen()),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const OtpScreen()),
+                        // );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF321f8d),
@@ -80,11 +89,11 @@ class LoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: const Text(
+                      child: Text(
                         'Login',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 18,
+                          fontSize: 2.5.h, // 2.5% of screen height using Sizer
                         ),
                       ),
                     ),
@@ -92,43 +101,39 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          Positioned(
-            bottom: 180,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: RichText(
-                text: TextSpan(
-                  text: "I'm already an account ",
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'Sign In',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xffFF8181),
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignupScreen()),
-                          );
-                        },
-                    ),
-                  ],
+            SizedBox(height: 10.h), // Add some spacing
+
+            // "I'm already an account" text at the bottom
+            RichText(
+              text: TextSpan(
+                text: "I'm already an account ",
+                style: TextStyle(
+                  fontSize: 2.h, // 2% of screen height using Sizer
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: 'Sign In',
+                    style: TextStyle(
+                      fontSize: 2.h, // 2% of screen height using Sizer
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xffFF8181),
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignupScreen()),
+                        );
+                      },
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

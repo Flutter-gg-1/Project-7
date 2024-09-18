@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:project_management_app/screens/Auth/auth_screen.dart';
+import 'package:project_management_app/screens/Bottom_Nav/bottom_nav.dart';
+import 'package:project_management_app/services/setup.dart';
+import 'package:sizer/sizer.dart';
 
-void main() {
-  runApp(const MainApp());
+void main() async {
+  await setup();
+  runApp(const MainApp()
+
+      // DevicePreview(
+      //   enabled: !kReleaseMode,
+      //   builder: (context) => const MainApp(), // Wrap your app
+      // ),
+      );
 }
 
 class MainApp extends StatelessWidget {
@@ -10,6 +19,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: AuthScreen());
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        return const MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: BottomNav(),
+        );
+      },
+    );
   }
 }
