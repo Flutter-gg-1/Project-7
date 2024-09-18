@@ -16,7 +16,7 @@ part 'edit_state.dart';
 class EditBloc extends Bloc<EditEvent, EditState> {
   final api = NetworkingApi();
   File? logoImage;
-  File? projectImage;
+  List<File>? projectImages;
   File? presentation;
   List<int>? presentationAsList;
   String ammarToken =
@@ -57,6 +57,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
 //=====================
   EditBloc() : super(EditInitial()) {
     on<EditEvent>((event, emit) async {});
+    on<ChangeImagesEvent>(changeImagesMethod);
     on<ChangeLinksEvent>(changeLinksMethod);
     on<ChangePresentationEvent>(changePresentationMethod);
 
@@ -66,6 +67,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
     //file picker event
     on<FilePickedEvent>((event, emit) async {
       presentation = event.selectedFile;
+      emit(LoadingState());
       Uint8List fileAsList = await presentation!.readAsBytes();
       presentationAsList = fileAsList.toList();
       emit(ProjectImagesState(presentationFile: presentation));
@@ -75,21 +77,39 @@ class EditBloc extends Bloc<EditEvent, EditState> {
       logoImage = event.selectedImage;
       emit(ProjectImagesState(
         logoImage: logoImage,
-        projectImage: projectImage,
       ));
     });
 
-    on<ProjectImageChangeEvent>((event, emit) {
-      projectImage = event.selectedImage;
-      emit(ProjectImagesState(
-        logoImage: logoImage,
-        projectImage: projectImage,
-      ));
+    on<ProjectImagesChangeEvent>((event, emit) {
+      projectImages = event.selectedImages;
+      emit(ProjectImagesState(projectImage: projectImages));
     });
+  }
+
+  FutureOr<void> changeImagesMethod(event, emit) async {
+    try {
+      List<Uint8List> imagesAsList = [];
+      for (var element in projectImages!) {
+        imagesAsList.add(element.readAsBytesSync());
+      }
+      emit(LoadingState());
+      await api.chnageImage(
+          token: ammarToken,
+          projectImgs: imagesAsList,
+          projectId: 'p-ipotpvpI9H');
+
+      emit(SucsessState(msg: 'Project images change sucsessfully'));
+      logoImage = null;
+    } on DioException catch (error) {
+      emit(ErrorState(msg: '${error.message}'));
+    } catch (e) {
+      emit(ErrorState(msg: '$e'));
+    }
   }
 
   FutureOr<void> changeLinksMethod(event, emit) async {
     try {
+      emit(LoadingState());
       final res = await api.chnageLinks(
           token: ammarToken,
           links: generateLinksList(),
@@ -104,6 +124,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
 
   FutureOr<void> changePresentationMethod(event, emit) async {
     try {
+      emit(LoadingState());
       final res = await api.chnagePresentation(
           token: ammarToken,
           presentationFile: presentationAsList!,
@@ -118,6 +139,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
 
   FutureOr<void> changeBaseMethod(event, emit) async {
     try {
+      emit(LoadingState());
       final res = await api.chnageBaseData(
           token: ammarToken,
           projectId: 'p-ipotpvpI9H',
@@ -138,6 +160,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
 
   FutureOr<void> changeLogoMethod(event, emit) async {
     try {
+      emit(LoadingState());
       Uint8List imageAsList = await logoImage!.readAsBytes();
       await api.chnagelogo(
           token: ammarToken,

@@ -8,12 +8,14 @@ class LogoImageChangeEvent extends EditEvent {
   LogoImageChangeEvent({required this.selectedImage});
 }
 
-class ProjectImageChangeEvent extends EditEvent {
-  final File selectedImage;
-  ProjectImageChangeEvent({required this.selectedImage});
+class ProjectImagesChangeEvent extends EditEvent {
+  final List<File> selectedImages;
+  ProjectImagesChangeEvent({required this.selectedImages});
 }
 
 class ChangeLogoEvent extends EditEvent {}
+
+class ChangeImagesEvent extends EditEvent {}
 
 class ChangeBaseEvent extends EditEvent {}
 
@@ -22,6 +24,6 @@ class FilePickedEvent extends EditEvent {
   FilePickedEvent({required this.selectedFile});
 }
 
-class ChangePresentationEvent extends EditEvent{}
+class ChangePresentationEvent extends EditEvent {}
 
-class ChangeLinksEvent extends EditEvent{}
+class ChangeLinksEvent extends EditEvent {}

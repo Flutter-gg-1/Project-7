@@ -11,6 +11,7 @@ import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 
 import 'package:tuwaiq_project/screens/projectView/edit/bloc/edit_bloc.dart';
 import 'package:tuwaiq_project/screens/projectView/edit/edit_base.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/edit_images.dart';
 import 'package:tuwaiq_project/screens/projectView/edit/edit_links.dart';
 import 'package:tuwaiq_project/screens/projectView/edit/edit_logo.dart';
 import 'package:tuwaiq_project/screens/projectView/edit/edit_presentation.dart';
@@ -34,12 +35,25 @@ class EditScreen extends StatelessWidget {
         return BlocListener<EditBloc, EditState>(
           listener: (context, state) {
             if (state is SucsessState) {
+              Navigator.pop(context);
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(state.msg)));
             }
             if (state is ErrorState) {
+              Navigator.pop(context);
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(state.msg)));
+            }
+            if (state is LoadingState) {
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                ),
+              );
             }
           },
           child: Scaffold(
@@ -70,7 +84,7 @@ class EditScreen extends StatelessWidget {
                         EditBase(languageLayer: languageLayer, bloc: bloc),
                         EditPresentation(
                             bloc: bloc, languageLayer: languageLayer),
-                        const Text('Edit Project Images'),
+                        EditImages(bloc: bloc, languageLayer: languageLayer),
                         EditLinks(languageLayer: languageLayer, bloc: bloc),
                         const Text('Edit Project Members'),
                       ],
