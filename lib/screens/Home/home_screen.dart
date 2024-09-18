@@ -58,9 +58,7 @@ class _HomeScreenState extends State<HomeScreen>
           itemBuilder: (context, index) {
             final project = snapshot.data![index];
             return Projects(
-              projectName: project.projectName ?? 'Untitled Project',
-              bootcampName: project.bootcampName ?? 'Unknown Bootcamp',
-              type: project.type ?? 'Unknown',
+            project: project,
             );
           },
         );

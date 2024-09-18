@@ -1,10 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:outlined_text/outlined_text.dart';
 import 'package:project_management_app/models/profile_model.dart';
-import 'package:project_management_app/models/project_model.dart';
 import 'package:project_management_app/networking/api_networking.dart';
+import 'package:project_management_app/screens/Edit_Profile/edit_profile_screen.dart';
 import 'package:project_management_app/screens/Home/projects_contaner.dart';
 import 'package:project_management_app/screens/Profile/custom_profile_links.dart';
 import 'package:project_management_app/screens/Supervisor/add_project_screen.dart';
@@ -109,7 +107,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ]),
                               ),
                             ],
-                          )
+                          ),
+                          IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const EditProfileScreen()));
+                              },
+                              icon: const Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                              )),
                         ],
                       ),
                     ),
@@ -174,7 +184,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      AddProjectScreen(), // Define your details screen here
+                                      const AddProjectScreen(), // Define your details screen here
                                 ),
                               );
                             },
@@ -197,9 +207,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(height: 10),
                     ...List.generate(profile.projects.length, (index) {
                       return Projects(
-                        projectName: profile.projects[index].projectName!,
-                        bootcampName: profile.projects[index].bootcampName!,
-                        type: profile.projects[index].type!,
+                        project: profile.projects[index],
                       );
                     }),
                     const SizedBox(height: 30),

@@ -1,27 +1,32 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:project_management_app/theme/appcolors.dart';
 
 class EditProjectScreen extends StatelessWidget {
+  EditProjectScreen({super.key});
+
+  // Base Info Controllers
   final TextEditingController projectNameController = TextEditingController();
   final TextEditingController bootcampNameController = TextEditingController();
+  final TextEditingController projectTypeController = TextEditingController();
   final TextEditingController startDateController = TextEditingController();
   final TextEditingController endDateController = TextEditingController();
   final TextEditingController presentationDateController =
       TextEditingController();
   final TextEditingController projectDescriptionController =
       TextEditingController();
-  final TextEditingController projectTypeController =
-      TextEditingController(text: "App");
 
-  // Controllers for the new links section
+  // Links Controllers
   final TextEditingController githubController = TextEditingController();
-  final TextEditingController playStoreController = TextEditingController();
-  final TextEditingController appStoreController = TextEditingController();
   final TextEditingController figmaController = TextEditingController();
-  final TextEditingController webLinkController = TextEditingController();
+  final TextEditingController videoController = TextEditingController();
   final TextEditingController pinterestController = TextEditingController();
+  final TextEditingController playStoreController = TextEditingController();
+  final TextEditingController appleStoreController = TextEditingController();
+  final TextEditingController apkController = TextEditingController();
+  final TextEditingController webLinkController = TextEditingController();
 
-  // Controllers for members
+  // Members Controllers
   final TextEditingController member1Controller = TextEditingController();
   final TextEditingController member2Controller = TextEditingController();
   final TextEditingController member3Controller = TextEditingController();
@@ -128,23 +133,112 @@ class EditProjectScreen extends StatelessWidget {
             ),
             const SizedBox(height: 30),
 
-            // Text Fields Section
-            _buildTextField("Project Name", projectNameController),
-            const SizedBox(height: 16),
-            _buildTextField("Bootcamp Name", bootcampNameController),
-            const SizedBox(height: 16),
-            _buildTextField("Start Date", startDateController, isDate: true),
-            const SizedBox(height: 16),
-            _buildTextField("End Date", endDateController, isDate: true),
-            const SizedBox(height: 16),
-            _buildTextField("Presentation Date", presentationDateController,
-                isDate: true),
-            const SizedBox(height: 16),
-            _buildTextField("Type", projectTypeController),
-            const SizedBox(height: 16),
-            _buildTextField("Project Description", projectDescriptionController,
-                isMultiline: true),
-            const SizedBox(height: 20),
+        // Text Fields Section
+        _buildTextField("Project Name", projectNameController),
+        const SizedBox(height: 16),
+        _buildTextField("Bootcamp Name", bootcampNameController),
+        const SizedBox(height: 16),
+        _buildTextField("Type", projectTypeController),
+        const SizedBox(height: 16),
+        _buildTextField("Start Date", startDateController, isDate: true),
+        const SizedBox(height: 16),
+        _buildTextField("End Date", endDateController, isDate: true),
+        const SizedBox(height: 16),
+        _buildTextField("Presentation Date", presentationDateController,
+            isDate: true),
+        const SizedBox(height: 16),
+        _buildTextField("Project Description", projectDescriptionController,
+            isMultiline: true),
+
+              const SizedBox(
+                height: 10,
+              ),
+              Center(
+                child: SizedBox(
+                  height: 30,
+                  width: 170,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xff4129B7),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: const Text(
+                      "Save Basic Info",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+              const Divider(),
+              const SizedBox(height: 20),
+
+              // upload project images
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Upload images",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Color(0xff4129B7), // لون النص
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Center(
+                    child: DottedBorder(
+                      color: const Color(0xffD9D9D9),
+                      strokeWidth: 1,
+                      child: Container(
+                          height: 100,
+                          width: 250,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3)),
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.add,
+                              color: Colors.black,
+                            ),
+                          )),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                    child: SizedBox(
+                      height: 30,
+                      width: 170,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Action to save the project details
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xff4129B7),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: const Text(
+                          "Save Images",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 20),
+              const Divider(),
+              const SizedBox(height: 20),
 
             // Links Section
             Padding(

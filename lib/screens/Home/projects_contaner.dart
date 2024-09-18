@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:project_management_app/models/project_model.dart';
 import 'package:project_management_app/screens/Home/project_details.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../theme/appcolors.dart';
 
 class Projects extends StatelessWidget {
-  final String projectName;
-  final String bootcampName;
-  final String type;
+  final ProjectModel project;
 
-  const Projects(
-      {super.key,
-      required this.projectName,
-      required this.bootcampName,
-      required this.type});
+  const Projects({
+    super.key,
+    required this.project,
+    // required this.projectName,
+    // required this.bootcampName,
+    // required this.type,
+    // required this.image
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class Projects extends StatelessWidget {
         //   context,
         //   MaterialPageRoute(
         //     builder: (context) =>
-        //         ProjectDetailsScreen(), // Define your details screen here
+        //         ProjectDetailsScreen(),
         //   ),
         // );
       },
@@ -49,12 +51,33 @@ class Projects extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: const Center(
-                  child: Icon(
-                    Icons.image,
-                    size: 28,
-                    color: Colors.white,
-                  ),
+                child: Center(
+                  child: (project.logoUrl == null || project.logoUrl == 'null')
+                      ? const Icon(
+                          Icons.image,
+                          size: 28,
+                          color: Colors.white,
+                        )
+                      : Image.network(
+                          project.logoUrl!,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return const Icon(
+                              Icons.image,
+                              size: 28,
+                              color: Colors.white,
+                            );
+                          },
+                          loadingBuilder: (context, child, progress) {
+                            if (progress == null) {
+                              return child;
+                            } else {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                          },
+                        ),
                 ),
               ),
             ),
@@ -87,7 +110,7 @@ class Projects extends StatelessWidget {
                           Flexible(
                             flex: 10,
                             child: Text(
-                              'Project Name: $projectName',
+                              'Project Name: ${project.projectName}',
                               style: TextStyle(
                                 color: AppColors.blueDark,
                                 fontWeight: FontWeight.bold,
@@ -111,7 +134,7 @@ class Projects extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            ProjectDetailsScreen(), // Define your details screen here
+                                            ProjectDetailsScreen(),
                                       ),
                                     );
                                   },
@@ -124,12 +147,12 @@ class Projects extends StatelessWidget {
                       ),
                       SizedBox(height: 0.7.h),
                       Text(
-                        "Bootcamp: $bootcampName",
+                        "Bootcamp: ${project.bootcampName}",
                         style: TextStyle(fontSize: 7.sp, color: AppColors.grey),
                       ),
                       SizedBox(height: 0.7.h),
                       Text(
-                        "Type: $type",
+                        "Type: ${project.type}",
                         style: TextStyle(fontSize: 7.sp, color: AppColors.grey),
                       ),
                     ],
