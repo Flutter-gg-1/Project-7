@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:project_management_app/screens/All_projects/all_projects_screen.dart';
 import 'package:project_management_app/screens/Admin/admin_home_screen.dart';
-import 'package:project_management_app/screens/Edit_Project/edit_project.dart';
 import 'package:project_management_app/screens/Home/home_screen.dart';
 import 'package:project_management_app/screens/Profile/profile_screen.dart';
 
@@ -15,8 +14,6 @@ class BottomNavBloc extends Bloc<BottomNavEvent, BottomNavState> {
   List<Widget> views = [
     const HomeScreen(),
     const AllProjectsScreen(),
-    EditProjectScreen(),
-    const EvaluationScreen(),
     const AdminHomeScreen(),
     const ProfileScreen()
   ];
