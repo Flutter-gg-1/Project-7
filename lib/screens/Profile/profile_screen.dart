@@ -26,6 +26,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         centerTitle: true,
         backgroundColor: const Color(0xff4129B7),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              // Implement the log-out logic here
+              logout(context);
+            },
+          ),
+        ],
       ),
       backgroundColor: Colors.white,
       body: FutureBuilder<Profile>(
@@ -201,30 +213,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       fontWeight: FontWeight.bold),
                                 )),
                           ),
-                          if(profile.role == 'supervisor')
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const AddProjectScreen(), // Define your details screen here
-                                ),
-                              );
-                            },
-                            style: TextButton.styleFrom(
-                              foregroundColor: const Color(0xff4129B7),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
+                          if (profile.role == 'supervisor')
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AddProjectScreen(),
+                                  ),
+                                );
+                              },
+                              style: TextButton.styleFrom(
+                                foregroundColor: const Color(0xff4129B7),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                              ),
+                              child: const Row(
+                                children: [
+                                  Icon(Icons.add, size: 20),
+                                  SizedBox(width: 5),
+                                  Text('Add Project'),
+                                ],
+                              ),
                             ),
-                            child: const Row(
-                              children: [
-                                Icon(Icons.add, size: 20),
-                                SizedBox(width: 5),
-                                Text('Add Project'),
-                              ],
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -251,5 +263,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         },
       ),
     );
+  }
+
+  void logout(BuildContext context) {
+    // Add the log-out functionality here, e.g., clear user data and navigate to the login screen.
+    // Example navigation to the login screen
   }
 }

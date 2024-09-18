@@ -76,48 +76,7 @@ class _HomeScreenState extends State<HomeScreen>
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  // Search Bar Section
-                  Padding(
-                    padding: EdgeInsets.all(4.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 1,
-                                  blurRadius: 3,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Search...',
-                                prefixIcon: const Icon(Icons.search),
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5.sp),
-                                  borderSide: BorderSide.none,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 4.w),
-                        Image.asset(
-                          scale: 1,
-                          'assets/Group 10 (1).png',
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 3.h),
-
+            
                   const Center(child: ImageSlider()), // Image Slider
                   SizedBox(height: 2.h),
 
