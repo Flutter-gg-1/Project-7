@@ -2,7 +2,6 @@ import 'package:project_management_app/models/auth_model.dart';
 import 'package:get_storage/get_storage.dart';
 
 class DataLayer {
-
   AuthModel? auth;
   final box = GetStorage();
 

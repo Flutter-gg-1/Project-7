@@ -2,15 +2,21 @@ import 'package:project_management_app/models/auth_model.dart';
 import 'package:project_management_app/networking/constants_api.dart';
 import 'package:dio/dio.dart';
 
-mixin AuthApi on ConstantsApi{
+mixin AuthApi on ConstantsApi {
+  resendOtp() {}
 
+  login({required String email}) async {
+    try {
+       await dio
+          .post('$baseUrl$loginEndpoint', data: {'email': email.trim()});
+    } on DioException catch (error) {
+      throw FormatException(error.response?.data["data"]);
+    } catch (error) {
+      throw const FormatException("Error with Login");
+    }
+  }
 
-
-  resendOtp(){}
-
-  login(){}
-
-Future<String> createNewAccount(
+  Future<String> createNewAccount(
       {required String email,
       required String firstName,
       required String lastName}) async {
@@ -45,5 +51,4 @@ Future<String> createNewAccount(
       throw const FormatException("~there error with API");
     }
   }
-
 }

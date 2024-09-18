@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_management_app/screens/Auth/first_screen.dart';
 import 'package:project_management_app/screens/Bottom_Nav/bottom_nav.dart';
 import 'package:project_management_app/services/setup.dart';
 import 'package:sizer/sizer.dart';
@@ -23,7 +24,7 @@ class MainApp extends StatelessWidget {
       builder: (context, orientation, deviceType) {
         return const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: BottomNav(),
+          home: FirstScreen(),
         );
       },
     );

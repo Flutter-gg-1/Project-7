@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:project_management_app/networking/api_networking.dart';
+import 'package:project_management_app/screens/Auth/otp_Screan.dart';
 import 'package:sizer/sizer.dart'; // Import Sizer package
 import 'package:project_management_app/screens/Auth/signup_screen.dart';
 
@@ -8,6 +10,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final api = ApiNetworking();
+    TextEditingController emailController = TextEditingController();
     return Scaffold(
       resizeToAvoidBottomInset:
           true, // This will ensure screen adjusts for the keyboard
@@ -58,6 +62,7 @@ class LoginScreen extends StatelessWidget {
                       ],
                     ),
                     child: TextField(
+                      controller: emailController,
                       decoration: InputDecoration(
                         hintText: 'Email',
                         hintStyle: const TextStyle(color: Color(0xff4129B7)),
@@ -77,11 +82,14 @@ class LoginScreen extends StatelessWidget {
                     height: 6.h, // 6% of screen height using Sizer
                     child: ElevatedButton(
                       onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const OtpScreen()),
-                        // );
+                        api.login(email: emailController.text);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OtpScreen(
+                                    email: emailController.text,
+                                  )),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF321f8d),

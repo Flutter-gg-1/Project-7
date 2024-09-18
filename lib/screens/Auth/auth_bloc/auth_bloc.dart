@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,7 @@ import 'package:project_management_app/networking/api_networking.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
-class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState>  {
+class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState> {
   TextEditingController? controllerEmail = TextEditingController();
   TextEditingController? controllerFName = TextEditingController();
   TextEditingController? controllerLName = TextEditingController();

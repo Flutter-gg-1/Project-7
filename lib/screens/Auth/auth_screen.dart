@@ -51,7 +51,7 @@ class AuthScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const LoginScreen()),
+                          builder: (context) => const SignupScreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -84,7 +84,7 @@ class AuthScreen extends StatelessWidget {
                     ),
                     children: <TextSpan>[
                       TextSpan(
-                        text: 'Sign In',
+                        text: ' Sign In',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -103,7 +103,7 @@ class AuthScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const SignupScreen(),
+                                builder: (context) => const LoginScreen(),
                               ),
                             );
                           },
