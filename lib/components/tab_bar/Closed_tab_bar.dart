@@ -7,7 +7,7 @@ class MyProjectCardClosed extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
       child: Container(
-        height: 108,
+        height: 115,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -36,7 +36,7 @@ class MyProjectCardClosed extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(19),
                     child: Image.asset(
-                      'assets/logo.png',
+                      'assets/images/logo.png',
                       fit: BoxFit.cover,
                     ),
                   ),

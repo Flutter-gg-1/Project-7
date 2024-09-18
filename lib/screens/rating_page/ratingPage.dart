@@ -21,15 +21,15 @@ class RatingPageState extends State<RatingPage> {
     return Scaffold(
       backgroundColor:  Colors.white,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: Color(0xFF4E2EB5),
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: const Color(0xFF4E2EB5),
         elevation: 0,
         centerTitle: true,
-        title: Text('Rate', style: TextStyle(color: Colors.white)),
+        title: const Text('Rate', style: TextStyle(color: Colors.white)),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset("assets/send.png"),
+            child: Image.asset("assets/images/send.png"),
           ),
         ],
       ),
@@ -39,15 +39,15 @@ class RatingPageState extends State<RatingPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('ProjectName', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
-              Text('Rate this project on a scale from 1 (poor) to 10 (excellent).', style: TextStyle(color: Colors.grey, fontSize: 22)),
-              SizedBox(height: 10),
+              const Text('ProjectName', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+              const Text('Rate this project on a scale from 1 (poor) to 10 (excellent).', style: TextStyle(color: Colors.grey, fontSize: 22)),
+              const SizedBox(height: 10),
 
               // Sliders
               SliderSection(
                 label: 'Idea',
                 value: ideaRating,
-                imagePath: 'assets/idea.png',
+                imagePath: 'assets/images/idea.png',
                 onChanged: (newValue) {
                   setState(() {
                     ideaRating = newValue;
@@ -57,7 +57,7 @@ class RatingPageState extends State<RatingPage> {
               SliderSection(
                 label: 'Design',
                 value: designRating,
-                imagePath: 'assets/design.png',
+                imagePath: 'assets/images/design.png',
                 onChanged: (newValue) {
                   setState(() {
                     designRating = newValue;
@@ -67,7 +67,7 @@ class RatingPageState extends State<RatingPage> {
               SliderSection(
                 label: 'Tools',
                 value: toolsRating,
-                imagePath: 'assets/tools.png',
+                imagePath: 'assets/images/tools.png',
                 onChanged: (newValue) {
                   setState(() {
                     toolsRating = newValue;
@@ -77,7 +77,7 @@ class RatingPageState extends State<RatingPage> {
               SliderSection(
                 label: 'Practices',
                 value: practicesRating,
-                imagePath: 'assets/medal.png',
+                imagePath: 'assets/images/medal.png',
                 onChanged: (newValue) {
                   setState(() {
                     practicesRating = newValue;
@@ -87,7 +87,7 @@ class RatingPageState extends State<RatingPage> {
               SliderSection(
                 label: 'Presentation',
                 value: presentationRating,
-                imagePath: 'assets/presentation.png',
+                imagePath: 'assets/images/presentation.png',
                 onChanged: (newValue) {
                   setState(() {
                     presentationRating = newValue;
@@ -97,7 +97,7 @@ class RatingPageState extends State<RatingPage> {
               SliderSection(
                 label: 'Investment',
                 value: investmentRating,
-                imagePath: 'assets/invest.png',
+                imagePath: 'assets/images/invest.png',
                 onChanged: (newValue) {
                   setState(() {
                     investmentRating = newValue;
@@ -105,7 +105,7 @@ class RatingPageState extends State<RatingPage> {
                 },
               ),
 
-              SizedBox(height: 10), 
+              const SizedBox(height: 10), 
               NotesSection(),
             ],
           ),

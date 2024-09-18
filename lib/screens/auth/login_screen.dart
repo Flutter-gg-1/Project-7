@@ -95,19 +95,22 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(
                         height: 130,
                       ),
-                      CustomTextFormField(
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                        controller: cubit.emailLoginController,
-                        hintText: "Example@example.com",
-                        icon: Icons.email_outlined,
-                        validator: (value) {
-                          if (value == null ||
-                              value.isEmpty ||
-                              !value.contains('@')) {
-                            return 'Please enter a valid email';
-                          }
-                          return null;
-                        },
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: CustomTextFormField(
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          controller: cubit.emailLoginController,
+                          hintText: "Example@example.com",
+                          icon: Icons.email_outlined,
+                          validator: (value) {
+                            if (value == null ||
+                                value.isEmpty ||
+                                !value.contains('@')) {
+                              return 'Please enter a valid email';
+                            }
+                            return null;
+                          },
+                        ),
                       ),
                       const SizedBox(
                         height: 111,

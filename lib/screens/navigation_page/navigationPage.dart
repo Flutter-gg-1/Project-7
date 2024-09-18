@@ -1,10 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:project_judge/components/buttons/bottomNavBar.dart';
 import 'package:project_judge/screens/browse_page/browsePage.dart';
+import 'package:project_judge/screens/home_screen/home_screen.dart';
 import 'package:project_judge/screens/myproject_page/myProjectsPage.dart';
+import 'package:project_judge/screens/profile_screen/profile_screen.dart';
 
 class NavigationPage extends StatefulWidget {
+  const NavigationPage({super.key});
+
   @override
   NavigationPageState createState() => NavigationPageState();
 }
@@ -13,11 +16,11 @@ class NavigationPageState extends State<NavigationPage> {
   int selectedIndex = 0;
 
   final List<Widget> pages = [
-    Center(child: Text("Home Page")),
+    const HomeScreen(),
     BrowsePage(),
-    Center(child: Text("Middle Page")),
-  MyProjectsScreen(),
-    Center(child: Text("Profile Page")),
+    const Center(child:  Text("Middle Page")),
+    const MyProjectsScreen(),
+    ProfileScreen()
   ];
 
   void onItemTapped(int index) {
@@ -28,7 +31,7 @@ class NavigationPageState extends State<NavigationPage> {
 
   void onMiddleButtonTapped() {
     setState(() {
-      selectedIndex = 2;
+      selectedIndex = 0;
     });
   }
 

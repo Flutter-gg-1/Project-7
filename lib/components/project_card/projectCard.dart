@@ -9,7 +9,7 @@ class ProjectCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
         child: Container(
-          height: 108,
+          height: 115,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
@@ -32,13 +32,13 @@ class ProjectCard extends StatelessWidget {
                   height: 94,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(19),
-                    color:const Color(0x4E2EB5),
+                    color: const Color(0x4E2EB5),
                   ),
                   child: Center(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(19),
                       child: Image.asset(
-                        'assets/logo.png',
+                        'assets/images/logo.png',
                         fit: BoxFit.cover,
                       ),
                     ),

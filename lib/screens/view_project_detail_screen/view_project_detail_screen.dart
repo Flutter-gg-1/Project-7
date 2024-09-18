@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project_judge/components/list_tiles/custom_project_detail_list_tile.dart';
 import 'package:project_judge/components/text/custom_text.dart';
-import 'package:simple_icons/simple_icons.dart';
+import "package:simple_icons/simple_icons.dart";
 import '../../components/app_bar/custom_app_bar.dart';
 import '../../components/buttons/custom_icon_button.dart';
 import '../../components/cards/custom_team_member_card.dart';
@@ -158,7 +158,7 @@ class ViewProjectDetailScreen extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    CustomText(text: "4.7/5", size: 16),
+                    CustomText( text: "4.7/5", size: 16),
                     SizedBox(
                       width: 14,
                     ),

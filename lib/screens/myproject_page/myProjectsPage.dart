@@ -4,6 +4,8 @@ import 'package:project_judge/components/tab_bar/Closed_tab_bar.dart';
 import 'package:project_judge/components/tab_bar/Opened_tab_bar.dart';
 
 class MyProjectsScreen extends StatefulWidget {
+  const MyProjectsScreen({super.key});
+
   @override
   MyProjectsScreenState createState() => MyProjectsScreenState();
 }
@@ -21,12 +23,12 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF4E2EB5),
+      backgroundColor: const Color(0xFF4E2EB5),
       appBar: AppBar(
-        backgroundColor: Color(0xFF4E2EB5),
+        backgroundColor: const Color(0xFF4E2EB5),
         elevation: 0,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'My Projects',
           style: TextStyle(color: Colors.white),
         ),
@@ -36,15 +38,15 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
           controller: tabController,
           indicatorColor: Colors.cyan,
           labelColor: Colors.cyan,
-          labelStyle: TextStyle(
+          labelStyle: const TextStyle(
             fontSize: 20,
             color: Colors.cyan,
           ),
-          unselectedLabelStyle: TextStyle(
+          unselectedLabelStyle: const TextStyle(
             fontSize: 20,
           ),
           unselectedLabelColor: Colors.grey,
-          tabs: [
+          tabs: const [
             Tab(text: 'Open'),
             Tab(text: 'Closed'),
           ],
@@ -74,9 +76,9 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: Colors.cyan,
-        child: Icon(Icons.add),
-        shape: CircleBorder(),
+        shape: const CircleBorder(),
         heroTag: 'unique_tag',
+        child:  const Icon(Icons.add),
       ),
     );
   }

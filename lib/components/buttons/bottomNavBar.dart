@@ -6,7 +6,7 @@ class BottomNavBar extends StatelessWidget {
   final ValueChanged<int> onItemTapped;
   final VoidCallback onMiddleButtonTapped;
 
-  BottomNavBar({
+  const BottomNavBar({super.key, 
     required this.selectedIndex,
     required this.onItemTapped,
     required this.onMiddleButtonTapped,
@@ -20,7 +20,7 @@ class BottomNavBar extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30.0),
               topRight: Radius.circular(30.0),
             ),
@@ -29,12 +29,12 @@ class BottomNavBar extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.2),
                 spreadRadius: 5,
                 blurRadius: 10,
-                offset: Offset(0, 3),
+                offset: const Offset(0, 3),
               ),
             ],
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30.0),
               topRight: Radius.circular(30.0),
             ),
@@ -46,14 +46,14 @@ class BottomNavBar extends StatelessWidget {
               showSelectedLabels: false,
               showUnselectedLabels: false,
               items: [
-                buildBottomNavBarItem('assets/Call.png', 'Home', 0),
-                buildBottomNavBarItem('assets/browse.png', 'Browse', 1),
-                BottomNavigationBarItem(
+                buildBottomNavBarItem('assets/images/Call.png', 'Home', 0),
+                buildBottomNavBarItem('assets/images/browse.png', 'Browse', 1),
+                const BottomNavigationBarItem(
                   icon: SizedBox.shrink(), 
                   label: '',
                 ),
-                buildBottomNavBarItem('assets/projects.png', 'My Projects', 3),
-                buildBottomNavBarItem('assets/profile.png', 'Profile', 4),
+                buildBottomNavBarItem('assets/images/projects.png', 'My Projects', 3),
+                buildBottomNavBarItem('assets/images/profile.png', 'Profile', 4),
               ],
             ),
           ),
@@ -66,14 +66,14 @@ class BottomNavBar extends StatelessWidget {
             child: Container(
               width: 80,
               height: 80,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.transparent,
                 shape: BoxShape.circle,
               
               ),
               child: ClipOval(
                 child: Image.asset(
-                  'assets/FAB.png',
+                  'assets/images/FAB.png',
                   fit: BoxFit.cover,
                   width: 48,
                   height: 48,
@@ -96,16 +96,16 @@ class BottomNavBar extends StatelessWidget {
             width: 24,
             height: 24,
             color:
-                selectedIndex == index ? Color(0xFF4E2EB5) : Color(0xFF848484),
+                selectedIndex == index ? const Color(0xFF4E2EB5) : const Color(0xFF848484),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(
             label,
             style: TextStyle(
               fontSize: 12,
               color: selectedIndex == index
-                  ? Color(0xFF4E2EB5)
-                  : Color(0xFF848484),
+                  ? const Color(0xFF4E2EB5)
+                  : const Color(0xFF848484),
             ),
           ),
         ],
