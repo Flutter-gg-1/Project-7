@@ -117,6 +117,7 @@ class EditScreen extends StatelessWidget {
                                         hintText: 'GitHub URL',
                                         controller: bloc.githubController,
                                       ),
+                                      context.addSpacer(multiply: 0.008),
                                       Text(
                                         languageLayer.isArabic
                                             ? 'رابط Figma'
@@ -131,6 +132,7 @@ class EditScreen extends StatelessWidget {
                                         hintText: 'Figma URL',
                                         controller: bloc.figmaController,
                                       ),
+                                      context.addSpacer(multiply: 0.008),
                                       Text(
                                         languageLayer.isArabic
                                             ? 'رابط فيديو'
@@ -145,6 +147,7 @@ class EditScreen extends StatelessWidget {
                                         hintText: 'Video URL',
                                         controller: bloc.videoController,
                                       ),
+                                      context.addSpacer(multiply: 0.008),
                                       Text(
                                         languageLayer.isArabic
                                             ? 'رابط Pinterest'
@@ -159,6 +162,7 @@ class EditScreen extends StatelessWidget {
                                         hintText: 'Pinterest URL',
                                         controller: bloc.pinterestController,
                                       ),
+                                      context.addSpacer(multiply: 0.008),
                                       Text(
                                         languageLayer.isArabic
                                             ? 'رابط Play Store'
@@ -173,6 +177,7 @@ class EditScreen extends StatelessWidget {
                                         hintText: 'Play Store URL',
                                         controller: bloc.playstoreController,
                                       ),
+                                      context.addSpacer(multiply: 0.008),
                                       Text(
                                         languageLayer.isArabic
                                             ? 'رابط Apple Store'
@@ -187,6 +192,7 @@ class EditScreen extends StatelessWidget {
                                         hintText: 'Apple Store URL',
                                         controller: bloc.applestoreController,
                                       ),
+                                      context.addSpacer(multiply: 0.008),
                                       Text(
                                         languageLayer.isArabic
                                             ? 'رابط APK'
@@ -201,6 +207,7 @@ class EditScreen extends StatelessWidget {
                                         hintText: 'APK URL',
                                         controller: bloc.apkController,
                                       ),
+                                      context.addSpacer(multiply: 0.008),
                                       Text(
                                         languageLayer.isArabic
                                             ? 'رابط ويب'
