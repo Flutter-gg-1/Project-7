@@ -1,8 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:dio/dio.dart';
 import 'package:project_management_app/models/member_model.dart';
 import 'package:project_management_app/models/project_link.dart';
@@ -58,19 +55,6 @@ mixin UserApi on ConstantsApi {
       log('${response?.data}');
       throw Exception("Error occurred while updating Logo");
     }
-  }
-
-  // Instructor's method
-  uploadLogo(
-      {required String path,
-      required String projectId,
-      required String token}) async {
-    Uint8List data = await File(path).readAsBytes();
-    await dio.put(
-      '$baseUrl$editProjectLogoEndpoint/$projectId',
-      data: jsonEncode({"logo": data.toList()}),
-      options: Options(headers: {"Authorization": "Bearer $token"}),
-    );
   }
 
   editProjectInfo(
