@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:project_management_app/models/project_model.dart';
 import 'package:project_management_app/screens/Edit_Project/edit_project.dart';
 import 'package:project_management_app/theme/appcolors.dart';
+import 'package:sizer/sizer.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
+  final ProjectModel project;
+
+  const ProjectDetailsScreen({super.key, required this.project});
+
   @override
   _ProjectDetailsScreenState createState() => _ProjectDetailsScreenState();
 }
 
 class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
   String? selectedLink;
+  List<String> links = [
+    'GitHub',
+    'Figma',
+    'Video',
+    'Pinterest Link',
+    'PlayStore Link',
+    'AppleStore Link',
+    'Web Link',
+    'Apk'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +38,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => EditProjectScreen()));
+                        builder: (context) => const EditProjectScreen()));
               },
               icon: const Icon(
                 Icons.edit,
@@ -31,23 +47,65 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
         ],
       ),
       body: ListView(
+        padding:
+            const EdgeInsets.only(left: 16, top: 16, bottom: 16, right: 30),
         children: [
           const SizedBox(
             height: 20,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(right: 100.0),
-                child: Text(
-                  ' Projects Details ..',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 21,
-                      color: Color(0xff57E3D8)),
-                ),
+              const Text(
+                ' Projects Details ..',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 21,
+                    color: Color(0xff57E3D8)),
               ),
+              if (widget.project.logoUrl != null &&
+                  widget.project.logoUrl != 'null')
+                Flexible(
+                  flex: 3,
+                  child: Container(
+                    height: 8.h,
+                    width: 8.h,
+                    decoration: BoxDecoration(
+                      color: AppColors.blueDark,
+                      borderRadius: BorderRadius.circular(1.4.h),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1.4,
+                          blurRadius: 3.5,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Image.network(
+                        widget.project.logoUrl!,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return const Icon(
+                            Icons.image,
+                            size: 28,
+                            color: Colors.white,
+                          );
+                        },
+                        loadingBuilder: (context, child, progress) {
+                          if (progress == null) {
+                            return child;
+                          } else {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                ),
               Image.asset('assets/Group 10 (1).png')
             ],
           ),
@@ -56,10 +114,10 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
           ),
 
           // First project name
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Project name :',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -68,8 +126,8 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                 ),
               ),
               Text(
-                'Project 7',
-                style: TextStyle(
+                widget.project.projectName.toString(),
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Color(0xffB8B8BB),
                 ),
@@ -79,10 +137,10 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
           const SizedBox(height: 20),
 
           // Second project name
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'BootCamp  :',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -91,8 +149,8 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                 ),
               ),
               Text(
-                'Project 7',
-                style: TextStyle(
+                widget.project.bootcampName.toString(),
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Color(0xffB8B8BB),
                 ),
@@ -102,10 +160,10 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
           const SizedBox(height: 20),
 
           // Third project name
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Description :',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -113,11 +171,16 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                   color: Color(0xff4129B7),
                 ),
               ),
-              Text(
-                'Project 7',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xffB8B8BB),
+              const SizedBox(
+                width: 10,
+              ),
+              Flexible(
+                child: Text(
+                  widget.project.projectDescription.toString(),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xffB8B8BB),
+                  ),
                 ),
               ),
             ],
@@ -125,10 +188,10 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
           const SizedBox(height: 20),
 
           // Fourth project name
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Start Date  :',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -137,8 +200,8 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                 ),
               ),
               Text(
-                'Project 7',
-                style: TextStyle(
+                widget.project.startDate.toString(),
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Color(0xffB8B8BB),
                 ),
@@ -147,10 +210,10 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
           ),
           const SizedBox(height: 20),
 
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'End Date  :',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -159,8 +222,8 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                 ),
               ),
               Text(
-                'Project 7',
-                style: TextStyle(
+                widget.project.endDate.toString(),
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Color(0xffB8B8BB),
                 ),
@@ -170,10 +233,10 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
           const SizedBox(
             height: 20,
           ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Presentaion Date :',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -182,8 +245,8 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                 ),
               ),
               Text(
-                'Project 7',
-                style: TextStyle(
+                widget.project.presentationDate.toString(),
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Color(0xffB8B8BB),
                 ),
@@ -199,8 +262,8 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: 139, // Set the width to 139
-                height: 30, // Set the height to 30
+                width: 170,
+                height: 30,
                 decoration: BoxDecoration(
                   color: const Color(0xff4129B7),
                   borderRadius: BorderRadius.circular(10),
@@ -241,7 +304,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                 ),
               ),
               const SizedBox(
-                  width: 20), // Add spacing between dropdown and image
+                  width: 10), // Add spacing between dropdown and image
               Image.asset(
                 'assets/Untitled 1.png', // Replace with your image path
                 width: 150,
@@ -249,7 +312,17 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               ),
             ],
           ),
-
+          if (selectedLink != null)
+            Text(
+              widget.project.linksProject![links.indexOf(selectedLink!)].url
+                  as String,
+              style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.blue),
+            )
+          else
+            const Text('No Link Added'),
           const SizedBox(
             height: 30,
           ),

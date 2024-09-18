@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_management_app/models/project_model.dart';
-import 'package:project_management_app/screens/Home/project_details.dart';
+import 'package:project_management_app/screens/Project/project_details_screen.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../theme/appcolors.dart';
@@ -134,7 +134,7 @@ class Projects extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            ProjectDetailsScreen(),
+                                            ProjectDetailsScreen(project: project,),
                                       ),
                                     );
                                   },
