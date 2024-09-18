@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project_management_app/networking/api_networking.dart';
+import 'package:project_management_app/theme/appcolors.dart';
+
 import 'custom_evaluation_slider.dart';
 
 class EvaluationScreen extends StatefulWidget {
@@ -81,12 +84,14 @@ class _EvaluationScreenState extends State<EvaluationScreen> {
                   width: 78,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(9),
-                      color: const Color(0xff57E3D8)),
+                      color: AppColors.blueLight),
                   child: TextButton(
                       onPressed: () {},
                       child: const Text(
+                        textAlign: TextAlign.center,
                         'Send',
-                        style: TextStyle(fontSize: 16, color: Colors.white),
+                        style: TextStyle(fontSize: 16, color: Colors.white
+                        ),
                       )),
                 )
               ],

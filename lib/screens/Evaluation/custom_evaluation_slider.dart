@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_management_app/theme/appcolors.dart';
 
 import 'custom_slider.dart';
 
@@ -18,16 +19,19 @@ class CustomEvaluationSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-         const SizedBox(height: 20,),
+        const SizedBox(
+          height: 30,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
+                alignment: Alignment.center,
                 height: 27,
-                width: 85,
+                width: 100,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    color: const Color(0xff4129B7)),
+                    color: AppColors.blueDark),
                 child: Text(
                   label,
                   textAlign: TextAlign.center,
