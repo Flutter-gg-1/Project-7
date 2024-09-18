@@ -22,16 +22,17 @@ final class ErorrState extends ProfileState {
 
 
 
-final class ImageHereState extends ProfileState {
-  final List<int> imgFile;
+// final class ImageHereState extends ProfileState {
+//   final List<int> imgFile;
+//    final String? imagUrl;
 
-  ImageHereState({required this.imgFile});
-}
+//   ImageHereState({this.imagUrl ,required this.imgFile});
+// }
 
 
-final class ImageNoState extends ProfileState {
+// final class ImageNoState extends ProfileState {
   
 
-  ImageNoState();
-}
+//   ImageNoState();
+// }
 

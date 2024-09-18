@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
-import 'package:tuwaiq_project/screens/profile/cubit/profile_cubit.dart';
+import 'package:tuwaiq_project/screens/profile/cubit_profile/profile_cubit.dart';
 import 'package:tuwaiq_project/screens/profile_information_screen.dart';
 import 'package:tuwaiq_project/widget/links_profile/custome_links_profile.dart';
 import 'package:tuwaiq_project/widget/links_profile/custome_title_text_profile.dart';

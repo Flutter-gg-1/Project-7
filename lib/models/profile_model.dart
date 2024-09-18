@@ -18,7 +18,7 @@ class ProfileModel {
   late final String lastName;
   late final String email;
   late final String role;
-  late final List<int>? imageFile;
+  late final String? imageFile;
   late final Link link;
   late final List<Projects> projects;
   late final String createdAt;

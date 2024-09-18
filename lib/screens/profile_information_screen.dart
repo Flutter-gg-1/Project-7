@@ -8,7 +8,8 @@ import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/models/profile_model.dart';
 import 'package:tuwaiq_project/screens/auth/login_screen.dart';
-import 'package:tuwaiq_project/screens/profile/cubit/profile_cubit.dart';
+import 'package:tuwaiq_project/screens/profile/cubit_profile/profile_cubit.dart';
+import 'package:tuwaiq_project/screens/profile/img_handle_cubit/img_handle_cubit.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 import 'package:tuwaiq_project/widget/button/custom_button.dart';
@@ -38,6 +39,8 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
 
   @override
   void initState() {
+    context.read<ImgHandleCubit>().convortImgUrl(imgUrl:widget.profileModel.imageFile);
+
     firstNameCon.text = widget.profileModel.firstName;
     lastNameCon.text = widget.profileModel.lastName;
     linkCon.text = widget.profileModel.link.linkedin ?? "";
@@ -168,7 +171,7 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                 ),
               ],
             ),
-            BlocBuilder<ProfileCubit, ProfileState>(
+            BlocBuilder<ImgHandleCubit, ImgHandleState>(
               builder: (context, state) {
                 if (state is ImageHereState) {
                   return Container(
@@ -179,7 +182,7 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                           Image.memory(Uint8List.fromList(state.imgFile)),
                           IconButton(
                               onPressed: () {
-                                context.read<ProfileCubit>().imageDel();
+                                context.read<ImgHandleCubit>().imageDel();
                               },
                               icon: const Icon(
                                 Icons.delete,
@@ -197,7 +200,7 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
 
                     if (imgFile != null) {
                       final bytes = await imgFile.readAsBytes();
-                      context.read<ProfileCubit>().imageAdd(bytes);
+                      context.read<ImgHandleCubit>().imageAdd(bytes);
                     }
                   },
                   child: Container(
@@ -224,7 +227,9 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                     lastName: lastNameCon.text,
                     bindLink: bidingCon.text,
                     linkedinLink: linkCon.text,
-                    githubLink: gitCon.text);
+                    githubLink: gitCon.text,
+                    imgCubitFile:  context.read<ImgHandleCubit>().imgCubitFile
+                    );
 
                 // Navigator.of(context).pop();
               },

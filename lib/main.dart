@@ -4,7 +4,8 @@ import 'package:tuwaiq_project/networking/networking_api.dart';
 import 'package:tuwaiq_project/screens/auth/login_screen.dart';
 import 'package:tuwaiq_project/screens/auth/otp_screen.dart';
 import 'package:tuwaiq_project/screens/home_screen.dart';
-import 'package:tuwaiq_project/screens/profile/cubit/profile_cubit.dart';
+import 'package:tuwaiq_project/screens/profile/cubit_profile/profile_cubit.dart';
+import 'package:tuwaiq_project/screens/profile/img_handle_cubit/img_handle_cubit.dart';
 import 'package:tuwaiq_project/screens/profile/profile_screen.dart';
 import 'package:tuwaiq_project/screens/projectView/create_project_screen.dart';
 import 'package:tuwaiq_project/screens/splach/splach_screen.dart';
@@ -31,6 +32,10 @@ class MyApp extends StatelessWidget {
       providers: [
          BlocProvider(
           create: (context) => ProfileCubit(),
+        ),
+
+         BlocProvider(
+          create: (context) => ImgHandleCubit(),
         ),
       ],
       child: const MaterialApp(

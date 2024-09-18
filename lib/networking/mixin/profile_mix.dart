@@ -13,7 +13,7 @@ mixin ProfileMix on NetworkingConstant {
       final res = await dio.get("$baseUrl$endProfile",
           options: Options(headers: {'Authorization': 'Bearer $token'}));
 
-          log("in the after");
+      log("in the after");
 
       print(res.data);
 
@@ -21,10 +21,9 @@ mixin ProfileMix on NetworkingConstant {
     } on DioException catch (err) {
       print(err.response?.data);
       throw err.response?.data ?? 'Unknown error occurred';
-    } 
+    }
     // catch (err) {
     //   print(err);
-
 
     //   throw 'Failed to load profile:';
     // }
@@ -40,6 +39,7 @@ mixin ProfileMix on NetworkingConstant {
       required String linkedinLink,
       required String githubLink}) async {
     try {
+      print(profileImg);
       final res = await dio.put("$baseUrl$endProfileUpdate",
           options: Options(headers: {'Authorization': 'Bearer $token'}),
           data: {
