@@ -1,6 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/models/profile_model.dart';
@@ -164,6 +167,46 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                   },
                 ),
               ],
+            ),
+            BlocBuilder<ProfileCubit, ProfileState>(
+              builder: (context, state) {
+                if (state is ImageHereState) {
+                  return Container(
+                      width: 200,
+                      height: 100,
+                      child: Stack(
+                        children: [
+                          Image.memory(Uint8List.fromList(state.imgFile)),
+                          IconButton(
+                              onPressed: () {
+                                context.read<ProfileCubit>().imageDel();
+                              },
+                              icon: const Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                              ))
+                        ],
+                      ));
+                }
+
+                return GestureDetector(
+                  onTap: () async {
+                    final ImagePicker picker = ImagePicker();
+                    final XFile? imgFile =
+                        await picker.pickImage(source: ImageSource.gallery);
+
+                    if (imgFile != null) {
+                      final bytes = await imgFile.readAsBytes();
+                      context.read<ProfileCubit>().imageAdd(bytes);
+                    }
+                  },
+                  child: Container(
+                      width: 100,
+                      height: 100,
+                      color: Colors.grey,
+                      child: const Icon(FontAwesomeIcons.plus)),
+                );
+              },
             ),
             SizedBox(
               height: context.getHeight(multiply: 0.035),

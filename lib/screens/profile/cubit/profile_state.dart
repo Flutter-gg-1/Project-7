@@ -18,3 +18,20 @@ final class ErorrState extends ProfileState {
 
   ErorrState({required this.msg});
 }
+
+
+
+
+final class ImageHereState extends ProfileState {
+  final List<int> imgFile;
+
+  ImageHereState({required this.imgFile});
+}
+
+
+final class ImageNoState extends ProfileState {
+  
+
+  ImageNoState();
+}
+

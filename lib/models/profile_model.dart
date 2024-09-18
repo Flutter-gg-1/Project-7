@@ -1,3 +1,5 @@
+
+
 class ProfileModel {
   ProfileModel({
     required this.id,
@@ -5,7 +7,7 @@ class ProfileModel {
     required this.lastName,
     required this.email,
     required this.role,
-    required this.imageUrl,
+    required this.imageFile,
     required this.link,
     required this.projects,
     required this.createdAt,
@@ -16,11 +18,12 @@ class ProfileModel {
   late final String lastName;
   late final String email;
   late final String role;
-  late final String? imageUrl;
+  late final List<int>? imageFile;
   late final Link link;
   late final List<Projects> projects;
   late final String createdAt;
   late final String updatedAt;
+  late final List<int>? resumeFile;
 
   ProfileModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -28,12 +31,14 @@ class ProfileModel {
     lastName = json['last_name'];
     email = json['email'];
     role = json['role'];
-    imageUrl = json['image_url'];
+    imageFile = json['image_url'];
     link = Link.fromJson(json['link']);
     projects =
         List.from(json['projects']).map((e) => Projects.fromJson(e)).toList();
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    resumeFile = json['resume_url'];
+    
   }
 
   Map<String, dynamic> toJson() {
@@ -43,11 +48,12 @@ class ProfileModel {
     _data['last_name'] = lastName;
     _data['email'] = email;
     _data['role'] = role;
-    _data['image_url'] = imageUrl;
+    _data['image_url'] = imageFile;
     _data['link'] = link.toJson();
     _data['projects'] = projects.map((e) => e.toJson()).toList();
     _data['created_at'] = createdAt;
     _data['updated_at'] = updatedAt;
+    _data['resume_url'] = resumeFile;
     return _data;
   }
 }

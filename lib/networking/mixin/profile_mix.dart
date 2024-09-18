@@ -9,8 +9,11 @@ import 'package:tuwaiq_project/networking/networking_constant.dart';
 mixin ProfileMix on NetworkingConstant {
   Future<ProfileModel> profileGet({required String token}) async {
     try {
+      log("pre");
       final res = await dio.get("$baseUrl$endProfile",
           options: Options(headers: {'Authorization': 'Bearer $token'}));
+
+          log("in the after");
 
       print(res.data);
 
@@ -19,18 +22,19 @@ mixin ProfileMix on NetworkingConstant {
       print(err.response?.data);
       throw err.response?.data ?? 'Unknown error occurred';
     } 
-    catch (err) {
-      print(err);
+    // catch (err) {
+    //   print(err);
 
-      throw 'Failed to load profile:';
-    }
+
+    //   throw 'Failed to load profile:';
+    // }
   }
 
   updateProfile(
       {required String token,
       required String firstName,
       required String lastName,
-      required List<int> profileImg,
+      required List<int>? profileImg,
       required List<int> cvImg,
       required String bindLink,
       required String linkedinLink,
@@ -41,7 +45,7 @@ mixin ProfileMix on NetworkingConstant {
           data: {
             "first_name": firstName,
             "last_name": lastName,
-            // "image": profileImg,
+            "image": profileImg,
             // "cv": cvImg,
             "accounts": {
               "bindlink": bindLink,
