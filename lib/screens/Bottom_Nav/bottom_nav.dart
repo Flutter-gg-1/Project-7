@@ -16,7 +16,7 @@ class BottomNav extends StatelessWidget {
       Icons.calendar_month,
       Icons.person,
     ];
-
+    
     return BlocProvider(
       create: (context) => BottomNavBloc(),
       child: Builder(builder: (context) {
