@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatelessWidget {
@@ -46,14 +45,14 @@ class BottomNavBar extends StatelessWidget {
               showSelectedLabels: false,
               showUnselectedLabels: false,
               items: [
-                buildBottomNavBarItem('assets/Call.png', 'Home', 0),
-                buildBottomNavBarItem('assets/browse.png', 'Browse', 1),
+                buildBottomNavBarItem('assets/images/Call.png', 'Home', 0),
+                buildBottomNavBarItem('assets/images/browse.png', 'Browse', 1),
                 BottomNavigationBarItem(
                   icon: SizedBox.shrink(), 
                   label: '',
                 ),
-                buildBottomNavBarItem('assets/projects.png', 'My Projects', 3),
-                buildBottomNavBarItem('assets/profile.png', 'Profile', 4),
+                buildBottomNavBarItem('assets/images/projects.png', 'My Projects', 3),
+                buildBottomNavBarItem('assets/images/profile.png', 'Profile', 4),
               ],
             ),
           ),
@@ -69,11 +68,10 @@ class BottomNavBar extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.transparent,
                 shape: BoxShape.circle,
-              
               ),
               child: ClipOval(
                 child: Image.asset(
-                  'assets/FAB.png',
+                  'assets/images/FAB.png',
                   fit: BoxFit.cover,
                   width: 48,
                   height: 48,

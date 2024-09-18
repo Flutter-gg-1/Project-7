@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class SliderSection extends StatefulWidget {
@@ -28,24 +29,36 @@ class SliderSectionState extends State<SliderSection> {
   }
 
   @override
+  void didUpdateWidget(SliderSection oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.value != oldWidget.value) {
+      setState(() {
+        sliderValue = widget.value;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         sliderWidth = constraints.maxWidth;
         return Container(
-          margin: const EdgeInsets.only(bottom: 20),
+          margin: EdgeInsets.only(bottom: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Image.asset(widget.imagePath),
-                  const SizedBox(width: 12),
-                  Text(widget.label, style: const TextStyle(fontSize: 18)),
-                ], ),
-              const SizedBox(height: 10),
+                  SizedBox(width: 12),
+                  Text(widget.label, style: TextStyle(fontSize: 18)),
+                ],
+              ),
+              SizedBox(height: 10),
               Stack(
-                clipBehavior: Clip.none, 
+                clipBehavior: Clip
+                    .none, 
                 alignment: Alignment.center,
                 children: [
                   Slider(
@@ -53,33 +66,37 @@ class SliderSectionState extends State<SliderSection> {
                     min: 1,
                     max: 10,
                     divisions: 9,
-                    activeColor: const Color(0xFF4E2EB5),
+                    activeColor: Color(0xFF4E2EB5),
                     inactiveColor: Colors.grey,
                     onChanged: (value) {
                       setState(() {
                         sliderValue = value;
                         widget.onChanged(value);
-                      });},  ),
+                      });
+                    },
+                  ),
                   Positioned(
                     left: calculateLabelPosition(),
                     top: -25, 
-
                     child: Column(
                       children: [
                         Container(
                           padding:
-                              const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                              EdgeInsets.symmetric(horizontal: 20, vertical: 6),
                           decoration: BoxDecoration(
                             color: Colors.grey[400]!,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
                             sliderValue.toStringAsFixed(0),
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.white,
-                              fontWeight: FontWeight.bold, ), ), ),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                         CustomPaint(
-                          size: const Size(20, 10),
+                          size: Size(20, 10), 
                           painter: TrianglePainter(
                             color: Colors.grey[400]!,
                           ),
@@ -95,12 +112,15 @@ class SliderSectionState extends State<SliderSection> {
       },
     );
   }
+
   double calculateLabelPosition() {
     double fraction =
         (sliderValue - 1) / (10 - 1); 
-    return (fraction * (sliderWidth - 48)) +4; 
+    return (fraction * (sliderWidth - 48)) +
+        4; 
   }
 }
+
 
 class TrianglePainter extends CustomPainter {
   final Color color;
@@ -119,6 +139,7 @@ class TrianglePainter extends CustomPainter {
 
     canvas.drawPath(path, paint);
   }
+
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;

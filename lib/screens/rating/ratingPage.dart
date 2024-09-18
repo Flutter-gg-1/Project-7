@@ -42,7 +42,6 @@ class RatingPage extends StatelessWidget {
                         style: TextStyle(color: Colors.grey, fontSize: 22)),
                     SizedBox(height: 10),
 
-                    // Idea Slider
                     SliderSection(
                       label: 'Idea',
                       value: state.ideaRating,
@@ -55,7 +54,6 @@ class RatingPage extends StatelessWidget {
                       },
                     ),
 
-                    // Design Slider
                     SliderSection(
                       label: 'Design',
                       value: state.designRating,
@@ -68,7 +66,6 @@ class RatingPage extends StatelessWidget {
                       },
                     ),
 
-                    // Tools Slider
                     SliderSection(
                       label: 'Tools',
                       value: state.toolsRating,
@@ -81,7 +78,6 @@ class RatingPage extends StatelessWidget {
                       },
                     ),
 
-                    // Practices Slider
                     SliderSection(
                       label: 'Practices',
                       value: state.practicesRating,
@@ -94,7 +90,6 @@ class RatingPage extends StatelessWidget {
                       },
                     ),
 
-                    // Presentation Slider
                     SliderSection(
                       label: 'Presentation',
                       value: state.presentationRating,
@@ -107,7 +102,6 @@ class RatingPage extends StatelessWidget {
                       },
                     ),
 
-                    // Investment Slider
                     SliderSection(
                       label: 'Investment',
                       value: state.investmentRating,

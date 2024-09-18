@@ -6,13 +6,13 @@ import 'package:project_judge/screens/myproject/myProjectsPage.dart';
 
 class NavigationPage extends StatefulWidget {
   @override
-  _NavigationPageState createState() => _NavigationPageState();
+  NavigationPageState createState() => NavigationPageState();
 }
 
-class _NavigationPageState extends State<NavigationPage> {
-  int _selectedIndex = 0;
+class NavigationPageState extends State<NavigationPage> {
+  int selectedIndex = 0;
 
-  final List<Widget> _pages = [
+  final List<Widget> pages = [
     Center(child: Text("Home Page")),
     BrowsePage(),
     Center(child: Text("Middle Page")),
@@ -20,26 +20,26 @@ class _NavigationPageState extends State<NavigationPage> {
     Center(child: Text("Profile Page")),
   ];
 
-  void _onItemTapped(int index) {
+  void onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      selectedIndex = index;
     });
   }
 
-  void _onMiddleButtonTapped() {
+  void onMiddleButtonTapped() {
     setState(() {
-      _selectedIndex = 2;
+      selectedIndex = 2;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_selectedIndex],
+      body: pages[selectedIndex],
       bottomNavigationBar: BottomNavBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-        onMiddleButtonTapped: _onMiddleButtonTapped,
+        selectedIndex: selectedIndex,
+        onItemTapped: onItemTapped,
+        onMiddleButtonTapped: onMiddleButtonTapped,
       ),
     );
   }

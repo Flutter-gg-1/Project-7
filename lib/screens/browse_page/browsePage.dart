@@ -1,9 +1,10 @@
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:project_judge/components/project_card/projectCard.dart';
 import 'package:project_judge/components/tab_bar/tab_bar_browse.dart';
 import 'package:project_judge/components/text_field/custom_text_form_field.dart';
-import 'package:project_judge/screens/rating_page/ratingPage.dart';
+import 'package:project_judge/screens/rating/ratingPage.dart';
 
 class BrowsePage extends StatefulWidget {
   @override
@@ -13,11 +14,22 @@ class BrowsePage extends StatefulWidget {
 class BrowsePageState extends State<BrowsePage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
+  List projects = [];
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 4, vsync: this);
+    loadData();
+  }
+
+  Future<void> loadData() async {
+    final String jsonString = await rootBundle.loadString('assets/json/data.json');
+    final List jsonResponse = json.decode(jsonString);
+
+    setState(() {
+      projects = jsonResponse;
+    });
   }
 
   @override
@@ -32,17 +44,13 @@ class BrowsePageState extends State<BrowsePage>
       backgroundColor: Color(0xFF4E2EB5),
       appBar: AppBar(
         backgroundColor: Color(0xFF4E2EB5),
-        title: Text(
-          "Browse",
-          style: TextStyle(color: Colors.white),
-        ),
+        title: Text("Browse", style: TextStyle(color: Colors.white)),
         centerTitle: true,
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(100),
+          preferredSize: Size.fromHeight(120),
           child: Column(
             children: [
-              CustomTextFormField(hintText: "search", icon: Icons.search),
-              
+              CustomTextFormField(hintText: 'search',icon: Icons.search,),
               TabBarWidget(tabController: tabController),
             ],
           ),
@@ -62,16 +70,17 @@ class BrowsePageState extends State<BrowsePage>
 
   Widget buildListView() {
     return ListView.builder(
-      itemCount: 5,
+      itemCount: projects.length,
       itemBuilder: (context, index) {
         return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => RatingPage()),
-              );
-            },
-            child: ProjectCard());
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => RatingPage()),
+            );
+          },
+          child: ProjectCard(project: projects[index]),
+        );
       },
     );
   }

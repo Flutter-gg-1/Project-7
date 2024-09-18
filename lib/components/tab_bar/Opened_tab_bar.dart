@@ -1,7 +1,13 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:project_judge/models/project_model.dart';
 
 class MyProjectCardOpened extends StatelessWidget {
+  final Project project;
+
+  MyProjectCardOpened({required this.project});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -36,7 +42,7 @@ class MyProjectCardOpened extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(19),
                     child: Image.asset(
-                      'assets/logo.png',
+                      'assets/images/logo.png', 
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -49,7 +55,7 @@ class MyProjectCardOpened extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Flutter Bootcamp',
+                        project.title,
                         style: TextStyle(
                           fontSize: 9,
                           fontWeight: FontWeight.bold,
@@ -58,7 +64,7 @@ class MyProjectCardOpened extends StatelessWidget {
                       ),
                       SizedBox(height: 2),
                       Text(
-                        'Lorem ipsum sfgl...',
+                        project.description,
                         style: TextStyle(
                           color: Color(0xFF4E2EB5),
                           fontSize: 15,
@@ -67,7 +73,7 @@ class MyProjectCardOpened extends StatelessWidget {
                       SizedBox(height: 2),
                       RatingBar.builder(
                         itemSize: 16,
-                        initialRating: 5,
+                        initialRating: project.rating,
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: false,
@@ -80,7 +86,7 @@ class MyProjectCardOpened extends StatelessWidget {
                         },
                       ),
                       Text(
-                        'App',
+                        'App', 
                         style: TextStyle(
                           color: Color(0xFFC4C4C4),
                         ),
@@ -90,12 +96,16 @@ class MyProjectCardOpened extends StatelessWidget {
                 ),
               ),
               Center(
-                  child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.edit_outlined,
-                        color: Color(0xFF4E2EB5),
-                      )))
+                child: IconButton(
+                  onPressed: () {
+                
+                  },
+                  icon: Icon(
+                    Icons.edit_outlined,
+                    color: Color(0xFF4E2EB5),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

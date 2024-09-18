@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:project_judge/models/project_model.dart';
 
 abstract class ProjectState {}
@@ -12,6 +14,7 @@ class ProjectLoaded extends ProjectState {
 
 class ProjectError extends ProjectState {
   final String message;
+  final String bb;
 
-  ProjectError(this.message);
+  ProjectError(this.message,this.bb);
 }

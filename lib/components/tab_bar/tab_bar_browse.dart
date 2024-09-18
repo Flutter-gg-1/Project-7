@@ -12,7 +12,7 @@ class TabBarWidget extends StatelessWidget {
       controller: tabController,
       isScrollable: true,
       indicator:
-          BoxDecoration(),
+          BoxDecoration(), 
       unselectedLabelColor: Color(0x99FFFFFF),
       labelColor: Colors.white,
       tabs: [
@@ -38,7 +38,7 @@ class TabBarWidget extends StatelessWidget {
             height: 33,
             margin: EdgeInsets.symmetric(
                 horizontal: 4), 
-// padding: EdgeInsets.zero, 
+            padding: EdgeInsets.zero, 
             decoration: BoxDecoration(
               color: isSelected ? Color(0xFF5CE3D9) : Color(0x99FFFFFF),
               borderRadius: BorderRadius.circular(8),

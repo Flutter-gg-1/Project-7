@@ -11,7 +11,7 @@ class NotesSection extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              Image.asset('assets/note.png'),
+              Image.asset('assets/images/note.png'),
               SizedBox(width: 12),
               Text("Note", style: TextStyle(fontSize: 18)),
             ],
