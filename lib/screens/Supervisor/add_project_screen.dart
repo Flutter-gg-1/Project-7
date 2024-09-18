@@ -1,8 +1,10 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:project_management_app/data_layer/data_layer.dart';
 import 'package:project_management_app/networking/api_networking.dart';
-import 'package:project_management_app/models/project_model.dart';
 import 'package:project_management_app/screens/Supervisor/custom_add_card.dart';
+import 'package:project_management_app/services/setup.dart';
 import 'package:sizer/sizer.dart';
 
 class AddProjectScreen extends StatefulWidget {
@@ -16,15 +18,13 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
   final ApiNetworking apiNetworking = ApiNetworking();
   final TextEditingController _userIdController = TextEditingController();
   final TextEditingController _timeEndEditController = TextEditingController();
-  bool _isEditable = false;
+  bool isEditable = false;
 
-  Future<void> _createProject() async {
-    final String token =
-        'YWU1YzhkZmU4MWI3NWE1Y2Y3MzQ0ZjQwNTg2NmQwOWI4MWUwZTExZjQyND...';
-    final String userId = _userIdController.text;
-    print(_userIdController.text);
-    final String timeEndEdit = _timeEndEditController.text;
-
+  Future<void> _createProject(
+      {required String token,
+      required String userId,
+      required String timeEndEdit}) async {
+    log(locator.get<DataLayer>().auth!.token);
     if (userId.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter a User ID')),
@@ -33,24 +33,16 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
     }
 
     try {
-      log('Creating project with userId: $userId, timeEndEdit: $timeEndEdit, isEditable: $_isEditable');
-
-      ProjectModel newProject = await apiNetworking.createProject(
+      await apiNetworking.createProject(
         token: token,
         userId: userId,
         timeEndEdit: timeEndEdit,
-        isEditable: _isEditable,
+        isEditable: isEditable,
       );
-
-      // عرض رسالة النجاح
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Project Created: ${newProject.projectName}')),
+        const SnackBar(content: Text('Project Created Successfully!!')),
       );
     } catch (e) {
-      // تسجيل الخطأ لمزيد من التفاصيل
-      log('Error occurred: $e');
-
-      // عرض رسالة الخطأ
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
       );
@@ -123,17 +115,22 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                       children: [
                         const Text('Editable: '),
                         Switch(
-                          value: _isEditable,
+                          value: isEditable,
                           onChanged: (value) {
                             setState(() {
-                              _isEditable = value;
+                              isEditable = value;
                             });
                           },
                         ),
                       ],
                     ),
                     ElevatedButton(
-                      onPressed: _createProject,
+                      onPressed: () {
+                        _createProject(
+                            token: locator.get<DataLayer>().auth!.token,
+                            timeEndEdit: _timeEndEditController.text,
+                            userId: _userIdController.text);
+                      },
                       child: const Text('Create Project'),
                     ),
                   ],

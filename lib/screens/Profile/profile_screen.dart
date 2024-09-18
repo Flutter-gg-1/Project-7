@@ -237,21 +237,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ],
                             ),
                           ),
+                          if (profile.role == 'supervisor')
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AddProjectScreen(),
+                                  ),
+                                );
+                              },
+                              style: TextButton.styleFrom(
+                                foregroundColor: const Color(0xff4129B7),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                              ),
+                              child: const Row(
+                                children: [
+                                  Icon(Icons.add, size: 20),
+                                  SizedBox(width: 5),
+                                  Text('Add Project'),
+                                ],
+                              ),
+                            ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 10),
                     ...List.generate(profile.projects.length, (index) {
-                      return Row(
-                        children: [
-                          Projects(
-                            project: profile.projects[index],
-                          ),
-                          const Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                          )
-                        ],
+                      return ListTile(
+                        trailing: profile.role == 'supervisor'
+                            ? IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ))
+                            : null,
+                        title: Projects(
+                          project: profile.projects[index],
+                        ),
                       );
                     }),
                     const SizedBox(height: 30),

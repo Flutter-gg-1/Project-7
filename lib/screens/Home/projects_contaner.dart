@@ -20,7 +20,7 @@ class Projects extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 1.4.h, left: 9.w, right: 1.4.w),
+      padding: EdgeInsets.only(bottom: 1.4.h, left: 5.w, right: 1.4.w),
       child: Row(
         children: [
           Flexible(
@@ -124,8 +124,10 @@ class Projects extends StatelessWidget {
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           ProjectDetailsScreen(
-                                        project: project,
-                                      ),
+                                        
+                                          project: project,
+                                      
+                                        ),
                                     ),
                                   );
                                 },
