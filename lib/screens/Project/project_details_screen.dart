@@ -38,7 +38,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const EditProjectScreen()));
+                        builder: (context) =>  EditProjectScreen()));
               },
               icon: const Icon(
                 Icons.edit,
