@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_management_app/theme/appcolors.dart';
 
 class EditProjectScreen extends StatelessWidget {
   final TextEditingController projectNameController = TextEditingController();
@@ -32,7 +31,7 @@ class EditProjectScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("Edit Project"),
-        backgroundColor: AppColors.blueDark, // لون العلوم الأبيض
+        // backgroundColor: AppColors.blueDark, // لون العلوم الأبيض
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -44,7 +43,7 @@ class EditProjectScreen extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
-                color: AppColors.blueDarkgit , // لون النص
+                // color: AppColors.blueDarkgit , // لون النص
               ),
             ),
             const SizedBox(height: 10),
