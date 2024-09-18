@@ -23,7 +23,7 @@ class CustomSlider extends StatefulWidget {
 
 class _CustomSliderState extends State<CustomSlider> {
   double _value = 0;
-  double paddingFactor = 0.2;
+  double paddingFactor = 0.1;
   List<Color> colors = const [
     Color(0xffFF9191),
     Color(0xffA380FF),
@@ -45,17 +45,17 @@ class _CustomSliderState extends State<CustomSlider> {
         ),
         gradient: LinearGradient(
             colors: [
-              colors[widget.index].withOpacity(0.7),
+              colors[widget.index].withOpacity(0.9),
               colors[widget.index]
             ],
-            begin: const FractionalOffset(0.0, 0.0),
+            begin: const FractionalOffset(0.5, 0.5),
             end: const FractionalOffset(1.0, 1.00),
             stops: const [0.0, 1.0],
             tileMode: TileMode.clamp),
       ),
       child: Padding(
         padding: EdgeInsets.fromLTRB(widget.sliderHeight * paddingFactor, 2,
-            widget.sliderHeight * paddingFactor, 2),
+            widget.sliderHeight * paddingFactor, 5),
         child: Row(
           children: [
             Expanded(
