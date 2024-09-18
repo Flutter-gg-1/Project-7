@@ -57,19 +57,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
 //=====================
   EditBloc() : super(EditInitial()) {
     on<EditEvent>((event, emit) async {});
-    on<ChangeLinksEvent>((event, emit) async {
-      try {
-        final res = await api.chnageLinks(
-            token: ammarToken,
-            links: generateLinksList(),
-            projectId: 'p-ipotpvpI9H');
-        emit(SucsessState(msg: res.toString()));
-      } on DioException catch (error) {
-        emit(ErrorState(msg: '${error.message}'));
-      } catch (e) {
-        emit(ErrorState(msg: '$e'));
-      }
-    });
+    on<ChangeLinksEvent>(changeLinksMethod);
     on<ChangePresentationEvent>(changePresentationMethod);
 
     on<ChangeBaseEvent>(changeBaseMethod);
@@ -98,6 +86,20 @@ class EditBloc extends Bloc<EditEvent, EditState> {
         projectImage: projectImage,
       ));
     });
+  }
+
+  FutureOr<void> changeLinksMethod(event, emit) async {
+    try {
+      final res = await api.chnageLinks(
+          token: ammarToken,
+          links: generateLinksList(),
+          projectId: 'p-ipotpvpI9H');
+      emit(SucsessState(msg: res.toString()));
+    } on DioException catch (error) {
+      emit(ErrorState(msg: '${error.message}'));
+    } catch (e) {
+      emit(ErrorState(msg: '$e'));
+    }
   }
 
   FutureOr<void> changePresentationMethod(event, emit) async {
