@@ -31,7 +31,7 @@ class Projects extends StatelessWidget {
         // );
       },
       child: Padding(
-        padding: EdgeInsets.only(bottom: 1.4.h, left: 9.w, right: 1.4.w),
+        padding: EdgeInsets.only(bottom: 1.4.h, left: 5.w, right: 1.4.w),
         child: Row(
           children: [
             Flexible(
@@ -134,7 +134,9 @@ class Projects extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            ProjectDetailsScreen(project: project,),
+                                            ProjectDetailsScreen(
+                                          project: project,
+                                        ),
                                       ),
                                     );
                                   },

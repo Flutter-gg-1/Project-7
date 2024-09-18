@@ -4,33 +4,26 @@ import 'package:project_management_app/models/project_model.dart';
 import 'package:project_management_app/networking/constants_api.dart';
 
 mixin SupervisorApi on ConstantsApi {
-  Future<ProjectModel> createProject({
+  createProject({
     required String token,
     required String userId,
     required String timeEndEdit,
     required bool isEditable,
   }) async {
     try {
-      final response = await dio.post(
+      await dio.post(
         '$baseUrl$createProjectEndpoint',
         data: {
-          'user_id': userId,
-          'time_end_edit': timeEndEdit,
+          'user_id': userId.trim(),
+          'time_end_edit': timeEndEdit.trim(),
           'edit': isEditable.toString(),
         },
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $token',
-          },
-        ),
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
-      return ProjectModel.fromJson(
-          Map<String, dynamic>.from(response.data['data']));
     } on DioException catch (error) {
-      log('DioException: ${error.message}');
-      throw const FormatException('Unknown error occurred');
+      throw DioException(requestOptions: RequestOptions(), message: '${error.response?.data['data']}');
     } catch (error) {
-      throw const FormatException("Error occurred while creating project");
+      throw Exception("Error occurred while creating project");
     }
   }
 
