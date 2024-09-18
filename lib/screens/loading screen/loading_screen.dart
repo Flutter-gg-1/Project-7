@@ -17,7 +17,7 @@ class LoadingScreen extends StatelessWidget {
           listener: (context, state) {
             if (state is LoggedInState) {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) =>  HomeScreen()));
+                  MaterialPageRoute(builder: (context) => HomeScreen()));
             }
             if (state is NotLoggedInState) {
               Navigator.push(
@@ -27,6 +27,7 @@ class LoadingScreen extends StatelessWidget {
             }
           },
           child: Scaffold(
+            backgroundColor: Colors.white,
             body: Center(
               child: Lottie.asset("assets/json/Loading animation.json"),
             ),

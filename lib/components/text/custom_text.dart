@@ -6,7 +6,7 @@ class CustomText extends StatelessWidget {
       required this.text,
       this.textAlign,
       required this.size,
-      required this.color,
+      this.color,
       this.weight});
   final String text;
   final TextAlign? textAlign;

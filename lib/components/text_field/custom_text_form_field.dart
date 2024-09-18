@@ -17,7 +17,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: controller,
@@ -26,7 +26,11 @@ class CustomTextFormField extends StatelessWidget {
             filled: true,
             fillColor: const Color(0xffEDEDED),
             hintText: hintText,
-            prefixIcon: Icon(icon),
+            hintStyle: const TextStyle(color: Color(0xff848484)),
+            prefixIcon: Icon(
+              icon,
+              color: const Color(0xff848484),
+            ),
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
         validator: validator,
       ),
