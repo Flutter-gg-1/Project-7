@@ -22,7 +22,7 @@ class EditProjectScreen extends StatelessWidget {
   final TextEditingController videoController = TextEditingController();
   final TextEditingController pinterestController = TextEditingController();
   final TextEditingController playStoreController = TextEditingController();
-  final TextEditingController appleStoreController = TextEditingController();
+  final TextEditingController appStoreController = TextEditingController();
   final TextEditingController apkController = TextEditingController();
   final TextEditingController webLinkController = TextEditingController();
 
@@ -267,15 +267,12 @@ class EditProjectScreen extends StatelessWidget {
             const SizedBox(height: 30),
 
             // Members Section
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: const Text(
-                "Members :",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: AppColors.blueDark, // لون النص
-                ),
+            const Text(
+              "Members",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: Color(0xff4129B7), // لون النص
               ),
             ),
             const SizedBox(height: 10),
@@ -293,17 +290,14 @@ class EditProjectScreen extends StatelessWidget {
                   // Action to save the project details
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.blueLight,
+                  backgroundColor: const Color(0xff4129B7),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: const Text(
-                  "Save",
-                  style: TextStyle(color: AppColors.white),
-                ),
+                child: const Text("Save"),
               ),
             ),
             const SizedBox(height: 70),
