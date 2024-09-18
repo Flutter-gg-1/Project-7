@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:tuwaiq_project/networking/networking_api.dart';
 import 'package:tuwaiq_project/screens/auth/login_screen.dart';
 import 'package:tuwaiq_project/screens/auth/otp_screen.dart';
+
 import 'package:tuwaiq_project/screens/projectView/create_project_screen.dart';
 import 'package:tuwaiq_project/screens/project_view_screen.dart';
+
+import 'package:tuwaiq_project/screens/projectView/manage_project_screen.dart';
+
 import 'package:tuwaiq_project/screens/splach/splach_screen.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 
@@ -25,8 +29,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      //debugShowCheckedModeBanner: false,
-      home: ProjectViewScreen(),
+      debugShowCheckedModeBanner: false,
+      home:  ManageProjectScreen(),
     );
   }
 }
