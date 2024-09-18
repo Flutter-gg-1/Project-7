@@ -35,22 +35,52 @@ class EditBloc extends Bloc<EditEvent, EditState> {
       TextEditingController(text: '30/09/2024');
   TextEditingController projectDescriptionController = TextEditingController(
       text: 'This is a sample project description for testing purposes.');
-
   //==========================
+
+  //=====Links Controller=============
+  TextEditingController githubController =
+      TextEditingController(text: 'https://github.com/example');
+  TextEditingController figmaController =
+      TextEditingController(text: 'https://figma.com/example');
+  TextEditingController videoController =
+      TextEditingController(text: 'https://youtube.com/example');
+  TextEditingController pinterestController =
+      TextEditingController(text: 'https://pinterest.com/example');
+  TextEditingController playstoreController = TextEditingController(
+      text: 'https://play.google.com/store/apps/details?id=example');
+  TextEditingController applestoreController =
+      TextEditingController(text: 'https://apps.apple.com/app/idexample');
+  TextEditingController apkController =
+      TextEditingController(text: 'https://example.com/app.apk');
+  TextEditingController weblinkController =
+      TextEditingController(text: 'https://example.com');
+//=====================
   EditBloc() : super(EditInitial()) {
     on<EditEvent>((event, emit) async {});
+    on<ChangeLinksEvent>((event, emit) async {
+      try {
+        final res = await api.chnageLinks(
+            token: ammarToken,
+            links: generateLinksList(),
+            projectId: 'p-ipotpvpI9H');
+        emit(SucsessState(msg: res.toString()));
+      } on DioException catch (error) {
+        emit(ErrorState(msg: '${error.message}'));
+      } catch (e) {
+        emit(ErrorState(msg: '$e'));
+      }
+    });
     on<ChangePresentationEvent>(changePresentationMethod);
 
     on<ChangeBaseEvent>(changeBaseMethod);
     on<ChangeLogoEvent>(changeLogoMethod);
+
     //file picker event
     on<FilePickedEvent>((event, emit) async {
       presentation = event.selectedFile;
       Uint8List fileAsList = await presentation!.readAsBytes();
       presentationAsList = fileAsList.toList();
-      emit(ProjectImagesState(
-        presentationFile: presentation
-      ));
+      emit(ProjectImagesState(presentationFile: presentation));
     });
     //image picker event
     on<LogoImageChangeEvent>((event, emit) async {
@@ -71,7 +101,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
   }
 
   FutureOr<void> changePresentationMethod(event, emit) async {
-          try {
+    try {
       final res = await api.chnagePresentation(
           token: ammarToken,
           presentationFile: presentationAsList!,
@@ -119,5 +149,36 @@ class EditBloc extends Bloc<EditEvent, EditState> {
     } catch (e) {
       emit(ErrorState(msg: '$e'));
     }
+  }
+
+  List<Map<String, String?>> generateLinksList() {
+    List<Map<String, String?>> links = [];
+
+    if (githubController.text.isNotEmpty) {
+      links.add({"type": "github", "url": githubController.text});
+    }
+    if (figmaController.text.isNotEmpty) {
+      links.add({"type": "figma", "url": figmaController.text});
+    }
+    if (videoController.text.isNotEmpty) {
+      links.add({"type": "video", "url": videoController.text});
+    }
+    if (pinterestController.text.isNotEmpty) {
+      links.add({"type": "pinterest", "url": pinterestController.text});
+    }
+    if (playstoreController.text.isNotEmpty) {
+      links.add({"type": "playstore", "url": playstoreController.text});
+    }
+    if (applestoreController.text.isNotEmpty) {
+      links.add({"type": "applestore", "url": applestoreController.text});
+    }
+    if (apkController.text.isNotEmpty) {
+      links.add({"type": "apk", "url": apkController.text});
+    }
+    if (weblinkController.text.isNotEmpty) {
+      links.add({"type": "weblink", "url": weblinkController.text});
+    }
+
+    return links;
   }
 }

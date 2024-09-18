@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -10,6 +12,7 @@ import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/screens/projectView/edit/bloc/edit_bloc.dart';
 import 'package:tuwaiq_project/screens/projectView/edit/edit_base.dart';
 import 'package:tuwaiq_project/screens/projectView/edit/edit_logo.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/edit_presentation.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 import 'package:tuwaiq_project/widget/button/custom_button.dart';
@@ -64,27 +67,14 @@ class EditScreen extends StatelessWidget {
                       children: [
                         EditLogo(bloc: bloc, languageLayer: languageLayer),
                         EditBase(languageLayer: languageLayer, bloc: bloc),
+                        EditPresentation(
+                            bloc: bloc, languageLayer: languageLayer),
+                        const Text('Edit Project Images'),
                         SingleChildScrollView(
                           padding: EdgeInsets.symmetric(
-                              horizontal: context.getWidth(multiply: 0.1)),
+                              horizontal: context.getWidth(multiply: 0.08)),
                           child: BlocBuilder<EditBloc, EditState>(
                             builder: (context, state) {
-                              Future<void> pickFile({
-                                required EditEvent Function(File) createEvent,
-                                required Function(File) updateFile,
-                              }) async {
-                                FilePickerResult? result =
-                                    await FilePicker.platform.pickFiles(
-                                  type: FileType.any,
-                                );
-                                if (result != null) {
-                                  final selectedFile =
-                                      File(result.files.single.path!);
-                                  updateFile(selectedFile);
-                                  bloc.add(createEvent(selectedFile));
-                                }
-                              }
-
                               return Column(
                                 children: [
                                   Row(
@@ -93,14 +83,14 @@ class EditScreen extends StatelessWidget {
                                     children: [
                                       Text(
                                         languageLayer.isArabic
-                                            ? 'تعديل العرض'
-                                            : 'Edit Presentation',
+                                            ? 'تعديل الروابط'
+                                            : 'Edit Links',
                                         style: const TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       ),
                                       const Text(
-                                        '3 / 6 >',
+                                        '5 / 6 >',
                                         style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
@@ -108,70 +98,131 @@ class EditScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  context.addSpacer(),
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          languageLayer.isArabic
-                                              ? 'ارفع العرض'
-                                              : 'upload Presentation',
-                                          style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500),
+                                  context.addSpacer(multiply: 0.025),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        languageLayer.isArabic
+                                            ? 'رابط GitHub'
+                                            : 'GitHub Link',
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
                                         ),
-                                        const Text(
-                                          ' *',
-                                          style: TextStyle(
-                                              fontSize: 18, color: Colors.red),
-                                        )
-                                      ],
-                                    ),
+                                      ),
+                                      context.addSpacer(multiply: 0.008),
+                                      NormalTextFormFeild(
+                                        hintText: 'GitHub URL',
+                                        controller: bloc.githubController,
+                                      ),
+                                      Text(
+                                        languageLayer.isArabic
+                                            ? 'رابط Figma'
+                                            : 'Figma Link',
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      context.addSpacer(multiply: 0.008),
+                                      NormalTextFormFeild(
+                                        hintText: 'Figma URL',
+                                        controller: bloc.figmaController,
+                                      ),
+                                      Text(
+                                        languageLayer.isArabic
+                                            ? 'رابط فيديو'
+                                            : 'Video Link',
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      context.addSpacer(multiply: 0.008),
+                                      NormalTextFormFeild(
+                                        hintText: 'Video URL',
+                                        controller: bloc.videoController,
+                                      ),
+                                      Text(
+                                        languageLayer.isArabic
+                                            ? 'رابط Pinterest'
+                                            : 'Pinterest Link',
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      context.addSpacer(multiply: 0.008),
+                                      NormalTextFormFeild(
+                                        hintText: 'Pinterest URL',
+                                        controller: bloc.pinterestController,
+                                      ),
+                                      Text(
+                                        languageLayer.isArabic
+                                            ? 'رابط Play Store'
+                                            : 'Play Store Link',
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      context.addSpacer(multiply: 0.008),
+                                      NormalTextFormFeild(
+                                        hintText: 'Play Store URL',
+                                        controller: bloc.playstoreController,
+                                      ),
+                                      Text(
+                                        languageLayer.isArabic
+                                            ? 'رابط Apple Store'
+                                            : 'Apple Store Link',
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      context.addSpacer(multiply: 0.008),
+                                      NormalTextFormFeild(
+                                        hintText: 'Apple Store URL',
+                                        controller: bloc.applestoreController,
+                                      ),
+                                      Text(
+                                        languageLayer.isArabic
+                                            ? 'رابط APK'
+                                            : 'APK Link',
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      context.addSpacer(multiply: 0.008),
+                                      NormalTextFormFeild(
+                                        hintText: 'APK URL',
+                                        controller: bloc.apkController,
+                                      ),
+                                      Text(
+                                        languageLayer.isArabic
+                                            ? 'رابط ويب'
+                                            : 'Web Link',
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      context.addSpacer(multiply: 0.008),
+                                      NormalTextFormFeild(
+                                        hintText: 'Web URL',
+                                        controller: bloc.weblinkController,
+                                      ),
+                                    ],
                                   ),
-                                  context.addSpacer(multiply: 0.008),
-                                  Container(
-                                      margin: const EdgeInsets.only(
-                                          top: 7, bottom: 32),
-                                      width: double.infinity,
-                                      height: 140,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          color: const Color(0xffededed)),
-                                      child: state is ProjectImagesState &&
-                                              state.presentationFile != null
-                                          ? Center(
-                                              child: Text(state
-                                                  .presentationFile!.path
-                                                  .split('/')
-                                                  .last))
-                                          : IconButton(
-                                              onPressed: () {
-                                                pickFile(
-                                                  createEvent: (file) =>
-                                                      FilePickedEvent(
-                                                          selectedFile: file),
-                                                  updateFile: (p0) => {},
-                                                );
-                                              },
-                                              icon: const Icon(
-                                                Icons.add,
-                                                size: 65,
-                                                color: Color(0xff969696),
-                                              ))),
+                                  context.addSpacer(multiply: 0.02),
                                   CustomButton(
-                                    englishTitle: 'Edit Presentation',
-                                    arabicTitle: 'تعديل العرض',
+                                    englishTitle: 'Edit Links',
+                                    arabicTitle: 'تعديل الروابط',
                                     onPressed: () {
-                                      if (bloc.presentation != null) {
-                                        bloc.add(ChangePresentationEvent());
-                                      } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(
-                                                content:
-                                                    Text('Upload file first')));
-                                      }
+                                      bloc.add(ChangeLinksEvent());
                                     },
                                     arabic: languageLayer.isArabic,
                                   ),
@@ -180,8 +231,6 @@ class EditScreen extends StatelessWidget {
                             },
                           ),
                         ),
-                        const Text('Edit Project Images'),
-                        const Text('Edit Project Links'),
                         const Text('Edit Project Members'),
                       ],
                     ),

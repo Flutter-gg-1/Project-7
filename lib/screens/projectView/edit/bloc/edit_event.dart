@@ -23,3 +23,5 @@ class FilePickedEvent extends EditEvent {
 }
 
 class ChangePresentationEvent extends EditEvent{}
+
+class ChangeLinksEvent extends EditEvent{}
