@@ -39,79 +39,91 @@ class EditProjectScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Upload Logo Section
-            const Text(
-              "Upload Logo",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: AppColors.blueDark, // لون النص
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: const Text(
+                "Upload Logo",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: AppColors.blueDark, // لون النص
+                ),
               ),
             ),
             const SizedBox(height: 10),
-            Container(
-              height: 150,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: const Color(0xffD9D4F1),
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.4),
-                    spreadRadius: 4,
-                    blurRadius: 10,
-                    offset: const Offset(5, 5), // الإزاحة للظل
-                  ),
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.4),
-                    spreadRadius: 4,
-                    blurRadius: 10,
-                    offset: const Offset(-5, 5), // ظل من اليسار
-                  ),
-                ],
-              ),
-              child: const Icon(
-                Icons.upload_file,
-                size: 50,
-                color: Color(0xff57E3D8),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Container(
+                height: 150,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 1,
+                      blurRadius: 10,
+                      offset: const Offset(3, 3), // الإزاحة للظل
+                    ),
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 1,
+                      blurRadius: 10,
+                      offset: const Offset(-3, -3), // ظل من اليسار
+                    ),
+                  ],
+                ),
+                child: const Icon(
+                  Icons.upload_file,
+                  size: 50,
+                  color: Color(0xff57E3D8),
+                ),
               ),
             ),
             const SizedBox(height: 20),
 
             // Upload Presentation Section
-            const Text(
-              "Upload Presentation",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: Color(0xff4129B7),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: const Text(
+                "Upload Presentation",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Color(0xff4129B7),
+                ),
               ),
             ),
             const SizedBox(height: 10),
-            Container(
-              height: 150,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: const Color(0xffD9D4F1),
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.4),
-                    spreadRadius: 4,
-                    blurRadius: 10,
-                    offset: const Offset(5, 5), // ظل من اليمين
-                  ),
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.4),
-                    spreadRadius: 4,
-                    blurRadius: 10,
-                    offset: const Offset(-5, 5), // ظل من اليسار
-                  ),
-                ],
-              ),
-              child: const Icon(
-                Icons.upload_file,
-                size: 50,
-                color: Color(0xff57E3D8),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Container(
+                height: 150,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 1,
+                      blurRadius: 10,
+                      offset: const Offset(3, 3), // الإزاحة للظل
+                    ),
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 1,
+                      blurRadius: 10,
+                      offset: const Offset(-3, -3), // ظل من اليسار
+                    ),
+                  ],
+                ),
+                child: const Icon(
+                  Icons.upload_file,
+                  size: 50,
+                  color: Color(0xff57E3D8),
+                ),
               ),
             ),
             const SizedBox(height: 30),
@@ -135,12 +147,15 @@ class EditProjectScreen extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Links Section
-            const Text(
-              "Links: ",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Color(0xff4129B7), // لون النص
-                fontSize: 18,
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: const Text(
+                "Links: ",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff4129B7), // لون النص
+                  fontSize: 18,
+                ),
               ),
             ),
             const SizedBox(height: 10),
@@ -158,12 +173,15 @@ class EditProjectScreen extends StatelessWidget {
             const SizedBox(height: 30),
 
             // Members Section
-            const Text(
-              "Members",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: Color(0xff4129B7), // لون النص
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: const Text(
+                "Members :",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: AppColors.blueDark, // لون النص
+                ),
               ),
             ),
             const SizedBox(height: 10),
@@ -181,14 +199,17 @@ class EditProjectScreen extends StatelessWidget {
                   // Action to save the project details
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff4129B7),
+                  backgroundColor: AppColors.blueLight,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: const Text("Save"),
+                child: const Text(
+                  "Save",
+                  style: TextStyle(color: AppColors.white),
+                ),
               ),
             ),
             const SizedBox(height: 70),
@@ -203,48 +224,62 @@ class EditProjectScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-            color: Color(0xff4129B7), // لون النص
-          ),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.4),
-                spreadRadius: 0,
-                blurRadius: 4,
-                offset: const Offset(5, 5),
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                label,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: AppColors.blueDark, // لون النص
+                ),
               ),
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.4),
-                spreadRadius: 4,
-                blurRadius: 10,
-                offset: const Offset(-20, 10), // ظل من اليسار
+              Container(
+                // padding: const EdgeInsets.all(13.0),
+                alignment: Alignment.bottomLeft,
+                width: 190,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 0,
+                      blurRadius: 10,
+                      offset: const Offset(3, 3),
+                    ),
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 0,
+                      blurRadius: 10,
+                      offset: const Offset(-3, -3), // ظل من اليسار
+                    ),
+                  ],
+                ),
+                child: TextField(
+                  textDirection: TextDirection.ltr,
+                  controller: controller,
+                  maxLines: isMultiline ? 5 : 1,
+                  keyboardType:
+                      isDate ? TextInputType.datetime : TextInputType.text,
+                  decoration: InputDecoration(
+                    contentPadding:
+                        const EdgeInsets.all(16.0), // إضافة البادينق هنا
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none,
+                    ),
+                    hintText: isDate ? "Select a date" : "",
+                  ),
+                ),
               ),
             ],
           ),
-          child: TextField(
-            controller: controller,
-            maxLines: isMultiline ? 5 : 1,
-            keyboardType: isDate ? TextInputType.datetime : TextInputType.text,
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(16.0), // إضافة البادينق هنا
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide.none,
-              ),
-              hintText: isDate ? "Select a date" : "",
-            ),
-          ),
         ),
+        const SizedBox(height: 8),
       ],
     );
   }
