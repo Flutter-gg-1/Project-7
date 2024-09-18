@@ -21,9 +21,7 @@ class BottomNav extends StatelessWidget {
       create: (context) => BottomNavBloc(),
       child: Builder(builder: (context) {
         return Scaffold(
-          // backgroundColor: Color.fromARGB(255, 55, 49, 49),
           extendBody: true,
-
           body: BlocBuilder<BottomNavBloc, BottomNavState>(
             builder: (context, state) {
               final bloc = BlocProvider.of<BottomNavBloc>(context);
@@ -41,7 +39,6 @@ class BottomNav extends StatelessWidget {
           ),
 
           // Floating Action Button
-
           bottomNavigationBar: BlocBuilder<BottomNavBloc, BottomNavState>(
             builder: (context, state) {
               final bloc = BlocProvider.of<BottomNavBloc>(context);
@@ -51,7 +48,7 @@ class BottomNav extends StatelessWidget {
                 currentPageIndex = state.currentPageIndex;
               }
               return Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: AppColors.blueDark,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(32),

@@ -171,15 +171,15 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                   color: Color(0xff4129B7),
                 ),
               ),
-              const SizedBox(
-                width: 10,
-              ),
               Flexible(
-                child: Text(
-                  widget.project.projectDescription.toString(),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xffB8B8BB),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 100),
+                  child: Text(
+                    widget.project.projectDescription.toString(),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xffB8B8BB),
+                    ),
                   ),
                 ),
               ),

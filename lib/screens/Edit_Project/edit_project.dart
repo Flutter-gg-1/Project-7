@@ -19,7 +19,7 @@ class EditProjectScreen extends StatefulWidget {
 }
 
 class _EditProjectScreenState extends State<EditProjectScreen> {
-  final ApiNetworking api = ApiNetworking(); // Instance of ApiNetworking
+  final ApiNetworking api = ApiNetworking();
 
   // Controllers for the form fields
   final TextEditingController projectNameController = TextEditingController();
