@@ -13,11 +13,13 @@ class ProjectImageChangeEvent extends EditEvent {
   ProjectImageChangeEvent({required this.selectedImage});
 }
 
-class PresentationImageChangeEvent extends EditEvent {
-  final File selectedImage;
-  PresentationImageChangeEvent({required this.selectedImage});
-}
-
 class ChangeLogoEvent extends EditEvent {}
 
 class ChangeBaseEvent extends EditEvent {}
+
+class FilePickedEvent extends EditEvent {
+  final File selectedFile;
+  FilePickedEvent({required this.selectedFile});
+}
+
+class ChangePresentationEvent extends EditEvent{}

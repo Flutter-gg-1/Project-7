@@ -23,11 +23,11 @@ class EditChangeState extends EditState {
 final class ProjectImagesState extends EditState {
   final File? logoImage;
   final File? projectImage;
-  final File? presentationImage;
+  final File? presentationFile;
 
   ProjectImagesState({
     this.logoImage,
     this.projectImage,
-    this.presentationImage,
+    this.presentationFile,
   });
 }
