@@ -53,12 +53,12 @@ class _HomeScreenState extends State<HomeScreen>
 
         return ListView.builder(
           shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
+          // physics: const NeverScrollableScrollPhysics(),
           itemCount: snapshot.data!.length,
           itemBuilder: (context, index) {
             final project = snapshot.data![index];
             return Projects(
-            project: project,
+              project: project,
             );
           },
         );

@@ -6,6 +6,7 @@ class CustomSlider extends StatefulWidget {
   final int max;
   final bool fullWidth;
   final int index;
+   final ValueChanged<double> onChanged;
 
   const CustomSlider(
       {super.key,
@@ -13,7 +14,8 @@ class CustomSlider extends StatefulWidget {
       this.max = 10,
       this.min = 0,
       this.fullWidth = false,
-      required this.index});
+      required this.index,
+      required this.onChanged,});
 
   @override
   State<CustomSlider> createState() => _CustomSliderState();
@@ -76,11 +78,14 @@ class _CustomSliderState extends State<CustomSlider> {
                       thumbColor: Colors.black,
                       activeColor: colors[widget.index],
                       value: _value,
+                      min: widget.min.toDouble(),
+                    max: widget.max.toDouble(),
                       onChanged: (value) {
-                        setState(() {
-                          _value = value;
-                        });
-                      }),
+                      setState(() {
+                        _value = value;
+                      });
+                      widget.onChanged(value);
+                    }),
                 ),
               ),
             ),

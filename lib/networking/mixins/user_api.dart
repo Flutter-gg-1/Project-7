@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -20,7 +21,7 @@ mixin UserApi on ConstantsApi {
       required String token}) async {
     try {
       await dio.post(
-        '$baseUrl$rateProjectEndpoint',
+        '$baseUrl$rateProjectEndpoint/$projectId',
         data: {
           'project_id': projectId,
           "idea": idea,
@@ -44,24 +45,29 @@ mixin UserApi on ConstantsApi {
       {required String projectId,
       required List<int> logo,
       required String token}) async {
+     Response? response;
     try {
-      await dio.put(
+      response = await dio.put(
         '$baseUrl$editProjectLogoEndpoint/$projectId',
-        data: {'logo': logo},
+        data: jsonEncode({"logo": logo}),
         options: Options(
           headers: {'Authorization': 'Bearer $token'},
         ),
       );
     } catch (e) {
+      log('${response?.data}');
       throw Exception("Error occurred while updating Logo");
     }
   }
 
   // Instructor's method
-  uploadLogo({required String path, required String projectId,required String token}) async {
+  uploadLogo(
+      {required String path,
+      required String projectId,
+      required String token}) async {
     Uint8List data = await File(path).readAsBytes();
-     await dio.put(
-      'http://0.0.0.0:8080/v1/user/edit/project/logo/p-JGqY6xjCAK',
+    await dio.put(
+      '$baseUrl$editProjectLogoEndpoint/$projectId',
       data: jsonEncode({"logo": data.toList()}),
       options: Options(headers: {"Authorization": "Bearer $token"}),
     );
