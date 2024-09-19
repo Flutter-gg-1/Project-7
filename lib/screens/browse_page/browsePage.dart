@@ -6,6 +6,8 @@ import 'package:project_judge/components/text_field/custom_text_form_field.dart'
 import 'package:project_judge/screens/rating_page/ratingPage.dart';
 
 class BrowsePage extends StatefulWidget {
+  const BrowsePage({super.key});
+
   @override
   BrowsePageState createState() => BrowsePageState();
 }
@@ -29,19 +31,19 @@ class BrowsePageState extends State<BrowsePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF4E2EB5),
+      backgroundColor: const Color(0xFF4E2EB5),
       appBar: AppBar(
-        backgroundColor: Color(0xFF4E2EB5),
-        title: Text(
+        backgroundColor: const Color(0xFF4E2EB5),
+        title: const Text(
           "Browse",
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(100),
+          preferredSize: const Size.fromHeight(100),
           child: Column(
             children: [
-              CustomTextFormField(hintText: "search", icon: Icons.search),
+              const CustomTextFormField(hintText: "search", icon: Icons.search),
               
               TabBarWidget(tabController: tabController),
             ],

@@ -1,8 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:project_judge/screens/home_screen/home_screen.dart';
 import 'package:project_judge/screens/loading%20screen/loading_screen.dart';
-import 'package:project_judge/screens/profile_screen/profile_screen.dart';
 import 'package:project_judge/setup/init_setup.dart';
 
 void main() async {

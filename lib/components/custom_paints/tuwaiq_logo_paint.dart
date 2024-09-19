@@ -34,19 +34,19 @@ class TuwaiqLogoCustomPaint extends CustomPainter {
     path_0.cubicTo(98.327, 1.58034, 101.628, 1.19236, 105.376, 0.670942);
     path_0.close();
 
-    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.shader = ui.Gradient.linear(
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.shader = ui.Gradient.linear(
         Offset(size.width * 1.088786, size.height * 0.9978082),
         Offset(size.width * 0.1094495, size.height * 0.9978082), [
-      Color(0xff4D2DB3).withOpacity(0.5),
-      Color(0xffA380FF).withOpacity(0.5),
-      Color(0xff5CE3D9).withOpacity(0.5)
+      const Color(0xff4D2DB3).withOpacity(0.5),
+      const Color(0xffA380FF).withOpacity(0.5),
+      const Color(0xff5CE3D9).withOpacity(0.5)
     ], [
       0,
       0.535,
       1
     ]);
-    canvas.drawPath(path_0, paint_0_fill);
+    canvas.drawPath(path_0, paint0Fill);
   }
 
   @override

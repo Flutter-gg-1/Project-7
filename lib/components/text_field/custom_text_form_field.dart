@@ -32,7 +32,7 @@ class CustomTextFormField extends StatelessWidget {
                   fontSize: 16,
                 ),
               )
-            : SizedBox.shrink(),
+            : const SizedBox.shrink(),
         TextFormField(
           maxLines: maximumLines,
           autovalidateMode: AutovalidateMode.onUserInteraction,

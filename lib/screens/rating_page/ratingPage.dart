@@ -3,6 +3,8 @@ import 'package:project_judge/components/slider_section/sliderSection.dart';
 import 'package:project_judge/components/text_field/noteSection_text.dart';
 
 class RatingPage extends StatefulWidget {
+  const RatingPage({super.key});
+
   @override
   RatingPageState createState() => RatingPageState();
 }

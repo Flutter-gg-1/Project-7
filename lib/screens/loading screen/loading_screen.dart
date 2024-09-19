@@ -17,7 +17,7 @@ class LoadingScreen extends StatelessWidget {
           listener: (context, state) {
             if (state is LoggedInState) {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()));
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
             }
             if (state is NotLoggedInState) {
               Navigator.push(

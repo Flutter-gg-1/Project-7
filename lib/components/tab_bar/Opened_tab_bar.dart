@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MyProjectCardOpened extends StatelessWidget {
+  const MyProjectCardOpened({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,7 +32,7 @@ class MyProjectCardOpened extends StatelessWidget {
                 height: 94,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(19),
-                  color: const Color(0x4E2EB5),
+                  color: const Color(0x004e2eb5),
                 ),
                 child: Center(
                   child: ClipRRect(

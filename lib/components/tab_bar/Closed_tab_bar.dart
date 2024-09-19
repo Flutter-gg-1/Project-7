@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MyProjectCardClosed extends StatelessWidget {
+  const MyProjectCardClosed({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,7 +18,7 @@ class MyProjectCardClosed extends StatelessWidget {
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 5,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             ),
           ],
         ),
@@ -30,7 +32,7 @@ class MyProjectCardClosed extends StatelessWidget {
                 height: 94,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(19),
-                  color: Color(0x4E2EB5),
+                  color: const Color(0x004e2eb5),
                 ),
                 child: Center(
                   child: ClipRRect(
@@ -56,7 +58,7 @@ class MyProjectCardClosed extends StatelessWidget {
                           color: Color(0xFFC4C4C4),
                         ),
                       ),
-                      SizedBox(height: 2),
+                      const SizedBox(height: 2),
                       const Text(
                         'Lorem ipsum sfgl...',
                         style: TextStyle(
@@ -64,7 +66,7 @@ class MyProjectCardClosed extends StatelessWidget {
                           fontSize: 15,
                         ),
                       ),
-                      SizedBox(height: 2),
+                      const SizedBox(height: 2),
                       RatingBar.builder(
                         itemSize: 16,
                         initialRating: 5,
@@ -72,7 +74,7 @@ class MyProjectCardClosed extends StatelessWidget {
                         direction: Axis.horizontal,
                         allowHalfRating: false,
                         itemCount: 5,
-                        itemBuilder: (context, _) => Icon(
+                        itemBuilder: (context, _) => const Icon(
                           Icons.star,
                           color: Colors.amber,
                         ),

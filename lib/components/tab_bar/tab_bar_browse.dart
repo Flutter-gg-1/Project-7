@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class TabBarWidget extends StatelessWidget {
   final TabController tabController;
 
-  TabBarWidget({required this.tabController});
+  const TabBarWidget({super.key, required this.tabController});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +12,8 @@ class TabBarWidget extends StatelessWidget {
       controller: tabController,
       isScrollable: true,
       indicator:
-          BoxDecoration(),
-      unselectedLabelColor: Color(0x99FFFFFF),
+          const BoxDecoration(),
+      unselectedLabelColor: const Color(0x99FFFFFF),
       labelColor: Colors.white,
       tabs: [
         buildFloatingTab('Flutter', 0),
@@ -36,13 +36,13 @@ class TabBarWidget extends StatelessWidget {
           return Container(
             width: 102,
             height: 33,
-            margin: EdgeInsets.symmetric(
+            margin: const EdgeInsets.symmetric(
                 horizontal: 4), 
 // padding: EdgeInsets.zero, 
             decoration: BoxDecoration(
-              color: isSelected ? Color(0xFF5CE3D9) : Color(0x99FFFFFF),
+              color: isSelected ? const Color(0xFF5CE3D9) : const Color(0x99FFFFFF),
               borderRadius: BorderRadius.circular(8),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Colors.black12,
                   blurRadius: 6,
@@ -53,7 +53,7 @@ class TabBarWidget extends StatelessWidget {
             child: Center(
               child: Text(
                 text,
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'Gilroy',
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF4E2EB5),

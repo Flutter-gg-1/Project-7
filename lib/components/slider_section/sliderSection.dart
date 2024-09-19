@@ -6,7 +6,7 @@ class SliderSection extends StatefulWidget {
   final String imagePath;
   final ValueChanged<double> onChanged;
 
-  SliderSection({
+  const SliderSection({super.key, 
     required this.label,
     required this.value,
     required this.imagePath,
