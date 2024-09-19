@@ -9,7 +9,6 @@ mixin SupervisorMix on NetworkingConstant {
     required String userId,
     required String timeEditEnd,
     required bool isEdit,
-    required String projectId,
   }) async {
     try {
       final res = await dio.post("$baseUrl$endProjectCreate",
@@ -22,7 +21,9 @@ mixin SupervisorMix on NetworkingConstant {
 
       print(res.data);
     } on DioException catch (err) {
-      print(err.response?.data);
+      throw DioException(
+          requestOptions: RequestOptions(),
+          message: '${err.response?.data['data']}');
     } catch (err) {
       throw Exception;
     }
@@ -30,10 +31,10 @@ mixin SupervisorMix on NetworkingConstant {
 
   changeProjectState({
     required String token,
-    required String timeEndEdit ,
-    required bool allowEdit ,
-    required bool allowRating ,
-    required bool allowPublic ,
+    required String timeEndEdit,
+    required bool allowEdit,
+    required bool allowRating,
+    required bool allowPublic,
     required String projectId,
   }) async {
     try {
@@ -54,22 +55,21 @@ mixin SupervisorMix on NetworkingConstant {
     }
   }
 
-
-
-
   delproject({
     required String token,
-    
     required String projectId,
   }) async {
     try {
-      final res = await dio.delete("$baseUrl$endProjectDel$projectId",
-          options: Options(headers: {'Authorization': 'Bearer $token'}),
-         );
+      final res = await dio.delete(
+        "$baseUrl$endProjectDel$projectId",
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
+      );
 
       print(res.data);
     } on DioException catch (err) {
-      print(err.response?.data);
+      throw DioException(
+          requestOptions: RequestOptions(),
+          message: '${err.response?.data['data']}');
     } catch (err) {
       throw Exception;
     }

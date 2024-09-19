@@ -49,6 +49,13 @@ dependencies:
   network_to_file_image: ^6.0.1
   file_picker: ^8.1.2
 
+  image: ^3.0.1
+  file_picker: ^5.0.0
+
+  smooth_page_indicator: ^1.2.0+3
+  carousel_slider: ^5.0.0
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

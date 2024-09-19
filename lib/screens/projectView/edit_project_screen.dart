@@ -10,11 +10,13 @@ import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 import 'package:tuwaiq_project/widget/button/custom_button.dart';
 import 'package:tuwaiq_project/widget/column/images_coulmn.dart';
+import 'package:tuwaiq_project/widget/column/project_links_column.dart';
+import 'package:tuwaiq_project/widget/column/project_members_column.dart';
 import 'package:tuwaiq_project/widget/row/date_row.dart';
 import 'package:tuwaiq_project/widget/textformfeild/normal_text_form_feild.dart';
 
-class CreateProjectScreen extends StatelessWidget {
-  const CreateProjectScreen({super.key});
+class EditProjectScreen extends StatelessWidget {
+  const EditProjectScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -121,48 +123,9 @@ class CreateProjectScreen extends StatelessWidget {
                           minLines: 4,
                         ),
                         ImagesCoulmn(languageLayer: languageLayer),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              languageLayer.isArabic ? 'الروابط' : 'Links',
-                              style: const TextStyle(
-                                  fontSize: 13, fontWeight: FontWeight.w500),
-                            ),
-                            const Divider(),
-                            const NormalTextFormFeild(
-                                hintText: 'https://github.com/example'),
-                            context.addSpacer(multiply: 0.008),
-                            const NormalTextFormFeild(
-                                hintText: '"https://figma.com/example"'),
-                            context.addSpacer(multiply: 0.008),
-                            const NormalTextFormFeild(
-                                hintText: 'https://github.com/example'),
-                            context.addSpacer(multiply: 0.008),
-                            const NormalTextFormFeild(
-                                hintText: '"https://figma.com/example"'),
-                          ],
-                        ),
+                        ProjectLinksColumn(languageLayer: languageLayer),
                         context.addSpacer(multiply: 0.02),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              languageLayer.isArabic ? 'الاعضاء' : 'Members',
-                              style: const TextStyle(
-                                  fontSize: 13, fontWeight: FontWeight.w500),
-                            ),
-                            const Divider(),
-                            const Text(
-                              'ID member',
-                              style: TextStyle(
-                                  fontSize: 13, fontWeight: FontWeight.w500),
-                            ),
-                            const NormalTextFormFeild(
-                                hintText:
-                                    '10545b55-4875-441d-88e8-f835acc72374')
-                          ],
-                        ),
+                        ProjectMembersColumn(languageLayer: languageLayer),
                         context.addSpacer(multiply: 0.02),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
