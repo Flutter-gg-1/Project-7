@@ -1,6 +1,8 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:project_judge/screens/browse_page/browsePage.dart';
 import 'package:project_judge/screens/loading%20screen/loading_screen.dart';
+import 'package:project_judge/screens/navigation/navigationPage.dart';
 import 'package:project_judge/setup/init_setup.dart';
 
 void main() async {
@@ -22,7 +24,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      // اعدل عليها اذا خلصت من رن حقي ارجعها زي قبل لا انسى
       home: LoadingScreen(),
     );
   }

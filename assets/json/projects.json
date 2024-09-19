@@ -1,0 +1,15 @@
+[
+    {
+      "title": "Project 1",
+      "description": "Description of project 1",
+      "rating": 4.5,
+      "isOpen": true
+    },
+    {
+      "title": "Project 2",
+      "description": "Description of project 2",
+      "rating": 3.0,
+      "isOpen": false
+    }
+  ]
+  

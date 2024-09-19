@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatelessWidget {
@@ -48,7 +47,11 @@ class BottomNavBar extends StatelessWidget {
               items: [
                 buildBottomNavBarItem('assets/images/Call.png', 'Home', 0),
                 buildBottomNavBarItem('assets/images/browse.png', 'Browse', 1),
+<<<<<<< HEAD
                 const BottomNavigationBarItem(
+=======
+                BottomNavigationBarItem(
+>>>>>>> origin/noufAlqahtani
                   icon: SizedBox.shrink(), 
                   label: '',
                 ),
@@ -69,7 +72,6 @@ class BottomNavBar extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Colors.transparent,
                 shape: BoxShape.circle,
-              
               ),
               child: ClipOval(
                 child: Image.asset(

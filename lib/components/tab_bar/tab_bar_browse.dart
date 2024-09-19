@@ -12,8 +12,13 @@ class TabBarWidget extends StatelessWidget {
       controller: tabController,
       isScrollable: true,
       indicator:
+<<<<<<< HEAD
           const BoxDecoration(),
       unselectedLabelColor: const Color(0x99FFFFFF),
+=======
+          BoxDecoration(), 
+      unselectedLabelColor: Color(0x99FFFFFF),
+>>>>>>> origin/noufAlqahtani
       labelColor: Colors.white,
       tabs: [
         buildFloatingTab('Flutter', 0),
@@ -38,7 +43,7 @@ class TabBarWidget extends StatelessWidget {
             height: 33,
             margin: const EdgeInsets.symmetric(
                 horizontal: 4), 
-// padding: EdgeInsets.zero, 
+            padding: EdgeInsets.zero, 
             decoration: BoxDecoration(
               color: isSelected ? const Color(0xFF5CE3D9) : const Color(0x99FFFFFF),
               borderRadius: BorderRadius.circular(8),

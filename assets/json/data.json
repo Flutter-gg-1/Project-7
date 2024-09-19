@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Flutter Bootcamp",
+        "description": "Learn Flutter from scratch.",
+        "rating": 4.5,
+        "category": "Education"
+    },
+    {
+        "name": "Mobile App Development",
+        "description": "Build mobile apps with Flutter.",
+        "rating": 5.0,
+        "category": "Technology"
+    }
+]

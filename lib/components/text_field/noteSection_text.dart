@@ -14,8 +14,13 @@ class NotesSection extends StatelessWidget {
           child: Row(
             children: [
               Image.asset('assets/images/note.png'),
+<<<<<<< HEAD
               const SizedBox(width: 12),
               const Text("Note", style: TextStyle(fontSize: 18)),
+=======
+              SizedBox(width: 12),
+              Text("Note", style: TextStyle(fontSize: 18)),
+>>>>>>> origin/noufAlqahtani
             ],
           ),
         ),
