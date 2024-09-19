@@ -27,3 +27,20 @@ class FilePickedEvent extends EditEvent {
 class ChangePresentationEvent extends EditEvent {}
 
 class ChangeLinksEvent extends EditEvent {}
+
+
+
+
+class AddMembersEvent extends EditEvent {}
+
+
+class ChangeMembersEvent extends EditEvent {
+
+  //  final List<String> names;
+  // final List<String> position;
+
+  // ChangeMembersEvent({required this.names, required this.position});
+}
+
+
+

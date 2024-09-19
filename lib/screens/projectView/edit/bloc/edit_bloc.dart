@@ -54,6 +54,15 @@ class EditBloc extends Bloc<EditEvent, EditState> {
       TextEditingController(text: 'https://example.com/app.apk');
   TextEditingController weblinkController =
       TextEditingController(text: 'https://example.com');
+
+  TextEditingController memberIdController =
+      TextEditingController(text: 'ammar');
+
+  TextEditingController memberPositionController =
+      TextEditingController(text: 'logic');
+
+  final List<String> nameList = [];
+  final List<String> positionList = [];
 //=====================
   EditBloc() : super(EditInitial()) {
     on<EditEvent>((event, emit) async {});
@@ -62,7 +71,30 @@ class EditBloc extends Bloc<EditEvent, EditState> {
     on<ChangePresentationEvent>(changePresentationMethod);
 
     on<ChangeBaseEvent>(changeBaseMethod);
-    on<ChangeLogoEvent>(changeLogoMethod);
+
+    on<AddMembersEvent>(addMemberMethod);
+
+    on<ChangeMembersEvent>((event, emit) async {
+      List<Map<String, dynamic>> lis = [];
+
+      for (int i = 0; i < positionList.length; i++) {
+        lis.add({
+          "user_id": nameList[i],
+          "position": positionList[i],
+        });
+
+        try {
+          emit(LoadingState());
+          final res = await api.chnageMembers(
+              token: ammarToken, projectId: 'p-ipotpvpI9H', members: lis);
+          emit(SucsessState(msg: res.toString()));
+        } on DioException catch (error) {
+          emit(ErrorState(msg: '${error.message}'));
+        } catch (e) {
+          emit(ErrorState(msg: '$e'));
+        }
+      }
+    });
 
     //file picker event
     on<FilePickedEvent>((event, emit) async {
@@ -205,5 +237,18 @@ class EditBloc extends Bloc<EditEvent, EditState> {
     }
 
     return links;
+  }
+
+  // FutureOr<void> changeMemberMethod(event, emit) async {
+
+  // }
+
+  addMemberMethod(event, emit) async {
+    nameList.add(memberIdController.text);
+    positionList.add(memberPositionController.text);
+    memberIdController.clear();
+    memberPositionController.clear();
+
+    emit(AddMembersState(names: nameList, position: positionList));
   }
 }

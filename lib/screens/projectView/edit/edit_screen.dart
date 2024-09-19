@@ -14,6 +14,7 @@ import 'package:tuwaiq_project/screens/projectView/edit/edit_base.dart';
 import 'package:tuwaiq_project/screens/projectView/edit/edit_images.dart';
 import 'package:tuwaiq_project/screens/projectView/edit/edit_links.dart';
 import 'package:tuwaiq_project/screens/projectView/edit/edit_logo.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/edit_members.dart';
 import 'package:tuwaiq_project/screens/projectView/edit/edit_presentation.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
@@ -86,7 +87,7 @@ class EditScreen extends StatelessWidget {
                             bloc: bloc, languageLayer: languageLayer),
                         EditImages(bloc: bloc, languageLayer: languageLayer),
                         EditLinks(languageLayer: languageLayer, bloc: bloc),
-                        const Text('Edit Project Members'),
+                         EditMembers(bloc: bloc, languageLayer: languageLayer,),
                       ],
                     ),
                   ),
