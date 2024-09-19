@@ -15,8 +15,9 @@ class BottomNav extends StatelessWidget {
       FontAwesomeIcons.rectangleList,
       Icons.calendar_month,
       Icons.person,
+      Icons.qr_code,
     ];
-    
+
     return BlocProvider(
       create: (context) => BottomNavBloc(),
       child: Builder(builder: (context) {
