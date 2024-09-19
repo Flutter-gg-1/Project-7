@@ -4,8 +4,8 @@ import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/widget/button/custom_button.dart';
 
-dialog({required BuildContext context, Function()? onDone}) {
-  TextEditingController? controller;
+dialog({required BuildContext context, Function()? onDone , required TextEditingController? controller }) {
+  // TextEditingController? controller;
   String? Function(String?)? validate;
   final language = languageLocaitor.get<LanguageLayer>();
   return showDialog(
@@ -43,6 +43,8 @@ dialog({required BuildContext context, Function()? onDone}) {
                   SizedBox(
                     width: context.getWidth(multiply: 0.7),
                     child: TextFormField(
+                      // initialValue: controller?.text ,
+
                       validator: validate,
                       controller: controller,
                       decoration: const InputDecoration(

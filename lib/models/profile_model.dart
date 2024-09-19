@@ -1,3 +1,5 @@
+
+
 class ProfileModel {
   ProfileModel({
     required this.id,
@@ -5,7 +7,7 @@ class ProfileModel {
     required this.lastName,
     required this.email,
     required this.role,
-    required this.imageUrl,
+    required this.imageFile,
     required this.link,
     required this.projects,
     required this.createdAt,
@@ -16,23 +18,27 @@ class ProfileModel {
   late final String lastName;
   late final String email;
   late final String role;
-  late final String imageUrl;
+  late final String? imageFile;
   late final Link link;
   late final List<Projects> projects;
   late final String createdAt;
   late final String updatedAt;
-  
-  ProfileModel.fromJson(Map<String, dynamic> json){
+  late final String? resumeFile;
+
+  ProfileModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     firstName = json['first_name'];
     lastName = json['last_name'];
     email = json['email'];
     role = json['role'];
-    imageUrl = json['image_url'];
+    imageFile = json['image_url'];
     link = Link.fromJson(json['link']);
-    projects = List.from(json['projects']).map((e)=>Projects.fromJson(e)).toList();
+    projects =
+        List.from(json['projects']).map((e) => Projects.fromJson(e)).toList();
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    resumeFile = json['resume_url'];
+    
   }
 
   Map<String, dynamic> toJson() {
@@ -42,22 +48,34 @@ class ProfileModel {
     _data['last_name'] = lastName;
     _data['email'] = email;
     _data['role'] = role;
-    _data['image_url'] = imageUrl;
+    _data['image_url'] = imageFile;
     _data['link'] = link.toJson();
-    _data['projects'] = projects.map((e)=>e.toJson()).toList();
+    _data['projects'] = projects.map((e) => e.toJson()).toList();
     _data['created_at'] = createdAt;
     _data['updated_at'] = updatedAt;
+    _data['resume_url'] = resumeFile;
     return _data;
   }
 }
 
 class Link {
-  Link();
-  
-  Link.fromJson(Map json);
+  late final String? github;
+  late final String? linkedin;
+  late final String? bindlink;
+  Link({required this.github, required this.linkedin, required this.bindlink});
+
+  Link.fromJson(Map json) {
+    github = json["github"];
+    linkedin = json["linkedin"];
+    bindlink = json["bindlink"];
+  }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
+
+    _data["github"] = github;
+    _data["linkedin"] = linkedin;
+    _data["bindlink"] = bindlink;
     return _data;
   }
 }
@@ -68,12 +86,12 @@ class Projects {
     required this.type,
     required this.projectName,
     required this.bootcampName,
-     this.startDate,
-     this.endDate,
-     this.presentationDate,
-     this.projectDescription,
-     this.logoUrl,
-     this.presentationUrl,
+    this.startDate,
+    this.endDate,
+    this.presentationDate,
+    this.projectDescription,
+    this.logoUrl,
+    this.presentationUrl,
     required this.userId,
     required this.adminId,
     required this.timeEndEdit,
@@ -87,30 +105,30 @@ class Projects {
     required this.linksProject,
     required this.membersProject,
   });
-  late final String projectId;
-  late final String type;
-  late final String projectName;
-  late final String bootcampName;
+  late final String? projectId;
+  late final String? type;
+  late final String? projectName;
+  late final String? bootcampName;
   late final String? startDate;
   late final String? endDate;
   late final String? presentationDate;
   late final String? projectDescription;
   late final Null logoUrl;
   late final Null presentationUrl;
-  late final String userId;
-  late final String adminId;
-  late final String timeEndEdit;
-  late final bool allowEdit;
-  late final bool allowRating;
-  late final bool isPublic;
-  late final double? rating;
-  late final String createAt;
-  late final String updateAt;
+  late final String? userId;
+  late final String? adminId;
+  late final String? timeEndEdit;
+  late final bool? allowEdit;
+  late final bool? allowRating;
+  late final bool? isPublic;
+  late final num? rating;
+  late final String? createAt;
+  late final String? updateAt;
   late final List<dynamic> imagesProject;
   late final List<dynamic> linksProject;
   late final List<MembersProject> membersProject;
-  
-  Projects.fromJson(Map<String, dynamic> json){
+
+  Projects.fromJson(Map<String, dynamic> json) {
     projectId = json['project_id'];
     type = json['type'];
     projectName = json['project_name'];
@@ -132,7 +150,9 @@ class Projects {
     updateAt = json['update_at'];
     imagesProject = List.castFrom<dynamic, dynamic>(json['images_project']);
     linksProject = List.castFrom<dynamic, dynamic>(json['links_project']);
-    membersProject = List.from(json['members_project']).map((e)=>MembersProject.fromJson(e)).toList();
+    membersProject = List.from(json['members_project'])
+        .map((e) => MembersProject.fromJson(e))
+        .toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -158,7 +178,7 @@ class Projects {
     _data['update_at'] = updateAt;
     _data['images_project'] = imagesProject;
     _data['links_project'] = linksProject;
-    _data['members_project'] = membersProject.map((e)=>e.toJson()).toList();
+    _data['members_project'] = membersProject.map((e) => e.toJson()).toList();
     return _data;
   }
 }
@@ -170,7 +190,7 @@ class MembersProject {
     required this.lastName,
     required this.email,
     required this.position,
-     this.imageUrl,
+    this.imageUrl,
     required this.link,
   });
   late final String id;
@@ -180,8 +200,8 @@ class MembersProject {
   late final String position;
   late final String? imageUrl;
   late final Link link;
-  
-  MembersProject.fromJson(Map<String, dynamic> json){
+
+  MembersProject.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     firstName = json['first_name'];
     lastName = json['last_name'];

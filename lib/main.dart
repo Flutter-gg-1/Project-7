@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tuwaiq_project/networking/networking_api.dart';
 import 'package:tuwaiq_project/screens/auth/login_screen.dart';
 import 'package:tuwaiq_project/screens/auth/otp_screen.dart';
+
 
 import 'package:tuwaiq_project/screens/projectView/edit/edit_screen.dart';
 
@@ -19,6 +21,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setup();
   runApp(const MyApp());
+
   // NetworkingApi().createUserPost(email: "ali@gmail.com", fName: "fName", lName: "lName");
   // NetworkingApi().profileGet(
   //     token:
@@ -32,9 +35,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home:  EditScreen(),
+
+    return MultiBlocProvider(
+      providers: [
+         BlocProvider(
+          create: (context) => ProfileCubit(),
+        ),
+
+         BlocProvider(
+          create: (context) => ImgHandleCubit(),
+        ),
+
+         BlocProvider(
+          create: (context) => CvHandleCubit(),
+        ),
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home:  HomeScreen(),
+      ),
+
     );
   }
 }

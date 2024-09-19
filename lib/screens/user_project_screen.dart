@@ -24,7 +24,7 @@ class UserProjectScreen extends StatelessWidget {
           ),
           const Divider(),
           SizedBox(
-            height: context.getHeight(multiply: 0.69),
+            height: context.getHeight(multiply: 0.65),
             child: GridView(
               shrinkWrap: true,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
