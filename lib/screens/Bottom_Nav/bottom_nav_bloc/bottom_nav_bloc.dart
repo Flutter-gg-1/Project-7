@@ -2,10 +2,11 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:project_management_app/screens/All_projects/all_projects_screen.dart';
 import 'package:project_management_app/screens/Admin/admin_home_screen.dart';
+import 'package:project_management_app/screens/All_projects/all_projects_screen.dart';
 import 'package:project_management_app/screens/Home/home_screen.dart';
 import 'package:project_management_app/screens/Profile/profile_screen.dart';
+import 'package:project_management_app/screens/QR_scanner/qr_scanner_screen.dart';
 
 part 'bottom_nav_event.dart';
 part 'bottom_nav_state.dart';
@@ -15,7 +16,8 @@ class BottomNavBloc extends Bloc<BottomNavEvent, BottomNavState> {
     const HomeScreen(),
     const AllProjectsScreen(),
     const AdminHomeScreen(),
-    const ProfileScreen()
+    const ProfileScreen(),
+    const QrScannerScreen()
   ];
 
   int currentIndex = 0;
