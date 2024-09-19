@@ -45,29 +45,14 @@ class BrowsePageState extends State<BrowsePage>
     return Scaffold(
       backgroundColor: const Color(0xFF4E2EB5),
       appBar: AppBar(
-<<<<<<< HEAD
         backgroundColor: const Color(0xFF4E2EB5),
-        title: const Text(
-          "Browse",
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text("Browse", style: TextStyle(color: Colors.white)),
         centerTitle: true,
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(100),
+          preferredSize: const Size.fromHeight(120),
           child: Column(
             children: [
-              const CustomTextFormField(hintText: "search", icon: Icons.search),
-              
-=======
-        backgroundColor: Color(0xFF4E2EB5),
-        title: Text("Browse", style: TextStyle(color: Colors.white)),
-        centerTitle: true,
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(120),
-          child: Column(
-            children: [
-              CustomTextFormField(hintText: 'search',icon: Icons.search,),
->>>>>>> origin/noufAlqahtani
+              const CustomTextFormField(hintText: 'search',icon: Icons.search,),
               TabBarWidget(tabController: tabController),
             ],
           ),

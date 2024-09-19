@@ -8,15 +8,17 @@ import 'package:project_judge/screens/myproject/bloc/bloc_rating_state.dart';
 
 
 class RatingPage extends StatelessWidget {
+  const RatingPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: Color(0xFF4E2EB5),
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: const Color(0xFF4E2EB5),
         elevation: 0,
         centerTitle: true,
-        title: Text('Rate', style: TextStyle(color: Colors.white)),
+        title: const Text('Rate', style: TextStyle(color: Colors.white)),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -34,13 +36,13 @@ class RatingPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('ProjectName',
+                    const Text('ProjectName',
                         style: TextStyle(
                             fontSize: 32, fontWeight: FontWeight.bold)),
-                    Text(
+                    const Text(
                         'Rate this project on a scale from 1 (poor) to 10 (excellent).',
                         style: TextStyle(color: Colors.grey, fontSize: 22)),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     SliderSection(
                       label: 'Idea',
@@ -114,7 +116,7 @@ class RatingPage extends StatelessWidget {
                       },
                     ),
 
-                    NotesSection(),
+                    const NotesSection(),
                   ],
                 ),
               ),

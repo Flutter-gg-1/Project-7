@@ -5,13 +5,9 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:project_judge/models/project_model.dart';
 
 class MyProjectCardClosed extends StatelessWidget {
-<<<<<<< HEAD
-  const MyProjectCardClosed({super.key});
-=======
-  final Project project;
+  final Project? project;
 
-  MyProjectCardClosed({required this.project});
->>>>>>> origin/noufAlqahtani
+  const MyProjectCardClosed({super.key,  this.project});
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +43,7 @@ class MyProjectCardClosed extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(19),
                     child: Image.asset(
-<<<<<<< HEAD
-                      'assets/images/logo.png',
-=======
                       'assets/images/logo.png', 
->>>>>>> origin/noufAlqahtani
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -63,23 +55,18 @@ class MyProjectCardClosed extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        project.title,
+                      const Text(
+                        "rewkre",
+                        
                         style: TextStyle(
                           fontSize: 9,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFFC4C4C4),
                         ),
                       ),
-<<<<<<< HEAD
                       const SizedBox(height: 2),
                       const Text(
-                        'Lorem ipsum sfgl...',
-=======
-                      SizedBox(height: 2),
-                      Text(
-                        project.description,
->>>>>>> origin/noufAlqahtani
+                        "lorem ipsum",
                         style: TextStyle(
                           color: Color(0xFF4E2EB5),
                           fontSize: 15,
@@ -88,7 +75,7 @@ class MyProjectCardClosed extends StatelessWidget {
                       const SizedBox(height: 2),
                       RatingBar.builder(
                         itemSize: 16,
-                        initialRating: project.rating,
+                        initialRating: project?.rating??43,
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: false,
@@ -100,7 +87,7 @@ class MyProjectCardClosed extends StatelessWidget {
                         onRatingUpdate: (rating) {
                         },
                       ),
-                      Text(
+                      const Text(
                         'App', 
                         style: TextStyle(
                           color: Color(0xFFC4C4C4),
@@ -114,7 +101,7 @@ class MyProjectCardClosed extends StatelessWidget {
                 child: IconButton(
                   onPressed: () {
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.edit_off_outlined,
                     color: Color(0xFF4E2EB5),
                   ),

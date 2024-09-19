@@ -1,7 +1,3 @@
-import 'dart:convert';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:project_judge/screens/rating/blocs/bloc_project_event.dart';
 
 class Project {
   final String title;

@@ -47,11 +47,7 @@ class BottomNavBar extends StatelessWidget {
               items: [
                 buildBottomNavBarItem('assets/images/Call.png', 'Home', 0),
                 buildBottomNavBarItem('assets/images/browse.png', 'Browse', 1),
-<<<<<<< HEAD
                 const BottomNavigationBarItem(
-=======
-                BottomNavigationBarItem(
->>>>>>> origin/noufAlqahtani
                   icon: SizedBox.shrink(), 
                   label: '',
                 ),

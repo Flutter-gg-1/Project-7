@@ -23,7 +23,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
 
       emit(ProjectLoaded(projects));
     } catch (e) {
-      emit(ProjectError("Failed to load projects: ${e.toString()}"));
+     print(e.toString());
     }
   }
 }

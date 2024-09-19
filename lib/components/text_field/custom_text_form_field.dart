@@ -8,7 +8,7 @@ class CustomTextFormField extends StatelessWidget {
     this.icon,
     this.validator,
     this.floatingLabelBehavior,
-    this.label, this.maximumLines =1,
+    this.label, this.maximumLines =1, this.fillColor,
   });
 
   final String? label;
@@ -18,6 +18,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final FloatingLabelBehavior? floatingLabelBehavior;
   final int maximumLines;
+  final Color? fillColor;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class CustomTextFormField extends StatelessWidget {
           decoration: InputDecoration(
               floatingLabelBehavior: floatingLabelBehavior,
               filled: true,
-              fillColor: const Color(0xffEDEDED),
+              fillColor: fillColor ?? const Color(0xffEDEDED),
               hintText: hintText,
               prefixIcon: icon != null ? Icon(icon) : null,
               border:

@@ -24,7 +24,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       // اعدل عليها اذا خلصت من رن حقي ارجعها زي قبل لا انسى
       home: LoadingScreen(),
     );

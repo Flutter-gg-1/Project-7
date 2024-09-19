@@ -44,18 +44,18 @@ class SliderSectionState extends State<SliderSection> {
       builder: (context, constraints) {
         sliderWidth = constraints.maxWidth;
         return Container(
-          margin: EdgeInsets.only(bottom: 20),
+          margin: const EdgeInsets.only(bottom: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Image.asset(widget.imagePath),
-                  SizedBox(width: 12),
-                  Text(widget.label, style: TextStyle(fontSize: 18)),
+                  const SizedBox(width: 12),
+                  Text(widget.label, style: const TextStyle(fontSize: 18)),
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Stack(
                 clipBehavior: Clip
                     .none, 
@@ -66,7 +66,7 @@ class SliderSectionState extends State<SliderSection> {
                     min: 1,
                     max: 10,
                     divisions: 9,
-                    activeColor: Color(0xFF4E2EB5),
+                    activeColor: const Color(0xFF4E2EB5),
                     inactiveColor: Colors.grey,
                     onChanged: (value) {
                       setState(() {
@@ -82,21 +82,21 @@ class SliderSectionState extends State<SliderSection> {
                       children: [
                         Container(
                           padding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                              const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
                           decoration: BoxDecoration(
                             color: Colors.grey[400]!,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
                             sliderValue.toStringAsFixed(0),
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
                         CustomPaint(
-                          size: Size(20, 10), 
+                          size: const Size(20, 10), 
                           painter: TrianglePainter(
                             color: Colors.grey[400]!,
                           ),

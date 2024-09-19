@@ -111,7 +111,7 @@ class RatingPageState extends State<RatingPage> {
               ),
 
               const SizedBox(height: 10),
-              NotesSection(),
+              const NotesSection(),
             ],
           ),
         ),

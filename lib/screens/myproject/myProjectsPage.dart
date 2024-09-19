@@ -9,6 +9,8 @@ import 'package:project_judge/screens/rating/blocs/bloc_project_event.dart';
 import 'package:project_judge/screens/rating/blocs/bloc_project_state.dart';
 
 class MyProjectsScreen extends StatefulWidget {
+  const MyProjectsScreen({super.key});
+
   @override
   MyProjectsScreenState createState() => MyProjectsScreenState();
 }
@@ -37,12 +39,12 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF4E2EB5),
+      backgroundColor: const Color(0xFF4E2EB5),
       appBar: AppBar(
-        backgroundColor: Color(0xFF4E2EB5),
+        backgroundColor: const Color(0xFF4E2EB5),
         elevation: 0,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'My Projects',
           style: TextStyle(color: Colors.white),
         ),
@@ -52,9 +54,9 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
           indicatorSize: TabBarIndicatorSize.tab,
           indicatorColor: Colors.cyan,
           labelColor: Colors.cyan,
-          labelStyle: TextStyle(fontSize: 20, color: Colors.cyan),
+          labelStyle: const TextStyle(fontSize: 20, color: Colors.cyan),
           unselectedLabelColor: Colors.grey,
-          tabs: [
+          tabs: const [
             Tab(text: 'Open'),
             Tab(text: 'Closed'),
           ],
@@ -64,7 +66,7 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
         bloc: projectBloc,
         builder: (context, state) {
           if (state is ProjectLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is ProjectLoaded) {
        
             final openProjects = state.projects.where((p) => p.isOpen).toList();
@@ -86,8 +88,8 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: Colors.cyan,
+        shape: const CircleBorder(),
         child: Icon(Icons.add),
-        shape: CircleBorder(),
       ),
     );
   }

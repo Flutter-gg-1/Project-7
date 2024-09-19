@@ -4,13 +4,9 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:project_judge/models/project_model.dart';
 
 class MyProjectCardOpened extends StatelessWidget {
-<<<<<<< HEAD
-  const MyProjectCardOpened({super.key});
-=======
-  final Project project;
+  final Project? project;
 
-  MyProjectCardOpened({required this.project});
->>>>>>> origin/noufAlqahtani
+  const MyProjectCardOpened({super.key,  this.project});
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +42,7 @@ class MyProjectCardOpened extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(19),
                     child: Image.asset(
-<<<<<<< HEAD
-                      'assets/images/logo.png',
-=======
                       'assets/images/logo.png', 
->>>>>>> origin/noufAlqahtani
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -62,29 +54,18 @@ class MyProjectCardOpened extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-<<<<<<< HEAD
-                      const Text(
-                        'Flutter Bootcamp',
-=======
                       Text(
-                        project.title,
->>>>>>> origin/noufAlqahtani
-                        style: TextStyle(
+                        project?.title ?? "lorem ipsum",
+                        style: const TextStyle(
                           fontSize: 9,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFFC4C4C4),
                         ),
                       ),
-<<<<<<< HEAD
                       const SizedBox(height: 2),
-                      const Text(
-                        'Lorem ipsum sfgl...',
-=======
-                      SizedBox(height: 2),
                       Text(
-                        project.description,
->>>>>>> origin/noufAlqahtani
-                        style: TextStyle(
+                        project?.description?? "lorem ipsum",
+                        style: const TextStyle(
                           color: Color(0xFF4E2EB5),
                           fontSize: 15,
                         ),
@@ -92,7 +73,7 @@ class MyProjectCardOpened extends StatelessWidget {
                       const SizedBox(height: 2),
                       RatingBar.builder(
                         itemSize: 16,
-                        initialRating: project.rating,
+                        initialRating: project?.rating ?? 54,
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: false,
@@ -103,13 +84,8 @@ class MyProjectCardOpened extends StatelessWidget {
                         ),
                         onRatingUpdate: (rating) {},
                       ),
-<<<<<<< HEAD
                       const Text(
-                        'App',
-=======
-                      Text(
                         'App', 
->>>>>>> origin/noufAlqahtani
                         style: TextStyle(
                           color: Color(0xFFC4C4C4),
                         ),
@@ -119,25 +95,16 @@ class MyProjectCardOpened extends StatelessWidget {
                 ),
               ),
               Center(
-<<<<<<< HEAD
-                  child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.edit_outlined,
-                        color: Color(0xFF4E2EB5),
-                      )))
-=======
                 child: IconButton(
                   onPressed: () {
                 
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.edit_outlined,
                     color: Color(0xFF4E2EB5),
                   ),
                 ),
               ),
->>>>>>> origin/noufAlqahtani
             ],
           ),
         ),

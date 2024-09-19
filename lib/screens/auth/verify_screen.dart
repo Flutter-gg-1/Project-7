@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
 import 'package:project_judge/components/dialog/error_dialog.dart';
 import 'package:project_judge/components/text/custom_text.dart';
 import 'package:project_judge/screens/auth/cubit/auth_cubit.dart';
-import 'package:project_judge/screens/navigation_page/navigationPage.dart';
-import 'package:project_judge/screens/profile_screen/profile_screen.dart';
+import 'package:project_judge/screens/navigation/navigationPage.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
 class VerifyScreen extends StatelessWidget {
