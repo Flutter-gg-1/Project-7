@@ -61,14 +61,6 @@ class Out_Standing_Student extends StatelessWidget {
                       child: Container(
                         width: 90,
                         height: 100,
-                        child: Center(
-                          child: CircleAvatar(
-                            radius: 40,
-                            backgroundImage: AssetImage(
-                              'assets/R 2.png',
-                            ),
-                          ),
-                        ),
                         decoration: ShapeDecoration(
                           color: Colors.white,
                           shape: const CircleBorder(
@@ -85,6 +77,14 @@ class Out_Standing_Student extends StatelessWidget {
                                   0, 1), // Position the shadow (X, Y)
                             ),
                           ],
+                        ),
+                        child: const Center(
+                          child: CircleAvatar(
+                            radius: 40,
+                            backgroundImage: AssetImage(
+                              'assets/R 2.png',
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -145,7 +145,7 @@ class Out_Standing_Student extends StatelessWidget {
                       child: Container(
                         width: 90,
                         height: 100,
-                        child: Center(
+                        child: const Center(
                           child: CircleAvatar(
                             radius: 40,
                             backgroundImage: AssetImage(
@@ -183,7 +183,7 @@ class Out_Standing_Student extends StatelessWidget {
                * Endedd of container for Student 2
                * 
                */
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
           const SizedBox(height: 20), // Add space between rows
@@ -237,7 +237,7 @@ class Out_Standing_Student extends StatelessWidget {
                       child: Container(
                         width: 90,
                         height: 100,
-                        child: Center(
+                        child: const Center(
                           child: CircleAvatar(
                             radius: 40,
                             backgroundImage: AssetImage(
@@ -322,7 +322,7 @@ class Out_Standing_Student extends StatelessWidget {
                       child: Container(
                         width: 90,
                         height: 100,
-                        child: Center(
+                        child: const Center(
                           child: CircleAvatar(
                             radius: 40,
                             backgroundImage: AssetImage(

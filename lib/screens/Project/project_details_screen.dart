@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:project_management_app/models/project_model.dart';
 import 'package:project_management_app/screens/Edit_Project/edit_project.dart';
+import 'package:project_management_app/screens/Project/custom_logo.dart';
+import 'package:project_management_app/screens/Project/custom_project_info.dart';
+import 'package:project_management_app/services/launch_url.dart';
 import 'package:project_management_app/theme/appcolors.dart';
-import 'package:sizer/sizer.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
   final ProjectModel project;
@@ -38,7 +40,9 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>  EditProjectScreen(project: widget.project,)));
+                        builder: (context) => EditProjectScreen(
+                              project: widget.project,
+                            )));
               },
               icon: const Icon(
                 Icons.edit,
@@ -57,7 +61,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                ' Projects Details ..',
+                ' Project Details ..',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 21,
@@ -65,47 +69,9 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               ),
               if (widget.project.logoUrl != null &&
                   widget.project.logoUrl != 'null')
-                Flexible(
-                  flex: 3,
-                  child: Container(
-                    height: 8.h,
-                    width: 8.h,
-                    decoration: BoxDecoration(
-                      color: AppColors.blueDark,
-                      borderRadius: BorderRadius.circular(1.4.h),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1.4,
-                          blurRadius: 3.5,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Image.network(
-                        widget.project.logoUrl!,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return const Icon(
-                            Icons.image,
-                            size: 28,
-                            color: Colors.white,
-                          );
-                        },
-                        loadingBuilder: (context, child, progress) {
-                          if (progress == null) {
-                            return child;
-                          } else {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
-                        },
-                      ),
-                    ),
-                  ),
-                ),
+                CustomLogo(logoUrl: widget.project.logoUrl!, isLogo: true)
+              else
+                CustomLogo(logoUrl: widget.project.logoUrl!),
               Image.asset('assets/Group 10 (1).png')
             ],
           ),
@@ -113,144 +79,78 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
             height: 20,
           ),
 
-          // First project name
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Project name :',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Color(0xff4129B7),
-                ),
-              ),
-              Text(
-                widget.project.projectName.toString(),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xffB8B8BB),
-                ),
-              ),
-            ],
+          // project name
+          CustomProjectInfo(
+            label: 'Project name :',
+            content: widget.project.projectName.toString(),
           ),
           const SizedBox(height: 20),
 
-          // Second project name
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'BootCamp  :',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Color(0xff4129B7),
-                ),
-              ),
-              Text(
-                widget.project.bootcampName.toString(),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xffB8B8BB),
-                ),
-              ),
-            ],
+          // Bootcamp name
+          CustomProjectInfo(
+            label: 'BootCamp  :',
+            content: widget.project.bootcampName.toString(),
           ),
           const SizedBox(height: 20),
 
-          // Third project name
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Description :',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Color(0xff4129B7),
-                ),
-              ),
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 100),
-                  child: Text(
-                    widget.project.projectDescription.toString(),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xffB8B8BB),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+          // Description
+          CustomProjectInfo(
+            label: 'Description :',
+            content: widget.project.projectDescription.toString(),
           ),
           const SizedBox(height: 20),
 
-          // Fourth project name
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Start Date  :',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Color(0xff4129B7),
-                ),
-              ),
-              Text(
-                widget.project.startDate.toString(),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xffB8B8BB),
-                ),
-              ),
-            ],
+          // Start Date
+          CustomProjectInfo(
+            label: 'Start Date  :',
+            content: widget.project.startDate.toString(),
           ),
           const SizedBox(height: 20),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'End Date  :',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Color(0xff4129B7),
-                ),
-              ),
-              Text(
-                widget.project.endDate.toString(),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xffB8B8BB),
-                ),
-              ),
-            ],
+          // End Date
+          CustomProjectInfo(
+            label: 'End Date  :',
+            content: widget.project.endDate.toString(),
           ),
           const SizedBox(
             height: 20,
           ),
+
+          // Editing End Date
+          CustomProjectInfo(
+            label: 'Editing End Date :',
+            content: widget.project.timeEndEdit.toString(),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+
+          // Presentation Date
+          CustomProjectInfo(
+            label: 'Presentaion Date :',
+            content: widget.project.presentationDate.toString(),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+
+          // Presentation Url
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Presentaion Date :',
+                'Presentaion Url :',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
                   color: Color(0xff4129B7),
                 ),
               ),
-              Text(
-                widget.project.presentationDate.toString(),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xffB8B8BB),
-                ),
-              ),
+              IconButton(
+                  onPressed: () {
+                    launchLink(widget.project.presentationUrl.toString());
+                  },
+                  icon: const Icon(Icons.link))
             ],
           ),
           const SizedBox(
@@ -303,56 +203,79 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                   }).toList(),
                 ),
               ),
-              const SizedBox(
-                  width: 10), // Add spacing between dropdown and image
+              const SizedBox(width: 10),
               Image.asset(
-                'assets/Untitled 1.png', // Replace with your image path
+                'assets/Untitled 1.png',
                 width: 150,
                 height: 150,
               ),
             ],
           ),
           if (selectedLink != null)
-            Text(
-              widget.project.linksProject![links.indexOf(selectedLink!)].url
-                  as String,
-              style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.blue),
-            )
-          else
-            const Text('No Link Added'),
+            if (widget.project.linksProject!.isNotEmpty)
+              InkWell(
+                onTap: () {
+                  launchLink(widget
+                      .project
+                      .linksProject![links.indexOf(selectedLink!)]
+                      .url as String);
+                },
+                child: Text(
+                  widget.project.linksProject![links.indexOf(selectedLink!)].url
+                      as String,
+                  style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.blue),
+                ),
+              )
+            else
+              const Text('No Link Added'),
           const SizedBox(
             height: 30,
           ),
 
-          // Container to display images with shadow and rounded edges
+          // Grid to display images
+          const Text(
+            ' Project Images ..',
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Color(0xff57E3D8)),
+          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Container(
-              height: 200, // Set the height of the container
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 10,
-                    offset: const Offset(0, 5), // changes position of shadow
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 1,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
+              itemCount: widget.project.imagesProject!.length,
+              itemBuilder: (context, index) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.network(
+                    widget.project.imagesProject![index].url,
+                    fit: BoxFit.cover,
                   ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  'assets/Group 63.png', // Replace with your image path
-                  fit: BoxFit.cover,
-                ),
-              ),
+                );
+              },
             ),
           ),
+
+           // Display Members
+          const Text(
+            ' Project Members ..',
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Color(0xff57E3D8)),
+          ),
+          
         ],
       ),
     );

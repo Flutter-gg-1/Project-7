@@ -52,7 +52,7 @@ class _EditProjectScreenState extends State<EditProjectScreen> {
   File? presentationFile;
   List<File> imageFiles = [];
 
-  late String token; // Replace with actual token
+  late String token;
   late String? projectId;
 
   @override

@@ -42,7 +42,7 @@ mixin UserApi on ConstantsApi {
       {required String projectId,
       required List<int> logo,
       required String token}) async {
-     Response? response;
+    Response? response;
     try {
       response = await dio.put(
         '$baseUrl$editProjectLogoEndpoint/$projectId',
@@ -128,7 +128,7 @@ mixin UserApi on ConstantsApi {
       required List<ProjectLink> links,
       required String token}) async {
     try {
-      await dio.put(
+     await dio.put(
         '$baseUrl$editProjectLinksEndpoint/$projectId',
         data: {
           'link': links.map((link) => link.toJson()).toList(),
@@ -137,8 +137,8 @@ mixin UserApi on ConstantsApi {
           headers: {'Authorization': 'Bearer $token'},
         ),
       );
-    } catch (e) {
-      throw Exception("Error occurred while updating Links");
+    } on DioException catch (e) {
+      throw DioException(requestOptions: RequestOptions(), message: '${e.response?.data['data']}');
     }
   }
 
@@ -147,7 +147,7 @@ mixin UserApi on ConstantsApi {
       required List<MemberModel> members,
       required String token}) async {
     try {
-      await dio.put(
+       await dio.put(
         '$baseUrl$editProjectMembersEndpoint/$projectId',
         data: {
           'members': members

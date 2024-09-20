@@ -24,8 +24,8 @@ class Projects extends StatelessWidget {
           Flexible(
             flex: 3,
             child: Container(
-              height: 13.h,
-              width: 13.h,
+              height: 12.h,
+              width: 12.h,
               decoration: BoxDecoration(
                 color: AppColors.blueDark,
                 borderRadius: BorderRadius.circular(1.4.h),
@@ -72,7 +72,7 @@ class Projects extends StatelessWidget {
           Flexible(
             flex: 7,
             child: Container(
-              height: 14.h,
+              height: 15.h,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -107,6 +107,7 @@ class Projects extends StatelessWidget {
                         ),
                         Container(
                           height: 30,
+                          width: 19.5.w,
                           decoration: BoxDecoration(
                             color: AppColors.blueDark,
                             borderRadius: BorderRadius.circular(3),
