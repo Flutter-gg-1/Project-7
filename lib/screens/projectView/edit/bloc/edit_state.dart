@@ -34,4 +34,13 @@ final class ProjectImagesState extends EditState {
     this.projectImage,
     this.presentationFile,
   });
+
+}
+
+
+ final class AddMembersState extends EditState {
+  final List<String> names;
+  final List<String> position;
+  AddMembersState( {required this.names , required this.position});
+
 }
