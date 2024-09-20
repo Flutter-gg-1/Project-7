@@ -89,7 +89,7 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
         onPressed: () {},
         backgroundColor: Colors.cyan,
         shape: const CircleBorder(),
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

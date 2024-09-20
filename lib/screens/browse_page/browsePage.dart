@@ -78,7 +78,7 @@ class BrowsePageState extends State<BrowsePage>
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => RatingPage()),
+              MaterialPageRoute(builder: (context) => const RatingPage()),
             );
           },
           child: ProjectCard(project: projects[index]),

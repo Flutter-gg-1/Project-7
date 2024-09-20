@@ -68,6 +68,120 @@ class CreateAccountScreen extends StatelessWidget {
                               borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(40),
                                   topLeft: Radius.circular(40))),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              const SizedBox(
+                                height: 60,
+                              ),
+                              const Text(
+                                "Sign up",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 32),
+                              ),
+                              const SizedBox(
+                                height: 70,
+                              ),
+                              Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20),
+                                    child: CustomTextFormField(
+                                      floatingLabelBehavior:
+                                          FloatingLabelBehavior.never,
+                                      controller: bloc.emailController,
+                                      hintText: "Example@example.com",
+                                      icon: Icons.email_outlined,
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.isEmpty ||
+                                            !value.contains('@')) {
+                                          return 'Please enter a valid email';
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 46,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20),
+                                    child: CustomTextFormField(
+                                      floatingLabelBehavior:
+                                          FloatingLabelBehavior.never,
+                                      controller: bloc.fNameController,
+                                      hintText: "First Name",
+                                      icon: Icons.person_outline_rounded,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your first name';
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 46,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20),
+                                    child: CustomTextFormField(
+                                      floatingLabelBehavior:
+                                          FloatingLabelBehavior.never,
+                                      controller: bloc.lNameController,
+                                      hintText: "Last Name",
+                                      icon: Icons.person_outline_rounded,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your last name';
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 46,
+                                  ),
+                                  CustomElevatedButton(
+                                    minimumSize: Size(
+                                        MediaQuery.of(context).size.width, 63),
+                                    backgroundColor: const Color(0xff4D2EB4),
+                                    text: "Get OTP",
+                                    textcolor: Colors.white,
+                                    onPressed: () {
+                                      bloc.checkAccounts();
+                                    },
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Text(
+                                        "Already have an account?",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const LoginScreen()));
+                                          },
+                                          child: const Text(
+                                            "Log in",
+                                            style: TextStyle(
+                                                color: Color(0xff57E3D8)),
+                                          ))
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                         Positioned(
                             top: -50,
@@ -83,102 +197,6 @@ class CreateAccountScreen extends StatelessWidget {
                                     Image.asset("assets/images/logo-h 2.png"),
                               ),
                             )),
-                        const Positioned(
-                          top: 90,
-                          left: 160,
-                          child: Text(
-                            "Sign up",
-                            style: TextStyle(color: Colors.white, fontSize: 32),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 150,
-                        ),
-                        CustomTextFormField(
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          controller: bloc.emailController,
-                          hintText: "Example@example.com",
-                          icon: Icons.email_outlined,
-                          validator: (value) {
-                            if (value == null ||
-                                value.isEmpty ||
-                                !value.contains('@')) {
-                              return 'Please enter a valid email';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(
-                          height: 46,
-                        ),
-                        CustomTextFormField(
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          controller: bloc.fNameController,
-                          hintText: "First Name",
-                          icon: Icons.person_outline_rounded,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your first name';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(
-                          height: 46,
-                        ),
-                        CustomTextFormField(
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          controller: bloc.lNameController,
-                          hintText: "Last Name",
-                          icon: Icons.person_outline_rounded,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your last name';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(
-                          height: 46,
-                        ),
-                        CustomElevatedButton(
-                          minimumSize:
-                              Size(MediaQuery.of(context).size.width, 63),
-                          backgroundColor: const Color(0xff4D2EB4),
-                          text: "Get OTP",
-                          textcolor: Colors.white,
-                          onPressed: () {
-                            bloc.checkAccounts();
-                          },
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "Already have an account?",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const LoginScreen()));
-                                },
-                                child: const Text(
-                                  "Log in",
-                                  style: TextStyle(color: Color(0xff57E3D8)),
-                                ))
-                          ],
-                        )
                       ],
                     ),
                   ),

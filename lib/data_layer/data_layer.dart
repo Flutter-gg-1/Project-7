@@ -24,6 +24,7 @@ class DataLayer {
 
   Future<void> getUserr() async {
     userInfo = await api.getUserProfile(token: authUser!.token);
+    
   }
 
   loadData() {
