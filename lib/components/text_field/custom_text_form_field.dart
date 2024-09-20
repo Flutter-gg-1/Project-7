@@ -8,7 +8,9 @@ class CustomTextFormField extends StatelessWidget {
     this.icon,
     this.validator,
     this.floatingLabelBehavior,
-    this.label, this.maximumLines =1,
+    this.label,
+    this.maximumLines = 1,
+    this.onChange,
   });
 
   final String? label;
@@ -16,6 +18,7 @@ class CustomTextFormField extends StatelessWidget {
   final String hintText;
   final IconData? icon;
   final String? Function(String?)? validator;
+  final String? Function(String?)? onChange;
   final FloatingLabelBehavior? floatingLabelBehavior;
   final int maximumLines;
 
@@ -34,6 +37,7 @@ class CustomTextFormField extends StatelessWidget {
               )
             : SizedBox.shrink(),
         TextFormField(
+          onChanged: onChange,
           maxLines: maximumLines,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           controller: controller,
@@ -42,9 +46,26 @@ class CustomTextFormField extends StatelessWidget {
               filled: true,
               fillColor: const Color(0xffEDEDED),
               hintText: hintText,
+              hintStyle: const TextStyle(fontSize: 12),
               prefixIcon: icon != null ? Icon(icon) : null,
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
+              border: InputBorder.none,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Colors.transparent),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Colors.transparent),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Color(0xffFF8182)),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Colors.transparent),
+              ),
+              errorStyle: TextStyle(color: Color(0xffFF8182))),
           validator: validator,
         ),
       ],

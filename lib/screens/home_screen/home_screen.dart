@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                   CustomText(
                                     text:
-                                        "Hello, ${getIt.get<DataLayer>().userInfo?.firstName}!",
+                                        "Hello, ${getIt.get<DataLayer>().userInfo?.firstName ?? 'user'}!",
                                     size: 32,
                                     color: const Color(0xffffffff),
                                   ),

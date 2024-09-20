@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:project_judge/screens/edit_project/edit_project_screen.dart';
 
 class MyProjectCardOpened extends StatelessWidget {
   @override
@@ -90,7 +91,12 @@ class MyProjectCardOpened extends StatelessWidget {
               ),
               Center(
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditProjectScreen()));
+                      },
                       icon: const Icon(
                         Icons.edit_outlined,
                         color: Color(0xFF4E2EB5),
