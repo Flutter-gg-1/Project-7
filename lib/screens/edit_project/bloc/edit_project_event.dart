@@ -8,6 +8,22 @@ final class EditImagesEvent extends EditProjectEvent {
   EditImagesEvent({required this.imgs});
 }
 
+final class UpdateLogoEvent extends EditProjectEvent {
+    final File logo;
+    UpdateLogoEvent({required this.logo});
+}
+
+final class UpdatePresentationDateEvent extends EditProjectEvent {
+    final DateTime date;
+    UpdatePresentationDateEvent({required this.date});
+}
+
+final class UpdateProjectDurationEvent extends EditProjectEvent {
+    final DateTimeRange date;
+    UpdateProjectDurationEvent({required this.date});
+}
+
+
 final class DeleteImagesEvent extends EditProjectEvent {
   final int imgsInt;
   DeleteImagesEvent({required this.imgsInt});
