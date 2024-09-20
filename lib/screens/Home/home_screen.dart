@@ -40,8 +40,9 @@ class _HomeScreenState extends State<HomeScreen>
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-              child:
-                  CircularProgressIndicator()); // عرض مؤشر التحميل عند انتظار البيانات
+              child: CircularProgressIndicator(
+            color: Colors.lightBlueAccent,
+          )); // عرض مؤشر التحميل عند انتظار البيانات
         } else if (snapshot.hasError) {
           return Center(
               child: Text('Error: ${snapshot.error}')); // عرض رسالة الخطأ
@@ -53,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen>
 
         return ListView.builder(
           shrinkWrap: true,
+
           // physics: const NeverScrollableScrollPhysics(),
           itemCount: snapshot.data!.length,
           itemBuilder: (context, index) {
@@ -71,126 +73,100 @@ class _HomeScreenState extends State<HomeScreen>
     return Sizer(
       builder: (context, orientation, deviceType) {
         return Scaffold(
-          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-          body: SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  // Search Bar Section
-                  Padding(
-                    padding: EdgeInsets.all(4.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 1,
-                                  blurRadius: 3,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Search...',
-                                prefixIcon: const Icon(Icons.search),
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5.sp),
-                                  borderSide: BorderSide.none,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 4.w),
-                        Image.asset(
-                          scale: 1,
-                          'assets/Group 10 (1).png',
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 3.h),
+          backgroundColor: Color(0x80e9e9e9),
+          body: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                backgroundColor: const Color(0xff352197),
+                floating: true, // لتجعل الـ AppBar يظهر عند التمرير لأعلى
+                pinned: false, // لا يبقى مثبتًا عند التمرير لأسفل
 
-                  const Center(child: ImageSlider()), // Image Slider
-                  SizedBox(height: 2.h),
-
-                  // Tab Bar Section
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 1.w),
-                    child: TabBar(
-                      controller: _tabController,
-                      indicator: BoxDecoration(
-                        color: AppColors.blueLight.withOpacity(0.6),
-                        borderRadius: BorderRadius.circular(10.sp),
-                      ),
-                      dividerHeight: 0,
-                      labelColor: Colors.white,
-                      unselectedLabelColor: AppColors.blueDark,
-                      tabs: [
-                        _buildTab("All", context),
-                        _buildTab("Recent", context),
-                        _buildTab("Top", context),
-                      ],
-                    ),
+                actions: [
+                  Image.asset(
+                    'assets/logo-h-white 2.png',
+                    height: 20.h,
+                    width: 28.w,
                   ),
-                  SizedBox(height: 2.h),
-
-                  // TabBarView Section
-                  SizedBox(
-                    height: 80.h,
-                    child: TabBarView(
-                      controller: _tabController,
-                      clipBehavior: Clip.none,
-                      children: [
-                        _buildProjectsTab(_allProjectsFuture),
-                        const Center(child: Text('Content 2')),
-                        const Center(child: Text('Content 3')),
-                      ],
-                    ),
-                  ),
-                  const Divider(
-                    height: 2,
-                    thickness: 2,
-                    color: Color.fromARGB(255, 245, 243, 243),
-                  ),
-                  SizedBox(height: 4.h),
-
-                  // New Programs Section
-                  const Botcamps(),
-                  SizedBox(height: 2.h),
-
-                  const Divider(
-                    height: 2,
-                    thickness: 2,
-                    color: Color.fromARGB(255, 245, 243, 243),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 2.w),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Outstanding students ..',
-                        style: TextStyle(
-                          color: AppColors.blueLight,
-                          fontSize: 18.sp, // استخدم sp لحجم النص
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10.h),
-
-                  const Out_Standing_Student(),
                 ],
               ),
-            ),
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    const Center(child: ImageSlider()), // Image Slider
+                    SizedBox(height: 2.h),
+
+                    // Tab Bar Section
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 0.3.w),
+                      child: TabBar(
+                        controller: _tabController,
+                        indicator: BoxDecoration(
+                          color: AppColors.blueLight.withOpacity(0.6),
+                          borderRadius: BorderRadius.circular(10.sp),
+                        ),
+                        dividerHeight: 0,
+                        labelColor: Colors.white,
+                        unselectedLabelColor: AppColors.blueDark,
+                        tabs: [
+                          _buildTab("All", context),
+                          _buildTab("Recent", context),
+                          _buildTab("Top", context),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 2.h),
+
+                    // TabBarView Section
+                    SizedBox(
+                      height: 80.h,
+                      child: TabBarView(
+                        controller: _tabController,
+                        clipBehavior: Clip.none,
+                        children: [
+                          _buildProjectsTab(_allProjectsFuture),
+                          const Center(child: Text('Content 2')),
+                          const Center(child: Text('Content 3')),
+                        ],
+                      ),
+                    ),
+                    const Divider(
+                      height: 2,
+                      thickness: 2,
+                      color: Color.fromARGB(255, 245, 243, 243),
+                    ),
+                    SizedBox(height: 4.h),
+
+                    // New Programs Section
+                    const Botcamps(),
+                    SizedBox(height: 2.h),
+
+                    const Divider(
+                      height: 2,
+                      thickness: 2,
+                      color: Color.fromARGB(255, 245, 243, 243),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 2.w),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Outstanding students ..',
+                          style: TextStyle(
+                            color: AppColors.blueLight,
+                            fontSize: 18.sp, // استخدم sp لحجم النص
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10.h),
+
+                    const Out_Standing_Student(),
+                    SizedBox(height: 10.h),
+                  ],
+                ),
+              ),
+            ],
           ),
         );
       },
@@ -200,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen>
   Widget _buildTab(String label, BuildContext context) {
     return Container(
       width: 100.w,
-      height: 6.h,
+      height: 5.h,
       padding: EdgeInsets.symmetric(
         vertical: 1.h,
         horizontal: 2.w,
@@ -213,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen>
         label,
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 12.sp, // حجم النص مع تجاوب
+          fontSize: 12.sp,
         ),
       ),
     );

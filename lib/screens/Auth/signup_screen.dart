@@ -20,7 +20,7 @@ class SignupScreen extends StatelessWidget {
           },
           child: BlocListener<CreateAccountBloc, CreateAccountState>(
             listener: (context, state) {
-                if (state is LoadingState) {
+              if (state is LoadingState) {
                 showDialog(
                     barrierDismissible: false,
                     context: context,
@@ -90,8 +90,7 @@ class SignupScreen extends StatelessWidget {
                               controller: bloc.controllerEmail,
                               decoration: const InputDecoration(
                                 hintText: 'Email',
-                                hintStyle:
-                                    TextStyle(color: Color(0xff4129B7)),
+                                hintStyle: TextStyle(color: Color(0xff4129B7)),
                                 border: InputBorder.none,
                                 contentPadding: EdgeInsets.symmetric(
                                     horizontal: 20, vertical: 15),
@@ -118,8 +117,7 @@ class SignupScreen extends StatelessWidget {
                               controller: bloc.controllerFName,
                               decoration: const InputDecoration(
                                 hintText: 'First name',
-                                hintStyle:
-                                    TextStyle(color: Color(0xff4129B7)),
+                                hintStyle: TextStyle(color: Color(0xff4129B7)),
                                 border: InputBorder.none,
                                 contentPadding: EdgeInsets.symmetric(
                                     horizontal: 20, vertical: 15),
@@ -146,8 +144,7 @@ class SignupScreen extends StatelessWidget {
                               controller: bloc.controllerLName,
                               decoration: const InputDecoration(
                                 hintText: 'Last name',
-                                hintStyle:
-                                    TextStyle(color: Color(0xff4129B7)),
+                                hintStyle: TextStyle(color: Color(0xff4129B7)),
                                 border: InputBorder.none,
                                 contentPadding: EdgeInsets.symmetric(
                                     horizontal: 20, vertical: 15),
@@ -189,7 +186,7 @@ class SignupScreen extends StatelessWidget {
 
                   // Bottom Image
                   Positioned(
-                    bottom: 0,
+                    bottom: -120,
                     left: 0,
                     right: 0,
                     child: Column(

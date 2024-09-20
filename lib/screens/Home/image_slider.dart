@@ -12,8 +12,8 @@ class _ImageSliderState extends State<ImageSlider> {
   int _currentImage = 0;
   final List<String> images = [
     'assets/Group 44.png',
-    'assets/Group 44.png',
-    'assets/Group 44.png',
+    'assets/Group 114.png',
+    'assets/Screenshot 1446-03-17 at 12.00.00 AM 1.png',
   ];
 
   late PageController _pageController;
@@ -69,8 +69,8 @@ class _ImageSliderState extends State<ImageSlider> {
                   child: Image.asset(
                     images[index],
                     fit: BoxFit.contain,
-                    width: 343,
-                    height: 180,
+                    width: 400,
+                    height: 200,
                   ),
                 ),
               );
