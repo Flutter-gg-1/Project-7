@@ -55,7 +55,6 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
-          // يجب استخدام Column أو Row هنا ليحتوي على Expanded
           children: [
             Padding(
               padding: EdgeInsets.all(8.w),
@@ -63,7 +62,6 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
-                    // Expanded الآن داخل Row
                     child: Container(
                       decoration: BoxDecoration(
                         boxShadow: [
@@ -99,7 +97,6 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
               ),
             ),
             Expanded(
-              // Expanded هنا داخل Column
               child: SingleChildScrollView(
                 child: Column(
                   children: [
