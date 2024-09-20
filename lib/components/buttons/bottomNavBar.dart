@@ -13,10 +13,15 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final bottomNavBarHeight = 120.0;
+    final middleButtonSize = 100.0;
+
     return Stack(
       clipBehavior: Clip.none,
       children: [
         Container(
+          height: bottomNavBarHeight,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
@@ -48,23 +53,25 @@ class BottomNavBar extends StatelessWidget {
                 buildBottomNavBarItem('assets/images/Call.png', 'Home', 0),
                 buildBottomNavBarItem('assets/images/browse.png', 'Browse', 1),
                 BottomNavigationBarItem(
-                  icon: SizedBox.shrink(), 
+                  icon: SizedBox.shrink(),
                   label: '',
                 ),
-                buildBottomNavBarItem('assets/images/projects.png', 'My Projects', 3),
-                buildBottomNavBarItem('assets/images/profile.png', 'Profile', 4),
-              ],
+                buildBottomNavBarItem(
+                    'assets/images/projects.png', 'My Projects', 3),
+                buildBottomNavBarItem(
+                    'assets/images/profile.png', 'Profile', 4),
+                    ],
             ),
           ),
         ),
         Positioned(
-          bottom: 60,
-          left: MediaQuery.of(context).size.width / 2 - 35,
+          bottom: bottomNavBarHeight / 2- middleButtonSize /70,
+          left: (screenWidth / 2) - (middleButtonSize / 2),
           child: GestureDetector(
             onTap: onMiddleButtonTapped,
             child: Container(
-              width: 80,
-              height: 80,
+              width: middleButtonSize,
+              height: middleButtonSize,
               decoration: BoxDecoration(
                 color: Colors.transparent,
                 shape: BoxShape.circle,
@@ -73,7 +80,7 @@ class BottomNavBar extends StatelessWidget {
                 child: Image.asset(
                   'assets/images/FAB.png',
                   fit: BoxFit.cover,
-                  width: 48,
+                  width: 50,
                   height: 48,
                 ),
               ),
@@ -91,10 +98,9 @@ class BottomNavBar extends StatelessWidget {
         children: [
           Image.asset(
             assetPath,
-            width: 24,
-            height: 24,
-            color:
-                selectedIndex == index ? Color(0xFF4E2EB5) : Color(0xFF848484),
+            width: 20,
+            height: 20,
+            color:selectedIndex == index ? Color(0xFF4E2EB5) : Color(0xFF848484),
           ),
           SizedBox(height: 5),
           Text(
