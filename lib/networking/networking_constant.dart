@@ -28,6 +28,8 @@ abstract class NetworkingConstant {
   final String endProjectMembersEdit = "/user/edit/project/members/";
   final String endProjectCreate = "/supervisor/create/project";
   final String endProjectChangeState = "/supervisor/change/status/";
+  
+  final String endGetAllProject = "/projects";
 
   final String endProjectDel = "/supervisor/delete/project/";
 

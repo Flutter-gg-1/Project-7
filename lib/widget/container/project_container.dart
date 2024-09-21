@@ -1,20 +1,22 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
+import 'package:tuwaiq_project/models/profile_model.dart';
 
 class ProjectContainer extends StatelessWidget {
   final Function()? onTap;
-  final String imagePath, bootcamp, rate, projectName;
+  // final String imagePath, bootcamp, rate, projectName;
+
+  final ProjectsModel projectsModel;
   const ProjectContainer({
     super.key,
     this.onTap,
-    required this.bootcamp,
-    required this.rate,
-    required this.imagePath,
-    required this.projectName,
+    required this.projectsModel,
   });
 
   @override
   Widget build(BuildContext context) {
+    print(projectsModel.logoUrl);
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -27,16 +29,34 @@ class ProjectContainer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              imagePath,
-              width: double.infinity,
-            ),
+            projectsModel.logoUrl != null && projectsModel.logoUrl!.isNotEmpty
+                ? Image.network(
+                    projectsModel.logoUrl!,
+                    errorBuilder: (context, error, stackTrace) {
+                      
+                      return Image.asset("assets/image/flutter.png");
+                    },
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null){
+                           return child; 
+
+                      }
+                     
+                      return const Center(
+                        child:
+                            Center(child: CircularProgressIndicator()), 
+                      );
+                    },
+                    fit: BoxFit.cover, // Adjust fit as needed
+                  )
+                : Image.asset("assets/image/flutter.png"),
             //Later make sure for responsive
-             Row(
+            Row(
               children: [
                 Text(
-                  projectName,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  projectsModel.projectName ?? "no name",
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 const Spacer(),
                 const Icon(
@@ -44,13 +64,14 @@ class ProjectContainer extends StatelessWidget {
                   color: Colors.amberAccent,
                 ),
                 Text(
-                  '$rate/5',
-                  style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                  '${projectsModel.rating}/5',
+                  style: const TextStyle(
+                      fontSize: 13, fontWeight: FontWeight.bold),
                 )
               ],
             ),
-             Text(
-              bootcamp,
+            Text(
+              projectsModel.bootcampName ?? "no name",
               style: const TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
