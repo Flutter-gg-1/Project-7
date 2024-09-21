@@ -15,7 +15,9 @@ class QrScannerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('QR Code Scanner', style: TextStyle(color: AppColors.white)),
+        automaticallyImplyLeading: false,
+        title: const Text('QR Code Scanner',
+            style: TextStyle(color: AppColors.white)),
         backgroundColor: AppColors.blueDark,
       ),
       body: BlocProvider(
@@ -42,9 +44,11 @@ class BarcodeScannerView extends StatelessWidget {
               } else if (state is BarcodeScanning) {
                 return const CircularProgressIndicator(); // Show progress during scan
               } else if (state is BarcodeScanned) {
-                return Text('Scan result: ${state.result}'); // Display result after scan
+                return Text(
+                    'Scan result: ${state.result}'); // Display result after scan
               } else if (state is BarcodeScanFailed) {
-                return const Text('Failed to scan the barcode.'); // Show error message
+                return const Text(
+                    'Failed to scan the barcode.'); // Show error message
               }
               return const SizedBox.shrink();
             },
@@ -52,10 +56,12 @@ class BarcodeScannerView extends StatelessWidget {
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
-              BlocProvider.of<BarcodeScannerBloc>(context).add(StartScan()); // Trigger scan event
+              BlocProvider.of<BarcodeScannerBloc>(context)
+                  .add(StartScan()); // Trigger scan event
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.blueDark, // Set button background color
+              backgroundColor:
+                  AppColors.blueDark, // Set button background color
             ),
             child: const Text(
               'Start Barcode Scan',

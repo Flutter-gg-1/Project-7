@@ -19,6 +19,7 @@ class DataLayer {
       auth = AuthModel.fromJson(
           Map.from(await box.read("auth")).cast<String, dynamic>());
     }
+  
   }
 
   Future<void> logOut() async {
