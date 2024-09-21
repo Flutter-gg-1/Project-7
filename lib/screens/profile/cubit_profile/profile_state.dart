@@ -11,8 +11,6 @@ final class ShowProfileState extends ProfileState {
   ShowProfileState({required this.profileModel});
 }
 
-
-
 final class ErorrState extends ProfileState {
   final String msg;
 

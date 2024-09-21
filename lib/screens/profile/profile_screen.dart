@@ -8,6 +8,7 @@ import 'package:tuwaiq_project/widget/links_profile/custome_links_profile.dart';
 import 'package:tuwaiq_project/widget/links_profile/custome_title_text_profile.dart';
 import 'package:tuwaiq_project/widget/list_tile/custome_listtile_profile.dart';
 import 'package:tuwaiq_project/widget/status_profile/custome_status_profile.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -102,21 +103,32 @@ class ProfileScreen extends StatelessWidget {
                           FontAwesomeIcons.linkedinIn,
                           color: Colors.white,
                         ),
-                        onTap: () async {},
+                        onTap: () async {
+                          await launchUrl(
+                              Uri.parse(state.profileModel.link.linkedin ??
+                                  "fake_url"),
+                              mode: LaunchMode.externalApplication);
+                        },
                       ),
                       CustomeLinksProfile(
                         iconLinks: const FaIcon(
                           FontAwesomeIcons.github,
                           color: Colors.white,
                         ),
-                        onTap: () async {},
+                        onTap: () async {
+                          await launchUrl(
+                              Uri.parse(state.profileModel.link.github ?? " "));
+                        },
                       ),
                       CustomeLinksProfile(
                         iconLinks: const FaIcon(
                           FontAwesomeIcons.discord,
                           color: Colors.white,
                         ),
-                        onTap: () async {},
+                        onTap: () async {
+                          await launchUrl(Uri.parse(
+                              state.profileModel.link.bindlink ?? " "));
+                        },
                       ),
                       CustomeLinksProfile(
                         text: 'CV',
