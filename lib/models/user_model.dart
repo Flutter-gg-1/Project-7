@@ -1,3 +1,5 @@
+import 'project_info_model.dart';
+
 class UserModel {
   UserModel({
     required this.id,
@@ -18,7 +20,7 @@ class UserModel {
   late final String role;
   late final String imageUrl;
   late final Link link;
-  late final List<Projects> projects;
+  late final List<ProjectsInfo> projects;
   late final String createdAt;
   late final String updatedAt;
 
@@ -31,7 +33,7 @@ class UserModel {
     imageUrl = json['imageUrl'];
     link = Link.fromJson(json['link']);
     projects =
-        List.from(json['projects']).map((e) => Projects.fromJson(e)).toList();
+        List.from(json['projects']).map((e) => ProjectsInfo.fromJson(e)).toList();
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -77,109 +79,6 @@ class Link {
   }
 }
 
-class Projects {
-  Projects({
-    required this.projectId,
-    required this.type,
-    this.projectName,
-    this.bootcampName,
-    this.startDate,
-    this.endDate,
-    this.presentationDate,
-    this.projectDescription,
-    this.logoUrl,
-    this.presentationUrl,
-    required this.userId,
-    required this.adminId,
-    required this.timeEndEdit,
-    required this.allowEdit,
-    required this.allowRating,
-    required this.isPublic,
-    required this.rating,
-    required this.createAt,
-    required this.updateAt,
-    required this.imagesProject,
-    required this.linksProject,
-    required this.membersProject,
-  });
-  late final String? projectId;
-  late final String? type;
-  late final String? projectName;
-  late final String? bootcampName;
-  late final String? startDate;
-  late final String? endDate;
-  late final String? presentationDate;
-  late final String? projectDescription;
-  late final String? logoUrl;
-  late final String? presentationUrl;
-  late final String? userId;
-  late final String? adminId;
-  late final String? timeEndEdit;
-  late final bool? allowEdit;
-  late final bool? allowRating;
-  late final bool? isPublic;
-  late final int? rating;
-  late final String? createAt;
-  late final String? updateAt;
-  late final List<dynamic>? imagesProject;
-  late final List<dynamic>? linksProject;
-  late final List<MembersProject>? membersProject;
-
-  Projects.fromJson(Map<String, dynamic> json) {
-    projectId = json['project_id'];
-    type = json['type'];
-    projectName = json['projectName'];
-    bootcampName = json['bootcampName'];
-    startDate = json['startDate'];
-    endDate = json['endDate'];
-    presentationDate = json['presentationDate'];
-    projectDescription = json['projectDescription'];
-    logoUrl = json['logoUrl'];
-    presentationUrl = json['presentationUrl'];
-    userId = json['user_id'];
-    adminId = json['admin_id'];
-    timeEndEdit = json['time_end_edit'];
-    allowEdit = json['allow_edit'];
-    allowRating = json['allow_rating'];
-    isPublic = json['is_public'];
-    rating = json['rating'];
-    createAt = json['create_at'];
-    updateAt = json['update_at'];
-    imagesProject = List.castFrom<dynamic, dynamic>(json['images_project']);
-    linksProject = List.castFrom<dynamic, dynamic>(json['links_project']);
-    membersProject = List.from(json['members_project'])
-        .map((e) => MembersProject.fromJson(e))
-        .toList();
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['project_id'] = projectId;
-    _data['type'] = type;
-    _data['project_name'] = projectName;
-    _data['bootcamp_name'] = bootcampName;
-    _data['start_date'] = startDate;
-    _data['end_date'] = endDate;
-    _data['presentation_date'] = presentationDate;
-    _data['project_description'] = projectDescription;
-    _data['logo_url'] = logoUrl;
-    _data['presentation_url'] = presentationUrl;
-    _data['user_id'] = userId;
-    _data['admin_id'] = adminId;
-    _data['time_end_edit'] = timeEndEdit;
-    _data['allow_edit'] = allowEdit;
-    _data['allow_rating'] = allowRating;
-    _data['is_public'] = isPublic;
-    _data['rating'] = rating;
-    _data['create_at'] = createAt;
-    _data['update_at'] = updateAt;
-    _data['images_project'] = imagesProject;
-    _data['links_project'] = linksProject;
-    _data['members_project'] = membersProject!.map((e) => e.toJson()).toList();
-    return _data;
-  }
-}
-
 class MembersProject {
   MembersProject({
     required this.id,
@@ -219,4 +118,5 @@ class MembersProject {
     _data['link'] = link.toJson();
     return _data;
   }
+  
 }
