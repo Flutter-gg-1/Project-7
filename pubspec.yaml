@@ -19,6 +19,8 @@ dependencies:
 
   flutter_rating_bar: ^4.0.1
   carousel_slider: ^5.0.0
+  device_preview: ^1.2.0
+ 
 
 dev_dependencies:
   flutter_test:
