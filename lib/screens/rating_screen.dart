@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
+import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
+import 'package:tuwaiq_project/widget/button/custom_button.dart';
 import 'package:tuwaiq_project/widget/custome_rating_star.dart';
 import 'package:tuwaiq_project/widget/project_view_widget/costumr_details_project.dart';
 
 class RatingScreen extends StatelessWidget {
-  const RatingScreen({super.key});
-
+  RatingScreen({super.key});
+  final language = languageLocaitor.get<LanguageLayer>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
@@ -35,7 +39,7 @@ class RatingScreen extends StatelessWidget {
                 CostomeDetailsProject(
                   readOnly: true,
                   maxHeight: context.getHeight(multiply: 0.13),
-                  titleText: 'details project',
+                  titleText: 'Project details',
                   heightContainer: context.getHeight(multiply: 0.22),
                   widthContainer: context.getWidth(multiply: 0.6),
                   cotentText:
@@ -133,6 +137,13 @@ class RatingScreen extends StatelessWidget {
             SizedBox(
               height: context.getHeight(multiply: 0.03),
             ),
+            CustomButton(
+              englishTitle: 'Submit',
+              arabicTitle: 'تقييم',
+              onPressed: () {},
+              arabic: language.isArabic,
+            ),
+            context.addSpacer()
           ],
         ),
       )),
