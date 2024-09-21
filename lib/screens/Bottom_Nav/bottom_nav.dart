@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project_management_app/screens/Bottom_Nav/bottom_nav_bloc/bottom_nav_bloc.dart';
+import 'package:project_management_app/screens/QR_scanner/qr_scanner_screen.dart';
 import 'package:project_management_app/theme/appcolors.dart';
 
 class BottomNav extends StatelessWidget {
@@ -15,7 +16,7 @@ class BottomNav extends StatelessWidget {
       FontAwesomeIcons.rectangleList,
       Icons.calendar_month,
       Icons.person,
-      Icons.qr_code,
+      // Icons.qr_code,  // لن نستخدم هذه الأيقونة في الـ Bottom Nav الآن
     ];
 
     return BlocProvider(
@@ -39,7 +40,24 @@ class BottomNav extends StatelessWidget {
             },
           ),
 
-          // Floating Action Button
+          // تعديل الـ Floating Action Button
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              // عند الضغط، الانتقال إلى صفحة QR Code
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const QrScannerScreen()),
+              );
+            },
+            backgroundColor: AppColors.blueLight,
+            child: const Icon(Icons.qr_code,
+                size: 25, color: Colors.white), // تعديل الأيقونة إلى QR Code
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked, // لضبط موقع الفاب
+
+          // شريط التنقل السفلي
           bottomNavigationBar: BlocBuilder<BottomNavBloc, BottomNavState>(
             builder: (context, state) {
               final bloc = BlocProvider.of<BottomNavBloc>(context);
@@ -82,15 +100,15 @@ class BottomNav extends StatelessWidget {
                       ],
                     );
                   },
-                  backgroundColor: Colors
-                      .transparent, // Set to transparent because the container handles it
+                  backgroundColor: Colors.transparent,
                   height: 50,
                   activeIndex: currentPageIndex,
-                  gapLocation: GapLocation.none,
+                  gapLocation: GapLocation.center,
+                  gapWidth: 40,
                   leftCornerRadius: 32,
                   rightCornerRadius: 32,
                   splashRadius: 30,
-                  notchSmoothness: NotchSmoothness.verySmoothEdge,
+                  notchSmoothness: NotchSmoothness.softEdge,
                   onTap: (index) {
                     BlocProvider.of<BottomNavBloc>(context)
                         .add(ChangeEvent(index: index));
