@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
       ],
       child: const MaterialApp(
         //debugShowCheckedModeBanner: false,
-        home: RatingScreen(),
+        home: HomeScreen(),
       ),
     );
   }

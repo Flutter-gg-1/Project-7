@@ -69,12 +69,57 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                   context.getHeight(multiply: 0.1)),
               painter: AuthShape(),
             ),
-            Container(
-              height: context.getHeight(multiply: 0.19),
-              width: context.getWidth(multiply: 0.19),
-              decoration: const BoxDecoration(
-                  color: Color(0xffCACACA), shape: BoxShape.circle),
-              child: Image.asset('assets/image/Search-amico(1).png'),
+            BlocBuilder<ImgHandleCubit, ImgHandleState>(
+              builder: (context, state) {
+                if (state is ImageHereState) {
+                  return Badge(
+                    alignment: AlignmentGeometry.lerp(
+                        Alignment.centerLeft, Alignment.topRight, 0.6),
+                    smallSize: 10,
+                    backgroundColor: Colors.transparent,
+                    label: IconButton(
+                        onPressed: () {
+                          context.read<ImgHandleCubit>().imageDel();
+                        },
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        )),
+                    child: Container(
+                      height: context.getHeight(multiply: 0.19),
+                      width: context.getWidth(multiply: 0.19),
+                      decoration: const BoxDecoration(
+                          color: Color(0xffCACACA), shape: BoxShape.circle),
+                      child: Image.memory(Uint8List.fromList(state.imgFile)),
+                    ),
+                  );
+                }
+                return Badge(
+                  alignment: AlignmentGeometry.lerp(
+                      Alignment.centerLeft, Alignment.topRight, 0.6),
+                  smallSize: 10,
+                  backgroundColor: Colors.transparent,
+                  label: IconButton(
+                      onPressed: () async {
+                        final ImagePicker picker = ImagePicker();
+                        final XFile? imgFile =
+                            await picker.pickImage(source: ImageSource.gallery);
+
+                        if (imgFile != null) {
+                          final bytes = await imgFile.readAsBytes();
+                          context.read<ImgHandleCubit>().imageAdd(bytes);
+                        }
+                      },
+                      icon: const FaIcon(FontAwesomeIcons.camera)),
+                  child: Container(
+                    height: context.getHeight(multiply: 0.19),
+                    width: context.getWidth(multiply: 0.19),
+                    decoration: const BoxDecoration(
+                        color: Color(0xffCACACA), shape: BoxShape.circle),
+                    child: Image.asset('assets/image/Search-amico(1).png'),
+                  ),
+                );
+              },
             ),
             Center(
               child: Column(
@@ -131,30 +176,42 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
               title: 'CV',
             ),
             Container(
-              width: 200,
-              height: 50,
-              color: Colors.grey,
+              width: context.getWidth(multiply: 0.9),
+              height: context.getHeight(multiply: 0.08),
+              decoration: BoxDecoration(
+                  color: const Color(0xffEDEDED),
+                  borderRadius: BorderRadius.circular(6)),
               child: BlocBuilder<CvHandleCubit, CvHandleState>(
                 builder: (context, state) {
                   if (state is CvHereState) {
-                    return Row(
-                      children: [
-                        Text(state.cvName),
-                        IconButton(
+                    return Padding(
+                      padding: EdgeInsets.only(
+                          left: context.getWidth(multiply: 0.005),
+                          top: context.getWidth(multiply: 0.015)),
+                      child: ListTile(
+                        leading: Text(
+                          state.cvName,
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        trailing: IconButton(
                             onPressed: () {
                               context.read<CvHandleCubit>().cvDel();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.delete,
                               color: Colors.red,
-                            ))
-                      ],
+                            )),
+                      ),
                     );
                   }
-                  return Row(
-                    children: [
-                      Text("no file"),
-                      IconButton(
+                  return Padding(
+                    padding: EdgeInsets.only(
+                        left: context.getWidth(multiply: 0.005),
+                        top: context.getWidth(multiply: 0.015)),
+                    child: ListTile(
+                      leading:
+                          const Text("no file", style: TextStyle(fontSize: 16)),
+                      trailing: IconButton(
                           onPressed: () async {
                             final fileData =
                                 await FilePicker.platform.pickFiles(
@@ -173,8 +230,8 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                                   fileName.substring(0, 5));
                             }
                           },
-                          icon: Icon(FontAwesomeIcons.plus))
-                    ],
+                          icon: const Icon(FontAwesomeIcons.plus)),
+                    ),
                   );
                 },
               ),
@@ -224,46 +281,6 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                   },
                 ),
               ],
-            ),
-            BlocBuilder<ImgHandleCubit, ImgHandleState>(
-              builder: (context, state) {
-                if (state is ImageHereState) {
-                  return Container(
-                      width: 200,
-                      height: 100,
-                      child: Stack(
-                        children: [
-                          Image.memory(Uint8List.fromList(state.imgFile)),
-                          IconButton(
-                              onPressed: () {
-                                context.read<ImgHandleCubit>().imageDel();
-                              },
-                              icon: const Icon(
-                                Icons.delete,
-                                color: Colors.red,
-                              ))
-                        ],
-                      ));
-                }
-
-                return GestureDetector(
-                  onTap: () async {
-                    final ImagePicker picker = ImagePicker();
-                    final XFile? imgFile =
-                        await picker.pickImage(source: ImageSource.gallery);
-
-                    if (imgFile != null) {
-                      final bytes = await imgFile.readAsBytes();
-                      context.read<ImgHandleCubit>().imageAdd(bytes);
-                    }
-                  },
-                  child: Container(
-                      width: 100,
-                      height: 100,
-                      color: Colors.grey,
-                      child: const Icon(FontAwesomeIcons.plus)),
-                );
-              },
             ),
             SizedBox(
               height: context.getHeight(multiply: 0.035),

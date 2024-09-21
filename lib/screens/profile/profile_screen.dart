@@ -177,7 +177,7 @@ class ProfileScreen extends StatelessWidget {
                         CustomeListTileProfile(
                           onTap: () {},
                           iconListTile: Icon(
-                            Icons.notifications_none_outlined,
+                            Icons.chrome_reader_mode,
                             size: context.getHeight(multiply: 0.035),
                             color: const Color(0xff0601B4).withOpacity(0.70),
                           ),
