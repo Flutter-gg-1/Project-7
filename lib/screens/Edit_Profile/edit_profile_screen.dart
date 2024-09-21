@@ -189,17 +189,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         child: resumeFile == null
                             ? IconButton(
                                 onPressed: () async {
-                                  final FilePickerResult? result =
-                                      await FilePicker.platform.pickFiles(
-                                    type: FileType.custom,
-                                    allowedExtensions: ['pdf'],
-                                  );
-
-                                  if (result != null) {
-                                    setState(() {
-                                      _pickResume();
-                                    });
-                                  }
+                                  _pickResume();
                                 },
                                 icon: const Icon(Icons.file_present,
                                     color: Colors.black),

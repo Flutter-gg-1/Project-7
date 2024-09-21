@@ -5,6 +5,7 @@ import 'package:project_management_app/data_layer/data_layer.dart';
 import 'package:project_management_app/models/profile_model.dart';
 import 'package:project_management_app/networking/api_networking.dart';
 import 'package:project_management_app/screens/Edit_Profile/edit_profile_screen.dart';
+import 'package:project_management_app/screens/Home/projects_contaner.dart';
 import 'package:project_management_app/screens/Profile/custom_profile_links.dart';
 import 'package:project_management_app/screens/Supervisor/add_project_screen.dart';
 import 'package:project_management_app/services/setup.dart';
@@ -93,13 +94,19 @@ class ProfileScreen extends StatelessWidget {
                                     border: Border.all(
                                         color: Colors.white, width: 4)),
                                 child: ClipOval(
-                                  child: Image.asset(
-                                    'assets/R 2.png',
-                                    width: 68,
-                                    height: 68,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                                    child: profile.imageUrl == null
+                                        ? Image.asset(
+                                            'assets/pfp.png',
+                                            width: 68,
+                                            height: 68,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image.network(
+                                            profile.imageUrl,
+                                            width: 68,
+                                            height: 68,
+                                            fit: BoxFit.cover,
+                                          )),
                               ),
                               const SizedBox(width: 20),
                               Column(
@@ -256,18 +263,17 @@ class ProfileScreen extends StatelessWidget {
                         const SizedBox(height: 10),
                         ...List.generate(profile.projects.length, (index) {
                           return ListTile(
-                            trailing: profile.role == 'supervisor'
-                                ? IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.delete,
-                                      color: Colors.red,
-                                    ),
-                                  )
-                                : null,
-                            title: Text(profile.projects[index]
-                                .projectName!), // تأكد من أن "name" هو خاصية صالحة
-                          );
+                              trailing: profile.role == 'supervisor'
+                                  ? IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
+                                    )
+                                  : null,
+                              title:
+                                  Projects(project: profile.projects[index]));
                         }),
                         const SizedBox(height: 30),
                       ],
