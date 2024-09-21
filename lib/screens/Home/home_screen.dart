@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_management_app/models/project_model.dart';
 import 'package:project_management_app/networking/api_networking.dart';
+import 'package:project_management_app/screens/Home/bloc/home_bloc.dart';
 import 'package:project_management_app/screens/Home/boot_camps.dart';
 import 'package:project_management_app/screens/Home/image_slider.dart';
 import 'package:project_management_app/screens/Home/out_Standing_student.dart';
@@ -8,168 +10,103 @@ import 'package:project_management_app/screens/Home/projects_contaner.dart';
 import 'package:project_management_app/theme/appcolors.dart';
 import 'package:sizer/sizer.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-  late Future<List<ProjectModel>> _allProjectsFuture;
-  final ApiNetworking apiNetworking = ApiNetworking();
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 3, vsync: this);
-    _allProjectsFuture = apiNetworking.getAllPublicProjects();
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  Widget _buildProjectsTab(Future<List<ProjectModel>> futureProjects) {
-    return FutureBuilder<List<ProjectModel>>(
-      future: futureProjects,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-              child: CircularProgressIndicator(
-            color: Colors.lightBlueAccent,
-          )); // عرض مؤشر التحميل عند انتظار البيانات
-        } else if (snapshot.hasError) {
-          return Center(
-              child: Text('Error: ${snapshot.error}')); // عرض رسالة الخطأ
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(
-              child: Text(
-                  'No projects available.')); // عرض رسالة عند عدم وجود بيانات
-        }
-
-        return ListView.builder(
-          shrinkWrap: true,
-
-          // physics: const NeverScrollableScrollPhysics(),
-          itemCount: snapshot.data!.length,
-          itemBuilder: (context, index) {
-            final project = snapshot.data![index];
-            return Projects(
-              project: project,
-            );
-          },
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) {
-        return Scaffold(
-          backgroundColor: Color(0x80e9e9e9),
-          body: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                backgroundColor: const Color(0xff352197),
-                floating: true, // لتجعل الـ AppBar يظهر عند التمرير لأعلى
-                pinned: false, // لا يبقى مثبتًا عند التمرير لأسفل
-
-                actions: [
-                  Image.asset(
-                    'assets/logo-h-white 2.png',
-                    height: 20.h,
-                    width: 28.w,
-                  ),
-                ],
-              ),
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    const Center(child: ImageSlider()), // Image Slider
-                    SizedBox(height: 2.h),
-
-                    // Tab Bar Section
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 0.3.w),
-                      child: TabBar(
-                        controller: _tabController,
-                        indicator: BoxDecoration(
-                          color: AppColors.blueLight.withOpacity(0.6),
-                          borderRadius: BorderRadius.circular(10.sp),
-                        ),
-                        dividerHeight: 0,
-                        labelColor: Colors.white,
-                        unselectedLabelColor: AppColors.blueDark,
-                        tabs: [
-                          _buildTab("All", context),
-                          _buildTab("Recent", context),
-                          _buildTab("Top", context),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 2.h),
-
-                    // TabBarView Section
-                    SizedBox(
-                      height: 80.h,
-                      child: TabBarView(
-                        controller: _tabController,
-                        clipBehavior: Clip.none,
-                        children: [
-                          _buildProjectsTab(_allProjectsFuture),
-                          const Center(child: Text('Content 2')),
-                          const Center(child: Text('Content 3')),
-                        ],
-                      ),
-                    ),
-                    const Divider(
-                      height: 2,
-                      thickness: 2,
-                      color: Color.fromARGB(255, 245, 243, 243),
-                    ),
-                    SizedBox(height: 4.h),
-
-                    // New Programs Section
-                    const Botcamps(),
-                    SizedBox(height: 2.h),
-
-                    const Divider(
-                      height: 2,
-                      thickness: 2,
-                      color: Color.fromARGB(255, 245, 243, 243),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 2.w),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Outstanding students ..',
-                          style: TextStyle(
-                            color: AppColors.blueLight,
-                            fontSize: 18.sp, // استخدم sp لحجم النص
-                            fontWeight: FontWeight.bold,
+        return BlocProvider(
+          create: (context) =>
+              HomeBloc(apiNetworking: ApiNetworking())..add(FetchProjects()),
+          child: Builder(
+            builder: (context) {
+              return DefaultTabController(
+                length: 3, // Number of tabs
+                child: Scaffold(
+                  backgroundColor: const Color(0x80e9e9e9),
+                  body: CustomScrollView(
+                    slivers: [
+                      SliverAppBar(
+                        backgroundColor: const Color(0xff352197),
+                        floating: true,
+                        pinned: false,
+                        actions: [
+                          Image.asset(
+                            'assets/logo-h-white 2.png',
+                            height: 20.h,
+                            width: 28.w,
                           ),
+                        ],
+                      ),
+                      SliverList(
+                        delegate: SliverChildListDelegate(
+                          [
+                            const Center(child: ImageSlider()), // Image Slider
+                            SizedBox(height: 2.h),
+                            _buildTabBar(context),
+                            SizedBox(height: 2.h),
+                            _buildTabContent(),
+                            const Divider(
+                              height: 2,
+                              thickness: 2,
+                              color: Color.fromARGB(255, 245, 243, 243),
+                            ),
+                            const Botcamps(),
+                            const Divider(
+                              height: 2,
+                              thickness: 2,
+                              color: Color.fromARGB(255, 245, 243, 243),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 2.w),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Outstanding students ..',
+                                  style: TextStyle(
+                                    color: AppColors.blueLight,
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 10.h),
+                            const Out_Standing_Student(),
+                            SizedBox(height: 10.h),
+                          ],
                         ),
                       ),
-                    ),
-                    SizedBox(height: 10.h),
-
-                    const Out_Standing_Student(),
-                    SizedBox(height: 10.h),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              );
+            },
           ),
         );
       },
+    );
+  }
+
+  Widget _buildTabBar(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 0.3.w),
+      child: TabBar(
+        indicator: BoxDecoration(
+          color: AppColors.blueLight.withOpacity(0.6),
+          borderRadius: BorderRadius.circular(10.sp),
+        ),
+        dividerHeight: 0,
+        labelColor: Colors.white,
+        unselectedLabelColor: AppColors.blueDark,
+        tabs: [
+          _buildTab("All", context),
+          _buildTab("Recent", context),
+          _buildTab("Top", context),
+        ],
+      ),
     );
   }
 
@@ -191,6 +128,42 @@ class _HomeScreenState extends State<HomeScreen>
           fontWeight: FontWeight.bold,
           fontSize: 12.sp,
         ),
+      ),
+    );
+  }
+
+  Widget _buildTabContent() {
+    return SizedBox(
+      height: 80.h,
+      child: TabBarView(
+        children: [
+          BlocBuilder<HomeBloc, HomeState>(
+            builder: (context, state) {
+              if (state is HomeLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.lightBlueAccent,
+                  ),
+                );
+              } else if (state is HomeLoaded) {
+                return ListView.builder(
+                  itemCount: state.projects.length,
+                  itemBuilder: (context, index) {
+                    final project = state.projects[index];
+                    return Projects(project: project);
+                  },
+                );
+              } else if (state is HomeError) {
+                return Center(
+                  child: Text('Error: ${state.message}'),
+                );
+              }
+              return const Center(child: Text('No projects available.'));
+            },
+          ),
+          const Center(child: Text('Recent Projects')),
+          const Center(child: Text('Top Projects')),
+        ],
       ),
     );
   }
