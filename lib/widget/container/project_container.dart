@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/models/profile_model.dart';
@@ -33,28 +32,27 @@ class ProjectContainer extends StatelessWidget {
                 ? Image.network(
                     projectsModel.logoUrl!,
                     errorBuilder: (context, error, stackTrace) {
-                      
                       return Image.asset("assets/image/flutter.png");
                     },
                     loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null){
-                           return child; 
-
+                      if (loadingProgress == null) {
+                        return child;
                       }
-                     
+
                       return const Center(
-                        child:
-                            Center(child: CircularProgressIndicator()), 
+                        child: Center(child: CircularProgressIndicator()),
                       );
                     },
-                    fit: BoxFit.cover, 
+                    fit: BoxFit.cover,
                   )
                 : Image.asset("assets/image/flutter.png"),
             //Later make sure for responsive
             Row(
               children: [
                 Text(
-                  projectsModel.projectName ?? "no name",
+                  projectsModel.projectName == null
+                      ? "no name"
+                      : '${projectsModel.projectName?.substring(0, projectsModel.projectName!.length > 8 ? 8 : projectsModel.projectName?.length)}...',
                   style: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.bold),
                 ),
