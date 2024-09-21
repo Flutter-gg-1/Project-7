@@ -14,7 +14,7 @@ import 'package:tuwaiq_project/screens/projectView/edit_project_screen.dart';
 
 
 
-import 'package:tuwaiq_project/screens/project_view_screen.dart';
+import 'package:tuwaiq_project/screens/project_info/project_view_screen.dart';
 
 
 import 'package:tuwaiq_project/screens/projectView/manage_project_screen.dart';

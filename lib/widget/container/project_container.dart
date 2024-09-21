@@ -47,7 +47,7 @@ class ProjectContainer extends StatelessWidget {
                             Center(child: CircularProgressIndicator()), 
                       );
                     },
-                    fit: BoxFit.cover, // Adjust fit as needed
+                    fit: BoxFit.cover, 
                   )
                 : Image.asset("assets/image/flutter.png"),
             //Later make sure for responsive

@@ -5,7 +5,7 @@ import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/screens/all_project/show_projects_cubit/show_projects_cubit.dart';
 import 'package:tuwaiq_project/screens/auth/bloc/auth_bloc.dart';
-import 'package:tuwaiq_project/screens/project_view_screen.dart';
+import 'package:tuwaiq_project/screens/project_info/project_view_screen.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/widget/column/bootcamp_column.dart';
 import 'package:tuwaiq_project/widget/container/project_container.dart';
@@ -57,7 +57,7 @@ class AllProjectScreen extends StatelessWidget {
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) {
-                                  return ProjectViewScreen();
+                                  return ProjectViewScreen(projectsModel: state.projectList[index],);
                                 },
                               ));
                             },

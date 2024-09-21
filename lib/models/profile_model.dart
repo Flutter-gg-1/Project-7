@@ -123,7 +123,7 @@ class ProjectsModel {
   late final String? createAt;
   late final String? updateAt;
   late final List<ImagesProject> imagesProject;
-  late final List<dynamic> linksProject;
+  late final List<LinksProject> linksProject;
   late final List<MembersProject> membersProject;
 
   ProjectsModel.fromJson(Map<String, dynamic> json) {
@@ -149,7 +149,12 @@ class ProjectsModel {
     imagesProject = (json['images_project'] as List)
     .map((item) => ImagesProject.fromJson(item as Map<String, dynamic>))
     .toList();
-    linksProject = List.castFrom<dynamic, dynamic>(json['links_project']);
+    linksProject = List.from(json['links_project'])
+        .map((e) => LinksProject.fromJson(e))
+        .toList();
+
+
+
     membersProject = List.from(json['members_project'])
         .map((e) => MembersProject.fromJson(e))
         .toList();
@@ -241,6 +246,32 @@ class ImagesProject {
     final _data = <String, dynamic>{};
     _data['id'] = id;
     _data['url'] = url;
+    return _data;
+  }
+}
+
+
+
+
+
+
+class LinksProject {
+  LinksProject({
+    required this.url,
+    required this.type,
+  });
+  late final String url;
+  late final String type;
+  
+  LinksProject.fromJson(Map<String, dynamic> json){
+    url = json['url'];
+    type = json['type'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['url'] = url;
+    _data['type'] = type;
     return _data;
   }
 }
