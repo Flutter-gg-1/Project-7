@@ -8,4 +8,5 @@ abstract class ConstantNetwork {
   final String verifyAccountEndPoint = '/auth/verify';
   final String resendOTPEndPoint = '/auth/resend';
   final String getProfileEndPoint = '/user/profile';
+  final String getProjectEndPoint = '/get/project/p-L05kZQDSx5';
 }
