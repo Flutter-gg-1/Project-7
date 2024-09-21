@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:project_management_app/data_layer/data_layer.dart';
+import 'package:project_management_app/models/member_model.dart';
+import 'package:project_management_app/models/profile_model.dart';
 import 'package:project_management_app/models/project_model.dart';
+import 'package:project_management_app/networking/api_networking.dart';
 import 'package:project_management_app/screens/Edit_Project/edit_project.dart';
 import 'package:project_management_app/screens/Project/custom_logo.dart';
 import 'package:project_management_app/screens/Project/custom_project_info.dart';
+import 'package:project_management_app/screens/Project/custom_project_member.dart';
 import 'package:project_management_app/services/launch_url.dart';
+import 'package:project_management_app/services/setup.dart';
 import 'package:project_management_app/theme/appcolors.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
@@ -28,6 +34,35 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
     'Apk'
   ];
 
+  List<MemberModel> members = [];
+  bool isEditAuthrized = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkEditAuthorization();
+  }
+
+  Future<void> _checkEditAuthorization() async {
+    Profile profile = await getProfile();
+    isEditAuthrized = profile.id == widget.project.adminId;
+
+    if (!isEditAuthrized) {
+      for (var member in widget.project.membersProject!) {
+        if (member.userId == profile.id) {
+          isEditAuthrized = true;
+        }
+      }
+      setState(() {});
+    }
+    ;
+  }
+
+  Future<Profile> getProfile() async {
+    return await ApiNetworking()
+        .getProfile(locator.get<DataLayer>().auth!.token);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,19 +70,21 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.blueDark,
         actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => EditProjectScreen(
-                              project: widget.project,
-                            )));
-              },
-              icon: const Icon(
-                Icons.edit,
-                color: Colors.white,
-              ))
+          isEditAuthrized
+              ? IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditProjectScreen(
+                                  project: widget.project,
+                                )));
+                  },
+                  icon: const Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                  ))
+              : const Text('')
         ],
       ),
       body: ListView(
@@ -236,13 +273,14 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
           ),
 
           // Grid to display images
-          const Text(
-            ' Project Images ..',
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Color(0xff57E3D8)),
-          ),
+          if (widget.project.imagesProject!.isNotEmpty)
+            const Text(
+              ' Project Images ..',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Color(0xff57E3D8)),
+            ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: GridView.builder(
@@ -267,15 +305,35 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
             ),
           ),
 
-           // Display Members
-          const Text(
-            ' Project Members ..',
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Color(0xff57E3D8)),
+          // Display Members
+          if (widget.project.membersProject!.isNotEmpty)
+            const Text(
+              ' Project Members ..',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Color(0xff57E3D8)),
+            ),
+
+          Padding(
+            padding: const EdgeInsets.only(top: 70, bottom: 16),
+            child: GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 1,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
+              itemCount: widget.project.membersProject!.length,
+              itemBuilder: (context, index) {
+                MemberModel member = MemberModel.fromJson(
+                    widget.project.membersProject![index].toJson());
+                return CustomProjectMember(member: member);
+              },
+            ),
           ),
-          
         ],
       ),
     );

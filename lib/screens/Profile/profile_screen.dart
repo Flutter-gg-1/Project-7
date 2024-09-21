@@ -149,7 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const EditProfileScreen()));
+                                             EditProfileScreen(profile: profile,)));
                               },
                               icon: const Icon(
                                 Icons.edit,
