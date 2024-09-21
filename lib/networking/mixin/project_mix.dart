@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:tuwaiq_project/models/profile_model.dart';
 import 'package:tuwaiq_project/networking/networking_constant.dart';
 
 mixin ProjectMix on NetworkingConstant {
@@ -161,6 +162,35 @@ mixin ProjectMix on NetworkingConstant {
       print(error.response?.data);
     } catch (e) {
       throw Exception;
+    }
+
+    Future<List<ProjectsModel>> getAllProject() async {
+      try {
+        print("$baseUrl$endGetAllProject");
+        final res = await dio.get(
+          "$baseUrl$endGetAllProject",
+        );
+
+        print(res.data);
+
+        List<ProjectsModel> lis = [];
+
+        for (var val in res.data["data"]["projects"]) {
+          lis.add(ProjectsModel.fromJson(val));
+        }
+
+        log("hhhhhhhhhh");
+
+        print(lis);
+
+        return lis;
+      } on DioException catch (err) {
+        print(err.response?.data);
+
+        throw "err.response?.data";
+      } catch (err) {
+        throw "there was eorr";
+      }
     }
   }
 }
