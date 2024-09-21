@@ -7,6 +7,7 @@ import 'package:project_judge/components/buttons/custom_elevated_button.dart';
 import 'package:project_judge/components/text/custom_text.dart';
 import 'package:date_picker_plus/date_picker_plus.dart';
 import 'package:project_judge/components/text_field/custom_text_form_field.dart';
+import 'package:project_judge/network/api_netowrok.dart';
 import 'package:project_judge/screens/edit_project/bloc/edit_project_bloc.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:pdf_viewer_plugin/pdf_viewer_plugin.dart';
@@ -16,24 +17,32 @@ import 'package:project_judge/data_layer/data_layer.dart';
 import 'package:project_judge/setup/init_setup.dart';
 
 class EditProjectScreen extends StatelessWidget {
-  const EditProjectScreen({super.key});
+  final String projectId;
+
+  const EditProjectScreen({Key? key, required this.projectId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => EditProjectBloc(),
-      child: const EditProjectForm(),
+      child: EditProjectForm(
+        projectId: projectId,
+      ),
     );
   }
 }
 
 class EditProjectForm extends StatelessWidget {
-  const EditProjectForm({super.key});
+  final String projectId;
+  const EditProjectForm({super.key, required this.projectId});
 
   @override
   Widget build(BuildContext context) {
+    ApiNetowrok api = ApiNetowrok();
     final formKey = GlobalKey<FormState>();
-
+    final bloc = context.read<EditProjectBloc>();
+    bloc.id = projectId;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff4E2EB5),
@@ -49,6 +58,18 @@ class EditProjectForm extends StatelessWidget {
               onPressed: () {
                 if (formKey.currentState?.validate() == true) {
                   //go to api methods
+                  api.updateProject(
+                      projectID: projectId,
+                      token: getIt.get<DataLayer>().authUser!.token,
+                      name: bloc.name,
+                      bootcamp: bloc.bootcampName,
+                      type: bloc.type,
+                      start:
+                          DateFormat('dd/MM/yyyy').format(bloc.duration!.start),
+                      end: DateFormat('dd/MM/yyyy').format(bloc.duration!.end),
+                      presentationDate: DateFormat('dd/MM/yyyy')
+                          .format(bloc.presentationDate!),
+                      desc: bloc.description);
                 }
               },
               icon: const Icon(Icons.done, color: Color(0xffffffff)),
@@ -78,7 +99,7 @@ class EditProjectBody extends StatelessWidget {
           child: ListView(
             children: [
               const SizedBox(height: 10),
-              const ProfileImageSection(),
+              const ProjectLogoSection(),
               const SizedBox(height: 10),
               const Divider(),
               const SizedBox(height: 10),
@@ -98,16 +119,16 @@ class EditProjectBody extends StatelessWidget {
               const SizedBox(height: 10),
               const ProjectMembersSection(),
               const SizedBox(height: 10),
-              // if (getIt.get<DataLayer>().userInfo!.role != 'user')
-              CustomElevatedButton(
-                backgroundColor: Color(0xff4D2EB4),
-                text: 'Delete This Project',
-                textcolor: Color(0xffffffff),
-                onPressed: () {
-                  // alert msg
-                  // api delete method
-                },
-              )
+              if (getIt.get<DataLayer>().userInfo!.role != 'user')
+                CustomElevatedButton(
+                  backgroundColor: Color(0xff4D2EB4),
+                  text: 'Delete This Project',
+                  textcolor: Color(0xffffffff),
+                  onPressed: () {
+                    // alert msg
+                    // api delete method
+                  },
+                )
             ],
           ),
         ),
@@ -116,8 +137,8 @@ class EditProjectBody extends StatelessWidget {
   }
 }
 
-class ProfileImageSection extends StatelessWidget {
-  const ProfileImageSection({super.key});
+class ProjectLogoSection extends StatelessWidget {
+  const ProjectLogoSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -132,15 +153,19 @@ class ProfileImageSection extends StatelessWidget {
           onTap: () async {
             final image = await picker.pickImage(source: ImageSource.gallery);
             if (image != null) {
-              bloc.logoImg =
-                  File(image.path); // Update the bloc with the new image
+              bloc.logoImg = File(image.path);
             }
           },
-          child: CircleAvatar(
-            radius: 40,
-            backgroundImage: bloc.logoImg != null
-                ? FileImage(bloc.logoImg!)
-                : AssetImage("assets/images/defualt_img.png") as ImageProvider,
+          child: BlocBuilder<EditProjectBloc, EditProjectState>(
+            builder: (context, state) {
+              return CircleAvatar(
+                radius: 40,
+                backgroundImage: bloc.logoImg != null
+                    ? FileImage(bloc.logoImg!)
+                    : AssetImage("assets/images/defualt_img.png")
+                        as ImageProvider,
+              );
+            },
           ),
         ),
         SizedBox(
@@ -166,10 +191,17 @@ class BasicInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController? nameController;
-    TextEditingController? bootcampController;
-    TextEditingController? typeController;
-    TextEditingController? descController;
+    final bloc = context.read<EditProjectBloc>();
+    TextEditingController? nameController =
+        TextEditingController(text: bloc.name);
+    TextEditingController? bootcampController =
+        TextEditingController(text: bloc.bootcampName);
+    ;
+    TextEditingController? typeController =
+        TextEditingController(text: bloc.type);
+    ;
+    TextEditingController? descController =
+        TextEditingController(text: bloc.description);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -183,18 +215,27 @@ class BasicInformation extends StatelessWidget {
           label: 'Project name',
           hintText: 'Project name',
           controller: nameController,
+           onChange: (value) {
+            bloc.name = nameController.text;
+          },
         ),
         SizedBox(height: 10),
         CustomTextFormField(
           label: 'Bootcamp name',
           hintText: 'Bootcamp name',
           controller: bootcampController,
+          onChange: (value) {
+            bloc.bootcampName = bootcampController.text;
+          },
         ),
         SizedBox(height: 10),
         CustomTextFormField(
           label: 'Project Type',
           hintText: 'Website/app/etc...',
           controller: typeController,
+           onChange: (value) {
+            bloc.type = typeController.text;
+          },
         ),
         SizedBox(height: 10),
         ProjectDurationSection(
@@ -210,6 +251,9 @@ class BasicInformation extends StatelessWidget {
           maximumLines: 5,
           hintText: '',
           controller: descController,
+          onChange: (value) {
+            bloc.description = descController.text;
+          },
         ),
       ],
     );
@@ -237,7 +281,10 @@ class ProjectDurationSection extends StatelessWidget {
             BlocBuilder<EditProjectBloc, EditProjectState>(
               builder: (context, state) {
                 return CustomText(
-                  text: bloc.duration != null
+                  text: bloc.duration !=
+                          DateTimeRange(
+                              start: bloc.dateFormat.parse('0000-00-00'),
+                              end: bloc.dateFormat.parse('0000-00-00'))
                       ? '${DateFormat('MM/dd/yyyy').format(bloc.duration!.start)} - ${DateFormat('MM/dd/yyyy').format(bloc.duration!.end)}'
                       : 'No dates selected yet',
                   size: 12,
@@ -259,7 +306,10 @@ class ProjectDurationSection extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             RangeDatePicker(
-                              selectedRange: bloc.duration,
+                              selectedRange: bloc.startDateFromDB == null &&
+                                      bloc.endDateFromDB == null
+                                  ? null
+                                  : bloc.duration,
                               centerLeadingDate: true,
                               minDate: DateTime(2020, 10, 10),
                               maxDate: DateTime(2030, 10, 30),
@@ -318,7 +368,8 @@ class PresentationDateSection extends StatelessWidget {
             BlocBuilder<EditProjectBloc, EditProjectState>(
               builder: (context, state) {
                 return CustomText(
-                  text: bloc.presentationDate != null
+                  text: bloc.presentationDate !=
+                          bloc.dateFormat.parse('0000-00-00')
                       ? '${bloc.presentationDate!.month.toString().padLeft(2, '0')}/${bloc.presentationDate!.day.toString().padLeft(2, '0')}/${bloc.presentationDate!.year}'
                       : 'No date selected yet',
                   size: 12,
@@ -341,7 +392,9 @@ class PresentationDateSection extends StatelessWidget {
                           children: [
                             DatePicker(
                               centerLeadingDate: true,
-                              selectedDate: bloc.presentationDate ?? null,
+                              selectedDate: bloc.presentationDateFromDB == null
+                                  ? null
+                                  : bloc.presentationDate,
                               minDate: DateTime(2020, 10, 10),
                               maxDate: DateTime(2030, 10, 30),
                               onDateSelected: (value) {
@@ -490,14 +543,46 @@ class ProjectLinksSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController? githubController;
-    TextEditingController? figmacampController;
-    TextEditingController? youtubeController;
-    TextEditingController? pinterestController;
-    TextEditingController? playstoreController;
-    TextEditingController? appstorecampController;
-    TextEditingController? apkController;
-    TextEditingController? webController;
+    final bloc = context.read<EditProjectBloc>();
+    TextEditingController githubController = TextEditingController();
+    TextEditingController figmaController = TextEditingController();
+    TextEditingController youtubeController = TextEditingController();
+    TextEditingController pinterestController = TextEditingController();
+    TextEditingController playstoreController = TextEditingController();
+    TextEditingController appstoreController = TextEditingController();
+    TextEditingController apkController = TextEditingController();
+    TextEditingController webController = TextEditingController();
+
+    // Map links to controllers
+    for (var link in bloc.links) {
+      switch (link['type']) {
+        case 'github':
+          githubController.text = link['url'] ?? '';
+          break;
+        case 'figma':
+          figmaController.text = link['url'] ?? '';
+          break;
+        case 'video':
+          youtubeController.text = link['url'] ?? '';
+          break;
+        case 'pinterest':
+          pinterestController.text = link['url'] ?? '';
+          break;
+        case 'playstore':
+          playstoreController.text = link['url'] ?? '';
+          break;
+        case 'applestore':
+          appstoreController.text = link['url'] ?? '';
+          break;
+        case 'apk':
+          apkController.text = link['url'] ?? '';
+          break;
+        case 'weblink':
+          webController.text = link['url'] ?? '';
+          break;
+      }
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -516,7 +601,7 @@ class ProjectLinksSection extends StatelessWidget {
         CustomTextFormField(
           label: 'Figma url',
           hintText: 'https://Figma.com/example',
-          controller: figmacampController,
+          controller: figmaController,
         ),
         SizedBox(height: 10),
         CustomTextFormField(
@@ -540,7 +625,7 @@ class ProjectLinksSection extends StatelessWidget {
         CustomTextFormField(
           label: 'Appstore url',
           hintText: 'https://app.com/example',
-          controller: appstorecampController,
+          controller: appstoreController,
         ),
         SizedBox(height: 10),
         CustomTextFormField(
@@ -692,17 +777,30 @@ class MemberRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<EditProjectBloc>();
+    TextEditingController memberIdController = TextEditingController();
+    TextEditingController memberRoleController = TextEditingController();
 
+    for (var link in bloc.links) {
+      switch (link['type']) {
+        case 'github':
+          memberIdController.text = link['user_id'] ?? '';
+          break;
+        case 'figma':
+          memberRoleController.text = link['position'] ?? '';
+          break;
+      }
+    }
     return Column(
       children: [
         Row(
           children: [
             Expanded(
               child: CustomTextFormField(
-                hintText: "Member's Name",
+                controller: memberIdController,
+                hintText: "Member's ID",
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a name';
+                    return 'Enter ID';
                   }
                   return null;
                 },
@@ -718,10 +816,11 @@ class MemberRow extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: CustomTextFormField(
+                controller: memberRoleController,
                 hintText: "Member's Role",
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a role';
+                    return 'Enter a role';
                   }
                   return null;
                 },

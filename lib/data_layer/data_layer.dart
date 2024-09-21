@@ -12,7 +12,7 @@ class DataLayer {
   final box = GetStorage();
 
   DataLayer() {
-    box.erase();
+    // box.erase();
     loadData();
   }
 
@@ -22,14 +22,21 @@ class DataLayer {
     box.write("auth", auth.toJson());
   }
 
-  getUserProfile() async {
+  Future<void> getUserr() async {
     userInfo = await api.getUserProfile(token: authUser!.token);
+    print(userInfo);
+     box.write("user", userInfo!.toJson());
   }
 
+  
   loadData() {
     if (box.hasData("auth")) {
       Map<String, dynamic> loadedData = box.read("auth");
       authUser = AuthModel.fromJson(loadedData);
+    }
+        if (box.hasData("user")) {
+      Map<String, dynamic> loadedData = box.read("user");
+      userInfo = UserModel.fromJson(loadedData);
     }
   }
 }

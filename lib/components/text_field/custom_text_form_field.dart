@@ -44,7 +44,7 @@ class CustomTextFormField extends StatelessWidget {
           decoration: InputDecoration(
               floatingLabelBehavior: floatingLabelBehavior,
               filled: true,
-              fillColor: const Color(0xffEDEDED),
+              fillColor: const Color.fromARGB(255, 232, 232, 232),
               hintText: hintText,
               hintStyle: const TextStyle(fontSize: 12),
               prefixIcon: icon != null ? Icon(icon) : null,

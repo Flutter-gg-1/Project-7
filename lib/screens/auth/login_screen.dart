@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:project_judge/components/buttons/custom_elevated_button.dart';
+import 'package:project_judge/components/dialog/error_dialog.dart';
 import 'package:project_judge/components/text_field/custom_text_form_field.dart';
 import 'package:project_judge/screens/auth/create_account_screen.dart';
 import 'package:project_judge/screens/auth/cubit/auth_cubit.dart';
@@ -35,89 +36,9 @@ class LoginScreen extends StatelessWidget {
                       builder: (context) => VerifyScreen(
                           email: cubit.emailLoginController.text)));
             }
-            
+
             if (state is ErrorState) {
-              Navigator.pop(context);
-              showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                        backgroundColor: Colors.transparent,
-                        contentPadding: EdgeInsets.zero,
-                        content: Container(
-                          height: 421,
-                          width: 346,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: const Color(0xff4F2AB8)),
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 60,
-                              ),
-                              Container(
-                                height: 103,
-                                width: 103,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                        width: 12,
-                                        color: const Color(0x48FFFFFF))),
-                                child: const Icon(
-                                  Icons.close,
-                                  size: 55,
-                                  color: Color(0xff4F2AB8),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Text(
-                                "An error occured",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 32),
-                              ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              Text(
-                                textAlign: TextAlign.center,
-                                state.msg,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 12),
-                              ),
-                              const SizedBox(
-                                height: 33,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        backgroundColor: Colors.white,
-                                        fixedSize: Size(
-                                            MediaQuery.of(context).size.width,
-                                            63)),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Center(
-                                      child: Text(
-                                        "Done",
-                                        style: TextStyle(
-                                            color: Color(0xff4F2AB8),
-                                            fontSize: 20),
-                                      ),
-                                    )),
-                              )
-                            ],
-                          ),
-                        ),
-                      ));
+              showErrorDialog(context, state.msg);
             }
           },
           child: Scaffold(
@@ -157,14 +78,6 @@ class LoginScreen extends StatelessWidget {
                               child: Image.asset("assets/images/logo-h 2.png"),
                             ),
                           )),
-                      const Positioned(
-                        top: 90,
-                        left: 170,
-                        child: Text(
-                          "Log in",
-                          style: TextStyle(color: Colors.white, fontSize: 32),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -173,21 +86,31 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(
-                        height: 180,
+                        height: 70,
                       ),
-                      CustomTextFormField(
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                        controller: cubit.emailLoginController,
-                        hintText: "Example@example.com",
-                        icon: Icons.email_outlined,
-                        validator: (value) {
-                          if (value == null ||
-                              value.isEmpty ||
-                              !value.contains('@')) {
-                            return 'Please enter a valid email';
-                          }
-                          return null;
-                        },
+                      const Text(
+                        "Log in",
+                        style: TextStyle(color: Colors.white, fontSize: 32),
+                      ),
+                      const SizedBox(
+                        height: 130,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: CustomTextFormField(
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          controller: cubit.emailLoginController,
+                          hintText: "Example@example.com",
+                          icon: Icons.email_outlined,
+                          validator: (value) {
+                            if (value == null ||
+                                value.isEmpty ||
+                                !value.contains('@')) {
+                              return 'Please enter a valid email';
+                            }
+                            return null;
+                          },
+                        ),
                       ),
                       const SizedBox(
                         height: 111,

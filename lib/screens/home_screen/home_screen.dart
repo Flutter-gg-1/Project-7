@@ -7,11 +7,10 @@ import 'package:project_judge/setup/init_setup.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit()..checkCurrentUser(),
+      create: (context) => HomeCubit(),
       child: Scaffold(
         body: Container(
           decoration: const BoxDecoration(
@@ -42,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                   CustomText(
                                     text:
-                                        "Hello, ${getIt.get<DataLayer>().userInfo?.firstName}!",
+                                        "Hello, ${getIt.get<DataLayer>().userInfo?.firstName ?? 'user'}!",
                                     size: 32,
                                     color: const Color(0xffffffff),
                                   ),
@@ -132,11 +131,11 @@ class HomeScreen extends StatelessWidget {
                       ]),
                 ),
                 const CustomProjectsList(),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -175,7 +174,7 @@ class CustomProjectsList extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          SizedBox(
+          const SizedBox(
             width: 20,
           ),
           CustomProjectCard(
@@ -183,31 +182,31 @@ class CustomProjectsList extends StatelessWidget {
             projectName: "Long Project Name",
             bootcampName: "bootcamp name",
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           CustomProjectCard(
             img: null,
             projectName: "Long Project Name",
             bootcampName: "bootcamp name",
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           CustomProjectCard(
             img: null,
             projectName: "Long Project Name",
             bootcampName: "bootcamp name",
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           CustomProjectCard(
             img: null,
             projectName: "Long Project Name",
             bootcampName: "bootcamp name",
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           CustomProjectCard(
             img: null,
             projectName: "Long Project Name",
             bootcampName: "bootcamp name",
           ),
-          SizedBox(
+          const SizedBox(
             width: 20,
           ),
         ],

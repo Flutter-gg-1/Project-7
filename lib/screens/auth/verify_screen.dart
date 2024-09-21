@@ -6,7 +6,9 @@ import 'package:pinput/pinput.dart';
 import 'package:project_judge/components/dialog/error_dialog.dart';
 import 'package:project_judge/components/text/custom_text.dart';
 import 'package:project_judge/screens/auth/cubit/auth_cubit.dart';
-import 'package:project_judge/screens/home_screen/home_screen.dart';
+import 'package:project_judge/screens/navigation_page/navigationPage.dart';
+import 'package:project_judge/screens/profile_screen/profile_screen.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
 class VerifyScreen extends StatelessWidget {
   const VerifyScreen({super.key, required this.email});
@@ -14,6 +16,18 @@ class VerifyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final defaultPinTheme = PinTheme(
+      width: 56,
+      height: 56,
+      textStyle: const TextStyle(
+          fontSize: 20,
+          color: Color.fromRGBO(30, 60, 87, 1),
+          fontWeight: FontWeight.w600),
+      decoration: BoxDecoration(
+        border: Border.all(color: const Color.fromRGBO(234, 239, 243, 1)),
+        borderRadius: BorderRadius.circular(20),
+      ),
+    );
     return BlocProvider(
       create: (context) => AuthCubit(),
       child: Builder(builder: (context) {
@@ -31,13 +45,12 @@ class VerifyScreen extends StatelessWidget {
             }
             if (state is SuccessState) {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()));
+                  MaterialPageRoute(builder: (context) => NavigationPage()));
             }
             if (state is ResendOtpState) {
               Navigator.pop(context);
             }
             if (state is ErrorState) {
-              Navigator.pop(context);
               showErrorDialog(context, state.msg);
             }
           },
@@ -118,11 +131,9 @@ class VerifyScreen extends StatelessWidget {
                         height: 130,
                       ),
                       Pinput(
+                          defaultPinTheme: defaultPinTheme,
                           controller: cubit.otpController,
                           length: 6,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
                           onCompleted: (pin) {
                             cubit.checkAuth(email: email);
                           }),
@@ -135,11 +146,25 @@ class VerifyScreen extends StatelessWidget {
 
                             cubit.resendOTP(email: email);
                           },
-                          child: const CustomText(
-                            text: "Resend OTP",
-                            size: 24,
-                            color: Colors.white,
-                            weight: FontWeight.w700,
+                          child: Column(
+                            children: [
+                              CircularCountDownTimer(
+                                  onStart: () {},
+                                  isTimerTextShown: false,
+                                  isReverseAnimation: true,
+                                  isReverse: true,
+                                  width: 45,
+                                  height: 45,
+                                  duration: 59,
+                                  fillColor: Colors.blueAccent,
+                                  ringColor: Colors.blueGrey),
+                              const CustomText(
+                                text: "Resend OTP",
+                                size: 24,
+                                color: Colors.white,
+                                weight: FontWeight.w700,
+                              ),
+                            ],
                           ))
                     ],
                   ),
