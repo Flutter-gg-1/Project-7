@@ -1,20 +1,30 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:project_judge/models/project_model.dart';
 
 class MyProjectCardClosed extends StatelessWidget {
-  final Project project;
+  final ProjectsModel project;
 
   MyProjectCardClosed({required this.project});
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    final imageHeight = screenHeight * 0.12;
+    final cardHeight = screenHeight * 0.12;
+    final padding = screenWidth * 0.02;
+    final titleFontSize = screenWidth * 0.03;
+    final descriptionFontSize = screenWidth * 0.038;
+    final ratingItemSize = screenWidth * 0.04;
+    final iconSize = screenWidth * 0.06;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: padding, vertical: padding),
       child: Container(
-        height: 108,
+        height: cardHeight,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -23,73 +33,84 @@ class MyProjectCardClosed extends StatelessWidget {
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 5,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             ),
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(padding),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 117.79,
-                height: 94,
+                width: imageHeight,
+                height: imageHeight,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(19),
-                  color: Color(0x4E2EB5),
+                  color: const Color(0xFF4E2EB5),
                 ),
-                child: Center(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(19),
-                    child: Image.asset(
-                      'assets/images/logo.png', 
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(19),
+                  child: project.logoUrl != null
+                      ? Image.network(
+                          project.logoUrl!,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset(
+                          'assets/images/logo.png', 
+                          fit: BoxFit.cover,
+                        ),
                 ),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.symmetric(horizontal: padding),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        project.title,
+                        project.projectName ?? 'Untitled Project',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontSize: 9,
+                          fontSize: titleFontSize,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFFC4C4C4),
+                          color: const Color(0xFFC4C4C4),
                         ),
                       ),
-                      SizedBox(height: 2),
+                      const SizedBox(height: 2),
                       Text(
-                        project.description,
+                        project.projectDescription ??
+                            'No description available',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          color: Color(0xFF4E2EB5),
-                          fontSize: 15,
+                          fontSize: descriptionFontSize,
+                          color: const Color(0xFF4E2EB5),
                         ),
                       ),
-                      SizedBox(height: 2),
+                      const SizedBox(height: 2),
                       RatingBar.builder(
-                        itemSize: 16,
-                        initialRating: project.rating,
+                        itemSize: ratingItemSize,
+                        initialRating: project.rating?.toDouble() ?? 0,
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: false,
                         itemCount: 5,
-                        itemBuilder: (context, _) => Icon(
+                        itemBuilder: (context, _) => const Icon(
                           Icons.star,
                           color: Colors.amber,
                         ),
                         onRatingUpdate: (rating) {
                         },
                       ),
+                      const SizedBox(height: 2),
                       Text(
-                        'App', 
+                        project.type,
                         style: TextStyle(
-                          color: Color(0xFFC4C4C4),
+                          fontSize: descriptionFontSize * 0.8,
+                          color: const Color(0xFFC4C4C4),
                         ),
                       ),
                     ],
@@ -102,7 +123,8 @@ class MyProjectCardClosed extends StatelessWidget {
                   },
                   icon: Icon(
                     Icons.edit_off_outlined,
-                    color: Color(0xFF4E2EB5),
+                    color: const Color(0xFF4E2EB5),
+                    size: iconSize,
                   ),
                 ),
               ),
