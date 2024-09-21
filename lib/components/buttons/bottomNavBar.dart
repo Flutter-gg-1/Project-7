@@ -15,8 +15,8 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final bottomNavBarHeight = 120.0;
-    final middleButtonSize = 100.0;
+    const bottomNavBarHeight = 120.0;
+    const middleButtonSize = 100.0;
 
     return Stack(
       clipBehavior: Clip.none,
@@ -53,7 +53,7 @@ class BottomNavBar extends StatelessWidget {
               items: [
                 buildBottomNavBarItem('assets/images/Call.png', 'Home', 0),
                 buildBottomNavBarItem('assets/images/browse.png', 'Browse', 1),
-                BottomNavigationBarItem(
+                const BottomNavigationBarItem(
                   icon: SizedBox.shrink(),
                   label: '',
                 ),
@@ -73,7 +73,7 @@ class BottomNavBar extends StatelessWidget {
             child: Container(
               width: middleButtonSize,
               height: middleButtonSize,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.transparent,
                 shape: BoxShape.circle,
               ),
@@ -102,7 +102,7 @@ class BottomNavBar extends StatelessWidget {
             width: 20,
             height: 20,
             color:
-                selectedIndex == index ? Color(0xFF4E2EB5) : Color(0xFF848484),
+                selectedIndex == index ? const Color(0xFF4E2EB5) : const Color(0xFF848484),
           ),
           const SizedBox(height: 5),
           Text(

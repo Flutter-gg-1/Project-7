@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
@@ -6,7 +7,6 @@ import 'package:project_judge/components/dialog/error_dialog.dart';
 import 'package:project_judge/components/text/custom_text.dart';
 import 'package:project_judge/screens/auth/cubit/auth_cubit.dart';
 import 'package:project_judge/screens/navigation/navigationPage.dart';
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
 class VerifyScreen extends StatelessWidget {
   const VerifyScreen({super.key, required this.email});
@@ -14,18 +14,6 @@ class VerifyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultPinTheme = PinTheme(
-      width: 56,
-      height: 56,
-      textStyle: const TextStyle(
-          fontSize: 20,
-          color: Color.fromRGBO(30, 60, 87, 1),
-          fontWeight: FontWeight.w600),
-      decoration: BoxDecoration(
-        border: Border.all(color: const Color.fromRGBO(234, 239, 243, 1)),
-        borderRadius: BorderRadius.circular(20),
-      ),
-    );
     return BlocProvider(
       create: (context) => AuthCubit(),
       child: Builder(builder: (context) {
@@ -42,8 +30,10 @@ class VerifyScreen extends StatelessWidget {
                       ));
             }
             if (state is SuccessState) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const NavigationPage()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const NavigationPage()));
             }
             if (state is ResendOtpState) {
               Navigator.pop(context);
@@ -70,11 +60,109 @@ class VerifyScreen extends StatelessWidget {
                         constraints: BoxConstraints(
                             maxHeight:
                                 MediaQuery.of(context).size.height - 136),
+                        width: double.infinity,
                         decoration: const BoxDecoration(
                             color: Color(0x65000000),
                             borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(40),
                                 topLeft: Radius.circular(40))),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 100),
+                          child: Column(
+                            children: [
+                              const CustomText(
+                                  text: "Verification code",
+                                  size: 32,
+                                  color: Colors.white),
+                              const SizedBox(height: 50),
+                              SizedBox(
+                                width: 318,
+                                height: 48,
+                                child: RichText(
+                                  text: TextSpan(children: [
+                                    const TextSpan(
+                                      text:
+                                          "Please enter the code that has been sent to the email ",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: email,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Color(0xff57E3D8),
+                                      ),
+                                    )
+                                  ]),
+                                ),
+                              ),
+                              const SizedBox(height: 122),
+                              Pinput(
+                                  cursor: Column(
+                                    children: [
+                                      Container(
+                                        width: 49,
+                                        height: 4611,
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            border: Border.all(
+                                                color: const Color(0xff4D2EB4),
+                                                width: 2)),
+                                      )
+                                    ],
+                                  ),
+                                  pinAnimationType: PinAnimationType.scale,
+                                  defaultPinTheme: PinTheme(
+                                      width: 49,
+                                      height: 48,
+                                      textStyle: const TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16),
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(8))),
+                                  focusedPinTheme: PinTheme(
+                                      width: 49,
+                                      height: 48,
+                                      textStyle: const TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: const Color(0xff4D2EB4)),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          color: Colors.white)),
+                                  controller: cubit.otpController,
+                                  length: 6,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
+                                  onCompleted: (pin) {
+                                    cubit.checkAuth(email: email);
+                                  }),
+                              const SizedBox(height: 10),
+                              TextButton(
+                                  onPressed: () {
+                                    cubit.otpController.clear();
+                                    cubit.resendOTP(email: email);
+                                  },
+                                  child: const CustomText(
+                                    text: "Resend OTP",
+                                    size: 14,
+                                    color: Colors.white,
+                                    weight: FontWeight.w700,
+                                  ))
+                            ],
+                          ),
+                        ),
                       ),
                       Positioned(
                           top: -50,
@@ -89,81 +177,6 @@ class VerifyScreen extends StatelessWidget {
                               child: Image.asset("assets/images/logo-h 2.png"),
                             ),
                           )),
-                      const Positioned(
-                        top: 90,
-                        left: 80,
-                        child: Text(
-                          "Verification code",
-                          style: TextStyle(color: Colors.white, fontSize: 32),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 318,
-                        height: 48,
-                        child: RichText(
-                          text: TextSpan(children: [
-                            const TextSpan(
-                              text:
-                                  "Please enter the code that has been sent to the email ",
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                            TextSpan(
-                              text: email,
-                              style: const TextStyle(
-                                color: Color(0xff57E3D8),
-                              ),
-                            )
-                          ]),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 130,
-                      ),
-                      Pinput(
-                          defaultPinTheme: defaultPinTheme,
-                          controller: cubit.otpController,
-                          length: 6,
-                          onCompleted: (pin) {
-                            cubit.checkAuth(email: email);
-                          }),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      TextButton(
-                          onPressed: () {
-                            cubit.otpController.clear();
-
-                            cubit.resendOTP(email: email);
-                          },
-                          child: Column(
-                            children: [
-                              CircularCountDownTimer(
-                                  onStart: () {},
-                                  isTimerTextShown: false,
-                                  isReverseAnimation: true,
-                                  isReverse: true,
-                                  width: 45,
-                                  height: 45,
-                                  duration: 59,
-                                  fillColor: Colors.blueAccent,
-                                  ringColor: Colors.blueGrey),
-                              const CustomText(
-                                text: "Resend OTP",
-                                size: 24,
-                                color: Colors.white,
-                                weight: FontWeight.w700,
-                              ),
-                            ],
-                          ))
                     ],
                   ),
                 ),

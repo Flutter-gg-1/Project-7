@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:project_judge/components/text/custom_text.dart';
 
-class CustomManageUsersContainer extends StatefulWidget {
+class CustomManageUsersContainer extends StatelessWidget {
   const CustomManageUsersContainer({
     super.key,
     required this.image,
     required this.title,
-    required this.position,
+    required this.position, this.onChanged, required this.isSwitched,
   });
   final Widget image;
   final String title;
   final String position;
+  final Function(bool)? onChanged;
+  final bool isSwitched;
 
-  @override
-  State<CustomManageUsersContainer> createState() => _CustomManageUsersContainerState();
-}
 
-class _CustomManageUsersContainerState extends State<CustomManageUsersContainer> {
-  bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,18 +35,14 @@ class _CustomManageUsersContainerState extends State<CustomManageUsersContainer>
             shape: BoxShape.circle,
           ),
           child: Center(
-            child: widget.image,
+            child: image,
           ),
         ),
-        title: CustomText(text: widget.title, size: 16),
-        subtitle: CustomText(text: widget.position, size: 12),
+        title: CustomText(text: title, size: 16),
+        subtitle: CustomText(text: position, size: 12),
         trailing: Switch(
           value: isSwitched,
-          onChanged: (value) {
-            setState(() {
-              isSwitched = value;
-            });
-          },
+          onChanged: onChanged,
           activeColor: const Color(0xff57E3D8),
           thumbColor: const WidgetStatePropertyAll(Colors.white),
           trackOutlineColor: const WidgetStatePropertyAll(Colors.white),
