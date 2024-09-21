@@ -4,15 +4,18 @@ import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 class CostomeDetailsProject extends StatelessWidget {
   const CostomeDetailsProject({
     super.key,
-    required this.cotentText,
+    this.cotentText,
     required this.heightContainer,
     required this.widthContainer,
     this.titleText,
     required this.maxHeight,
     required this.readOnly,
+    this.controller,
+    this.hintText,
   });
-
-  final String cotentText;
+  final TextEditingController? controller;
+  final String? hintText;
+  final String? cotentText;
   final double heightContainer;
   final double widthContainer;
   final String? titleText;
@@ -53,9 +56,12 @@ class CostomeDetailsProject extends StatelessWidget {
             child: Scrollbar(
               child: SingleChildScrollView(
                 child: TextFormField(
+                  controller: controller,
                   readOnly: readOnly,
                   initialValue: cotentText,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
+                    hintText: hintText,
+                    hintStyle: const TextStyle(color: Colors.grey),
                     border: InputBorder.none,
                   ),
                   keyboardType: TextInputType.multiline,

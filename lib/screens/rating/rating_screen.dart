@@ -42,8 +42,6 @@ class RatingScreen extends StatelessWidget {
                   titleText: 'Project details',
                   heightContainer: context.getHeight(multiply: 0.22),
                   widthContainer: context.getWidth(multiply: 0.6),
-                  cotentText:
-                      'sdkljsdjlskdsvkjls;dfldl;dkf;lsdkdlkfsdjfkldsjfsdhfkjsdhfkjsdfhkjsdhfkjdhkfhsjkdskfbsjkdfbksjdfbsjdkvsdjvbsjdkvbjksdbvjksdbvjksdbkjvbsdjkvbsjkdbvjkdbvjksdbvkjsdbvkjsdbkvjsdvjsdnvksdjbvsjdkvbkjbdbvkjsdbvkjsdbvjskdjvbjdsnclk',
                 ),
               ],
             ),
@@ -125,12 +123,12 @@ class RatingScreen extends StatelessWidget {
                   ),
                 ),
                 CostomeDetailsProject(
-                  readOnly: true,
+                  readOnly: false,
                   maxHeight: context.getHeight(multiply: 0.14),
                   heightContainer: context.getHeight(multiply: 0.22),
                   widthContainer: context.getWidth(multiply: 0.9),
-                  cotentText:
-                      'sdkljsdjlskdsvkjls;dfldl;dkf;lsdkdlkfsdjfkldsjfsdhfkjsdhfkjsdfhkjsdhfkjdhkfhsjkdskfbsjkdfbksjdfbsjdkvsdjvbsjdkvbjksdbvjksdbvjksdbkjvbsdjkvbsjkdbvjkdbvjksdbvkjsdbvkjsdbkvjsdvjsdnvksdjbvsjdkvbkjbdbvkjsdbvkjsdbvjskdjvbjdsnclk',
+                  hintText:
+                      language.isArabic ? 'ادخل ملاحظاتك' : 'Enter your note',
                 ),
               ],
             ),
