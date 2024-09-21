@@ -8,7 +8,6 @@ import 'package:tuwaiq_project/widget/links_profile/custome_links_profile.dart';
 import 'package:tuwaiq_project/widget/links_profile/custome_title_text_profile.dart';
 import 'package:tuwaiq_project/widget/list_tile/custome_listtile_profile.dart';
 import 'package:tuwaiq_project/widget/status_profile/custome_status_profile.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -31,7 +30,9 @@ class ProfileScreen extends StatelessWidget {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
-                            return  ProfileInformationScreen(profileModel: state.profileModel,);
+                            return ProfileInformationScreen(
+                              profileModel: state.profileModel,
+                            );
                           },
                         ),
                       );
@@ -60,8 +61,8 @@ class ProfileScreen extends StatelessWidget {
                               color: Colors.black),
                           leading: const CircleAvatar(
                             radius: 30,
-                            backgroundImage: AssetImage(
-                                'assets/image/Search-amico(1).png'),
+                            backgroundImage:
+                                AssetImage('assets/image/Search-amico(1).png'),
                           ),
                         )),
                   ),
@@ -101,30 +102,21 @@ class ProfileScreen extends StatelessWidget {
                           FontAwesomeIcons.linkedinIn,
                           color: Colors.white,
                         ),
-                        onTap: () async {
-                        await  launchUrl(Uri.parse(state.profileModel.link.linkedin ?? "fake_url"),mode: LaunchMode.externalApplication);
-                        },
+                        onTap: () async {},
                       ),
                       CustomeLinksProfile(
                         iconLinks: const FaIcon(
                           FontAwesomeIcons.github,
                           color: Colors.white,
                         ),
-                        onTap: () async{
-    
-                           await  launchUrl(Uri.parse(state.profileModel.link.github ?? " "));
-                        },
+                        onTap: () async {},
                       ),
                       CustomeLinksProfile(
                         iconLinks: const FaIcon(
                           FontAwesomeIcons.discord,
                           color: Colors.white,
                         ),
-                        onTap: () async{
-    
-                           await  launchUrl(Uri.parse(state.profileModel.link.bindlink ?? " "));
-    
-                        },
+                        onTap: () async {},
                       ),
                       CustomeLinksProfile(
                         text: 'CV',
@@ -220,14 +212,14 @@ class ProfileScreen extends StatelessWidget {
               ),
             );
           }
-    
+
           if (state is ErorrState) {
             return Center(
               child: Text(state.msg),
             );
           }
-    
-          return const Center(child:  CircularProgressIndicator());
+
+          return const Center(child: CircularProgressIndicator());
         },
       );
     });

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
@@ -28,16 +27,7 @@ class EditPresentation extends StatelessWidget {
             required EditEvent Function(File) createEvent,
             required Function(File) updateFile,
           }) async {
-            FilePickerResult? result =
-                await FilePicker.platform.pickFiles(
-              type: FileType.any,
-            );
-            if (result != null) {
-              final selectedFile =
-                  File(result.files.single.path!);
-              updateFile(selectedFile);
-              bloc.add(createEvent(selectedFile));
-            }
+           
           }
     
           return Column(

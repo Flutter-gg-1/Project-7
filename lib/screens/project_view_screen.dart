@@ -1,8 +1,4 @@
-import 'package:carousel_slider/carousel_options.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 import 'package:tuwaiq_project/widget/project_view_widget/costumr_details_project.dart';
@@ -66,6 +62,9 @@ class ProjectViewScreen extends StatelessWidget {
               height: context.getHeight(multiply: 0.035),
             ),
             CostomeDetailsProject(
+              readOnly: true,
+              titleText: 'details project',
+              maxHeight: context.getHeight(multiply: 0.2),
               heightContainer: context.getHeight(multiply: 0.3),
               widthContainer: context.getWidth(multiply: 0.8),
               cotentText:

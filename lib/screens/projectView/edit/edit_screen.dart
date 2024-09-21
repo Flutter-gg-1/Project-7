@@ -2,7 +2,6 @@
 
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -87,7 +86,10 @@ class EditScreen extends StatelessWidget {
                             bloc: bloc, languageLayer: languageLayer),
                         EditImages(bloc: bloc, languageLayer: languageLayer),
                         EditLinks(languageLayer: languageLayer, bloc: bloc),
-                         EditMembers(bloc: bloc, languageLayer: languageLayer,),
+                        EditMembers(
+                          bloc: bloc,
+                          languageLayer: languageLayer,
+                        ),
                       ],
                     ),
                   ),

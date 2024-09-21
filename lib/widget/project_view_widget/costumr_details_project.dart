@@ -7,12 +7,17 @@ class CostomeDetailsProject extends StatelessWidget {
     required this.cotentText,
     required this.heightContainer,
     required this.widthContainer,
+    this.titleText,
+    required this.maxHeight,
+    required this.readOnly,
   });
 
   final String cotentText;
   final double heightContainer;
   final double widthContainer;
-
+  final String? titleText;
+  final double maxHeight;
+  final bool readOnly;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,17 +42,18 @@ class CostomeDetailsProject extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Text(
-            'details project',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+          Text(
+            titleText ?? '',
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
           ),
           ConstrainedBox(
             constraints: BoxConstraints(
-              maxHeight: context.getHeight(multiply: 0.2),
+              maxHeight: maxHeight,
             ),
             child: Scrollbar(
               child: SingleChildScrollView(
                 child: TextFormField(
+                  readOnly: readOnly,
                   initialValue: cotentText,
                   decoration: const InputDecoration(
                     border: InputBorder.none,

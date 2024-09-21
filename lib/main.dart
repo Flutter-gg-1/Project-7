@@ -8,16 +8,13 @@ import 'package:tuwaiq_project/screens/profile/cubit_profile/profile_cubit.dart'
 import 'package:tuwaiq_project/screens/profile/cv_handle_cubit/cv_handle_cubit.dart';
 import 'package:tuwaiq_project/screens/profile/img_handle_cubit/img_handle_cubit.dart';
 
-
 import 'package:tuwaiq_project/screens/projectView/edit/edit_screen.dart';
 import 'package:tuwaiq_project/screens/projectView/edit_project_screen.dart';
 
-
-
 import 'package:tuwaiq_project/screens/project_view_screen.dart';
 
-
 import 'package:tuwaiq_project/screens/projectView/manage_project_screen.dart';
+import 'package:tuwaiq_project/screens/rating_screen.dart';
 
 import 'package:tuwaiq_project/screens/splach/splach_screen.dart';
 import 'package:tuwaiq_project/services/setup.dart';
@@ -40,26 +37,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MultiBlocProvider(
       providers: [
-         BlocProvider(
+        BlocProvider(
           create: (context) => ProfileCubit(),
         ),
-
-         BlocProvider(
+        BlocProvider(
           create: (context) => ImgHandleCubit(),
         ),
-
-         BlocProvider(
+        BlocProvider(
           create: (context) => CvHandleCubit(),
         ),
       ],
       child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home:  EditScreen(),
+        //debugShowCheckedModeBanner: false,
+        home: RatingScreen(),
       ),
-
     );
   }
 }
