@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -154,7 +155,24 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                     children: [
                       Text("no file"),
                       IconButton(
-                          onPressed: () async {},
+                          onPressed: () async {
+                            final fileData =
+                                await FilePicker.platform.pickFiles(
+                              type: FileType.custom,
+                              allowedExtensions: ['pdf'],
+                            );
+
+                            if (fileData != null) {
+                              final file = fileData.files.first;
+                              final bytes = file.xFile;
+                              final fileName = file.name;
+
+                              // need late to check if byte not null
+                              context.read<CvHandleCubit>().cvAdd(
+                                  await bytes.readAsBytes(),
+                                  fileName.substring(0, 5));
+                            }
+                          },
                           icon: Icon(FontAwesomeIcons.plus))
                     ],
                   );
