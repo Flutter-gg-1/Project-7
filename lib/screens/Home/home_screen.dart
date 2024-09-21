@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project_management_app/models/project_model.dart';
 import 'package:project_management_app/networking/api_networking.dart';
+import 'package:project_management_app/screens/All_projects/all_projects_screen.dart';
 import 'package:project_management_app/screens/Home/bloc/home_bloc.dart';
 import 'package:project_management_app/screens/Home/boot_camps.dart';
 import 'package:project_management_app/screens/Home/image_slider.dart';
@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                             SizedBox(height: 2.h),
                             _buildTabBar(context),
                             SizedBox(height: 2.h),
-                            _buildTabContent(),
+                            _buildTabContent(context), // Pass context here
                             const Divider(
                               height: 2,
                               thickness: 2,
@@ -140,34 +140,59 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTabContent() {
+  Widget _buildTabContent(BuildContext context) {
+    // Added context here
     return SizedBox(
-      height: 80.h,
+      height: 75.h,
       child: TabBarView(
         children: [
-          BlocBuilder<HomeBloc, HomeState>(
-            builder: (context, state) {
-              if (state is HomeLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.lightBlueAccent,
+          Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AllProjectsScreen()),
+                      );
+                    },
+                    child: Text(
+                      "See more ..>",
+                      style: TextStyle(
+                        color: AppColors.blueDark,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                );
-              } else if (state is HomeLoaded) {
-                return ListView.builder(
-                  itemCount: state.projects.length,
-                  itemBuilder: (context, index) {
-                    final project = state.projects[index];
-                    return Projects(project: project);
-                  },
-                );
-              } else if (state is HomeError) {
-                return Center(
-                  child: Text('Error: ${state.message}'),
-                );
-              }
-              return const Center(child: Text('No projects available.'));
-            },
+                ],
+              ),
+              BlocBuilder<HomeBloc, HomeState>(
+                builder: (context, state) {
+                  if (state is HomeLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.lightBlueAccent,
+                      ),
+                    );
+                  } else if (state is HomeLoaded) {
+                    return Column(
+                      children: state.projects.take(4).map((project) {
+                        return Projects(project: project);
+                      }).toList(),
+                    );
+                  } else if (state is HomeError) {
+                    return Center(
+                      child: Text('Error: ${state.message}'),
+                    );
+                  }
+                  return const Center(child: Text('No projects available.'));
+                },
+              ),
+            ],
           ),
           const Center(child: Text('Recent Projects')),
           const Center(child: Text('Top Projects')),
