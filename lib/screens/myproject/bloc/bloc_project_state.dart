@@ -7,7 +7,7 @@ abstract class ProjectState {}
 class ProjectLoading extends ProjectState {}
 
 class ProjectLoaded extends ProjectState {
-  final List<Project> projects;
+  final List<ProjectsModel> projects;
 
   ProjectLoaded(this.projects);
 }
