@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_judge/components/slider_section/sliderSection.dart';
 import 'package:project_judge/components/text_field/noteSection_text.dart';
-import 'package:project_judge/screens/myproject/bloc/bloc_rating_bloc.dart';
-import 'package:project_judge/screens/myproject/bloc/bloc_rating_event.dart';
-import 'package:project_judge/screens/myproject/bloc/bloc_rating_state.dart';
+import 'package:project_judge/screens/rating/bloc/bloc_rating_bloc.dart';
+import 'package:project_judge/screens/rating/bloc/bloc_rating_event.dart';
+import 'package:project_judge/screens/rating/bloc/bloc_rating_state.dart';
 
 
 class RatingPage extends StatelessWidget {
