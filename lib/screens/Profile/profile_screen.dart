@@ -135,9 +135,10 @@ class ProfileScreen extends StatelessWidget {
                             IconButton(
                               onPressed: () {
                                 Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const EditProfileScreen()));
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                             EditProfileScreen(profile: profile,)));
                               },
                               icon: const Icon(
                                 Icons.edit,

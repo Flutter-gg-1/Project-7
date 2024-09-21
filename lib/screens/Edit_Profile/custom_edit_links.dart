@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomEditLinks extends StatelessWidget {
+  final TextEditingController controller;
   final String label;
-  const CustomEditLinks({super.key, required this.label});
+  const CustomEditLinks(
+      {super.key, required this.controller, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +23,13 @@ class CustomEditLinks extends StatelessWidget {
                 ),
               ],
               borderRadius: BorderRadius.circular(10)),
-          child: const TextField(
+          child: TextField(
+            controller: controller,
             cursorColor: Colors.black,
             maxLines: 1,
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
             textAlignVertical: TextAlignVertical.top,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
