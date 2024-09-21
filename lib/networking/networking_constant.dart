@@ -3,8 +3,6 @@ import 'package:dio/dio.dart';
 abstract class NetworkingConstant {
   Dio dio = Dio();
 
-
-
   final String baseUrl = "https://tuwaiq-gallery.onrender.com/v1";
   final String endCreateUser = "/auth/create/new/account";
   final String endLogin = "/auth/login";
@@ -15,12 +13,10 @@ abstract class NetworkingConstant {
   final String endProfile = "/user/profile";
   final String endProfileUpdate = "/user/update/profile";
   final String endProjectLogoEdit = "/user/edit/project/logo/";
-  // chnage this data 
+  // chnage this data
 
   // "project_name" , "bootcamp_name" , type" "start_date" "end_date" "presentation_date" "project_description"
   final String endProjectBaseEdit = "/user/edit/project/base/";
-
-
 
   final String endPresentationEdit = "/user/edit/project/presentation/";
   final String endProjectImgEdit = "/user/edit/project/images/";
@@ -31,4 +27,5 @@ abstract class NetworkingConstant {
 
   final String endProjectDel = "/supervisor/delete/project/";
 
+  final String endProjectRating = "/user/rating/project/";
 }
