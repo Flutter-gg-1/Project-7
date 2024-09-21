@@ -31,8 +31,11 @@ class ProjectContainer extends StatelessWidget {
             projectsModel.logoUrl != null && projectsModel.logoUrl!.isNotEmpty
                 ? Image.network(
                     projectsModel.logoUrl!,
+                    height: context.getHeight(multiply: 0.2),
                     errorBuilder: (context, error, stackTrace) {
-                      return Image.asset("assets/image/flutter.png");
+                      return Image.asset(
+                        "assets/image/flutter.png",
+                      );
                     },
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) {
