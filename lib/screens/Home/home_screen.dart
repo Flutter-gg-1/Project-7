@@ -7,6 +7,7 @@ import 'package:project_management_app/screens/Home/boot_camps.dart';
 import 'package:project_management_app/screens/Home/image_slider.dart';
 import 'package:project_management_app/screens/Home/out_Standing_student.dart';
 import 'package:project_management_app/screens/Home/projects_contaner.dart';
+import 'package:project_management_app/screens/Home/cubit/image_slider_cubit_cubit.dart';
 import 'package:project_management_app/theme/appcolors.dart';
 import 'package:sizer/sizer.dart';
 
@@ -17,9 +18,16 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) {
-        return BlocProvider(
-          create: (context) =>
-              HomeBloc(apiNetworking: ApiNetworking())..add(FetchProjects()),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => HomeBloc(apiNetworking: ApiNetworking())
+                ..add(FetchProjects()),
+            ),
+            BlocProvider(
+              create: (context) => ImageSliderCubit(3),
+            ),
+          ],
           child: Builder(
             builder: (context) {
               return DefaultTabController(
