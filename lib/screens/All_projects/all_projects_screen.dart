@@ -1,131 +1,126 @@
 import 'package:flutter/material.dart';
-import 'package:project_management_app/models/profile_model.dart';
-import 'package:project_management_app/models/project_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_management_app/networking/api_networking.dart';
+import 'package:project_management_app/screens/All_projects/bloc/all_projects_bloc_bloc.dart';
 import 'package:project_management_app/screens/Home/projects_contaner.dart';
 import 'package:project_management_app/screens/Supervisor/add_project_screen.dart';
 import 'package:project_management_app/theme/appcolors.dart';
 import 'package:sizer/sizer.dart';
 
-class AllProjectsScreen extends StatefulWidget {
+class AllProjectsScreen extends StatelessWidget {
   const AllProjectsScreen({super.key});
 
   @override
-  State<AllProjectsScreen> createState() => _AllProjectsScreenState();
-}
-
-class _AllProjectsScreenState extends State<AllProjectsScreen>
-    with TickerProviderStateMixin {
-  late Future<List<ProjectModel>> _allProjectsFuture;
-  late TabController _tabController;
-  final ApiNetworking apiNetworking = ApiNetworking();
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(vsync: this, length: 3); // Add a length
-    _allProjectsFuture = apiNetworking.getAllPublicProjects();
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  Widget _buildProjectsTab(Future<List<ProjectModel>> futureProjects) {
-    return FutureBuilder<List<ProjectModel>>(
-      future: futureProjects,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-              child: CircularProgressIndicator()); // Show loading indicator
-        } else if (snapshot.hasError) {
-          return Center(
-              child: Text('Error: ${snapshot.error}')); // Show error message
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No projects available.'));
-        }
-
-        return ListView.builder(
-          shrinkWrap: true,
-          itemCount: snapshot.data!.length,
-          itemBuilder: (context, index) {
-            final project = snapshot.data![index];
-            return Projects(
-              project: project,
-            );
-          },
-        );
-      },
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          // if (profile.role == 'supervisor')
-            IconButton(
-              icon: const Icon(Icons.add, color: Colors.white),
-              onPressed: () {
-                // Define the action for the "Add" button here
-                // For example, navigate to a new project creation screen
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          const AddProjectScreen()), // Replace with your desired screen
-                );
-              },
-            ),
-        ],
-        title: const Text('All Projects',
-            style: TextStyle(color: AppColors.white)),
-        backgroundColor: AppColors.blueDark,
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 1,
-                      blurRadius: 3,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
+    return BlocProvider(
+      create: (context) =>
+          AllProjectsBloc(ApiNetworking())..add(FetchAllProjectsEvent()),
+      child: Builder(builder: (context) {
+        return Scaffold(
+          body: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                backgroundColor: const Color(0x80e9e9e9),
+                expandedHeight: 100.0,
+                floating: true,
+                pinned: false,
+                flexibleSpace: FlexibleSpaceBar(
+                  title: const Text(
+                    'All Projects',
+                    style: TextStyle(color: AppColors.white),
+                  ),
+                  background: Container(color: AppColors.blueDark),
                 ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search...',
-                    prefixIcon: const Icon(Icons.search),
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.sp),
-                      borderSide: BorderSide.none,
+                actions: [
+                  IconButton(
+                    icon: const Icon(Icons.add, color: Colors.white),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AddProjectScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search...',
+                        prefixIcon: const Icon(Icons.search),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.sp),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              width: 8.w,
-              height: 20,
-            ),
-            Expanded(
-              child: _buildProjectsTab(_allProjectsFuture),
-            ),
-          ],
-        ),
-      ),
+              BlocBuilder<AllProjectsBloc, AllProjectsState>(
+                builder: (context, state) {
+                  if (state is AllProjectsLoading) {
+                    return const SliverToBoxAdapter(
+                      child: Center(child: CircularProgressIndicator()),
+                    );
+                  } else if (state is AllProjectsError) {
+                    return SliverToBoxAdapter(
+                      child: Center(child: Text('Error: ${state.message}')),
+                    );
+                  } else if (state is AllProjectsLoaded) {
+                    if (state.projects.isEmpty) {
+                      return const SliverToBoxAdapter(
+                        child: Center(child: Text('No projects available.')),
+                      );
+                    }
+                    return SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          final project = state.projects[index];
+                          return Projects(project: project);
+                        },
+                        childCount: state.projects.length,
+                      ),
+                    );
+                  }
+                  return const SliverToBoxAdapter(
+                    child: Center(child: Text('No data')),
+                  );
+                },
+              ),
+              // Add a SliverToBoxAdapter with a SizedBox at the bottom
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 14.h, // Adjust height as needed
+                  child: Center(
+                    child: Text(
+                      'End of Projects',
+                      style: TextStyle(fontSize: 16.sp, color: Colors.grey),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      }),
     );
   }
 }
