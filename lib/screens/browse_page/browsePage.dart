@@ -23,8 +23,7 @@ class BrowsePageState extends State<BrowsePage>
   void initState() {
     super.initState();
     tabController = TabController(length: 4, vsync: this);
-
-    GetIt.I<ProjectBloc>().add(LoadProjectsEvent());
+    context.read<ProjectBloc>().add(LoadProjectsEvent());
   }
 
   @override
@@ -47,7 +46,10 @@ class BrowsePageState extends State<BrowsePage>
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustomTextFormField(hintText: 'search',icon: Icons.search,),
+              const CustomTextFormField(
+                hintText: 'search',
+                icon: Icons.search,
+              ),
               Container(
                 alignment: Alignment.centerLeft,
                 child: TabBarWidget(tabController: tabController),
