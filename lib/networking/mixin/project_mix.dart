@@ -128,4 +128,39 @@ mixin ProjectMix on NetworkingConstant {
       throw Exception;
     }
   }
+
+  ratingProject({
+    required String userToken,
+    required String projectId,
+    required String note,
+    required double idea,
+    required double design,
+    required double tools,
+    required double practices,
+    required double presentation,
+    required double investment,
+  }) async {
+    try {
+      final res = await dio.post(
+        '$baseUrl$endProjectRating$projectId',
+        options: Options(
+          headers: {'Authorization': 'Bearer $userToken'},
+        ),
+        data: {
+          'note': note,
+          'idea': idea.toInt(),
+          'design': design.toInt(),
+          'tools': tools.toInt(),
+          'practices': practices.toInt(),
+          'presentation': presentation.toInt(),
+          'investment': investment.toInt(),
+        },
+      );
+      print(res.data);
+    } on DioException catch (error) {
+      print(error.response?.data);
+    } catch (e) {
+      throw Exception;
+    }
+  }
 }
