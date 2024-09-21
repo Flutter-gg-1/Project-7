@@ -88,6 +88,8 @@ class ProjectViewScreen extends StatelessWidget {
                   height: context.getHeight(multiply: 0.035),
                 ),
                 CostomeDetailsProject(
+                  maxHeight: context.getHeight(multiply: 0.1) ,
+                  readOnly: true,
                   heightContainer: context.getHeight(multiply: 0.3),
                   widthContainer: context.getWidth(multiply: 0.8),
                   cotentText: projectsModel.projectDescription ?? "nothing",

@@ -11,8 +11,6 @@ import 'package:tuwaiq_project/screens/profile/img_handle_cubit/img_handle_cubit
 import 'package:tuwaiq_project/screens/projectView/edit/edit_screen.dart';
 import 'package:tuwaiq_project/screens/projectView/edit_project_screen.dart';
 
-import 'package:tuwaiq_project/screens/project_view_screen.dart';
-
 import 'package:tuwaiq_project/screens/projectView/manage_project_screen.dart';
 import 'package:tuwaiq_project/screens/rating/rating_screen.dart';
 

@@ -163,6 +163,7 @@ mixin ProjectMix on NetworkingConstant {
     } catch (e) {
       throw Exception;
     }
+  }
 
     Future<List<ProjectsModel>> getAllProject() async {
       try {
@@ -193,4 +194,4 @@ mixin ProjectMix on NetworkingConstant {
       }
     }
   }
-}
+
