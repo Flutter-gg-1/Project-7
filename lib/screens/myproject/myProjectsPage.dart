@@ -1,48 +1,47 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:project_judge/components/tab_bar/Closed_tab_bar.dart';
 import 'package:project_judge/components/tab_bar/Opened_tab_bar.dart';
 import 'package:project_judge/models/project_model.dart';
-import 'package:project_judge/screens/rating/blocs/bloc_project_bloc.dart';
-import 'package:project_judge/screens/rating/blocs/bloc_project_event.dart';
-import 'package:project_judge/screens/rating/blocs/bloc_project_state.dart';
+import 'package:project_judge/screens/myproject/bloc/bloc_project_bloc.dart';
+import 'package:project_judge/screens/myproject/bloc/bloc_project_event.dart';
+import 'package:project_judge/screens/myproject/bloc/bloc_project_state.dart';
 
 class MyProjectsScreen extends StatefulWidget {
   @override
   MyProjectsScreenState createState() => MyProjectsScreenState();
 }
 
-
 class MyProjectsScreenState extends State<MyProjectsScreen>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
-  late ProjectBloc projectBloc;
 
-  @override
+@override
   void initState() {
     super.initState();
-    tabController = TabController(length: 2, vsync: this);
-    projectBloc = ProjectBloc()
-      ..add(LoadProjectsEvent()); 
+    tabController = TabController(length: 4, vsync: this);
+
+    context.read<ProjectBloc>().add(LoadProjectsEvent());
   }
 
   @override
   void dispose() {
     tabController.dispose();
-    projectBloc.close(); 
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final projectBloc = GetIt.I<ProjectBloc>();
+
     return Scaffold(
-      backgroundColor: Color(0xFF4E2EB5),
+      backgroundColor: const Color(0xFF4E2EB5),
       appBar: AppBar(
-        backgroundColor: Color(0xFF4E2EB5),
+        backgroundColor: const Color(0xFF4E2EB5),
         elevation: 0,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'My Projects',
           style: TextStyle(color: Colors.white),
         ),
@@ -52,10 +51,10 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
           indicatorSize: TabBarIndicatorSize.tab,
           indicatorColor: Colors.cyan,
           labelColor: Colors.cyan,
-          labelStyle: TextStyle(fontSize: 20, color: Colors.cyan),
+          labelStyle: const TextStyle(fontSize: 20, color: Colors.cyan),
           unselectedLabelColor: Colors.grey,
-          tabs: [
-            Tab(text: 'Open'),
+          tabs: const [
+            Tab(text: 'Opened'),
             Tab(text: 'Closed'),
           ],
         ),
@@ -64,12 +63,10 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
         bloc: projectBloc,
         builder: (context, state) {
           if (state is ProjectLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is ProjectLoaded) {
-       
-            final openProjects = state.projects.where((p) => p.isOpen).toList();
-            final closedProjects =
-                state.projects.where((p) => !p.isOpen).toList();
+            final openProjects = state.projects.where((p) => p.allowEdit).toList();
+            final closedProjects = state.projects.where((p) => !p.allowEdit).toList();
             return TabBarView(
               controller: tabController,
               children: [
@@ -78,28 +75,30 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
               ],
             );
           } else if (state is ProjectError) {
-            return Center(child: Text(state.message));
+            return Center(child: Text('Error: ${state.message}'));
+          } else {
+            return const Center(child: Text('No data available'));
           }
-          return Container();
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+        },
         backgroundColor: Colors.cyan,
-        child: Icon(Icons.add),
-        shape: CircleBorder(),
+        child: const Icon(Icons.add),
       ),
     );
   }
 
-  Widget buildProjectList(List<Project> projects, bool isOpen) {
+  Widget buildProjectList(List<ProjectsModel> projects, bool isOpen) {
     return ListView.builder(
       itemCount: projects.length,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: isOpen
-              ? MyProjectCardOpened(project: projects[index]) : MyProjectCardClosed(project: projects[index]),
+              ? MyProjectCardOpened(project: projects[index])
+              : MyProjectCardClosed(project: projects[index]),
         );
       },
     );
