@@ -17,7 +17,11 @@ final class ErorrState extends ProfileState {
   ErorrState({required this.msg});
 }
 
+final class ArabicState extends ProfileState {
+  final bool isArabic;
 
+  ArabicState({required this.isArabic});
+}
 
 
 // final class ImageHereState extends ProfileState {

@@ -57,11 +57,9 @@ class MyApp extends StatelessWidget {
           create: (context) => CvHandleCubit(),
         ),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         //debugShowCheckedModeBanner: false,
-        home: RatingScreen(
-          projectId: 'p-V2CEUkBcfd',
-        ),
+        home: HomeScreen(),
       ),
     );
   }
