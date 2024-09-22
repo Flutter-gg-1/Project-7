@@ -8,13 +8,9 @@ class CustomTextFormField extends StatelessWidget {
     this.icon,
     this.validator,
     this.floatingLabelBehavior,
-<<<<<<< HEAD
-    this.label, this.maximumLines =1, this.fillColor,
-=======
     this.label,
     this.maximumLines = 1,
-    this.onChange,
->>>>>>> origin/linda
+    this.onChange, this.fillColor,
   });
 
   final String? label;
@@ -49,11 +45,7 @@ class CustomTextFormField extends StatelessWidget {
           decoration: InputDecoration(
               floatingLabelBehavior: floatingLabelBehavior,
               filled: true,
-<<<<<<< HEAD
-              fillColor: fillColor ?? const Color(0xffEDEDED),
-=======
               fillColor: const Color.fromARGB(255, 232, 232, 232),
->>>>>>> origin/linda
               hintText: hintText,
               hintStyle: const TextStyle(fontSize: 12),
               prefixIcon: icon != null ? Icon(icon) : null,

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:project_judge/data_layer/data_layer.dart';
+import 'package:project_judge/models/project_info_model.dart';
 import 'package:project_judge/models/user_model.dart';
 import 'package:project_judge/setup/init_setup.dart';
 import 'package:bloc/bloc.dart';
@@ -15,7 +16,7 @@ part 'edit_project_state.dart';
 class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
   String? id;
 
-  late Projects project = getIt.get<DataLayer>().userInfo!.projects!.firstWhere(
+  late ProjectsInfo project = getIt.get<DataLayer>().userInfo!.projects!.firstWhere(
         (project) => project.projectId == id,
       );
 
@@ -42,10 +43,10 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
   List imgList = [];
 
   //save links
-  late List<Map<String, dynamic>> links = project.linksProject;
+  late List<LinksProject>? links = project.linksProject;
 
   //save members
-  late List members = project.membersProject;
+  late List<MembersProject>? members = project.membersProject;
   File presention = File('');
 
   EditProjectBloc() : super(EditProjectInitial()) {
@@ -81,7 +82,7 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
     });
 
     on<AddMembersEvent>((event, emit) {
-      members.add({'id': '', 'role': ''}); // Add row
+      members?.add(value) // Add row
       emit(UpdateProjectEntryState());
     });
     on<UpdateMembersEvent>((event, emit) {
