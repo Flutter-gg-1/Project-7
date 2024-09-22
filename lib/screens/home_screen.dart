@@ -1,4 +1,3 @@
-
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,8 +6,8 @@ import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/screens/all_project/all_project_screen.dart';
 import 'package:tuwaiq_project/screens/bottomNavBloc/bottomnav_bloc.dart';
 import 'package:tuwaiq_project/screens/profile/profile_screen.dart';
-import 'package:tuwaiq_project/screens/search_screen.dart';
-import 'package:tuwaiq_project/screens/user_project_screen.dart';
+import 'package:tuwaiq_project/screens/serch_screen/search_screen.dart';
+import 'package:tuwaiq_project/screens/user_project/user_project_screen.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -75,23 +74,25 @@ class HomeScreen extends StatelessWidget {
               );
             },
           ),
-          body: Column(
-            children: [
-              CustomPaint(
-                size: Size(context.getWidth(multiply: 1),
-                    context.getHeight(multiply: 0.1)),
-                painter: AuthShape(),
-              ),
-              BlocBuilder<BottomnavBloc, BottomnavState>(
-                builder: (context, state) {
-                  int selectedIndex = 0;
-                  if (state is IndexChangeState) {
-                    selectedIndex = state.index;
-                  }
-                  return tabs[selectedIndex];
-                },
-              ),
-            ],
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                CustomPaint(
+                  size: Size(context.getWidth(multiply: 1),
+                      context.getHeight(multiply: 0.1)),
+                  painter: AuthShape(),
+                ),
+                BlocBuilder<BottomnavBloc, BottomnavState>(
+                  builder: (context, state) {
+                    int selectedIndex = 0;
+                    if (state is IndexChangeState) {
+                      selectedIndex = state.index;
+                    }
+                    return tabs[selectedIndex];
+                  },
+                ),
+              ],
+            ),
           ),
         );
       }),

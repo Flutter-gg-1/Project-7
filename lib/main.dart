@@ -59,8 +59,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         //debugShowCheckedModeBanner: false,
-        home: RatingScreen(
-          projectId: 'p-V2CEUkBcfd',
+        home: HomeScreen(
+
         ),
       ),
     );
