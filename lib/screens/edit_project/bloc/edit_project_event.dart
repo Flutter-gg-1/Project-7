@@ -38,6 +38,22 @@ class UpdateMembersEvent extends EditProjectEvent {
   UpdateMembersEvent({required this.index, required this.id, required this.role});
 }
 
+
+class UpdateLinksEvent extends EditProjectEvent {
+
+  final String? github;
+  final String? figma;
+  final String? video;
+  final String? pinterest;
+  final String? playstore;
+  final String? applestore;
+    final String? apk;
+  final String? web;
+
+
+  UpdateLinksEvent({this.figma, this.video, this.pinterest, this.playstore, this.applestore, this.apk, this.web, this.github});
+}
+
 class UpdateFileEvent extends EditProjectEvent {
   final File presentation;
 

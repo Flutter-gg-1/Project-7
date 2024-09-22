@@ -30,9 +30,8 @@ class UserModel {
     role = json['role'];
     imageUrl = json['imageUrl'];
     link = Link.fromJson(json['link']);
-       projects = (json['projects'] as List)
-        .map((e) => Projects.fromJson(e))
-        .toList();
+    projects =
+        (json['projects'] as List).map((e) => Projects.fromJson(e)).toList();
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -183,13 +182,14 @@ class Projects {
 class MembersProject {
   MembersProject({
     required this.id,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.position,
+     this.firstName,
+     this.lastName,
+     this.email,
+     required this.position,
     this.imageUrl,
-    required this.link,
+    this.link,
   });
+
   late final String? id;
   late final String? firstName;
   late final String? lastName;
@@ -204,7 +204,7 @@ class MembersProject {
     lastName = json['last_name'];
     email = json['email'];
     position = json['position'];
-    imageUrl = json['ImageUrl'];
+    imageUrl = json['image_url'];
     link = Link.fromJson(json['link']);
   }
 
@@ -218,5 +218,10 @@ class MembersProject {
     data['image_url'] = imageUrl;
     data['link'] = link?.toJson();
     return data;
+  }
+
+  @override
+  String toString() {
+    return '{"user_id" : "$id", "position": "$position"}';
   }
 }

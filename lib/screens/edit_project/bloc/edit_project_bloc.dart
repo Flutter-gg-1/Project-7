@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 import 'package:project_judge/data_layer/data_layer.dart';
 import 'package:project_judge/models/user_model.dart';
@@ -9,6 +10,8 @@ import 'package:meta/meta.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart' as http;
 part 'edit_project_event.dart';
 part 'edit_project_state.dart';
 
@@ -20,7 +23,8 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
       );
 
   //save logo
-  File? logoImg;
+  File? logoImg; // to save the img from gallary
+  // late String savedLogo = project.logoUrl ?? '';
 
   //save base info
   late String name = project.projectName ?? '';
@@ -45,18 +49,19 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
   late List<Map<String, dynamic>> links = project.linksProject;
 
   //save members
-  late List members = project.membersProject;
+  late List<MembersProject> members = project.membersProject;
+
+  //
   File presention = File('');
 
   EditProjectBloc() : super(EditProjectInitial()) {
-
-
     on<UpdateLogoEvent>((event, emit) {
       logoImg = event.logo;
       emit(UpdateProjectEntryState());
     });
-    on<UpdatePresentationDateEvent>((event, emit) {
 
+    on<UpdatePresentationDateEvent>((event, emit) {
+      print(members.toList());
       presentationDate = event.date;
       emit(UpdateProjectEntryState());
     });
@@ -65,7 +70,41 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
       duration = event.date;
       emit(UpdateProjectEntryState());
     });
+    on<UpdateLinksEvent>((event, emit) {
+      Map<String, String?> currentLinksMap = {
+        for (var link in links) link['type']: link['url']
+      };
 
+      // Update the links list based on the event
+      links = [
+        {
+          "type": "github",
+          "url": event.github ?? currentLinksMap['github'] ?? ''
+        },
+        {"type": "figma", "url": event.figma ?? currentLinksMap['figma'] ?? ''},
+        {"type": "video", "url": event.video ?? currentLinksMap['video'] ?? ''},
+        {
+          "type": "pinterest",
+          "url": event.pinterest ?? currentLinksMap['pinterest'] ?? ''
+        },
+        {
+          "type": "playstore",
+          "url": event.playstore ?? currentLinksMap['playstore'] ?? ''
+        },
+        {
+          "type": "applestore",
+          "url": event.applestore ?? currentLinksMap['applestore'] ?? ''
+        },
+        {"type": "apk", "url": event.apk ?? currentLinksMap['apk'] ?? ''},
+        {
+          "type": "weblink",
+          "url": event.web ?? currentLinksMap['weblink'] ?? ''
+        },
+      ];
+
+      // Emit the updated state
+      emit(UpdateProjectEntryState());
+    });
     on<EditProjectEvent>((event, emit) {});
 
     on<EditImagesEvent>((event, emit) {
@@ -81,28 +120,33 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
     });
 
     on<AddMembersEvent>((event, emit) {
-      members.add({'id': '', 'role': ''}); // Add row
+      members.add(MembersProject(
+        id: '',
+        position: '',
+      ));
       emit(UpdateProjectEntryState());
     });
+
     on<UpdateMembersEvent>((event, emit) {
-      members[event.index] = {'id': event.id, 'role': event.role};
+      members[event.index] = MembersProject(
+        id: event.id, // Update id
+        firstName: members[event.index].firstName, // Keep
+        lastName: members[event.index].lastName, // Keep
+        email: members[event.index].email,
+        position: event.role, // Update position
+        imageUrl: members[event.index].imageUrl, // Keep
+        link: members[event.index].link, // Keep
+      );
+      emit(UpdateProjectEntryState());
+    });
+
+    on<DeleteMembersEvent>((event, emit) {
+      members.removeAt(event.index); // Remove member
+      emit(UpdateProjectEntryState());
     });
     on<UpdateFileEvent>((event, emit) {
       presention = event.presentation;
       emit(UpdateProjectEntryState());
     });
-    on<DeleteMembersEvent>((event, emit) {
-      members..removeAt(event.index);
-      emit(UpdateProjectEntryState());
-
-    });
   }
-}
-
-Future<File?> convertBinaryToFile(List<int> binaryData) async {
-  // This method converts binary data to a File
-  final filePath = '${(await getTemporaryDirectory()).path}/logo.png';
-  final file = File(filePath);
-  file.writeAsBytesSync(Uint8List.fromList(binaryData));
-  return file;
 }

@@ -44,6 +44,7 @@ class EditProjectForm extends StatelessWidget {
     final bloc = context.read<EditProjectBloc>();
     bloc.id = projectId;
     return Scaffold(
+      backgroundColor: Color(0xffFBFBFB),
       appBar: AppBar(
         backgroundColor: const Color(0xff4E2EB5),
         title: const CustomText(
@@ -58,18 +59,54 @@ class EditProjectForm extends StatelessWidget {
               onPressed: () {
                 if (formKey.currentState?.validate() == true) {
                   //go to api methods
-                  api.updateProject(
-                      projectID: projectId,
-                      token: getIt.get<DataLayer>().authUser!.token,
-                      name: bloc.name,
-                      bootcamp: bloc.bootcampName,
-                      type: bloc.type,
-                      start:
-                          DateFormat('dd/MM/yyyy').format(bloc.duration!.start),
-                      end: DateFormat('dd/MM/yyyy').format(bloc.duration!.end),
-                      presentationDate: DateFormat('dd/MM/yyyy')
-                          .format(bloc.presentationDate!),
-                      desc: bloc.description);
+
+                  if (bloc.logoImg == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Please select a logo image.'),
+                        backgroundColor: Color(0xff4D2EB4),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  } else if (bloc.duration ==
+                      DateTimeRange(
+                          start: bloc.dateFormat.parse('0000-00-00'),
+                          end: bloc.dateFormat.parse('0000-00-00'))) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Please Choose Project duration.'),
+                        backgroundColor: Color(0xff4D2EB4),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  } else if (bloc.presentationDate ==
+                      bloc.dateFormat.parse('0000-00-00')) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Please Choose Presentation date.'),
+                        backgroundColor: Color(0xff4D2EB4),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  } else {
+                    api.updateProject(
+                        projectID: projectId,
+                        token: getIt.get<DataLayer>().authUser!.token,
+                        name: bloc.name,
+                        bootcamp: bloc.bootcampName,
+                        type: bloc.type,
+                        start: DateFormat('dd/MM/yyyy')
+                            .format(bloc.duration!.start),
+                        end:
+                            DateFormat('dd/MM/yyyy').format(bloc.duration!.end),
+                        presentationDate: DateFormat('dd/MM/yyyy')
+                            .format(bloc.presentationDate!),
+                        desc: bloc.description,
+                        link: bloc.links,
+                        logo: bloc.logoImg!.path,
+                        members: bloc.members,
+                        imagesList: bloc.imgList);
+                  }
                 }
               },
               icon: const Icon(Icons.done, color: Color(0xffffffff)),
@@ -137,6 +174,7 @@ class EditProjectBody extends StatelessWidget {
   }
 }
 
+// --------------- edit logo --------------------
 class ProjectLogoSection extends StatelessWidget {
   const ProjectLogoSection({super.key});
 
@@ -144,16 +182,15 @@ class ProjectLogoSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = context.read<EditProjectBloc>();
     final picker = ImagePicker();
+
     return Column(
       children: [
-        SizedBox(
-          height: 10,
-        ),
+        SizedBox(height: 10),
         GestureDetector(
           onTap: () async {
             final image = await picker.pickImage(source: ImageSource.gallery);
             if (image != null) {
-              bloc.logoImg = File(image.path);
+              bloc.add(UpdateLogoEvent(logo: File(image.path)));
             }
           },
           child: BlocBuilder<EditProjectBloc, EditProjectState>(
@@ -162,15 +199,13 @@ class ProjectLogoSection extends StatelessWidget {
                 radius: 40,
                 backgroundImage: bloc.logoImg != null
                     ? FileImage(bloc.logoImg!)
-                    : AssetImage("assets/images/defualt_img.png")
+                    : AssetImage("assets/images/default_img.png")
                         as ImageProvider,
               );
             },
           ),
         ),
-        SizedBox(
-          height: 10,
-        ),
+        SizedBox(height: 10),
         Center(
           child: CustomText(
             text: 'Tap to Change Logo',
@@ -178,13 +213,13 @@ class ProjectLogoSection extends StatelessWidget {
             color: Color(0xff848484),
           ),
         ),
-        SizedBox(
-          height: 10,
-        ),
+        SizedBox(height: 10),
       ],
     );
   }
 }
+
+// --------------- edit base info --------------------
 
 class BasicInformation extends StatelessWidget {
   const BasicInformation({super.key});
@@ -214,15 +249,25 @@ class BasicInformation extends StatelessWidget {
         CustomTextFormField(
           label: 'Project name',
           hintText: 'Project name',
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Enter Project name';
+            }
+          },
           controller: nameController,
-           onChange: (value) {
+          onChange: (value) {
             bloc.name = nameController.text;
           },
         ),
         SizedBox(height: 10),
         CustomTextFormField(
           label: 'Bootcamp name',
-          hintText: 'Bootcamp name',
+          hintText: 'Bootcamp Name',
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Enter Bootcamp Name';
+            }
+          },
           controller: bootcampController,
           onChange: (value) {
             bloc.bootcampName = bootcampController.text;
@@ -232,8 +277,13 @@ class BasicInformation extends StatelessWidget {
         CustomTextFormField(
           label: 'Project Type',
           hintText: 'Website/app/etc...',
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Enter Project Type';
+            }
+          },
           controller: typeController,
-           onChange: (value) {
+          onChange: (value) {
             bloc.type = typeController.text;
           },
         ),
@@ -250,6 +300,11 @@ class BasicInformation extends StatelessWidget {
           label: 'Description',
           maximumLines: 5,
           hintText: '',
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Enter Description';
+            }
+          },
           controller: descController,
           onChange: (value) {
             bloc.description = descController.text;
@@ -259,6 +314,8 @@ class BasicInformation extends StatelessWidget {
     );
   }
 }
+
+// --------------- edit duration --------------------
 
 class ProjectDurationSection extends StatelessWidget {
   final ValueChanged<DateTimeRange> onRangeSelected;
@@ -347,6 +404,8 @@ class ProjectDurationSection extends StatelessWidget {
   }
 }
 
+// --------------- edit presentation date --------------------
+
 class PresentationDateSection extends StatelessWidget {
   final ValueChanged<DateTime> onDateSelected;
 
@@ -430,6 +489,8 @@ class PresentationDateSection extends StatelessWidget {
     );
   }
 }
+
+// --------------- edit imgs --------------------
 
 class ProjectImagesSection extends StatelessWidget {
   const ProjectImagesSection({super.key});
@@ -538,12 +599,15 @@ class ProjectImagesSection extends StatelessWidget {
   }
 }
 
+// --------------- edit links --------------------
 class ProjectLinksSection extends StatelessWidget {
   const ProjectLinksSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<EditProjectBloc>();
+
+    // Initialize controllers
     TextEditingController githubController = TextEditingController();
     TextEditingController figmaController = TextEditingController();
     TextEditingController youtubeController = TextEditingController();
@@ -596,53 +660,79 @@ class ProjectLinksSection extends StatelessWidget {
           label: 'Github url',
           hintText: 'https://github.com/example',
           controller: githubController,
+          onChange: (value) {
+            bloc.add(UpdateLinksEvent(github: value));
+          },
         ),
         SizedBox(height: 10),
         CustomTextFormField(
           label: 'Figma url',
           hintText: 'https://Figma.com/example',
           controller: figmaController,
+          onChange: (value) {
+            bloc.add(UpdateLinksEvent(figma: value));
+          },
         ),
         SizedBox(height: 10),
         CustomTextFormField(
           label: 'Youtube url',
           hintText: 'https://Youtube.com/example',
           controller: youtubeController,
+          onChange: (value) {
+            bloc.add(UpdateLinksEvent(video: value));
+          },
         ),
         SizedBox(height: 10),
         CustomTextFormField(
           label: 'Pinterest url',
           hintText: 'https://Pinterest.com/example',
           controller: pinterestController,
+          onChange: (value) {
+            bloc.add(UpdateLinksEvent(pinterest: value));
+          },
         ),
         SizedBox(height: 10),
         CustomTextFormField(
           label: 'Playstore url',
           hintText: 'https://app.com/example',
           controller: playstoreController,
+          onChange: (value) {
+            bloc.add(UpdateLinksEvent(playstore: value));
+          },
         ),
         SizedBox(height: 10),
         CustomTextFormField(
           label: 'Appstore url',
           hintText: 'https://app.com/example',
           controller: appstoreController,
+          onChange: (value) {
+            bloc.add(UpdateLinksEvent(applestore: value));
+          },
         ),
         SizedBox(height: 10),
         CustomTextFormField(
           label: 'APK url',
           hintText: 'https://app.com/example',
           controller: apkController,
+          onChange: (value) {
+            bloc.add(UpdateLinksEvent(apk: value));
+          },
         ),
         SizedBox(height: 10),
         CustomTextFormField(
           label: 'Web url',
           hintText: 'https://app.com/example',
           controller: webController,
+          onChange: (value) {
+            bloc.add(UpdateLinksEvent(web: value));
+          },
         ),
       ],
     );
   }
 }
+
+// --------------- edit presentation file --------------------
 
 class ProjectPresentationSection extends StatelessWidget {
   const ProjectPresentationSection({super.key});
@@ -700,6 +790,8 @@ class ProjectPresentationSection extends StatelessWidget {
     );
   }
 }
+
+// --------------- edit members --------------------
 
 class ProjectMembersSection extends StatelessWidget {
   const ProjectMembersSection({super.key});
@@ -780,16 +872,10 @@ class MemberRow extends StatelessWidget {
     TextEditingController memberIdController = TextEditingController();
     TextEditingController memberRoleController = TextEditingController();
 
-    for (var link in bloc.links) {
-      switch (link['type']) {
-        case 'github':
-          memberIdController.text = link['user_id'] ?? '';
-          break;
-        case 'figma':
-          memberRoleController.text = link['position'] ?? '';
-          break;
-      }
-    }
+    memberIdController.text = bloc.members[index].id ?? '';
+
+    memberRoleController.text = bloc.members[index].position ?? '';
+
     return Column(
       children: [
         Row(
@@ -808,7 +894,7 @@ class MemberRow extends StatelessWidget {
                   bloc.add(UpdateMembersEvent(
                     index: index,
                     id: value!,
-                    role: bloc.members[index]['role']!,
+                    role: bloc.members[index].position!,
                   ));
                 },
               ),
@@ -827,7 +913,7 @@ class MemberRow extends StatelessWidget {
                 onChange: (value) {
                   bloc.add(UpdateMembersEvent(
                     index: index,
-                    id: bloc.members[index]['id']!,
+                    id: bloc.members[index].id!,
                     role: value!,
                   ));
                 },
