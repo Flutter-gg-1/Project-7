@@ -88,9 +88,29 @@ class EditPresentation extends StatelessWidget {
                       color: const Color(0xffededed)),
                   child: state is ProjectImagesState &&
                           state.presentationFile != null
-                      ? Center(
-                          child: Text(
-                              state.presentationFile!.path.split('/').last))
+                      ? Stack(
+                          clipBehavior: Clip.none,
+                          alignment: Alignment.center,
+                          children: [
+                            Center(
+                                child: Text(state.presentationFile!.path
+                                    .split('/')
+                                    .last)),
+                            Positioned(
+                              left: context.getWidth(multiply: 0.68),
+                              bottom: context.getHeight(multiply: 0.1),
+                              child: IconButton(
+                                  onPressed: () {
+                                    bloc.presentation = null;
+                                    bloc.add(DefaultEvent());
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                  )),
+                            ),
+                          ],
+                        )
                       : IconButton(
                           onPressed: () {
                             pickFile(

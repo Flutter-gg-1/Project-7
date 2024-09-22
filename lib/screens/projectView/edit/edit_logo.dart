@@ -84,7 +84,26 @@ class EditLogo extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                       color: const Color(0xffededed)),
                   child: state is ProjectImagesState && state.logoImage != null
-                      ? Image.file(state.logoImage!)
+                      ? Stack(
+                          clipBehavior: Clip.none,
+                          alignment: Alignment.center,
+                          children: [
+                            Image.file(state.logoImage!),
+                            Positioned(
+                              left: context.getWidth(multiply: 0.68),
+                              bottom: context.getHeight(multiply: 0.1),
+                              child: IconButton(
+                                  onPressed: () {
+                                    bloc.logoImage = null;
+                                    bloc.add(DefaultEvent());
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                  )),
+                            ),
+                          ],
+                        )
                       : IconButton(
                           onPressed: () {
                             pickImage(
@@ -102,7 +121,12 @@ class EditLogo extends StatelessWidget {
                 englishTitle: 'Edit Logo',
                 arabicTitle: 'تعديل الشعار',
                 onPressed: () {
-                  bloc.add(ChangeLogoEvent());
+                  if (bloc.logoImage != null) {
+                    bloc.add(ChangeLogoEvent());
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Upload image first')));
+                  }
                 },
                 arabic: languageLayer.isArabic,
               ),

@@ -70,6 +70,9 @@ class EditBloc extends Bloc<EditEvent, EditState> {
 //=====================
   EditBloc() : super(EditInitial()) {
     on<EditEvent>((event, emit) async {});
+    on<DefaultEvent>((event, emit) async {
+      emit(EditInitial());
+    });
 
     on<ChangeStatusEvent>((event, emit) async {
       try {
@@ -132,11 +135,21 @@ class EditBloc extends Bloc<EditEvent, EditState> {
 
     //file picker event
     on<FilePickedEvent>((event, emit) async {
-      presentation = event.selectedFile;
-      emit(LoadingState());
-      Uint8List fileAsList = await presentation!.readAsBytes();
-      presentationAsList = fileAsList.toList();
-      emit(ProjectImagesState(presentationFile: presentation));
+      try {
+        presentation = event.selectedFile;
+        log(presentation!.path);
+        emit(LoadingState());
+        log('========1');
+        Uint8List fileAsList = await presentation!.readAsBytes();
+        log('========2');
+        presentationAsList = fileAsList.toList();
+        log('========3');
+        emit(SucsessState(msg: 'File upload susessfully'));
+        emit(ProjectImagesState(presentationFile: presentation));
+        log('========4');
+      } catch (e) {
+        emit(ErrorState(msg: '$e'));
+      }
     });
     //image picker event
     on<LogoImageChangeEvent>((event, emit) async {
