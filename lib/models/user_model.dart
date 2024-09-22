@@ -1,3 +1,5 @@
+import 'project_info_model.dart';
+
 class UserModel {
   UserModel({
     required this.id,
@@ -11,6 +13,16 @@ class UserModel {
     required this.createdAt,
     required this.updatedAt,
   });
+  late final String id;
+  late final String firstName;
+  late final String lastName;
+  late final String email;
+  late final String role;
+  late final String imageUrl;
+  late final Link link;
+  late final List<ProjectsInfo> projects;
+  late final String createdAt;
+  late final String updatedAt;
   late final String? id;
   late final String? firstName;
   late final String? lastName;
@@ -31,7 +43,7 @@ class UserModel {
     imageUrl = json['imageUrl'];
     link = Link.fromJson(json['link']);
     projects =
-        List.from(json['projects']).map((e) => Projects.fromJson(e)).toList();
+        List.from(json['projects']).map((e) => ProjectsInfo.fromJson(e)).toList();
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -219,4 +231,5 @@ class MembersProject {
     data['link'] = link?.toJson();
     return data;
   }
+  
 }

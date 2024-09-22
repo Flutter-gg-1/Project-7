@@ -3,11 +3,14 @@ import 'package:project_judge/models/auth_model.dart';
 import 'package:project_judge/models/user_model.dart';
 import 'package:project_judge/network/api_netowrok.dart';
 
+import '../models/project_info_model.dart';
+
 class DataLayer {
   ApiNetowrok api = ApiNetowrok();
 
   AuthModel? authUser;
   UserModel? userInfo;
+  ProjectsInfo? projectInfo;
 
   final box = GetStorage();
 
@@ -27,10 +30,15 @@ class DataLayer {
     
   }
 
-  loadData() {
+  getProjectInfo() async {
+      projectInfo = await api.getProjectDetails();
+  }
+
+  loadData() async {
     if (box.hasData("auth")) {
       Map<String, dynamic> loadedData = box.read("auth");
       authUser = AuthModel.fromJson(loadedData);
+      await getProjectInfo();
     }
   }
 }
