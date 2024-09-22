@@ -24,6 +24,18 @@ class EditStatusState extends EditState {
   EditStatusState({required this.isEdit});
 }
 
+class PublicStatusState extends EditState {
+  final bool isPublic;
+
+  PublicStatusState({required this.isPublic});
+}
+
+class RatingStatusState extends EditState {
+  final bool allowRating;
+
+  RatingStatusState({required this.allowRating});
+}
+
 final class ProjectImagesState extends EditState {
   final File? logoImage;
   final List<File>? projectImage;

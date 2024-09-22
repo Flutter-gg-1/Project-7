@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
           //debugShowCheckedModeBanner: false,
-          home: EditScreen()),
+          home: HomeScreen()),
     );
   }
 }

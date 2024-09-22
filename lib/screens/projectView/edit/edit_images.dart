@@ -51,7 +51,7 @@ class EditImages extends StatelessWidget {
                         fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const Text(
-                    '4 / 6 >',
+                    '4 / 7 >',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
