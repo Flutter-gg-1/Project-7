@@ -265,7 +265,41 @@ class ProfileScreen extends StatelessWidget {
                           return ListTile(
                               trailing: profile.role == 'supervisor'
                                   ? IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                content: const Text(
+                                                    'Are you sure you want to delete this project?'),
+                                                actions: [
+                                                  TextButton(
+                                                      onPressed: () async {
+                                                        await ApiNetworking()
+                                                            .deleteProject(
+                                                                token: token,
+                                                                projectId: profile
+                                                                    .projects[
+                                                                        index]
+                                                                    .projectId!);
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                                const SnackBar(
+                                                                    content: Text(
+                                                                        'Project Deleted Successfully')));
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: const Text('YES')),
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: const Text('No'))
+                                                ],
+                                              );
+                                            });
+                                      },
                                       icon: const Icon(
                                         Icons.delete,
                                         color: Colors.red,

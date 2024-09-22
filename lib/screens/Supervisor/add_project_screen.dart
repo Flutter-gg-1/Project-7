@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:project_management_app/data_layer/data_layer.dart';
 import 'package:project_management_app/networking/api_networking.dart';
-import 'package:project_management_app/screens/Supervisor/custom_add_card.dart';
 import 'package:project_management_app/services/setup.dart';
 import 'package:sizer/sizer.dart';
 
@@ -52,6 +51,13 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text("Add Project",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        centerTitle: true,
+        backgroundColor: const Color(0xff4129B7),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -100,17 +106,23 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const CustomAddCard(),
                     const SizedBox(height: 40),
                     TextField(
                       controller: _timeEndEditController,
                       decoration:
                           const InputDecoration(labelText: 'Time End Edit'),
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Text('Editable: '),
+                        const Text(
+                          'Editable: ',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
                         Switch(
                           value: isEditable,
                           onChanged: (value) {
@@ -121,14 +133,30 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                         ),
                       ],
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        _createProject(
-                            token: locator.get<DataLayer>().auth!.token,
-                            timeEndEdit: _timeEndEditController.text,
-                            userId: _userIdController.text);
-                      },
-                      child: const Text('Create Project'),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Center(
+                      child: SizedBox(
+                        height: 30,
+                        width: 170,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _createProject(
+                                token: locator.get<DataLayer>().auth!.token,
+                                timeEndEdit: _timeEndEditController.text,
+                                userId: _userIdController.text);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff4129B7),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          child: const Text("Create Project",
+                              style: TextStyle(color: Colors.white)),
+                        ),
+                      ),
                     ),
                   ],
                 ),
