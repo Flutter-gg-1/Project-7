@@ -2,12 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:project_judge/models/project_model.dart';
 
 class MyProjectCardClosed extends StatelessWidget {
-  final Project? project;
 
-  const MyProjectCardClosed({super.key,  this.project});
+  const MyProjectCardClosed({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +73,7 @@ class MyProjectCardClosed extends StatelessWidget {
                       const SizedBox(height: 2),
                       RatingBar.builder(
                         itemSize: 16,
-                        initialRating: project?.rating??43,
+                        initialRating: 43,
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: false,

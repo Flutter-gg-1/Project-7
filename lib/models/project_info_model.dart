@@ -1,8 +1,8 @@
 import 'user_model.dart';
 
 class ProjectsInfo {
-  final String projectId;
-  final String type;
+  final String? projectId;
+  final String? type;
   final String? projectName;
   final String? bootcampName;
   final String? startDate;
@@ -11,18 +11,18 @@ class ProjectsInfo {
   final String? projectDescription;
   final String? logoUrl;
   final String? presentationUrl;
-  final String userId;
-  final String adminId;
-  final String timeEndEdit;
-  final bool allowEdit;
-  final bool allowRating;
-  final bool isPublic;
-  final int rating;
-  final String createAt;
-  final String updateAt;
-  final List<dynamic> imagesProject;
-  final List<dynamic> linksProject;
-  final List<MembersProject> membersProject;
+  final String? userId;
+  final String? adminId;
+  final String? timeEndEdit;
+  final bool? allowEdit;
+  final bool? allowRating;
+  final bool? isPublic;
+  final double? rating;
+  final String? createAt;
+  final String? updateAt;
+  final List<ImagesProject>? imagesProject;
+  final List<LinksProject>? linksProject;
+  final List<MembersProject>? membersProject;
 
   ProjectsInfo({
     required this.projectId,
@@ -44,12 +44,12 @@ class ProjectsInfo {
     required this.rating,
     required this.createAt,
     required this.updateAt,
-    required List<dynamic>? imagesProject,
-    required List<dynamic>? linksProject,
+    required List<ImagesProject>? imagesProject,
+    required List<LinksProject>? linksProject,
     required List<MembersProject>? membersProject,
-  })  : imagesProject = imagesProject ?? [],
-        linksProject = linksProject ?? [],
-        membersProject = membersProject ?? [];
+  })  : linksProject = linksProject ?? [],
+        membersProject = membersProject ?? [],
+        imagesProject = imagesProject ?? [];
 
   ProjectsInfo.fromJson(Map<String, dynamic> json)
       : projectId = json['project_id'],
@@ -71,9 +71,13 @@ class ProjectsInfo {
         rating = json['rating'],
         createAt = json['create_at'],
         updateAt = json['update_at'],
-        imagesProject = List<dynamic>.from(json['images_project'] ?? []),
-        linksProject = List<dynamic>.from(json['links_project'] ?? []),
-        membersProject = (json['members_project'] as List)
+        imagesProject = List.from(json['images_project'])
+            .map((e) => ImagesProject.fromJson(e))
+            .toList(),
+        linksProject = List.from(json['links_project'])
+            .map((e) => LinksProject.fromJson(e))
+            .toList(),
+        membersProject = List.from(json["members_project"])
             .map((e) => MembersProject.fromJson(e))
             .toList();
 
@@ -100,7 +104,47 @@ class ProjectsInfo {
       'update_at': updateAt,
       'images_project': imagesProject,
       'links_project': linksProject,
-      'members_project': membersProject.map((e) => e.toJson()).toList(),
+      'members_project': membersProject?.map((e) => e.toJson()).toList(),
     };
+  }
+}
+
+class ImagesProject {
+  ImagesProject({
+    required this.id,
+    required this.url,
+  });
+  late final int id;
+  late final String url;
+
+  ImagesProject.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['url'] = url;
+    return data;
+  }
+}
+
+class LinksProject {
+  late final String? url;
+  late final String? type;
+
+  LinksProject({this.url, this.type});
+
+  LinksProject.fromJson(Map<String, dynamic> json) {
+    url = json['url'];
+    type = json['type'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data["url"] = url;
+    data["type"] = type;
+    return data;
   }
 }

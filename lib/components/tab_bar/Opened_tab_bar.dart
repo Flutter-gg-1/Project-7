@@ -1,12 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:project_judge/models/project_model.dart';
 
 class MyProjectCardOpened extends StatelessWidget {
-  final Project? project;
 
-  const MyProjectCardOpened({super.key,  this.project});
+  const MyProjectCardOpened({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +53,7 @@ class MyProjectCardOpened extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        project?.title ?? "lorem ipsum",
+                       "lorem ipsum",
                         style: const TextStyle(
                           fontSize: 9,
                           fontWeight: FontWeight.bold,
@@ -64,7 +62,7 @@ class MyProjectCardOpened extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        project?.description?? "lorem ipsum",
+                        "lorem ipsum",
                         style: const TextStyle(
                           color: Color(0xFF4E2EB5),
                           fontSize: 15,
@@ -73,7 +71,7 @@ class MyProjectCardOpened extends StatelessWidget {
                       const SizedBox(height: 2),
                       RatingBar.builder(
                         itemSize: 16,
-                        initialRating: project?.rating ?? 54,
+                        initialRating: 54,
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: false,

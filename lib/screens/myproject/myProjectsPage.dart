@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_judge/components/tab_bar/Closed_tab_bar.dart';
 import 'package:project_judge/components/tab_bar/Opened_tab_bar.dart';
-import 'package:project_judge/models/project_model.dart';
 import 'package:project_judge/screens/rating/blocs/bloc_project_bloc.dart';
 import 'package:project_judge/screens/rating/blocs/bloc_project_event.dart';
 import 'package:project_judge/screens/rating/blocs/bloc_project_state.dart';

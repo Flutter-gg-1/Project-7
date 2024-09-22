@@ -252,7 +252,7 @@ class ViewProjectDetailScreen extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                         if (projectDetail.membersProject.isNotEmpty) ...projectDetail.membersProject.map((member) {
+                         if (projectDetail.membersProject!.isNotEmpty) ...projectDetail.membersProject!.map((member) {
         return CustomTeamMemberCard(
           name: member.firstName,
           position: member.position,

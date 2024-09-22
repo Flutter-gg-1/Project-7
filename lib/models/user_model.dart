@@ -13,16 +13,6 @@ class UserModel {
     required this.createdAt,
     required this.updatedAt,
   });
-  late final String id;
-  late final String firstName;
-  late final String lastName;
-  late final String email;
-  late final String role;
-  late final String imageUrl;
-  late final Link link;
-  late final List<ProjectsInfo> projects;
-  late final String createdAt;
-  late final String updatedAt;
   late final String? id;
   late final String? firstName;
   late final String? lastName;
@@ -30,9 +20,10 @@ class UserModel {
   late final String? role;
   late final String? imageUrl;
   late final Link? link;
-  late final List<Projects>? projects;
+  late final List<ProjectsInfo>? projects;
   late final String? createdAt;
   late final String? updatedAt;
+
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
