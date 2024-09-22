@@ -165,33 +165,32 @@ mixin ProjectMix on NetworkingConstant {
     }
   }
 
-    Future<List<ProjectsModel>> getAllProject() async {
-      try {
-        print("$baseUrl$endGetAllProject");
-        final res = await dio.get(
-          "$baseUrl$endGetAllProject",
-        );
+  Future<List<ProjectsModel>> getAllProject() async {
+    try {
+      print("$baseUrl$endGetAllProject");
+      final res = await dio.get(
+        "$baseUrl$endGetAllProject",
+      );
 
-        print(res.data);
+      print(res.data);
 
-        List<ProjectsModel> lis = [];
+      List<ProjectsModel> lis = [];
 
-        for (var val in res.data["data"]["projects"]) {
-          lis.add(ProjectsModel.fromJson(val));
-        }
-
-        log("hhhhhhhhhh");
-
-        print(lis);
-
-        return lis;
-      } on DioException catch (err) {
-        print(err.response?.data);
-
-        throw "err.response?.data";
-      } catch (err) {
-        throw "there was eorr";
+      for (var val in res.data["data"]["projects"]) {
+        lis.add(ProjectsModel.fromJson(val));
       }
+
+      log("hhhhhhhhhh");
+
+      print(lis);
+
+      return lis;
+    } on DioException catch (err) {
+      print(err.response?.data);
+
+      throw "${err.response?.data}";
+    } catch (err) {
+      throw "there was eorr";
     }
   }
-
+}
