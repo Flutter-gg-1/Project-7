@@ -1,17 +1,36 @@
+// <<<<<<< HEAD
+// =======
+import 'dart:developer';
+
+import 'package:barcode_scan2/barcode_scan2.dart';
+// >>>>>>> 6d42ac97784047bf0d7a6a415abc15a887f50569
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/screens/all_project/all_project_screen.dart';
 import 'package:tuwaiq_project/screens/bottomNavBloc/bottomnav_bloc.dart';
 import 'package:tuwaiq_project/screens/profile/profile_screen.dart';
-import 'package:tuwaiq_project/screens/search_screen.dart';
-import 'package:tuwaiq_project/screens/user_project_screen.dart';
+import 'package:tuwaiq_project/screens/rating/rating_screen.dart';
+import 'package:tuwaiq_project/screens/serch_screen/search_screen.dart';
+import 'package:tuwaiq_project/screens/user_project/user_project_screen.dart';
+
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+  ScanResult? scanResult;
+
+  final _flashOnController = TextEditingController(text: 'Flash on');
+  final _flashOffController = TextEditingController(text: 'Flash off');
+  final _cancelController = TextEditingController(text: 'Cancel');
+
+  final _aspectTolerance = 0.00;
+  final _selectedCamera = -1;
+  final _useAutoFocus = true;
+  final _autoEnableFlash = false;
   final List<Widget> tabs = const [
     AllProjectScreen(),
     UserProjectScreen(),
@@ -74,25 +93,87 @@ class HomeScreen extends StatelessWidget {
               );
             },
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                CustomPaint(
-                  size: Size(context.getWidth(multiply: 1),
-                      context.getHeight(multiply: 0.1)),
-                  painter: AuthShape(),
-                ),
-                BlocBuilder<BottomnavBloc, BottomnavState>(
-                  builder: (context, state) {
-                    int selectedIndex = 0;
-                    if (state is IndexChangeState) {
-                      selectedIndex = state.index;
-                    }
-                    return tabs[selectedIndex];
-                  },
-                ),
-              ],
-            ),
+// <<<<<<< HEAD
+//           body: SingleChildScrollView(
+//             child: Column(
+//               children: [
+//                 CustomPaint(
+//                   size: Size(context.getWidth(multiply: 1),
+//                       context.getHeight(multiply: 0.1)),
+//                   painter: AuthShape(),
+//                 ),
+//                 BlocBuilder<BottomnavBloc, BottomnavState>(
+//                   builder: (context, state) {
+//                     int selectedIndex = 0;
+//                     if (state is IndexChangeState) {
+//                       selectedIndex = state.index;
+//                     }
+//                     return tabs[selectedIndex];
+//                   },
+//                 ),
+//               ],
+//             ),
+// =======
+          body: Column(
+            children: [
+              CustomPaint(
+                size: Size(context.getWidth(multiply: 1),
+                    context.getHeight(multiply: 0.1)),
+                painter: AuthShape(),
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                    onPressed: () async {
+                      try {
+                        final result = await BarcodeScanner.scan(
+                          options: ScanOptions(
+                            strings: {
+                              'cancel': _cancelController.text,
+                              'flash_on': _flashOnController.text,
+                              'flash_off': _flashOffController.text,
+                            },
+                            restrictFormat: [BarcodeFormat.qr],
+                            useCamera: _selectedCamera,
+                            autoEnableFlash: _autoEnableFlash,
+                            android: AndroidOptions(
+                              aspectTolerance: _aspectTolerance,
+                              useAutoFocus: _useAutoFocus,
+                            ),
+                          ),
+                        );
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  RatingScreen(projectId: result.rawContent),
+                            ));
+                      } on PlatformException catch (e) {
+                        scanResult = ScanResult(
+                          rawContent: e.code ==
+                                  BarcodeScanner.cameraAccessDenied
+                              ? 'The user did not grant the camera permission!'
+                              : 'Unknown error: $e',
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(scanResult!.rawContent),
+                          backgroundColor: Colors.red[300],
+                        ));
+                      }
+                    },
+                    icon: const Icon(Iconsax.scan_barcode_outline)),
+              ),
+              BlocBuilder<BottomnavBloc, BottomnavState>(
+                builder: (context, state) {
+                  int selectedIndex = 0;
+                  if (state is IndexChangeState) {
+                    selectedIndex = state.index;
+                  }
+                  return tabs[selectedIndex];
+                },
+              ),
+            ],
+// >>>>>>> 6d42ac97784047bf0d7a6a415abc15a887f50569
           ),
         );
       }),

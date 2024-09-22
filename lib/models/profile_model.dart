@@ -40,19 +40,19 @@ class ProfileModel {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['first_name'] = firstName;
-    _data['last_name'] = lastName;
-    _data['email'] = email;
-    _data['role'] = role;
-    _data['image_url'] = imageFile;
-    _data['link'] = link.toJson();
-    _data['projects'] = projects.map((e) => e.toJson()).toList();
-    _data['created_at'] = createdAt;
-    _data['updated_at'] = updatedAt;
-    _data['resume_url'] = resumeFile;
-    return _data;
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['first_name'] = firstName;
+    data['last_name'] = lastName;
+    data['email'] = email;
+    data['role'] = role;
+    data['image_url'] = imageFile;
+    data['link'] = link.toJson();
+    data['projects'] = projects.map((e) => e.toJson()).toList();
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['resume_url'] = resumeFile;
+    return data;
   }
 }
 
@@ -69,12 +69,12 @@ class Link {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
+    final data = <String, dynamic>{};
 
-    _data["github"] = github;
-    _data["linkedin"] = linkedin;
-    _data["bindlink"] = bindlink;
-    return _data;
+    data["github"] = github;
+    data["linkedin"] = linkedin;
+    data["bindlink"] = bindlink;
+    return data;
   }
 }
 
@@ -136,7 +136,7 @@ class ProjectsModel {
     presentationDate = json["presentation_date"];
     projectDescription = json["project_description"];
     logoUrl = json["logo_url"];
-    presentationUrl = json["presentation_date"];
+    presentationUrl = json["presentation_url"];
     userId = json['user_id'];
     adminId = json['admin_id'];
     timeEndEdit = json['time_end_edit'];
@@ -161,30 +161,30 @@ class ProjectsModel {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['project_id'] = projectId;
-    _data['type'] = type;
-    _data['project_name'] = projectName;
-    _data['bootcamp_name'] = bootcampName;
-    _data['start_date'] = startDate;
-    _data['end_date'] = endDate;
-    _data['presentation_date'] = presentationDate;
-    _data['project_description'] = projectDescription;
-    _data['logo_url'] = logoUrl;
-    _data['presentation_url'] = presentationUrl;
-    _data['user_id'] = userId;
-    _data['admin_id'] = adminId;
-    _data['time_end_edit'] = timeEndEdit;
-    _data['allow_edit'] = allowEdit;
-    _data['allow_rating'] = allowRating;
-    _data['is_public'] = isPublic;
-    _data['rating'] = rating;
-    _data['create_at'] = createAt;
-    _data['update_at'] = updateAt;
-    _data['images_project'] = imagesProject;
-    _data['links_project'] = linksProject;
-    _data['members_project'] = membersProject.map((e) => e.toJson()).toList();
-    return _data;
+    final data = <String, dynamic>{};
+    data['project_id'] = projectId;
+    data['type'] = type;
+    data['project_name'] = projectName;
+    data['bootcamp_name'] = bootcampName;
+    data['start_date'] = startDate;
+    data['end_date'] = endDate;
+    data['presentation_date'] = presentationDate;
+    data['project_description'] = projectDescription;
+    data['logo_url'] = logoUrl;
+    data['presentation_url'] = presentationUrl;
+    data['user_id'] = userId;
+    data['admin_id'] = adminId;
+    data['time_end_edit'] = timeEndEdit;
+    data['allow_edit'] = allowEdit;
+    data['allow_rating'] = allowRating;
+    data['is_public'] = isPublic;
+    data['rating'] = rating;
+    data['create_at'] = createAt;
+    data['update_at'] = updateAt;
+    data['images_project'] = imagesProject;
+    data['links_project'] = linksProject;
+    data['members_project'] = membersProject.map((e) => e.toJson()).toList();
+    return data;
   }
 }
 
@@ -217,15 +217,15 @@ class MembersProject {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['first_name'] = firstName;
-    _data['last_name'] = lastName;
-    _data['email'] = email;
-    _data['position'] = position;
-    _data['image_url'] = imageUrl;
-    _data['link'] = link.toJson();
-    return _data;
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['first_name'] = firstName;
+    data['last_name'] = lastName;
+    data['email'] = email;
+    data['position'] = position;
+    data['image_url'] = imageUrl;
+    data['link'] = link.toJson();
+    return data;
   }
 }
 
@@ -243,10 +243,10 @@ class ImagesProject {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['url'] = url;
-    return _data;
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['url'] = url;
+    return data;
   }
 }
 
@@ -269,9 +269,9 @@ class LinksProject {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['url'] = url;
-    _data['type'] = type;
-    return _data;
+    final data = <String, dynamic>{};
+    data['url'] = url;
+    data['type'] = type;
+    return data;
   }
 }

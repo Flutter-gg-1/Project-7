@@ -1,18 +1,24 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:tuwaiq_project/data_layer/auth_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
+import 'package:tuwaiq_project/helper/method/open_url.dart';
 import 'package:tuwaiq_project/models/profile_model.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/edit_screen.dart';
 import 'package:tuwaiq_project/screens/project_info/cubit/project_info_cubit.dart';
+import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 import 'package:tuwaiq_project/widget/project_view_widget/costumr_details_project.dart';
 import 'package:tuwaiq_project/widget/project_view_widget/custome_carousel_slider.dart';
 import 'package:tuwaiq_project/widget/project_view_widget/custome_member_of_project.dart';
 import 'package:tuwaiq_project/widget/project_view_widget/custome_status_project.dart';
 import 'package:tuwaiq_project/widget/project_view_widget/custome_top_action.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProjectViewScreen extends StatelessWidget {
   const ProjectViewScreen({super.key, required this.projectsModel});
@@ -25,7 +31,9 @@ class ProjectViewScreen extends StatelessWidget {
       create: (context) => ProjectInfoCubit(),
       child: Builder(builder: (context) {
         final cubit = context.read<ProjectInfoCubit>();
+        final id = authLocator.get<AuthLayerData>().auth!.id;
         return Scaffold(
+          backgroundColor: Colors.white,
           body: SafeArea(
               child: SingleChildScrollView(
             child: Column(
@@ -36,9 +44,44 @@ class ProjectViewScreen extends StatelessWidget {
                   painter: AuthShape(),
                 ),
                 CustomeActionProject(
-                  deleteClick: () {},
-                  editClick: () {},
-                  reviewClick: () {},
+                  isAuthraize:
+                      projectsModel.userId == id || projectsModel.adminId == id,
+                  editClick: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditScreen(
+                            projectId: projectsModel.projectId!,
+                            isAuthraize: projectsModel.adminId == id,
+                          ),
+                        ));
+                  },
+                  qrCodeButton: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => Center(
+                        child: Container(
+                          width: context.getWidth(multiply: 0.8),
+                          height: context.getHeight(multiply: 0.4),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12)),
+                          child: Column(
+                            children: [
+                              const Text('Rate me'),
+                              QrImageView(
+                                backgroundColor: Colors.white,
+                                data: projectsModel.projectId!,
+                                padding: EdgeInsets.zero,
+                                version: QrVersions.auto,
+                                size: context.getHeight(multiply: 0.3),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 Container(
                   height: context.getHeight(multiply: 0.2),
@@ -88,7 +131,7 @@ class ProjectViewScreen extends StatelessWidget {
                   height: context.getHeight(multiply: 0.035),
                 ),
                 CostomeDetailsProject(
-                  maxHeight: context.getHeight(multiply: 0.1) ,
+                  maxHeight: context.getHeight(multiply: 0.1),
                   readOnly: true,
                   heightContainer: context.getHeight(multiply: 0.3),
                   widthContainer: context.getWidth(multiply: 0.8),
@@ -155,50 +198,59 @@ class ProjectViewScreen extends StatelessWidget {
                   height: context.getHeight(multiply: 0.035),
                 ),
                 InkWell(
-                  child: Container(
-                      margin: EdgeInsets.symmetric(
-                          horizontal: context.getWidth(multiply: 0.095)),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: context.getWidth(multiply: 0.015),
-                          vertical: context.getWidth(multiply: 0.03)),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        color: Colors.white,
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color.fromARGB(255, 196, 196, 196),
-                            spreadRadius: 1,
-                            blurRadius: 2,
-                            offset: Offset(0.5, 4),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          const Text(
-                            'Presentation',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w500),
-                          ),
-                          CustomeCampStatusProject(
-                            titleSize: 0,
-                            continaerColor:
-                                const Color(0xff00FF19).withOpacity(0.30),
-                            borderColor:
-                                const Color(0xff00FF19).withOpacity(0.30),
-                            textContent:
-                                projectsModel.presentationDate ?? "not giveing",
-                            heightContainer: context.getHeight(multiply: 0.043),
-                            widthContainer: context.getWidth(multiply: 0.25),
-                            sizeText: 16,
-                          ),
-                          Icon(
-                            Icons.chevron_right,
-                            size: context.getWidth(multiply: 0.06),
-                          )
-                        ],
-                      )),
+                  child: GestureDetector(
+                    onTap: () {
+                      final url = projectsModel.presentationUrl;
+                      log(url!);
+
+                      openUrl(context: context, url: url);
+                    },
+                    child: Container(
+                        margin: EdgeInsets.symmetric(
+                            horizontal: context.getWidth(multiply: 0.095)),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: context.getWidth(multiply: 0.015),
+                            vertical: context.getWidth(multiply: 0.03)),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          color: Colors.white,
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 196, 196, 196),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset: Offset(0.5, 4),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            const Text(
+                              'Presentation',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w500),
+                            ),
+                            CustomeCampStatusProject(
+                              titleSize: 0,
+                              continaerColor:
+                                  const Color(0xff00FF19).withOpacity(0.30),
+                              borderColor:
+                                  const Color(0xff00FF19).withOpacity(0.30),
+                              textContent: projectsModel.presentationDate ??
+                                  "not giveing",
+                              heightContainer:
+                                  context.getHeight(multiply: 0.043),
+                              widthContainer: context.getWidth(multiply: 0.25),
+                              sizeText: 16,
+                            ),
+                            Icon(
+                              Icons.chevron_right,
+                              size: context.getWidth(multiply: 0.06),
+                            )
+                          ],
+                        )),
+                  ),
                 ),
                 SizedBox(
                   height: context.getHeight(multiply: 0.035),
@@ -233,9 +285,10 @@ class ProjectViewScreen extends StatelessWidget {
                           ],
                         ),
                         child: TextButton(
-                            onPressed: () {
-                              // here show up the url that the user when click will move him to website
-                              // projectsModel.linksProject[index].type;
+                            onPressed: () async {
+                              final url = projectsModel.linksProject[index].url;
+
+                              openUrl(context: context, url: url);
                             },
                             child:
                                 Text(projectsModel.linksProject[index].type)),

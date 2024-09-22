@@ -29,7 +29,7 @@ class EditMembers extends StatelessWidget {
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const Text(
-                '6 / 6 >',
+                '6 / 7 >',
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -42,7 +42,7 @@ class EditMembers extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                languageLayer.isArabic ? 'رابط GitHub' : 'id members',
+                languageLayer.isArabic ? 'ID' : 'id members',
                 style: const TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
@@ -55,7 +55,7 @@ class EditMembers extends StatelessWidget {
               ),
               context.addSpacer(multiply: 0.008),
               Text(
-                languageLayer.isArabic ? 'رابط Figma' : 'members position',
+                languageLayer.isArabic ? 'المنصب' : 'members position',
                 style: const TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
@@ -70,7 +70,7 @@ class EditMembers extends StatelessWidget {
               BlocBuilder<EditBloc, EditState>(
                 builder: (context, state) {
                   if (state is AddMembersState) {
-                    return Container(
+                    return SizedBox(
                       width: 100,
                       height: 100,
                       child: Column(
@@ -78,9 +78,12 @@ class EditMembers extends StatelessWidget {
                           state.names.length,
                           (index) {
                             return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [Text(state.names[index]), Text(state.position[index])]);
-                            
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(state.names[index]),
+                                  Text(state.position[index])
+                                ]);
                           },
                         ),
                       ),
@@ -95,7 +98,7 @@ class EditMembers extends StatelessWidget {
           ),
           CustomButton(
             englishTitle: 'Add User',
-            arabicTitle: 'تعديل الروابط',
+            arabicTitle: 'اضافة مستخدم',
             onPressed: () {
               bloc.add(AddMembersEvent());
             },
@@ -103,7 +106,7 @@ class EditMembers extends StatelessWidget {
           ),
           CustomButton(
             englishTitle: 'Update',
-            arabicTitle: 'تعديل الروابط',
+            arabicTitle: 'تحديث',
             onPressed: () {
               bloc.add(ChangeMembersEvent());
             },

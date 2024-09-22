@@ -21,26 +21,22 @@ class EditLinks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(
-          horizontal: context.getWidth(multiply: 0.08)),
+      padding:
+          EdgeInsets.symmetric(horizontal: context.getWidth(multiply: 0.08)),
       child: BlocBuilder<EditBloc, EditState>(
         builder: (context, state) {
           return Column(
             children: [
               Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    languageLayer.isArabic
-                        ? 'تعديل الروابط'
-                        : 'Edit Links',
+                    languageLayer.isArabic ? 'تعديل الروابط' : 'Edit Links',
                     style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const Text(
-                    '5 / 6 >',
+                    '5 / 7 >',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -50,13 +46,10 @@ class EditLinks extends StatelessWidget {
               ),
               context.addSpacer(multiply: 0.025),
               Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    languageLayer.isArabic
-                        ? 'رابط GitHub'
-                        : 'GitHub Link',
+                    languageLayer.isArabic ? 'رابط GitHub' : 'GitHub Link',
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
@@ -69,9 +62,7 @@ class EditLinks extends StatelessWidget {
                   ),
                   context.addSpacer(multiply: 0.008),
                   Text(
-                    languageLayer.isArabic
-                        ? 'رابط Figma'
-                        : 'Figma Link',
+                    languageLayer.isArabic ? 'رابط Figma' : 'Figma Link',
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
@@ -84,9 +75,7 @@ class EditLinks extends StatelessWidget {
                   ),
                   context.addSpacer(multiply: 0.008),
                   Text(
-                    languageLayer.isArabic
-                        ? 'رابط فيديو'
-                        : 'Video Link',
+                    languageLayer.isArabic ? 'رابط فيديو' : 'Video Link',
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
@@ -144,9 +133,7 @@ class EditLinks extends StatelessWidget {
                   ),
                   context.addSpacer(multiply: 0.008),
                   Text(
-                    languageLayer.isArabic
-                        ? 'رابط APK'
-                        : 'APK Link',
+                    languageLayer.isArabic ? 'رابط APK' : 'APK Link',
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
@@ -159,9 +146,7 @@ class EditLinks extends StatelessWidget {
                   ),
                   context.addSpacer(multiply: 0.008),
                   Text(
-                    languageLayer.isArabic
-                        ? 'رابط ويب'
-                        : 'Web Link',
+                    languageLayer.isArabic ? 'رابط ويب' : 'Web Link',
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,

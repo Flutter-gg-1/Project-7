@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:lottie/lottie.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/screens/auth/bloc/auth_bloc.dart';
@@ -25,45 +24,88 @@ class ProfileScreen extends StatelessWidget {
       return BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
           if (state is ShowProfileState) {
-            return Column(
+// <<<<<<< HEAD
+            // return Column(
+            //   children: [
+            //     SizedBox(
+            //       height: context.getHeight(multiply: 0.035),
+            //     ),
+            //     Align(
+            //       alignment: Alignment.centerRight,
+            //       child: Column(
+            //         children: [
+            //           IconButton(
+            //             onPressed: () {
+            //               context.read<ProfileCubit>().translate();
+            //             },
+            //             icon: const Icon(Icons.translate_sharp),
+            //             color: language.isArabic ? Colors.blue : Colors.grey,
+            //           ),
+            //           Text(
+            //             language.isArabic ? 'عربي' : 'English',
+            //             textDirection: TextDirection.rtl,
+            //           )
+            //         ],
+            //       ),
+            //     ),
+            //     InkWell(
+            //       onTap: () {
+            //         Navigator.of(context).push(
+            //           MaterialPageRoute(
+            //             builder: (context) {
+            //               return ProfileInformationScreen(
+            //                 profileModel: state.profileModel,
+            //               );
+            //             },
+            //           ),
+            //         );
+            //       },
+            //       child: Container(
+            //           padding: EdgeInsets.symmetric(
+            //               horizontal: context.getHeight(multiply: 0.03),
+            //               vertical: context.getWidth(multiply: 0.03)),
+            //           child: ListTile(
+            //             title: Text(
+            //               '${state.profileModel.firstName} ${state.profileModel.lastName}',
+            //               style: const TextStyle(
+            //                 fontSize: 16,
+            //                 fontWeight: FontWeight.bold,
+            //                 color: Colors.black,
+// =======
+            return SingleChildScrollView(
+                child: Column(
               children: [
-                SizedBox(
-                  height: context.getHeight(multiply: 0.035),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Column(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          context.read<ProfileCubit>().translate();
-                        },
-                        icon: const Icon(Icons.translate_sharp),
-                        color: language.isArabic ? Colors.blue : Colors.grey,
-                      ),
-                      Text(
-                        language.isArabic ? 'عربي' : 'English',
-                        textDirection: TextDirection.rtl,
-                      )
-                    ],
-                  ),
-                ),
+                context.addSpacer(multiply: 0.008),
                 InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return ProfileInformationScreen(
-                            profileModel: state.profileModel,
-                          );
-                        },
-                      ),
-                    );
-                  },
-                  child: Container(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return ProfileInformationScreen(
+                              profileModel: state.profileModel,
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    child: Container(
                       padding: EdgeInsets.symmetric(
                           horizontal: context.getHeight(multiply: 0.03),
                           vertical: context.getWidth(multiply: 0.03)),
+                      // subtitle: Text(
+                      //   '${state.profileModel.role} /n ${state.profileModel.id}',
+                      //   style: const TextStyle(
+                      //     fontSize: 14,
+                      //     color: Color(0xff6E7386),
+                      //   ),
+                      // ),
+                      // trailing: const Icon(Icons.arrow_forward_ios,
+                      //     color: Colors.black),
+                      // leading: const CircleAvatar(
+                      //   radius: 30,
+                      //   backgroundImage:
+                      //       AssetImage('assets/image/Search-amico(1).png'),
+                      // ),
                       child: ListTile(
                         title: Text(
                           '${state.profileModel.firstName} ${state.profileModel.lastName}',
@@ -80,15 +122,8 @@ class ProfileScreen extends StatelessWidget {
                             color: Color(0xff6E7386),
                           ),
                         ),
-                        trailing: const Icon(Icons.arrow_forward_ios,
-                            color: Colors.black),
-                        leading: const CircleAvatar(
-                          radius: 30,
-                          backgroundImage:
-                              AssetImage('assets/image/Search-amico(1).png'),
-                        ),
-                      )),
-                ),
+                      ),
+                    )),
                 SizedBox(
                   height: context.getHeight(multiply: 0.030),
                 ),
@@ -254,7 +289,7 @@ class ProfileScreen extends StatelessWidget {
                   height: context.getHeight(multiply: 0.02),
                 ),
               ],
-            );
+            ));
           }
 
           if (state is ErorrState) {

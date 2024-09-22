@@ -16,6 +16,7 @@ import 'package:tuwaiq_project/screens/projectView/edit/edit_links.dart';
 import 'package:tuwaiq_project/screens/projectView/edit/edit_logo.dart';
 import 'package:tuwaiq_project/screens/projectView/edit/edit_members.dart';
 import 'package:tuwaiq_project/screens/projectView/edit/edit_presentation.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/edit_status.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 import 'package:tuwaiq_project/widget/button/custom_button.dart';
@@ -23,7 +24,10 @@ import 'package:tuwaiq_project/widget/row/date_row.dart';
 import 'package:tuwaiq_project/widget/textformfeild/normal_text_form_feild.dart';
 
 class EditScreen extends StatelessWidget {
-  const EditScreen({super.key});
+  final String projectId;
+  final bool isAuthraize;
+  const EditScreen(
+      {super.key, required this.projectId, required this.isAuthraize});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +35,7 @@ class EditScreen extends StatelessWidget {
       create: (context) => EditBloc(),
       child: Builder(builder: (context) {
         final bloc = context.read<EditBloc>();
-
+        bloc.projectId = projectId;
         var languageLayer = languageLocaitor.get<LanguageLayer>();
         return BlocListener<EditBloc, EditState>(
           listener: (context, state) {
@@ -81,7 +85,11 @@ class EditScreen extends StatelessWidget {
                     height: context.getHeight(multiply: 0.75),
                     child: PageView(
                       children: [
-                        EditLogo(bloc: bloc, languageLayer: languageLayer),
+                        EditLogo(
+                          bloc: bloc,
+                          languageLayer: languageLayer,
+                          projectId: projectId,
+                        ),
                         EditBase(languageLayer: languageLayer, bloc: bloc),
                         EditPresentation(
                             bloc: bloc, languageLayer: languageLayer),
@@ -91,6 +99,12 @@ class EditScreen extends StatelessWidget {
                           bloc: bloc,
                           languageLayer: languageLayer,
                         ),
+                        EditStatus(
+                          languageLayer: languageLayer,
+                          bloc: bloc,
+                          projectId: projectId,
+                          isAuthraize: isAuthraize,
+                        )
                       ],
                     ),
                   ),

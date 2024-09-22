@@ -60,7 +60,7 @@ class RatingScreen extends StatelessWidget {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => const HomeScreen(),
+                builder: (context) => HomeScreen(),
               ),
               (route) => false,
             );

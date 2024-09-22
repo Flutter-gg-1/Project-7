@@ -2,7 +2,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tuwaiq_project/models/user_model.dart';
 
 class AuthLayerData {
-  UserModel? auth;
+  // change later
+  UserModel? auth = UserModel.fromJson({});
   final box = GetStorage();
 
   AuthLayerData() {

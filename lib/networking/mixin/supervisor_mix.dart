@@ -5,14 +5,13 @@ import 'package:tuwaiq_project/networking/networking_constant.dart';
 
 mixin SupervisorMix on NetworkingConstant {
   createProject({
-    required String token,
     required String userId,
     required String timeEditEnd,
     required bool isEdit,
   }) async {
     try {
       final res = await dio.post("$baseUrl$endProjectCreate",
-          options: Options(headers: {'Authorization': 'Bearer $token'}),
+          options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
           data: {
             "user_id": userId,
             "time_end_edit": timeEditEnd,
@@ -30,7 +29,6 @@ mixin SupervisorMix on NetworkingConstant {
   }
 
   changeProjectState({
-    required String token,
     required String timeEndEdit,
     required bool allowEdit,
     required bool allowRating,
@@ -39,7 +37,7 @@ mixin SupervisorMix on NetworkingConstant {
   }) async {
     try {
       final res = await dio.put("$baseUrl$endProjectChangeState$projectId",
-          options: Options(headers: {'Authorization': 'Bearer $token'}),
+          options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
           data: {
             "time_end_edit": timeEndEdit,
             "edit": allowEdit,
@@ -56,13 +54,12 @@ mixin SupervisorMix on NetworkingConstant {
   }
 
   delproject({
-    required String token,
     required String projectId,
   }) async {
     try {
       final res = await dio.delete(
         "$baseUrl$endProjectDel$projectId",
-        options: Options(headers: {'Authorization': 'Bearer $token'}),
+        options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
       );
 
       print(res.data);

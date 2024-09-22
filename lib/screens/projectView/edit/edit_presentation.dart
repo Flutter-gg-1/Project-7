@@ -51,7 +51,7 @@ class EditPresentation extends StatelessWidget {
                         fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const Text(
-                    '3 / 6 >',
+                    '3 / 7 >',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
