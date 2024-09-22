@@ -22,19 +22,3 @@ final class ArabicState extends ProfileState {
 
   ArabicState({required this.isArabic});
 }
-
-
-// final class ImageHereState extends ProfileState {
-//   final List<int> imgFile;
-//    final String? imagUrl;
-
-//   ImageHereState({this.imagUrl ,required this.imgFile});
-// }
-
-
-// final class ImageNoState extends ProfileState {
-  
-
-//   ImageNoState();
-// }
-

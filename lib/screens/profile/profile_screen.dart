@@ -258,7 +258,9 @@ class ProfileScreen extends StatelessWidget {
               child: Text(state.msg),
             );
           }
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator(
+            color: Colors.white,
+          );
         },
       );
     });
