@@ -17,7 +17,7 @@ class ProfileModel {
   late final String email;
   late final String role;
   late final String? imageFile;
-  late final Link link;
+  late final LinkModel link;
   late final List<ProjectsModel> projects;
   late final String createdAt;
   late final String updatedAt;
@@ -30,7 +30,7 @@ class ProfileModel {
     email = json['email'];
     role = json['role'];
     imageFile = json['image_url'];
-    link = Link.fromJson(json['link']);
+    link = LinkModel.fromJson(json['link']);
     projects = List.from(json['projects'])
         .map((e) => ProjectsModel.fromJson(e))
         .toList();
@@ -56,13 +56,14 @@ class ProfileModel {
   }
 }
 
-class Link {
+class LinkModel {
   late final String? github;
   late final String? linkedin;
   late final String? bindlink;
-  Link({required this.github, required this.linkedin, required this.bindlink});
+  LinkModel(
+      {required this.github, required this.linkedin, required this.bindlink});
 
-  Link.fromJson(Map json) {
+  LinkModel.fromJson(Map json) {
     github = json["github"];
     linkedin = json["linkedin"];
     bindlink = json["bindlink"];
@@ -122,9 +123,9 @@ class ProjectsModel {
   late final num? rating;
   late final String? createAt;
   late final String? updateAt;
-  late final List<ImagesProject> imagesProject;
+  late final List<ImagesProjectModel> imagesProject;
   late final List<LinksProject> linksProject;
-  late final List<MembersProject> membersProject;
+  late final List<MembersProjectModel> membersProject;
 
   ProjectsModel.fromJson(Map<String, dynamic> json) {
     projectId = json['project_id'];
@@ -147,16 +148,15 @@ class ProjectsModel {
     createAt = json['create_at'];
     updateAt = json['update_at'];
     imagesProject = (json['images_project'] as List)
-    .map((item) => ImagesProject.fromJson(item as Map<String, dynamic>))
-    .toList();
+        .map(
+            (item) => ImagesProjectModel.fromJson(item as Map<String, dynamic>))
+        .toList();
     linksProject = List.from(json['links_project'])
         .map((e) => LinksProject.fromJson(e))
         .toList();
 
-
-
     membersProject = List.from(json['members_project'])
-        .map((e) => MembersProject.fromJson(e))
+        .map((e) => MembersProjectModel.fromJson(e))
         .toList();
   }
 
@@ -188,8 +188,8 @@ class ProjectsModel {
   }
 }
 
-class MembersProject {
-  MembersProject({
+class MembersProjectModel {
+  MembersProjectModel({
     required this.id,
     required this.firstName,
     required this.lastName,
@@ -204,16 +204,16 @@ class MembersProject {
   late final String email;
   late final String position;
   late final String? imageUrl;
-  late final Link link;
+  late final LinkModel link;
 
-  MembersProject.fromJson(Map<String, dynamic> json) {
+  MembersProjectModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     firstName = json['first_name'];
     lastName = json['last_name'];
     email = json['email'];
     position = json['position'];
     imageUrl = null;
-    link = Link.fromJson(json['link']);
+    link = LinkModel.fromJson(json['link']);
   }
 
   Map<String, dynamic> toJson() {
@@ -229,15 +229,15 @@ class MembersProject {
   }
 }
 
-class ImagesProject {
-  ImagesProject({
+class ImagesProjectModel {
+  ImagesProjectModel({
     required this.id,
     required this.url,
   });
   late final int id;
   late final String url;
 
-  ImagesProject.fromJson(Map<String, dynamic> json) {
+  ImagesProjectModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     url = json['url'];
   }
@@ -250,11 +250,6 @@ class ImagesProject {
   }
 }
 
-
-
-
-
-
 class LinksProject {
   LinksProject({
     required this.url,
@@ -262,8 +257,8 @@ class LinksProject {
   });
   late final String url;
   late final String type;
-  
-  LinksProject.fromJson(Map<String, dynamic> json){
+
+  LinksProject.fromJson(Map<String, dynamic> json) {
     url = json['url'];
     type = json['type'];
   }

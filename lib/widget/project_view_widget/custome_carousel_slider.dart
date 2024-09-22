@@ -13,7 +13,7 @@ class CarouselSliderCustome extends StatelessWidget {
   });
   final int currentIndex;
   final Function(int, CarouselPageChangedReason) onPageChanged;
-  final List<ImagesProject> carouselSliderWidget;
+  final List<ImagesProjectModel> carouselSliderWidget;
 
   @override
   Widget build(BuildContext context) {
