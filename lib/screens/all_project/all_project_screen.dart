@@ -29,7 +29,7 @@ class AllProjectScreen extends StatelessWidget {
             children: [
               context.addSpacer(multiply: 0.008),
               Text(
-                language.isArabic ? 'معسكرات طويق' : 'Tuwaiq BootCamp',
+                language.isArabic ? 'جميع المشاريع' : 'All Project',
                 style:
                     const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
