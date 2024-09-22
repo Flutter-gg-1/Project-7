@@ -73,9 +73,9 @@ class ViewProjectDetailScreen extends StatelessWidget {
                         ),
                       ),
                       CustomProjectDetailListTile(
-                        title: projectDetail.projectName ?? "null",
-                        type: projectDetail.type,
-                        bootcampName: projectDetail.bootcampName ?? 'null',
+                        title: projectDetail[0].projectName ?? "null",
+                        type: "${projectDetail[0].type}",
+                        bootcampName: projectDetail[0].bootcampName ?? 'null',
                         leading: Image.asset(
                           "assets/images/projectLogo.png",
                           fit: BoxFit.fill,
@@ -173,7 +173,7 @@ class ViewProjectDetailScreen extends StatelessWidget {
                       children: [
                         CustomText(
                           text:
-                              "${projectDetail.startDate}-${projectDetail.endDate}",
+                              "${projectDetail[0].startDate}-${projectDetail[0].endDate}",
                           size: 12,
                           color: const Color(0xff262626),
                         ),
@@ -183,7 +183,7 @@ class ViewProjectDetailScreen extends StatelessWidget {
                         Row(
                           children: [
                             CustomText(
-                                text: "${projectDetail.rating}", size: 16),
+                                text: "${projectDetail[0].rating}", size: 16),
                             const SizedBox(
                               width: 14,
                             ),
@@ -211,7 +211,7 @@ class ViewProjectDetailScreen extends StatelessWidget {
                           height: 8,
                         ),
                         CustomText(
-                          text: projectDetail.projectDescription ?? "null",
+                          text: projectDetail[0].projectDescription ?? "null",
                           size: 12,
                           color: const Color(0xff848484),
                         ),
@@ -252,13 +252,13 @@ class ViewProjectDetailScreen extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                         if (projectDetail.membersProject!.isNotEmpty) ...projectDetail.membersProject!.map((member) {
+                         if (projectDetail[0].membersProject!.isNotEmpty) ...projectDetail[0].membersProject!.map((member) {
         return CustomTeamMemberCard(
-          name: member.firstName,
-          position: member.position,
+          name: "${member.firstName}",
+          position: "${member.position}",
           description: 'Lorem ipsum dolor sit amet consectetur.',
         );
-      }).toList()
+      })
       else ...[
         ///////// ): why?
         const CustomText(text: "No team members found.", size: 16),

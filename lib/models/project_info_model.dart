@@ -14,10 +14,10 @@ class ProjectsInfo {
   final String? userId;
   final String? adminId;
   final String? timeEndEdit;
-  final bool? allowEdit;
-  final bool? allowRating;
-  final bool? isPublic;
-  final double? rating;
+  final bool allowEdit;
+  final bool allowRating;
+  final bool isPublic;
+  final int? rating;
   final String? createAt;
   final String? updateAt;
   final List<ImagesProject>? imagesProject;

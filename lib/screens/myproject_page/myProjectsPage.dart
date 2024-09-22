@@ -24,6 +24,7 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
 
   @override
   Widget build(BuildContext context) {
+    final currentProject = getIt.get<DataLayer>().projectInfo;
     return Scaffold(
       backgroundColor: const Color(0xFF4E2EB5),
       appBar: AppBar(
@@ -60,17 +61,17 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
           ListView.builder(
               itemCount: 6,
               itemBuilder: (context, index) {
-                return const Padding(
-                  padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: MyProjectCardOpened(),
+                return  Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: MyProjectCardOpened(project: currentProject![0],),
                 );
               }),
           ListView.builder(
               itemCount: 5,
               itemBuilder: (context, index) {
-                return const Padding(
-                  padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: MyProjectCardClosed(),
+                return  Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: MyProjectCardClosed(project: currentProject![0],),
                 );
               }),
         ],

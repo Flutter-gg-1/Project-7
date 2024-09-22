@@ -8,7 +8,7 @@ class BarcodeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Barcode!"),
+        title: const Text("Barcode!"),
       ),
       body: Center(
         child: BarcodeWidget(

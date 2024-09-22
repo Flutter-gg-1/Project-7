@@ -2,10 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project_judge/models/project_model.dart';
+import 'package:project_judge/models/project_info_model.dart';
 import 'package:project_judge/screens/myproject/bloc/bloc_project_event.dart';
 import 'package:project_judge/screens/myproject/bloc/bloc_project_state.dart';
-
 
 class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   ProjectBloc() : super(ProjectLoading()) {
@@ -19,8 +18,8 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
           await rootBundle.loadString('assets/json/projects.json');
       List<dynamic> jsonData = jsonDecode(response) as List<dynamic>;
 
-      List<Project> projects =
-          jsonData.map((e) => Project.fromJson(e)).toList();
+      List<ProjectsInfo> projects =
+          jsonData.map((e) => ProjectsInfo.fromJson(e)).toList();
 
       emit(ProjectLoaded(projects));
     } catch (e) {

@@ -1,17 +1,30 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:project_judge/models/project_info_model.dart';
+
 
 class MyProjectCardOpened extends StatelessWidget {
+  final ProjectsInfo project;
 
-  const MyProjectCardOpened({super.key});
+  const MyProjectCardOpened({super.key, required this.project});
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    final imageHeight = screenHeight * 0.12;
+    final cardHeight = screenHeight * 0.12;
+    final padding = screenWidth * 0.02;
+    final titleFontSize = screenWidth * 0.03;
+    final descriptionFontSize = screenWidth * 0.038;
+    final ratingItemSize = screenWidth * 0.04;
+    final iconSize = screenWidth * 0.06;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: padding, vertical: padding),
       child: Container(
-        height: 115,
+        height: cardHeight,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -25,53 +38,62 @@ class MyProjectCardOpened extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(padding),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 117.79,
-                height: 94,
+                width: imageHeight,
+                height: imageHeight,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(19),
-                  color: const Color(0x004e2eb5),
+                  color: const Color(0xFF4E2EB5),
                 ),
-                child: Center(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(19),
-                    child: Image.asset(
-                      'assets/images/logo.png', 
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(19),
+                  child: project.logoUrl != null
+                      ? Image.network(
+                          project.logoUrl!,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset(
+                          'assets/images/logo.png',
+                          fit: BoxFit.cover,
+                        ),
                 ),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.symmetric(horizontal: padding),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                       "lorem ipsum",
-                        style: const TextStyle(
-                          fontSize: 9,
+                        project.projectName ?? 'Untitled Project',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: titleFontSize,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFFC4C4C4),
+                          color: const Color(0xFFC4C4C4),
                         ),
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        "lorem ipsum",
-                        style: const TextStyle(
-                          color: Color(0xFF4E2EB5),
-                          fontSize: 15,
+                        project.projectDescription ??
+                            'No description available',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: descriptionFontSize,
+                          color: const Color(0xFF4E2EB5),
                         ),
                       ),
                       const SizedBox(height: 2),
                       RatingBar.builder(
-                        itemSize: 16,
-                        initialRating: 54,
+                        itemSize: ratingItemSize,
+                        initialRating: project.rating?.toDouble() ?? 0,
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: false,
@@ -82,10 +104,12 @@ class MyProjectCardOpened extends StatelessWidget {
                         ),
                         onRatingUpdate: (rating) {},
                       ),
-                      const Text(
-                        'App', 
+                      const SizedBox(height: 2),
+                      Text(
+                        "${project.type}",
                         style: TextStyle(
-                          color: Color(0xFFC4C4C4),
+                          fontSize: descriptionFontSize * 0.8,
+                          color: const Color(0xFFC4C4C4),
                         ),
                       ),
                     ],
@@ -94,12 +118,11 @@ class MyProjectCardOpened extends StatelessWidget {
               ),
               Center(
                 child: IconButton(
-                  onPressed: () {
-                
-                  },
-                  icon: const Icon(
+                  onPressed: () {},
+                  icon:  Icon(
                     Icons.edit_outlined,
-                    color: Color(0xFF4E2EB5),
+                    color: const Color(0xFF4E2EB5),
+                    size: iconSize,
                   ),
                 ),
               ),

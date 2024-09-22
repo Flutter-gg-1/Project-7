@@ -1,19 +1,28 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:project_judge/models/project_info_model.dart';
 
 class ProjectCard extends StatelessWidget {
-  final Map<String, dynamic> project;
+  final ProjectsInfo project;
 
   const ProjectCard({super.key, required this.project});
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    final imageHeight = screenHeight * 0.12;
+    final cardHeight = screenHeight * 0.12;
+    final padding = screenWidth * 0.02;
+    final titleFontSize = screenWidth * 0.03;
+    final descriptionFontSize = screenWidth * 0.04;
+    final ratingItemSize = screenWidth * 0.04;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+      padding: EdgeInsets.symmetric(horizontal: padding, vertical: padding),
       child: Container(
-        height: 108,
+        height: cardHeight,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -27,53 +36,52 @@ class ProjectCard extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(padding),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 117.79,
-                height: 94,
+                width: imageHeight,
+                height: imageHeight,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(19),
                   color: const Color(0x004e2eb5),
                 ),
-                child: Center(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(19),
-                    child: Image.asset(
-                      'assets/images/logo.png',
-                      fit: BoxFit.cover,
-                    ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(19),
+                  child: Image.asset(
+                    'assets/images/logo.png',
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
+              const SizedBox(width: 10),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.symmetric(horizontal: padding),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        project['name'] ?? 'Project Name',
-                        style: const TextStyle(
-                          fontSize: 9,
+                        project.projectName ?? 'Project Name',
+                        style: TextStyle(
+                          fontSize: titleFontSize,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFFC4C4C4),
+                          color: const Color(0xFFC4C4C4),
                         ),
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        project['description'] ?? 'Project Description',
-                        style: const TextStyle(
-                          color: Color(0xFF4E2EB5),
-                          fontSize: 15,
+                        project.projectDescription ?? 'Project Description',
+                        style: TextStyle(
+                          color: const Color(0xFF4E2EB5),
+                          fontSize: descriptionFontSize,
                         ),
                       ),
                       const SizedBox(height: 2),
                       RatingBar.builder(
-                        itemSize: 16,
-                        initialRating: project['rating']?.toDouble() ?? 5.0,
+                        itemSize: ratingItemSize,
+                        initialRating: project.rating?.toDouble() ?? 0,
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: false,
@@ -82,11 +90,11 @@ class ProjectCard extends StatelessWidget {
                           Icons.star,
                           color: Colors.amber,
                         ),
-                        onRatingUpdate: (rating) {
-                        },
+                        onRatingUpdate: (rating) {},
                       ),
+                      const SizedBox(height: 2),
                       Text(
-                        project['category'] ?? 'Category',
+                        "${project.type}",
                         style: const TextStyle(
                           color: Color(0xFFC4C4C4),
                         ),

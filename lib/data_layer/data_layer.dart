@@ -10,7 +10,7 @@ class DataLayer {
 
   AuthModel? authUser;
   UserModel? userInfo;
-  ProjectsInfo? projectInfo;
+  List<ProjectsInfo>? projectInfo;
 
   final box = GetStorage();
 
@@ -30,7 +30,7 @@ class DataLayer {
     
   }
 
-  getProjectInfo() async {
+  Future<void> getProjectInfo() async {
       projectInfo = await api.getProjectDetails();
   }
 
@@ -38,7 +38,7 @@ class DataLayer {
     if (box.hasData("auth")) {
       Map<String, dynamic> loadedData = box.read("auth");
       authUser = AuthModel.fromJson(loadedData);
-      await getProjectInfo();
+      
     }
   }
 }
