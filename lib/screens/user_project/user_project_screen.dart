@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -51,7 +49,6 @@ class UserProjectScreen extends StatelessWidget {
                     }
 
                     if (state is UserProjectShowState) {
-                      log("in user project");
                       return GridView.builder(
                         shrinkWrap: true,
                         gridDelegate:

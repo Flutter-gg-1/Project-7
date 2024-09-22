@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
