@@ -21,7 +21,9 @@ mixin SupervisorApi on ConstantsApi {
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
     } on DioException catch (error) {
-      throw DioException(requestOptions: RequestOptions(), message: '${error.response?.data['data']}');
+      throw DioException(
+          requestOptions: RequestOptions(),
+          message: '${error.response?.data['data']}');
     } catch (error) {
       throw Exception("Error occurred while creating project");
     }
@@ -35,11 +37,12 @@ mixin SupervisorApi on ConstantsApi {
     required bool isPublic,
   }) async {
     try {
-       await dio.put(
+      await dio.put(
         '$baseUrl$changeProjectStatusEndpoint/$projectId',
         data: {
           'time_end_edit': timeEndEdit,
           'edit': isEditable,
+          "rating": true,
           'public': isPublic,
         },
         options: Options(
@@ -49,7 +52,8 @@ mixin SupervisorApi on ConstantsApi {
         ),
       );
     } on DioException catch (error) {
-      throw  DioException(requestOptions: RequestOptions(), message: '${error.message}');
+      throw DioException(
+          requestOptions: RequestOptions(), message: '${error.message}');
     } catch (error) {
       throw const FormatException(
           'Error occurred while changing project status');

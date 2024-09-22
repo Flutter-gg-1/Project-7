@@ -98,7 +98,9 @@ class _EvaluationScreenState extends State<EvaluationScreen> {
                       borderRadius: BorderRadius.circular(9),
                       color: AppColors.blueLight),
                   child: TextButton(
-                      onPressed: () {},
+                      onPressed: () async{
+                        await sendRating();
+                      },
                       child: const Text(
                         textAlign: TextAlign.center,
                         'Send',

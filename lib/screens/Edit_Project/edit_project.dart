@@ -143,13 +143,20 @@ class _EditProjectScreenState extends State<EditProjectScreen> {
                         height: 30,
                         width: 170,
                         child: ElevatedButton(
-                          onPressed: () {
-                            api.changeProjectStatus(
-                                token: token,
-                                projectId: projectId!,
-                                timeEndEdit: editEndTimeController.text,
-                                isEditable: isEditable!,
-                                isPublic: isPublic!);
+                          onPressed: () async {
+                            try {
+                              await api.changeProjectStatus(
+                                  token: token,
+                                  projectId: projectId!,
+                                  timeEndEdit: editEndTimeController.text,
+                                  isEditable: isEditable!,
+                                  isPublic: isPublic!);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('success')));
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Failed')));
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xff4129B7),

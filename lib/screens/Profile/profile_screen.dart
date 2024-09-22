@@ -4,6 +4,7 @@ import 'package:outlined_text/outlined_text.dart';
 import 'package:project_management_app/data_layer/data_layer.dart';
 import 'package:project_management_app/models/profile_model.dart';
 import 'package:project_management_app/networking/api_networking.dart';
+import 'package:project_management_app/screens/Auth/first_screen.dart';
 import 'package:project_management_app/screens/Edit_Profile/edit_profile_screen.dart';
 import 'package:project_management_app/screens/Home/projects_contaner.dart';
 import 'package:project_management_app/screens/Profile/custom_profile_links.dart';
@@ -34,8 +35,13 @@ class ProfileScreen extends StatelessWidget {
                 Icons.logout,
                 color: Colors.white,
               ),
-              onPressed: () {
-                // تنفيذ عملية تسجيل الخروج هنا
+              onPressed: () async {
+                await locator.get<DataLayer>().logOut();
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const FirstScreen()),
+                    (route) => false);
                 logout(context);
               },
             ),

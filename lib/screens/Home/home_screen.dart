@@ -41,6 +41,16 @@ class HomeScreen extends StatelessWidget {
                         floating: true,
                         pinned: false,
                         actions: [
+                          const Center(
+                            child: Text(
+                              'Home',
+                              style:
+                                  TextStyle(fontSize: 24, color: Colors.white),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 50,
+                          ),
                           Image.asset(
                             'assets/logo-h-white 2.png',
                             height: 20.h,
@@ -159,7 +169,7 @@ class HomeScreen extends StatelessWidget {
                             builder: (context) => const AllProjectsScreen()),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       "See more ..>",
                       style: TextStyle(
                         color: AppColors.blueDark,
