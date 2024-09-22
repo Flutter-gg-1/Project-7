@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
@@ -21,26 +20,22 @@ class EditBase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(
-          horizontal: context.getWidth(multiply: 0.08)),
+      padding:
+          EdgeInsets.symmetric(horizontal: context.getWidth(multiply: 0.08)),
       child: BlocBuilder<EditBloc, EditState>(
         builder: (context, state) {
           return Column(
             children: [
               Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    languageLayer.isArabic
-                        ? 'تعديل المتن'
-                        : 'Edit base',
+                    languageLayer.isArabic ? 'تعديل المتن' : 'Edit base',
                     style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const Text(
-                    '2 / 6 >',
+                    '2 / 7 >',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -50,52 +45,42 @@ class EditBase extends StatelessWidget {
               ),
               context.addSpacer(multiply: 0.025),
               Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    languageLayer.isArabic
-                        ? 'اسم المشروع'
-                        : 'Project name',
+                    languageLayer.isArabic ? 'اسم المشروع' : 'Project name',
                     style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500),
+                        fontSize: 13, fontWeight: FontWeight.w500),
                   ),
                   context.addSpacer(multiply: 0.008),
-                   NormalTextFormFeild(
+                  NormalTextFormFeild(
                     hintText: 'Clothes app',
                     controller: bloc.projectNameController,
                   ),
                   context.addSpacer(multiply: 0.008),
                   Text(
-                    languageLayer.isArabic
-                        ? 'اسم المعسكر'
-                        : 'Boot-Camp Name',
+                    languageLayer.isArabic ? 'اسم المعسكر' : 'Boot-Camp Name',
                     style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500),
+                        fontSize: 13, fontWeight: FontWeight.w500),
                   ),
                   context.addSpacer(multiply: 0.008),
-                   NormalTextFormFeild(
+                  NormalTextFormFeild(
                     hintText: 'Flutter bootcamp',
                     controller: bloc.bootcampNameController,
                   ),
                   context.addSpacer(multiply: 0.02),
                   Text(
-                    languageLayer.isArabic
-                        ? 'نوع المشروع'
-                        : 'project type',
+                    languageLayer.isArabic ? 'نوع المشروع' : 'project type',
                     style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500),
+                        fontSize: 13, fontWeight: FontWeight.w500),
                   ),
                   context.addSpacer(multiply: 0.008),
-                   NormalTextFormFeild(
+                  NormalTextFormFeild(
                     hintText: 'apps',
                     controller: bloc.typeController,
                   ),
                   context.addSpacer(multiply: 0.02),
-                   DateRow(
+                  DateRow(
                     startDateController: bloc.startDateController,
                     endDateController: bloc.endDateController,
                     presentationDateController: bloc.presentationDateController,
@@ -106,11 +91,10 @@ class EditBase extends StatelessWidget {
                         ? 'وصف المشروع'
                         : 'Project Description',
                     style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500),
+                        fontSize: 13, fontWeight: FontWeight.w500),
                   ),
                   context.addSpacer(multiply: 0.008),
-                   NormalTextFormFeild(
+                  NormalTextFormFeild(
                     hintText: 'Write Project Description',
                     minLines: 4,
                     controller: bloc.projectDescriptionController,

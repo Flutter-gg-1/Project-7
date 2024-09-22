@@ -8,6 +8,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/helper/method/open_url.dart';
 import 'package:tuwaiq_project/models/profile_model.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/edit_screen.dart';
 import 'package:tuwaiq_project/screens/project_info/cubit/project_info_cubit.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 import 'package:tuwaiq_project/widget/project_view_widget/costumr_details_project.dart';
@@ -40,7 +41,14 @@ class ProjectViewScreen extends StatelessWidget {
                   painter: AuthShape(),
                 ),
                 CustomeActionProject(
-                  editClick: () {},
+                  editClick: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              EditScreen(projectId: projectsModel.projectId!),
+                        ));
+                  },
                   qrCodeButton: () {
                     showDialog(
                       context: context,

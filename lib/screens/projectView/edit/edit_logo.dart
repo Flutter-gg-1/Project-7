@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -14,16 +13,17 @@ class EditLogo extends StatelessWidget {
     super.key,
     required this.bloc,
     required this.languageLayer,
+    required this.projectId,
   });
 
   final EditBloc bloc;
   final LanguageLayer languageLayer;
-
+  final String projectId;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(
-          horizontal: context.getWidth(multiply: 0.1)),
+      padding:
+          EdgeInsets.symmetric(horizontal: context.getWidth(multiply: 0.1)),
       child: BlocBuilder<EditBloc, EditState>(
         builder: (context, state) {
           Future<void> pickImage({
@@ -31,31 +31,26 @@ class EditLogo extends StatelessWidget {
             required Function(File) updateImage,
           }) async {
             final ImagePicker picker = ImagePicker();
-            XFile? image = await picker.pickImage(
-                source: ImageSource.gallery);
+            XFile? image = await picker.pickImage(source: ImageSource.gallery);
             if (image != null) {
               final selectedImage = File(image.path);
               updateImage(selectedImage);
               bloc.add(createEvent(selectedImage));
             }
           }
-    
+
           return Column(
             children: [
               Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    languageLayer.isArabic
-                        ? 'تعديل الشعار'
-                        : 'Edit logo',
+                    languageLayer.isArabic ? 'تعديل الشعار' : 'Edit logo',
                     style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const Text(
-                    '1 / 6 >',
+                    '1 / 7 >',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -69,40 +64,32 @@ class EditLogo extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      languageLayer.isArabic
-                          ? 'الشعار'
-                          : 'upload Logo',
+                      languageLayer.isArabic ? 'الشعار' : 'upload Logo',
                       style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
+                          fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                     const Text(
                       ' *',
-                      style: TextStyle(
-                          fontSize: 18, color: Colors.red),
+                      style: TextStyle(fontSize: 18, color: Colors.red),
                     )
                   ],
                 ),
               ),
               context.addSpacer(multiply: 0.008),
               Container(
-                  margin: const EdgeInsets.only(
-                      top: 7, bottom: 32),
+                  margin: const EdgeInsets.only(top: 7, bottom: 32),
                   width: double.infinity,
                   height: 140,
                   decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(15),
                       color: const Color(0xffededed)),
-                  child: state is ProjectImagesState &&
-                          state.logoImage != null
+                  child: state is ProjectImagesState && state.logoImage != null
                       ? Image.file(state.logoImage!)
                       : IconButton(
                           onPressed: () {
                             pickImage(
                               createEvent: (image) =>
-                                  LogoImageChangeEvent(
-                                      selectedImage: image),
+                                  LogoImageChangeEvent(selectedImage: image),
                               updateImage: (p0) => {},
                             );
                           },

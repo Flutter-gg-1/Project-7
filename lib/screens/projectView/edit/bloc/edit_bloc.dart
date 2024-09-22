@@ -1,17 +1,25 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:tuwaiq_project/data_layer/auth_layer.dart';
 import 'package:tuwaiq_project/networking/networking_api.dart';
+import 'package:tuwaiq_project/services/setup.dart';
 
 part 'edit_event.dart';
 part 'edit_state.dart';
 
 class EditBloc extends Bloc<EditEvent, EditState> {
   final api = NetworkingApi();
+  final token = authLocator.get<AuthLayerData>().auth!.token;
+  String projectId = '';
+  bool isEdit = true;
+  bool isPublic = true;
+  bool allowRating = true;
   File? logoImage;
   List<File>? projectImages;
   File? presentation;
@@ -63,14 +71,45 @@ class EditBloc extends Bloc<EditEvent, EditState> {
 //=====================
   EditBloc() : super(EditInitial()) {
     on<EditEvent>((event, emit) async {});
+
+    on<ChangeStatusEvent>((event, emit) async {
+      try {
+        final res = await api.changeProjectState(
+            token: token!,
+            timeEndEdit: endDateController.text.trim(),
+            allowEdit: isEdit,
+            allowRating: allowRating,
+            allowPublic: isPublic,
+            projectId: event.projectId);
+        log(res.data.toString());
+        emit(SucsessState(msg: '${res.data}'));
+      } on DioException catch (error) {
+        emit(ErrorState(msg: '${error.message}'));
+      } catch (e) {
+        emit(ErrorState(msg: '$e'));
+      }
+    });
+
     on<ChangeImagesEvent>(changeImagesMethod);
+    on<ChangeLogoEvent>(changeLogoMethod);
     on<ChangeLinksEvent>(changeLinksMethod);
     on<ChangePresentationEvent>(changePresentationMethod);
 
     on<ChangeBaseEvent>(changeBaseMethod);
 
     on<AddMembersEvent>(addMemberMethod);
-
+    on<IsEditEvent>((event, emit) {
+      isEdit = event.isEdit;
+      emit(EditStatusState(isEdit: isEdit));
+    });
+    on<IsPublicEvent>((event, emit) {
+      isPublic = event.isPublic;
+      emit(PublicStatusState(isPublic: isPublic));
+    });
+    on<AllowRatingEvent>((event, emit) {
+      allowRating = event.allowRating;
+      emit(RatingStatusState(allowRating: allowRating));
+    });
     on<ChangeMembersEvent>((event, emit) async {
       List<Map<String, dynamic>> lis = [];
 
@@ -83,7 +122,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
         try {
           emit(LoadingState());
           final res = await api.chnageMembers(
-              token: ammarToken, projectId: 'p-ipotpvpI9H', members: lis);
+              token: token!, projectId: projectId, members: lis);
           emit(SucsessState(msg: res.toString()));
         } on DioException catch (error) {
           emit(ErrorState(msg: '${error.message}'));
@@ -123,9 +162,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
       }
       emit(LoadingState());
       await api.chnageImage(
-          token: ammarToken,
-          projectImgs: imagesAsList,
-          projectId: 'p-ipotpvpI9H');
+          token: token!, projectImgs: imagesAsList, projectId: projectId);
 
       emit(SucsessState(msg: 'Project images change sucsessfully'));
       logoImage = null;
@@ -140,9 +177,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
     try {
       emit(LoadingState());
       final res = await api.chnageLinks(
-          token: ammarToken,
-          links: generateLinksList(),
-          projectId: 'p-ipotpvpI9H');
+          token: token!, links: generateLinksList(), projectId: projectId);
       emit(SucsessState(msg: res.toString()));
     } on DioException catch (error) {
       emit(ErrorState(msg: '${error.message}'));
@@ -155,9 +190,9 @@ class EditBloc extends Bloc<EditEvent, EditState> {
     try {
       emit(LoadingState());
       final res = await api.chnagePresentation(
-          token: ammarToken,
+          token: token!,
           presentationFile: presentationAsList!,
-          projectId: 'p-ipotpvpI9H');
+          projectId: projectId);
       emit(SucsessState(msg: res.toString()));
     } on DioException catch (error) {
       emit(ErrorState(msg: '${error.message}'));
@@ -170,8 +205,8 @@ class EditBloc extends Bloc<EditEvent, EditState> {
     try {
       emit(LoadingState());
       final res = await api.chnageBaseData(
-          token: ammarToken,
-          projectId: 'p-ipotpvpI9H',
+          token: token!,
+          projectId: projectId,
           projectName: projectNameController.text.trim(),
           bootcampName: bootcampNameController.text.trim(),
           type: typeController.text.trim(),
@@ -192,9 +227,9 @@ class EditBloc extends Bloc<EditEvent, EditState> {
       emit(LoadingState());
       Uint8List imageAsList = await logoImage!.readAsBytes();
       await api.chnagelogo(
-          token: ammarToken,
+          token: token!,
           logoImg: imageAsList.toList(growable: false),
-          projectId: 'p-ipotpvpI9H');
+          projectId: projectId);
       print(logoImage!.path);
       emit(SucsessState(msg: 'Project logo change sucsessfully'));
       logoImage = null;

@@ -17,6 +17,8 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   TextEditingController endDateController = TextEditingController();
   TextEditingController projectIdController = TextEditingController();
   bool isEdit = true;
+  bool isPublic = true;
+  bool allowRating = true;
   ProjectBloc() : super(ProjectInitial()) {
     on<ProfileImageChangeEvent>((event, emit) {
       profileImage = event.selectedImage;
@@ -89,7 +91,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     });
     on<IsEditEvent>((event, emit) {
       isEdit = event.isEdit;
-      emit(EditChangeState(isEdit: isEdit));
+      emit(EditStatusState(isEdit: isEdit));
     });
   }
 }
