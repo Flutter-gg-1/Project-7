@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_management_app/screens/Evaluation/evaluation_screen.dart';
 import 'package:project_management_app/screens/QR_scanner/bloc/barcode_scanner_bloc.dart';
 import 'package:project_management_app/screens/QR_scanner/bloc/barcode_scanner_event.dart';
 import 'package:project_management_app/screens/QR_scanner/bloc/barcode_scanner_state.dart';
@@ -44,8 +45,7 @@ class BarcodeScannerView extends StatelessWidget {
               } else if (state is BarcodeScanning) {
                 return const CircularProgressIndicator(); // Show progress during scan
               } else if (state is BarcodeScanned) {
-                return Text(
-                    'Scan result: ${state.result}'); // Display result after scan
+                return Text('Scan result: ${state.result}');
               } else if (state is BarcodeScanFailed) {
                 return const Text(
                     'Failed to scan the barcode.'); // Show error message
@@ -67,6 +67,21 @@ class BarcodeScannerView extends StatelessWidget {
               'Start Barcode Scan',
               style: TextStyle(color: Colors.white), // Set text color to white
             ),
+          ),
+          const SizedBox(height: 20),
+          BlocListener<BarcodeScannerBloc, BarcodeScannerState>(
+            listener: (context, state) {
+              if (state is BarcodeScanned) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        EvaluationScreen(projectId: state.result),
+                  ),
+                );
+              }
+            },
+            child: const SizedBox.shrink(), // This is just a placeholder
           ),
         ],
       ),

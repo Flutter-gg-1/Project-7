@@ -11,6 +11,7 @@ import 'package:project_management_app/screens/Project/custom_project_member.dar
 import 'package:project_management_app/services/launch_url.dart';
 import 'package:project_management_app/services/setup.dart';
 import 'package:project_management_app/theme/appcolors.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
   final ProjectModel project;
@@ -45,17 +46,17 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
 
   Future<void> _checkEditAuthorization() async {
     Profile profile = await getProfile();
-    isEditAuthrized = profile.id == widget.project.adminId;
+    setState(() {
+      isEditAuthrized = profile.id == widget.project.adminId;
 
-    if (!isEditAuthrized) {
-      for (var member in widget.project.membersProject!) {
-        if (member.userId == profile.id) {
-          isEditAuthrized = true;
+      if (!isEditAuthrized) {
+        for (var member in widget.project.membersProject!) {
+          if (member.userId == profile.id) {
+            isEditAuthrized = true;
+          }
         }
       }
-      setState(() {});
-    }
-    ;
+    });
   }
 
   Future<Profile> getProfile() async {
@@ -241,11 +242,12 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                 ),
               ),
               const SizedBox(width: 10),
-              Image.asset(
-                'assets/Untitled 1.png',
-                width: 150,
-                height: 150,
-              ),
+              QrImageView(
+                data: widget.project.projectId!,
+                version: QrVersions.auto,
+                size: 100,
+                gapless: false,
+              )
             ],
           ),
           if (selectedLink != null)

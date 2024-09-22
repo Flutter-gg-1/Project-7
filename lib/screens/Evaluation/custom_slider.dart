@@ -6,16 +6,17 @@ class CustomSlider extends StatefulWidget {
   final int max;
   final bool fullWidth;
   final int index;
-   final ValueChanged<double> onChanged;
+  final ValueChanged<double> onChanged;
 
-  const CustomSlider(
-      {super.key,
-      this.sliderHeight = 35,
-      this.max = 10,
-      this.min = 0,
-      this.fullWidth = false,
-      required this.index,
-      required this.onChanged,});
+  const CustomSlider({
+    super.key,
+    this.sliderHeight = 35,
+    this.max = 10,
+    this.min = 0,
+    this.fullWidth = false,
+    required this.index,
+    required this.onChanged,
+  });
 
   @override
   State<CustomSlider> createState() => _CustomSliderState();
@@ -37,7 +38,7 @@ class _CustomSliderState extends State<CustomSlider> {
   Widget build(BuildContext context) {
     if (widget.fullWidth) paddingFactor = 0.3;
     return Container(
-      width: widget.fullWidth ? double.infinity : (widget.sliderHeight) * 7,
+      width: widget.fullWidth ? double.infinity : (widget.sliderHeight) * 6,
       height: (widget.sliderHeight),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
@@ -79,13 +80,13 @@ class _CustomSliderState extends State<CustomSlider> {
                       activeColor: colors[widget.index],
                       value: _value,
                       min: widget.min.toDouble(),
-                    max: widget.max.toDouble(),
+                      max: widget.max.toDouble(),
                       onChanged: (value) {
-                      setState(() {
-                        _value = value;
-                      });
-                      widget.onChanged(value);
-                    }),
+                        setState(() {
+                          _value = value;
+                        });
+                        widget.onChanged(value);
+                      }),
                 ),
               ),
             ),
