@@ -18,10 +18,10 @@ class UserModel {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['token'] = token;
-    _data['refreshToken'] = refreshToken;
-    _data['expiresAt'] = expiresAt;
-    return _data;
+    final data = <String, dynamic>{};
+    data['token'] = token;
+    data['refreshToken'] = refreshToken;
+    data['expiresAt'] = expiresAt;
+    return data;
   }
 }

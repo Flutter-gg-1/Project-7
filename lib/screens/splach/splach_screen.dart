@@ -12,13 +12,13 @@ class SplachScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => SplachCubit()..checkLogin(),
       child: BlocListener<SplachCubit, SplachState>(
-        listener: (context, state) async{
-           await Future.delayed(const Duration(seconds: 2));
+        listener: (context, state) async {
+          await Future.delayed(const Duration(seconds: 2));
           if (state is LoginUserState) {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const HomeScreen(),
+                  builder: (context) => HomeScreen(),
                 ));
           }
           if (state is NotLoginUserState) {

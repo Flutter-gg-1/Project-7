@@ -63,6 +63,6 @@ mixin ProfileMix on NetworkingConstant {
       //  {msg: Error, data: The size of image profile should be less than 500 KB}
       log("here in eorr");
       print(err.response?.data);
-    } catch (err) {}
+    }
   }
 }

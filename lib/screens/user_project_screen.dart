@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/services/setup.dart';
-import 'package:tuwaiq_project/widget/container/project_container.dart';
 
 class UserProjectScreen extends StatelessWidget {
   const UserProjectScreen({super.key});
@@ -17,7 +16,7 @@ class UserProjectScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          context.addSpacer(),
+          context.addSpacer(multiply: 0.008),
           Text(
             language.isArabic ? 'مشاريعي' : 'My project',
             style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
@@ -33,7 +32,7 @@ class UserProjectScreen extends StatelessWidget {
                 mainAxisSpacing: 8,
                 childAspectRatio: 0.7,
               ),
-              children: [
+              children: const [
                 // ProjectContainer(
                 //   projectName: 'Clothes app',
                 //   rate: '4.5',
@@ -41,7 +40,6 @@ class UserProjectScreen extends StatelessWidget {
                 //   imagePath: 'assets/image/flutter.png',
                 //   onTap: () {},
                 // ),
-                
               ],
             ),
           ),

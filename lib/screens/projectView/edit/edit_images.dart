@@ -31,8 +31,8 @@ class EditImages extends StatelessWidget {
             required Function(List<File>) updateImages,
           }) async {
             final ImagePicker picker = ImagePicker();
-            final List<XFile>? images = await picker.pickMultiImage();
-            if (images != null && images.isNotEmpty) {
+            final List<XFile> images = await picker.pickMultiImage();
+            if (images.isNotEmpty) {
               final selectedImages =
                   images.map((image) => File(image.path)).toList();
               updateImages(selectedImages);
