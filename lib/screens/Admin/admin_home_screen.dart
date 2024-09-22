@@ -52,15 +52,15 @@ class AdminHomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
+            const Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const CustomInfoCards(),
-                    const SizedBox(
+                    CustomInfoCards(),
+                    SizedBox(
                       height: 30,
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.symmetric(horizontal: 36),
                       child: Column(
                         children: [
@@ -115,16 +115,13 @@ class AdminHomeScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'All Projects.. ',
                           style: TextStyle(
                               fontSize: 15,
                               color: Color(0xff4129B7),
                               fontWeight: FontWeight.bold),
                         ),
-                        // ...List.generate(6, (_){
-                        //   return const Projects();
-                        // })
                       ],
                     ),
                   ],
