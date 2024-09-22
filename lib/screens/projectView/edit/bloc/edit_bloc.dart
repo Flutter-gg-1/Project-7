@@ -70,6 +70,9 @@ class EditBloc extends Bloc<EditEvent, EditState> {
 //=====================
   EditBloc() : super(EditInitial()) {
     on<EditEvent>((event, emit) async {});
+    on<DefaultEvent>((event, emit) async {
+      emit(EditInitial());
+    });
 
     on<ChangeStatusEvent>((event, emit) async {
       try {

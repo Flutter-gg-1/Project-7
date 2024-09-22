@@ -39,6 +39,8 @@ class ChangeLogoEvent extends EditEvent {
 
 class ChangeImagesEvent extends EditEvent {}
 
+class DefaultEvent extends EditEvent {}
+
 class ChangeBaseEvent extends EditEvent {}
 
 class FilePickedEvent extends EditEvent {
