@@ -19,9 +19,9 @@ final class ErrorState extends EditState {
   ErrorState({required this.msg});
 }
 
-class EditChangeState extends EditState {
+class EditStatusState extends EditState {
   final bool isEdit;
-  EditChangeState({required this.isEdit});
+  EditStatusState({required this.isEdit});
 }
 
 final class ProjectImagesState extends EditState {
@@ -34,13 +34,10 @@ final class ProjectImagesState extends EditState {
     this.projectImage,
     this.presentationFile,
   });
-
 }
 
-
- final class AddMembersState extends EditState {
+final class AddMembersState extends EditState {
   final List<String> names;
   final List<String> position;
-  AddMembersState( {required this.names , required this.position});
-
+  AddMembersState({required this.names, required this.position});
 }

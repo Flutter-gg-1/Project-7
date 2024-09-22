@@ -89,7 +89,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     });
     on<IsEditEvent>((event, emit) {
       isEdit = event.isEdit;
-      emit(EditChangeState(isEdit: isEdit));
+      emit(EditStatusState(isEdit: isEdit));
     });
   }
 }
