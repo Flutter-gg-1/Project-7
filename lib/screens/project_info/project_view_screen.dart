@@ -24,7 +24,7 @@ class ProjectViewScreen extends StatelessWidget {
   const ProjectViewScreen({super.key, required this.projectsModel});
 
   final ProjectsModel projectsModel;
-  
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -44,14 +44,15 @@ class ProjectViewScreen extends StatelessWidget {
                   painter: AuthShape(),
                 ),
                 CustomeActionProject(
+                  isAuthraize: projectsModel.userId == id,
                   editClick: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              EditScreen(
-                                projectId: projectsModel.projectId!,
-                                isAuthraize: projectsModel.adminId==,),
+                          builder: (context) => EditScreen(
+                            projectId: projectsModel.projectId!,
+                            isAuthraize: projectsModel.adminId == id,
+                          ),
                         ));
                   },
                   qrCodeButton: () {
