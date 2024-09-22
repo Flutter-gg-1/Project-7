@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:developer';
+
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -82,8 +82,8 @@ class EditBloc extends Bloc<EditEvent, EditState> {
             allowRating: allowRating,
             allowPublic: isPublic,
             projectId: event.projectId);
-        log(res.data.toString());
-        emit(SucsessState(msg: '${res.data}'));
+
+        emit(SucsessState(msg: 'state change sucsessfuly'));
       } on DioException catch (error) {
         emit(ErrorState(msg: '${error.message}'));
       } catch (e) {
@@ -137,16 +137,14 @@ class EditBloc extends Bloc<EditEvent, EditState> {
     on<FilePickedEvent>((event, emit) async {
       try {
         presentation = event.selectedFile;
-        log(presentation!.path);
+
         emit(LoadingState());
-        log('========1');
+
         Uint8List fileAsList = await presentation!.readAsBytes();
-        log('========2');
+
         presentationAsList = fileAsList.toList();
-        log('========3');
+
         emit(SucsessState(msg: 'File upload susessfully'));
-        emit(ProjectImagesState(presentationFile: presentation));
-        log('========4');
       } catch (e) {
         emit(ErrorState(msg: '$e'));
       }
@@ -188,7 +186,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
       emit(LoadingState());
       final res = await api.chnageLinks(
           links: generateLinksList(), projectId: projectId);
-      emit(SucsessState(msg: res.toString()));
+      emit(SucsessState(msg: 'Links change sucsessfully'));
     } on DioException catch (error) {
       emit(ErrorState(msg: '${error.message}'));
     } catch (e) {
@@ -201,7 +199,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
       emit(LoadingState());
       final res = await api.chnagePresentation(
           presentationFile: presentationAsList!, projectId: projectId);
-      emit(SucsessState(msg: res.toString()));
+      emit(SucsessState(msg: 'Presentation change susessfully'));
     } on DioException catch (error) {
       emit(ErrorState(msg: '${error.message}'));
     } catch (e) {
@@ -221,7 +219,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
           endDate: endDateController.text.trim(),
           presentationDate: presentationDateController.text.trim(),
           projectDescription: projectDescriptionController.text.trim());
-      emit(SucsessState(msg: res.toString()));
+      emit(SucsessState(msg: 'Base change susesfully'));
     } on DioException catch (error) {
       emit(ErrorState(msg: '${error.message}'));
     } catch (e) {
@@ -235,7 +233,6 @@ class EditBloc extends Bloc<EditEvent, EditState> {
       Uint8List imageAsList = await logoImage!.readAsBytes();
       await api.chnagelogo(
           logoImg: imageAsList.toList(growable: false), projectId: projectId);
-      print(logoImage!.path);
       emit(SucsessState(msg: 'Project logo change sucsessfully'));
       logoImage = null;
     } on DioException catch (error) {
@@ -275,10 +272,6 @@ class EditBloc extends Bloc<EditEvent, EditState> {
 
     return links;
   }
-
-  // FutureOr<void> changeMemberMethod(event, emit) async {
-
-  // }
 
   addMemberMethod(event, emit) async {
     nameList.add(memberIdController.text);

@@ -22,12 +22,16 @@ class ManageProjectScreen extends StatelessWidget {
         return BlocListener<ProjectBloc, ProjectState>(
           listener: (context, state) {
             if (state is SucsessState) {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(state.msg)));
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(state.msg),
+                backgroundColor: Colors.green,
+              ));
             }
             if (state is ErrorState) {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(state.msg)));
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(state.msg),
+                backgroundColor: Colors.red,
+              ));
             }
           },
           child: Scaffold(

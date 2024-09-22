@@ -1,5 +1,3 @@
-// ignore_for_file: unused_import
-
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -41,13 +39,17 @@ class EditScreen extends StatelessWidget {
           listener: (context, state) {
             if (state is SucsessState) {
               Navigator.pop(context);
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(state.msg)));
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(state.msg),
+                backgroundColor: Colors.green,
+              ));
             }
             if (state is ErrorState) {
               Navigator.pop(context);
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(state.msg)));
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(state.msg),
+                backgroundColor: Colors.red,
+              ));
             }
             if (state is LoadingState) {
               showDialog(

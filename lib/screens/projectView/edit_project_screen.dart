@@ -50,7 +50,6 @@ class EditProjectScreen extends StatelessWidget {
               BlocBuilder<ProjectBloc, ProjectState>(
                 builder: (context, state) {
                   return Container(
-                      //margin: const EdgeInsets.only(top: 7, bottom: 32),
                       width: double.infinity,
                       height: context.getHeight(multiply: 0.12),
                       decoration: const BoxDecoration(
