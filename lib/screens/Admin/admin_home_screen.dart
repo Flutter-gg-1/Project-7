@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_management_app/networking/api_networking.dart';
+import 'package:project_management_app/screens/Admin/cubit/admin_page_cubit.dart';
 import 'package:project_management_app/screens/Admin/custom_info_cards.dart';
 import 'package:sizer/sizer.dart';
 
@@ -7,128 +10,170 @@ class AdminHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(8.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Search...',
-                          prefixIcon: const Icon(Icons.search),
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.sp),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 4.w),
-                  Image.asset(
-                    scale: 3,
-                    'assets/Group 10 (1).png',
-                  ),
-                ],
-              ),
-            ),
-            const Expanded(
-              child: SingleChildScrollView(
-                child: Column(
+    return BlocProvider(
+      create: (context) =>
+          AdminPageCubit(apiNetworking: ApiNetworking())..fetchProjects(),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: const Text("Admin Page",
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+          centerTitle: true,
+          backgroundColor: const Color(0xff4129B7),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(8.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CustomInfoCards(),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 36),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Username: ',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    color: Color(0xff4129B7),
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              DropdownMenu(dropdownMenuEntries: [
-                                DropdownMenuEntry(
-                                    value: 'fahad', label: 'fahad'),
-                                DropdownMenuEntry(
-                                    value: 'abdulaziz', label: 'abdulaziz'),
-                                DropdownMenuEntry(
-                                    value: 'muhhanned', label: 'muhanned'),
-                                DropdownMenuEntry(
-                                    value: 'rawan', label: 'rawan')
-                              ])
-                            ],
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Search...',
+                            prefixIcon: const Icon(Icons.search),
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.sp),
+                              borderSide: BorderSide.none,
+                            ),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Assign Role: ',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    color: Color(0xff4129B7),
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              DropdownMenu(dropdownMenuEntries: [
-                                DropdownMenuEntry(
-                                    value: 'supervisor', label: 'Supervisor'),
-                                DropdownMenuEntry(value: 'user', label: 'User'),
-                              ])
-                            ],
-                          ),
-                        ],
+                        ),
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'All Projects.. ',
-                          style: TextStyle(
-                              fontSize: 15,
-                              color: Color(0xff4129B7),
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
+                    SizedBox(width: 4.w),
+                    Image.asset(
+                      scale: 3,
+                      'assets/Group 10 (1).png',
                     ),
                   ],
                 ),
               ),
-            )
-          ],
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      BlocBuilder<AdminPageCubit, AdminPageState>(
+                        builder: (context, state) {
+                          if (state is AdminPageLoading) {
+                            return const CircularProgressIndicator();
+                          } else if (state is AdminPageLoaded) {
+                            return CustomInfoCards(
+                              numberOfProjects: state.projects.length,
+                            );
+                          } else if (state is AdminPageError) {
+                            return Text('Error: ${state.message}');
+                          } else {
+                            return const Text('No projects found.');
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 30),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 36),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              minLeadingWidth: 80,
+                              leading: const Text(
+                                'User Id: ',
+                                style: TextStyle(
+                                    fontSize: 14, color: Color(0xff4129B7)),
+                              ),
+                              title: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: const Offset(0, 2),
+                                      blurRadius: 4,
+                                      color: Colors.black.withOpacity(0.25),
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: TextField(
+                                  controller: TextEditingController(),
+                                  cursorColor: Colors.black,
+                                  maxLines: 1,
+                                  style: const TextStyle(fontSize: 16),
+                                  textAlignVertical: TextAlignVertical.top,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Assign Role: ',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      color: Color(0xff4129B7),
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                DropdownMenu(
+                                  onSelected: (value) {
+                                    // Assign role logic here
+                                  },
+                                  dropdownMenuEntries: const [
+                                    DropdownMenuEntry(
+                                        value: 'supervisor',
+                                        label: 'Supervisor'),
+                                    DropdownMenuEntry(
+                                        value: 'user', label: 'User'),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      Center(
+                        child: SizedBox(
+                          height: 30,
+                          width: 170,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // Handle change user role
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xff4129B7),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child: const Text("Change User Role",
+                                style: TextStyle(color: Colors.white)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

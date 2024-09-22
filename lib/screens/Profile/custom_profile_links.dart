@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_management_app/services/launch_url.dart';
 
 class CustomProfileLinks extends StatelessWidget {
   final String label;
@@ -18,12 +19,17 @@ class CustomProfileLinks extends StatelessWidget {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
         child: Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              url,
-              style: const TextStyle(
-                  fontSize: 11,
-                  color: Color(0xffB4B4B7),
-                  fontWeight: FontWeight.bold),
+            child: InkWell(
+              onTap: () {
+                launchLink(url);
+              },
+              child: Text(
+                url,
+                style: const TextStyle(
+                    fontSize: 11,
+                    color: Color(0xffB4B4B7),
+                    fontWeight: FontWeight.bold),
+              ),
             )),
       ),
     );

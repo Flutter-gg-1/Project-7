@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_management_app/models/project_model.dart';
@@ -44,15 +42,16 @@ class HomeScreen extends StatelessWidget {
                         floating: true,
                         pinned: false,
                         actions: [
-                          const Center(
-                            child: Text(
-                              'Home',
-                              style:
-                                  TextStyle(fontSize: 24, color: Colors.white),
-                            ),
+                          const Text(
+                            'Home',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                fontSize: 24,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(
-                            width: 50,
+                            width: 180,
                           ),
                           Image.asset(
                             'assets/logo-h-white 2.png',
