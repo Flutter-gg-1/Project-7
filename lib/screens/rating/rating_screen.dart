@@ -101,7 +101,9 @@ class RatingScreen extends StatelessWidget {
                       CostomeDetailsProject(
                         readOnly: true,
                         maxHeight: context.getHeight(multiply: 0.13),
-                        titleText: 'Project details',
+                        titleText: language.isArabic
+                            ? 'وصف المشروع'
+                            : 'Project details',
                         heightContainer: context.getHeight(multiply: 0.22),
                         widthContainer: context.getWidth(multiply: 0.6),
                       ),
@@ -115,7 +117,7 @@ class RatingScreen extends StatelessWidget {
                       bloc.idea = rating;
                     },
                     horizontalStar: context.getWidth(multiply: 0.04),
-                    titleText: 'IDEA',
+                    titleText: language.isArabic ? 'الفكرة' : 'IDEA',
                     itemCount: 5,
                     itemSize: context.getWidth(multiply: 0.1),
                   ),
@@ -127,7 +129,7 @@ class RatingScreen extends StatelessWidget {
                       bloc.design = rating;
                     },
                     horizontalStar: context.getWidth(multiply: 0.04),
-                    titleText: 'DESIGN',
+                    titleText: language.isArabic ? 'التصميم' : 'DESIGN',
                     itemCount: 5,
                     itemSize: context.getWidth(multiply: 0.1),
                   ),
@@ -139,7 +141,7 @@ class RatingScreen extends StatelessWidget {
                       bloc.tools = rating;
                     },
                     horizontalStar: context.getWidth(multiply: 0.04),
-                    titleText: 'TOOLS',
+                    titleText: language.isArabic ? 'الادوات' : 'TOOLS',
                     itemCount: 5,
                     itemSize: context.getWidth(multiply: 0.1),
                   ),
@@ -151,7 +153,7 @@ class RatingScreen extends StatelessWidget {
                       bloc.practices = rating;
                     },
                     horizontalStar: context.getWidth(multiply: 0.04),
-                    titleText: 'PRACTICES',
+                    titleText: language.isArabic ? 'الممارسات' : 'PRACTICES',
                     itemCount: 5,
                     itemSize: context.getWidth(multiply: 0.1),
                   ),
@@ -163,7 +165,7 @@ class RatingScreen extends StatelessWidget {
                       bloc.presentation = rating;
                     },
                     horizontalStar: context.getWidth(multiply: 0.04),
-                    titleText: 'PRESENTATION',
+                    titleText: language.isArabic ? 'العرض' : 'PRESENTATION',
                     itemCount: 5,
                     itemSize: context.getWidth(multiply: 0.1),
                   ),
@@ -175,7 +177,7 @@ class RatingScreen extends StatelessWidget {
                       bloc.investment = rating;
                     },
                     horizontalStar: context.getWidth(multiply: 0.04),
-                    titleText: 'INVESTMENT',
+                    titleText: language.isArabic ? 'الاستثمار' : 'INVESTMENT',
                     itemCount: 5,
                     itemSize: context.getWidth(multiply: 0.1),
                   ),
@@ -189,9 +191,9 @@ class RatingScreen extends StatelessWidget {
                         child: Padding(
                           padding: EdgeInsets.only(
                               left: context.getWidth(multiply: 0.06)),
-                          child: const Text(
-                            'NOTE',
-                            style: TextStyle(
+                          child: Text(
+                            language.isArabic ? 'ملاحظات' : 'NOTE',
+                            style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w400),
                           ),
                         ),

@@ -8,13 +8,15 @@ class CustomeListTileProfile extends StatelessWidget {
     required this.colorText,
     required this.iconListTile,
     this.onTap,
+    required this.isArabic,
   });
 
   final String text;
   final Color colorText;
   final Icon iconListTile;
   final Function()? onTap;
-  //'Help & Support'
+  final bool isArabic;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -27,6 +29,7 @@ class CustomeListTileProfile extends StatelessWidget {
       title: Text(
         text,
         style: TextStyle(color: colorText),
+        textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
       ),
       trailing: const Icon(Icons.chevron_right),
       onTap: onTap,

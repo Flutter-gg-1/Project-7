@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 class CustomTextFeild extends StatelessWidget {
+  final bool isArabic;
   final String hintText;
   final int? maxLines;
   final TextEditingController? controller;
@@ -23,12 +24,13 @@ class CustomTextFeild extends StatelessWidget {
       this.padding,
       this.initialValue,
       this.onChanged,
-      this.onFieldSubmitted});
+      this.onFieldSubmitted,
+      required this.isArabic});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: const TextStyle(color: Color(0xffDCD5D5)),
+      style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
       keyboardType: keyboardType,
       //inputFormatters: inputFormatters,
       validator: validator,
@@ -42,11 +44,12 @@ class CustomTextFeild extends StatelessWidget {
       decoration: InputDecoration(
           suffixIcon: const Icon(Icons.search),
           hintText: hintText,
+          hintTextDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
           hintStyle: const TextStyle(fontSize: 14, color: Color(0xffb8b8b8)),
           filled: true,
           fillColor: const Color.fromARGB(255, 255, 255, 255),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(10),
           )),
     );
   }

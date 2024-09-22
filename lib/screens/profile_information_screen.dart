@@ -140,39 +140,35 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                 ],
               ),
             ),
-            const CustomeTitleText(
-              title: 'First Name',
+            CustomeTitleText(
+              isArabic: language.isArabic,
+              title: language.isArabic ? 'الاسم الاول' : 'First Name',
             ),
             CustomeTextFormProfile(
               contentText: widget.profileModel.firstName,
               controller: firstNameCon,
-              hint: 'first name',
+              hint: language.isArabic ? 'الاسم الاول' : 'First Name',
+              isArabic: language.isArabic,
             ),
             SizedBox(
               height: context.getHeight(multiply: 0.035),
             ),
-            const CustomeTitleText(
-              title: 'Last Name',
+            CustomeTitleText(
+              isArabic: language.isArabic,
+              title: language.isArabic ? 'الاسم الاخير' : 'Last Name',
             ),
             CustomeTextFormProfile(
               contentText: widget.profileModel.lastName,
               controller: lastNameCon,
-              hint: 'last name',
+              hint: language.isArabic ? 'الاسم الاخير' : 'Last Name',
+              isArabic: language.isArabic,
             ),
             SizedBox(
               height: context.getHeight(multiply: 0.035),
             ),
-            const CustomeTitleText(
-              title: 'Email',
-            ),
-            const CustomeTextFormProfile(
-              hint: 'email',
-            ),
-            SizedBox(
-              height: context.getHeight(multiply: 0.035),
-            ),
-            const CustomeTitleText(
-              title: 'CV',
+            CustomeTitleText(
+              isArabic: language.isArabic,
+              title: language.isArabic ? 'السيرة الذاتية' : 'CV',
             ),
             Container(
               width: context.getWidth(multiply: 0.9),
@@ -208,28 +204,53 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                         left: context.getWidth(multiply: 0.005),
                         top: context.getWidth(multiply: 0.015)),
                     child: ListTile(
-                      leading:
-                          const Text("no file", style: TextStyle(fontSize: 16)),
-                      trailing: IconButton(
-                          onPressed: () async {
-                            final fileData =
-                                await FilePicker.platform.pickFiles(
-                              type: FileType.custom,
-                              allowedExtensions: ['pdf'],
-                            );
+                      leading: language.isArabic
+                          ? IconButton(
+                              onPressed: () async {
+                                final fileData =
+                                    await FilePicker.platform.pickFiles(
+                                  type: FileType.custom,
+                                  allowedExtensions: ['pdf'],
+                                );
 
-                            if (fileData != null) {
-                              final file = fileData.files.first;
-                              final bytes = file.xFile;
-                              final fileName = file.name;
+                                if (fileData != null) {
+                                  final file = fileData.files.first;
+                                  final bytes = file.xFile;
+                                  final fileName = file.name;
 
-                              // need late to check if byte not null
-                              context.read<CvHandleCubit>().cvAdd(
-                                  await bytes.readAsBytes(),
-                                  fileName.substring(0, 5));
-                            }
-                          },
-                          icon: const Icon(FontAwesomeIcons.plus)),
+                                  // need late to check if byte not null
+                                  context.read<CvHandleCubit>().cvAdd(
+                                      await bytes.readAsBytes(),
+                                      fileName.substring(0, 5));
+                                }
+                              },
+                              icon: const Icon(FontAwesomeIcons.plus))
+                          : Text(
+                              language.isArabic ? "لا يوجد ملفات" : "no file",
+                              style: TextStyle(fontSize: 16)),
+                      trailing: language.isArabic
+                          ? const Text("لا يوجد ملفات",
+                              style: TextStyle(fontSize: 16))
+                          : IconButton(
+                              onPressed: () async {
+                                final fileData =
+                                    await FilePicker.platform.pickFiles(
+                                  type: FileType.custom,
+                                  allowedExtensions: ['pdf'],
+                                );
+
+                                if (fileData != null) {
+                                  final file = fileData.files.first;
+                                  final bytes = file.xFile;
+                                  final fileName = file.name;
+
+                                  // need late to check if byte not null
+                                  context.read<CvHandleCubit>().cvAdd(
+                                      await bytes.readAsBytes(),
+                                      fileName.substring(0, 5));
+                                }
+                              },
+                              icon: const Icon(FontAwesomeIcons.plus)),
                     ),
                   );
                 },
