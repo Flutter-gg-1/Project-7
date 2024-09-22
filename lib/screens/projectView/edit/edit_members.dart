@@ -70,7 +70,7 @@ class EditMembers extends StatelessWidget {
               BlocBuilder<EditBloc, EditState>(
                 builder: (context, state) {
                   if (state is AddMembersState) {
-                    return Container(
+                    return SizedBox(
                       width: 100,
                       height: 100,
                       child: Column(

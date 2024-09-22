@@ -23,9 +23,7 @@ class ProfileScreen extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(
-                    height: context.getHeight(multiply: 0.035),
-                  ),
+                  context.addSpacer(multiply: 0.008),
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(

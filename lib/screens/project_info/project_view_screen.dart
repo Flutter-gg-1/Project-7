@@ -1,9 +1,6 @@
-import 'package:carousel_slider/carousel_options.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/models/profile_model.dart';
 import 'package:tuwaiq_project/screens/project_info/cubit/project_info_cubit.dart';
@@ -26,6 +23,7 @@ class ProjectViewScreen extends StatelessWidget {
       child: Builder(builder: (context) {
         final cubit = context.read<ProjectInfoCubit>();
         return Scaffold(
+          backgroundColor: Colors.white,
           body: SafeArea(
               child: SingleChildScrollView(
             child: Column(
@@ -36,9 +34,33 @@ class ProjectViewScreen extends StatelessWidget {
                   painter: AuthShape(),
                 ),
                 CustomeActionProject(
-                  deleteClick: () {},
                   editClick: () {},
-                  reviewClick: () {},
+                  qrCodeButton: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => Center(
+                        child: Container(
+                          width: context.getWidth(multiply: 0.8),
+                          height: context.getHeight(multiply: 0.4),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12)),
+                          child: Column(
+                            children: [
+                              const Text('Rate me'),
+                              QrImageView(
+                                backgroundColor: Colors.white,
+                                data: projectsModel.projectId!,
+                                padding: EdgeInsets.zero,
+                                version: QrVersions.auto,
+                                size: context.getHeight(multiply: 0.3),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 Container(
                   height: context.getHeight(multiply: 0.2),
@@ -88,7 +110,7 @@ class ProjectViewScreen extends StatelessWidget {
                   height: context.getHeight(multiply: 0.035),
                 ),
                 CostomeDetailsProject(
-                  maxHeight: context.getHeight(multiply: 0.1) ,
+                  maxHeight: context.getHeight(multiply: 0.1),
                   readOnly: true,
                   heightContainer: context.getHeight(multiply: 0.3),
                   widthContainer: context.getWidth(multiply: 0.8),

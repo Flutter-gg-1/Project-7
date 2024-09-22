@@ -5,14 +5,15 @@ import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/models/profile_model.dart';
 
 class CarouselSliderCustome extends StatelessWidget {
- const CarouselSliderCustome({
+  const CarouselSliderCustome({
     super.key,
     required this.currentIndex,
-    required this.onPageChanged, required this.carouselSliderWidget,
+    required this.onPageChanged,
+    required this.carouselSliderWidget,
   });
   final int currentIndex;
   final Function(int, CarouselPageChangedReason) onPageChanged;
-  final List<ImagesProject> carouselSliderWidget ;
+  final List<ImagesProject> carouselSliderWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -35,29 +36,24 @@ class CarouselSliderCustome extends StatelessWidget {
               return Builder(
                 builder: (BuildContext context) {
                   return ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: 
-                 Image.network(
-                    i.url,
-                    errorBuilder: (context, error, stackTrace) {
-                      
-                      return Image.asset("assets/image/Search-amico(1).png");
-                    },
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null){
-                           return child; 
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.network(
+                        i.url,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                              "assets/image/Search-amico(1).png");
+                        },
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          }
 
-                      }
-                     
-                      return const Center(
-                        child:
-                            Center(child: CircularProgressIndicator()), 
-                      );
-                    },
-                    fit: BoxFit.cover, 
-                  )
-               
-                  );
+                          return const Center(
+                            child: Center(child: CircularProgressIndicator()),
+                          );
+                        },
+                        fit: BoxFit.cover,
+                      ));
                 },
               );
             }).toList(),
