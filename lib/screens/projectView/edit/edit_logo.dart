@@ -97,7 +97,7 @@ class EditLogo extends StatelessWidget {
                                     bloc.logoImage = null;
                                     bloc.add(DefaultEvent());
                                   },
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.delete,
                                     color: Colors.red,
                                   )),
@@ -121,7 +121,12 @@ class EditLogo extends StatelessWidget {
                 englishTitle: 'Edit Logo',
                 arabicTitle: 'تعديل الشعار',
                 onPressed: () {
-                  bloc.add(ChangeLogoEvent());
+                  if (bloc.logoImage != null) {
+                    bloc.add(ChangeLogoEvent());
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Upload image first')));
+                  }
                 },
                 arabic: languageLayer.isArabic,
               ),

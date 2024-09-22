@@ -86,21 +86,40 @@ class EditImages extends StatelessWidget {
                       color: const Color(0xffededed)),
                   child: state is ProjectImagesState &&
                           state.projectImage != null
-                      ? SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: state.projectImage!
-                                .map(
-                                  (e) => Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.file(
-                                      e,
-                                      scale: 10,
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                          ),
+                      ? Stack(
+                          clipBehavior: Clip.none,
+                          alignment: Alignment.center,
+                          children: [
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: state.projectImage!
+                                    .map(
+                                      (e) => Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Image.file(
+                                          e,
+                                          scale: 10,
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            ),
+                            Positioned(
+                              left: context.getWidth(multiply: 0.68),
+                              bottom: context.getHeight(multiply: 0.1),
+                              child: IconButton(
+                                  onPressed: () {
+                                    bloc.projectImages = null;
+                                    bloc.add(DefaultEvent());
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                  )),
+                            ),
+                          ],
                         )
                       : IconButton(
                           onPressed: () {
@@ -119,7 +138,12 @@ class EditImages extends StatelessWidget {
                 englishTitle: 'Edit Images',
                 arabicTitle: 'تعديل الصور',
                 onPressed: () {
-                  bloc.add(ChangeImagesEvent());
+                  if (bloc.projectImages != null) {
+                    bloc.add(ChangeImagesEvent());
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Upload images first')));
+                  }
                 },
                 arabic: languageLayer.isArabic,
               ),
