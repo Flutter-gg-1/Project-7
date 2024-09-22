@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
+import 'package:tuwaiq_project/models/members_project_model.dart';
 import 'package:tuwaiq_project/models/profile_model.dart';
 
 class CustomeMemberContainer extends StatelessWidget {
@@ -11,10 +12,6 @@ class CustomeMemberContainer extends StatelessWidget {
   });
 
   final MembersProjectModel membersProject;
-
-  // final String name;
-  // final String positions;
-  // final Image img;
   final Function()? onPressedIcon;
   @override
   Widget build(BuildContext context) {

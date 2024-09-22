@@ -8,7 +8,6 @@ dialog(
     {required BuildContext context,
     Function()? onDone,
     required TextEditingController? controller}) {
-  // TextEditingController? controller;
   String? Function(String?)? validate;
   final language = languageLocaitor.get<LanguageLayer>();
   return showDialog(
@@ -52,7 +51,6 @@ dialog(
                   SizedBox(
                     width: context.getWidth(multiply: 0.7),
                     child: TextFormField(
-                      // initialValue: controller?.text ,
                       textDirection: language.isArabic
                           ? TextDirection.rtl
                           : TextDirection.ltr,

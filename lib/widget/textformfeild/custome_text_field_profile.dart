@@ -27,7 +27,6 @@ class CustomeTextFormProfile extends StatelessWidget {
       ),
       child: Center(
         child: TextFormField(
-          // initialValue: contentText,
           validator: validator,
           controller: controller,
           textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,

@@ -6,7 +6,7 @@ import 'package:tuwaiq_project/data_layer/language_layer.dart';
 final languageLocaitor = GetIt.instance;
 final authLocator = GetIt.instance;
 
-Future<void> setup() async{
+Future<void> setup() async {
   await GetStorage.init();
   languageLocaitor.registerSingleton<LanguageLayer>(LanguageLayer());
   authLocator.registerSingleton<AuthLayerData>(AuthLayerData());

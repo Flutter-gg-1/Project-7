@@ -18,21 +18,16 @@ class ProjectLinksColumn extends StatelessWidget {
       children: [
         Text(
           languageLayer.isArabic ? 'الروابط' : 'Links',
-          style: const TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w500),
+          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
         ),
         const Divider(),
-        const NormalTextFormFeild(
-            hintText: 'https://github.com/example'),
+        const NormalTextFormFeild(hintText: 'https://github.com/example'),
         context.addSpacer(multiply: 0.008),
-        const NormalTextFormFeild(
-            hintText: '"https://figma.com/example"'),
+        const NormalTextFormFeild(hintText: '"https://figma.com/example"'),
         context.addSpacer(multiply: 0.008),
-        const NormalTextFormFeild(
-            hintText: 'https://github.com/example'),
+        const NormalTextFormFeild(hintText: 'https://github.com/example'),
         context.addSpacer(multiply: 0.008),
-        const NormalTextFormFeild(
-            hintText: '"https://figma.com/example"'),
+        const NormalTextFormFeild(hintText: '"https://figma.com/example"'),
       ],
     );
   }

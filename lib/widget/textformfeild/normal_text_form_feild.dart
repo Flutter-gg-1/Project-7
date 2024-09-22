@@ -8,7 +8,9 @@ class NormalTextFormFeild extends StatelessWidget {
   const NormalTextFormFeild({
     super.key,
     required this.hintText,
-    this.controller, this.keyboardType, this.minLines,
+    this.controller,
+    this.keyboardType,
+    this.minLines,
   });
 
   @override
@@ -18,15 +20,13 @@ class NormalTextFormFeild extends StatelessWidget {
       maxLines: minLines,
       controller: controller,
       keyboardType: keyboardType,
-      decoration:  InputDecoration(
-        
+      decoration: InputDecoration(
           hintText: hintText,
           filled: true,
           hintStyle: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w400,
               color: Color(0xffA2A0A0)),
-          //enabledBorder: InputBorder.none,
           fillColor: const Color(0xffededed),
           border: const OutlineInputBorder()),
     );

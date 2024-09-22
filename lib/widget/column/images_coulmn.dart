@@ -81,7 +81,8 @@ class ImagesCoulmn extends StatelessWidget {
                         onPressed: () {
                           pickImage(
                             createEvent: (image) =>
-                                PresentationImageChangeEvent(selectedImage: image),
+                                PresentationImageChangeEvent(
+                                    selectedImage: image),
                             updateImage: (p0) => {},
                           );
                         },
