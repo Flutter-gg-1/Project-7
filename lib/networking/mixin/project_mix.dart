@@ -7,13 +7,10 @@ import 'package:tuwaiq_project/models/profile_model.dart';
 import 'package:tuwaiq_project/networking/networking_constant.dart';
 
 mixin ProjectMix on NetworkingConstant {
-  chnagelogo(
-      {required String token,
-      required List<int> logoImg,
-      required String projectId}) async {
+  chnagelogo({required List<int> logoImg, required String projectId}) async {
     try {
       final res = await dio.put("$baseUrl$endProjectLogoEdit$projectId",
-          options: Options(headers: {'Authorization': 'Bearer $token'}),
+          options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
           data: {"logo": logoImg});
       log(res.data);
       return res.data;
@@ -25,7 +22,6 @@ mixin ProjectMix on NetworkingConstant {
   }
 
   chnageBaseData({
-    required String token,
     required String projectId,
     required String projectName,
     required String bootcampName,
@@ -37,7 +33,7 @@ mixin ProjectMix on NetworkingConstant {
   }) async {
     try {
       final res = await dio.put("$baseUrl$endProjectBaseEdit$projectId",
-          options: Options(headers: {'Authorization': 'Bearer $token'}),
+          options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
           data: {
             "project_name": projectName,
             "bootcamp_name": bootcampName,
@@ -59,13 +55,12 @@ mixin ProjectMix on NetworkingConstant {
   }
 
   chnagePresentation({
-    required String token,
     required List<int> presentationFile,
     required String projectId,
   }) async {
     try {
       final res = await dio.put("$baseUrl$endPresentationEdit$projectId",
-          options: Options(headers: {'Authorization': 'Bearer $token'}),
+          options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
           data: {"presentation_file": presentationFile});
 
       print(res.data);
@@ -77,13 +72,12 @@ mixin ProjectMix on NetworkingConstant {
   }
 
   chnageImage({
-    required String token,
     required List<List<int>> projectImgs,
     required String projectId,
   }) async {
     try {
       final res = await dio.put("$baseUrl$endProjectImgEdit$projectId",
-          options: Options(headers: {'Authorization': 'Bearer $token'}),
+          options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
           data: {"images": projectImgs});
 
       print(res.data);
@@ -95,13 +89,12 @@ mixin ProjectMix on NetworkingConstant {
   }
 
   chnageLinks({
-    required String token,
     required List<Map<String, dynamic>> links,
     required String projectId,
   }) async {
     try {
       final res = await dio.put("$baseUrl$endProjectLinksEdit$projectId",
-          options: Options(headers: {'Authorization': 'Bearer $token'}),
+          options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
           data: {"link": links});
 
       print(res.data);
@@ -113,13 +106,12 @@ mixin ProjectMix on NetworkingConstant {
   }
 
   chnageMembers({
-    required String token,
     required List<Map<String, dynamic>> members,
     required String projectId,
   }) async {
     try {
       final res = await dio.put("$baseUrl$endProjectMembersEdit$projectId",
-          options: Options(headers: {'Authorization': 'Bearer $token'}),
+          options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
           data: {"members": members});
 
       print(res.data);
@@ -131,7 +123,6 @@ mixin ProjectMix on NetworkingConstant {
   }
 
   ratingProject({
-    required String userToken,
     required String projectId,
     required String note,
     required double idea,
@@ -145,7 +136,7 @@ mixin ProjectMix on NetworkingConstant {
       final res = await dio.post(
         '$baseUrl$endProjectRating$projectId',
         options: Options(
-          headers: {'Authorization': 'Bearer $userToken'},
+          headers: {'Authorization': 'Bearer $currentToken'},
         ),
         data: {
           'note': note,
