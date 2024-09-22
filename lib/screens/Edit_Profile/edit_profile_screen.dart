@@ -256,18 +256,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         Uint8List image = await profileImage!.readAsBytes();
         Uint8List resume = await resumeFile!.readAsBytes();
         await ApiNetworking().updateProfile(
-            token: locator.get<DataLayer>().auth!.token,
-            firstName: controllers[0].text,
-            lastName: controllers[1].text,
-            image: image.toList(),
-            cv: resume.toList(),
-            accounts: {
-              'github': controllers[2].text,
-              'linkedin': controllers[3].text,
-              'bindlink': controllers[4].text,
-            },
-            projects: widget.profile.projects
-            );
+          token: locator.get<DataLayer>().auth!.token,
+          firstName: controllers[0].text,
+          lastName: controllers[1].text,
+          image: image.toList(),
+          cv: resume.toList(),
+          accounts: {
+            'github': controllers[2].text,
+            'linkedin': controllers[3].text,
+            'bindlink': controllers[4].text,
+          },
+        );
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Updated successfully!')),
         );
