@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_management_app/models/project_model.dart';
 import 'package:project_management_app/networking/api_networking.dart';
 import 'package:project_management_app/screens/All_projects/all_projects_screen.dart';
 import 'package:project_management_app/screens/Home/bloc/home_bloc.dart';
@@ -204,8 +207,57 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          const Center(child: Text('Recent Projects')),
-          const Center(child: Text('Top Projects')),
+          BlocBuilder<HomeBloc, HomeState>(
+            builder: (context, state) {
+              if (state is HomeLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.lightBlueAccent,
+                  ),
+                );
+              } else if (state is HomeLoaded) {
+                List<ProjectModel> recentProjects = state.projects;
+                recentProjects.sort((a, b) => DateTime.parse(b.createAt!)
+                    .compareTo(DateTime.parse(a.createAt!)));
+                return Column(
+                  children: recentProjects.take(4).map((project) {
+                    return Projects(project: project);
+                  }).toList(),
+                );
+              } else if (state is HomeError) {
+                return Center(
+                  child: Text('Error: ${state.message}'),
+                );
+              }
+              return const Center(child: Text('No projects available.'));
+            },
+          ),
+          BlocBuilder<HomeBloc, HomeState>(
+            builder: (context, state) {
+              if (state is HomeLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.lightBlueAccent,
+                  ),
+                );
+              } else if (state is HomeLoaded) {
+                List<ProjectModel> topProjects = state.projects;
+                topProjects.sort((a, b) => b.rating!.compareTo(a.rating!));
+                return Column(
+                  children: topProjects.take(4).map((project) {
+                    return Projects(project: project);
+                  }).toList(),
+                );
+              } else if (state is HomeError) {
+                return Center(
+                  child: Text('Error: ${state.message}'),
+                );
+              }
+              return const Center(child: Text('No projects available.'));
+            },
+          ),
+          // const Center(child: Text('Recent Projects')),
+          // const Center(child: Text('Top Projects')),
         ],
       ),
     );

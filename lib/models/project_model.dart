@@ -23,6 +23,7 @@ class ProjectModel {
   final List<ImageModel>? imagesProject;
   final List<ProjectLink>? linksProject;
   final List<MemberModel>? membersProject;
+  final double? rating;
 
   ProjectModel({
     this.projectId,
@@ -45,6 +46,7 @@ class ProjectModel {
     this.imagesProject,
     this.linksProject,
     this.membersProject,
+    this.rating
   });
 
   factory ProjectModel.fromJson(Map<String, dynamic> json) {
@@ -75,6 +77,7 @@ class ProjectModel {
       membersProject: (json['members_project'] as List<dynamic>?)
           ?.map((e) => MemberModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+          rating: json['rating'] is double ? json['rating'] : (json['rating']as int).toDouble()
     );
   }
 
@@ -100,6 +103,7 @@ class ProjectModel {
       'images_project': imagesProject?.map((e) => e.toJson()).toList(),
       'links_project': linksProject?.map((e) => e.toJson()).toList(),
       'members_project': membersProject?.map((e) => e.toJson()).toList(),
+      'rating': rating is double ? rating : rating!.toDouble()
     };
   }
 }
