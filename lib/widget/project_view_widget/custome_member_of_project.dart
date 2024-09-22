@@ -67,38 +67,41 @@ class CustomeMemberContainer extends StatelessWidget {
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                onPressed: onPressedIcon,
-                icon: const FaIcon(
-                  FontAwesomeIcons.discord,
-                  color: Colors.black,
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: onPressedIcon,
+                  icon: const FaIcon(
+                    FontAwesomeIcons.discord,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              IconButton(
-                onPressed: onPressedIcon,
-                icon: const FaIcon(
-                  FontAwesomeIcons.linkedinIn,
-                  color: Colors.black,
+                IconButton(
+                  onPressed: onPressedIcon,
+                  icon: const FaIcon(
+                    FontAwesomeIcons.linkedinIn,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              IconButton(
-                onPressed: onPressedIcon,
-                icon: const FaIcon(
-                  FontAwesomeIcons.whatsapp,
-                  color: Colors.black,
+                IconButton(
+                  onPressed: onPressedIcon,
+                  icon: const FaIcon(
+                    FontAwesomeIcons.whatsapp,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              IconButton(
-                onPressed: onPressedIcon,
-                icon: const FaIcon(
-                  FontAwesomeIcons.googleDrive,
-                  color: Colors.black,
+                IconButton(
+                  onPressed: onPressedIcon,
+                  icon: const FaIcon(
+                    FontAwesomeIcons.googleDrive,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

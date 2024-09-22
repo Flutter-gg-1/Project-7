@@ -31,11 +31,7 @@ class AllowRatingEvent extends EditEvent {
   AllowRatingEvent({required this.allowRating});
 }
 
-class ChangeLogoEvent extends EditEvent {
-  // final String projectId;
-
-  // ChangeLogoEvent({required this.projectId});
-}
+class ChangeLogoEvent extends EditEvent {}
 
 class ChangeImagesEvent extends EditEvent {}
 

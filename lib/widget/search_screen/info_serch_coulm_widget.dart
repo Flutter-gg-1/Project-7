@@ -11,26 +11,28 @@ class InfoSerchCoulmWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image.asset(
-          'assets/image/Search-amico(1).png',
-          height: context.getHeight(multiply: 0.4),
-        ),
-        Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.search_rounded),
-              Text(
-                tex,
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-              ),
-            ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Image.asset(
+            'assets/image/Search-amico(1).png',
+            height: context.getHeight(multiply: 0.4),
           ),
-        )
-      ],
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.search_rounded),
+                Text(
+                  tex,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

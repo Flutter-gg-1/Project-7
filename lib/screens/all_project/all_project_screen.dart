@@ -80,7 +80,6 @@ class AllProjectScreen extends StatelessWidget {
                   },
                 ),
               ),
-              //
             ],
           ),
         );

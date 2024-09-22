@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:dio/dio.dart';
 import 'package:tuwaiq_project/networking/networking_constant.dart';
 
@@ -17,8 +15,6 @@ mixin SupervisorMix on NetworkingConstant {
             "time_end_edit": timeEditEnd,
             "edit": isEdit.toString()
           });
-
-      print(res.data);
     } on DioException catch (err) {
       throw DioException(
           requestOptions: RequestOptions(),
@@ -44,10 +40,8 @@ mixin SupervisorMix on NetworkingConstant {
             "rating": allowRating,
             "public": allowPublic
           });
-
-      print(res.data);
     } on DioException catch (err) {
-      print(err.response?.data);
+      throw err.response?.data ?? 'Unknown error occurred';
     } catch (err) {
       throw Exception;
     }
@@ -61,8 +55,6 @@ mixin SupervisorMix on NetworkingConstant {
         "$baseUrl$endProjectDel$projectId",
         options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
       );
-
-      print(res.data);
     } on DioException catch (err) {
       throw DioException(
           requestOptions: RequestOptions(),
