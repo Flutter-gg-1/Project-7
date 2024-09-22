@@ -24,7 +24,6 @@ class HomeScreen extends StatelessWidget {
   final _cancelController = TextEditingController(text: 'Cancel');
 
   final _aspectTolerance = 0.00;
-  final _numberOfCameras = 0;
   final _selectedCamera = -1;
   final _useAutoFocus = true;
   final _autoEnableFlash = false;
@@ -131,6 +130,10 @@ class HomeScreen extends StatelessWidget {
                               ? 'The user did not grant the camera permission!'
                               : 'Unknown error: $e',
                         );
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(scanResult!.rawContent),
+                          backgroundColor: Colors.red[300],
+                        ));
                       }
                     },
                     icon: const Icon(Iconsax.scan_barcode_outline)),
@@ -149,32 +152,5 @@ class HomeScreen extends StatelessWidget {
         );
       }),
     );
-  }
-
-  Future<void> _scan() async {
-    try {
-      final result = await BarcodeScanner.scan(
-        options: ScanOptions(
-          strings: {
-            'cancel': _cancelController.text,
-            'flash_on': _flashOnController.text,
-            'flash_off': _flashOffController.text,
-          },
-          restrictFormat: [BarcodeFormat.qr],
-          useCamera: _selectedCamera,
-          autoEnableFlash: _autoEnableFlash,
-          android: AndroidOptions(
-            aspectTolerance: _aspectTolerance,
-            useAutoFocus: _useAutoFocus,
-          ),
-        ),
-      );
-    } on PlatformException catch (e) {
-      scanResult = ScanResult(
-        rawContent: e.code == BarcodeScanner.cameraAccessDenied
-            ? 'The user did not grant the camera permission!'
-            : 'Unknown error: $e',
-      );
-    }
   }
 }
