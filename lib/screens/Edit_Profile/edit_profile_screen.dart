@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -8,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:outlined_text/outlined_text.dart';
 import 'package:project_management_app/data_layer/data_layer.dart';
-import 'package:project_management_app/models/link_model.dart';
 import 'package:project_management_app/models/profile_model.dart';
 import 'package:project_management_app/networking/api_networking.dart';
 import 'package:project_management_app/screens/Edit_Profile/custom_edit_links.dart';
@@ -242,7 +240,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       type: FileType.custom,
       allowedExtensions: ['pdf'],
     );
-
+    
     if (result != null) {
       setState(() {
         resumeFile = File(result.files.single.path!);
