@@ -16,10 +16,8 @@ class UserProjectCubit extends Cubit<UserProjectState> {
   showProjectUser() async {
     try {
       emit(UserProjectSLoadingState());
-      // change later
-      var user = authLocator.get<AuthLayerData>().auth;
 
-      ProfileModel pro = await NetworkingApi().profileGet(token: user!.token!);
+      ProfileModel pro = await NetworkingApi().profileGet();
       if (pro.projects.isEmpty) {
         emit(UserProjectInitial());
         return;

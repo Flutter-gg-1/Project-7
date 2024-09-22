@@ -8,11 +8,12 @@ class CustomeActionProject extends StatelessWidget {
     super.key,
     this.qrCodeButton,
     this.editClick,
+    required this.isAuthraize,
   });
 
   final Function()? qrCodeButton;
   final Function()? editClick;
-
+  final bool isAuthraize;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -20,14 +21,16 @@ class CustomeActionProject extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          IconButton(
-            onPressed: editClick,
-            icon: FaIcon(
-              FontAwesomeIcons.pencil,
-              color: const Color.fromARGB(255, 74, 74, 232),
-              size: context.getWidth(multiply: 0.05),
-            ),
-          ),
+          isAuthraize
+              ? IconButton(
+                  onPressed: editClick,
+                  icon: FaIcon(
+                    FontAwesomeIcons.pencil,
+                    color: const Color.fromARGB(255, 74, 74, 232),
+                    size: context.getWidth(multiply: 0.05),
+                  ),
+                )
+              : const Text(''),
           IconButton(
               onPressed: qrCodeButton,
               icon: const Icon(Iconsax.scan_barcode_outline)),
