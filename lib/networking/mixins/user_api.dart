@@ -58,7 +58,8 @@ mixin UserApi on ConstantsApi {
   }
 
   editProjectInfo(
-    String projectId, {
+     {
+      required String projectId,
     required String projectName,
     required String bootcampName,
     required String type,

@@ -71,7 +71,6 @@ class ProfileScreen extends StatelessWidget {
 
               return RefreshIndicator(
                 onRefresh: () async {
-                  // إعادة جلب البيانات عند السحب للأسفل
                   context.read<ProfileBloc>().add(FetchProfileEvent());
                 },
                 child: SingleChildScrollView(
