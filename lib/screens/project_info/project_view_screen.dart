@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/networking/networking_api.dart';
+import 'package:tuwaiq_project/widget/column/info_coulmn.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:tuwaiq_project/data_layer/auth_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
@@ -116,92 +117,7 @@ class ProjectViewScreen extends StatelessWidget {
                 SizedBox(
                   height: context.getHeight(multiply: 0.02),
                 ),
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        CustomeCampStatusProject(
-                          titleTextContainer:
-                              language.isArabic ? 'المعسكر' : 'BootCamp',
-                          continaerColor:
-                              const Color(0xffBB88FC).withOpacity(0.30),
-                          borderColor:
-                              const Color(0xffBB88FC).withOpacity(0.30),
-                          textContent: projectsModel.projectName ?? "no name",
-                          heightContainer: context.getHeight(multiply: 0.043),
-                          widthContainer: context.getWidth(multiply: 0.25),
-                          sizeText: 16,
-                        ),
-                        projectsModel.allowEdit == true
-                            ? CustomeCampStatusProject(
-                                titleTextContainer: language.isArabic
-                                    ? 'حالة المشروع'
-                                    : 'Project Status',
-                                continaerColor:
-                                    const Color(0xff00FF19).withOpacity(0.30),
-                                borderColor:
-                                    const Color(0xff00FF19).withOpacity(0.30),
-                                textContent:
-                                    language.isArabic ? 'ساري' : 'OnGoing',
-                                heightContainer:
-                                    context.getHeight(multiply: 0.043),
-                                widthContainer:
-                                    context.getWidth(multiply: 0.25),
-                                sizeText: 16,
-                              )
-                            : CustomeCampStatusProject(
-                                continaerColor:
-                                    const Color(0xffFF0000).withOpacity(0.30),
-                                borderColor:
-                                    const Color(0xffFF0000).withOpacity(0.30),
-                                textContent: 'close',
-                                heightContainer:
-                                    context.getHeight(multiply: 0.043),
-                                widthContainer:
-                                    context.getWidth(multiply: 0.25),
-                                sizeText: 16,
-                              ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: context.getHeight(multiply: 0.035),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        CustomeCampStatusProject(
-                          titleTextContainer:
-                              language.isArabic ? 'المعسكر' : 'BootCamp',
-                          continaerColor:
-                              const Color(0xffBB88FC).withOpacity(0.30),
-                          borderColor:
-                              const Color(0xffBB88FC).withOpacity(0.30),
-                          textContent: projectsModel.bootcampName ?? "No name",
-                          heightContainer: context.getHeight(multiply: 0.043),
-                          widthContainer: context.getWidth(multiply: 0.25),
-                          sizeText: 16,
-                        ),
-                        CustomeCampStatusProject(
-                          titleTextContainer: language.isArabic
-                              ? 'نوع المشروع'
-                              : 'Project type',
-                          continaerColor:
-                              const Color(0xff00FF19).withOpacity(0.30),
-                          borderColor:
-                              const Color(0xff00FF19).withOpacity(0.30),
-                          textContent: projectsModel.type ?? 'no type',
-                          heightContainer: context.getHeight(multiply: 0.043),
-                          widthContainer: context.getWidth(multiply: 0.25),
-                          sizeText: 16,
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: context.getHeight(multiply: 0.035),
-                    ),
-                  ],
-                ),
+                InfoCoulmn(language: language, projectsModel: projectsModel),
                 CostomeDetailsProject(
                   titleText:
                       language.isArabic ? 'وصف المشروع' : 'Project details',
