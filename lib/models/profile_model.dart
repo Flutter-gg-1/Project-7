@@ -136,7 +136,7 @@ class ProjectsModel {
     presentationDate = json["presentation_date"];
     projectDescription = json["project_description"];
     logoUrl = json["logo_url"];
-    presentationUrl = json["presentation_date"];
+    presentationUrl = json["presentation_url"];
     userId = json['user_id'];
     adminId = json['admin_id'];
     timeEndEdit = json['time_end_edit'];
