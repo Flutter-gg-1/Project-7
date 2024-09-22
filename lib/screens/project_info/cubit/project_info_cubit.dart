@@ -7,8 +7,6 @@ class ProjectInfoCubit extends Cubit<ProjectInfoState> {
   ProjectInfoCubit() : super(ProjectInfoInitial());
 
   onImgChange({required int imgIndex}) {
-
-
     emit(ImgChangeState(imgIndex: imgIndex));
   }
 }

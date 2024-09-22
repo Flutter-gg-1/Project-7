@@ -1,10 +1,12 @@
-import 'dart:developer';
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
+import 'package:tuwaiq_project/models/projects_model.dart';
 import 'package:tuwaiq_project/networking/networking_api.dart';
 import 'package:tuwaiq_project/widget/column/info_coulmn.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -194,7 +196,6 @@ class ProjectViewScreen extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       final url = projectsModel.presentationUrl;
-                      log(url!);
 
                       openUrl(context: context, url: url);
                     },
