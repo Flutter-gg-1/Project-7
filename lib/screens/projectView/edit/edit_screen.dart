@@ -64,6 +64,17 @@ class EditScreen extends StatelessWidget {
           child: Scaffold(
             backgroundColor: Colors.white,
             resizeToAvoidBottomInset: true,
+            floatingActionButton: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xff4D2EB4)),
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+                child: Text(
+                  languageLayer.isArabic ? 'تم' : 'Done',
+                  style: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                )),
             body: SingleChildScrollView(
               child: Column(
                 children: [

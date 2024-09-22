@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
+import 'package:tuwaiq_project/networking/networking_api.dart';
+import 'package:tuwaiq_project/widget/column/info_coulmn.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:tuwaiq_project/data_layer/auth_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
@@ -21,9 +23,9 @@ import 'package:tuwaiq_project/widget/project_view_widget/custome_status_project
 import 'package:tuwaiq_project/widget/project_view_widget/custome_top_action.dart';
 
 class ProjectViewScreen extends StatelessWidget {
-  const ProjectViewScreen({super.key, required this.projectsModel});
+  ProjectViewScreen({super.key, required this.projectsModel});
 
-  final ProjectsModel projectsModel;
+  ProjectsModel projectsModel;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,26 @@ class ProjectViewScreen extends StatelessWidget {
                             projectId: projectsModel.projectId!,
                             isAuthraize: projectsModel.adminId == id,
                           ),
-                        ));
+                        )).then(
+                      (value) async {
+                        if (value == true) {
+                          var list = await NetworkingApi().profileGet();
+                          for (var element in list.projects) {
+                            if (element.projectId == projectsModel.projectId) {
+                              projectsModel = element;
+                              Navigator.pop(context);
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProjectViewScreen(
+                                        projectsModel: projectsModel),
+                                  ));
+                              break;
+                            }
+                          }
+                        }
+                      },
+                    );
                   },
                   qrCodeButton: () {
                     showDialog(
@@ -96,48 +117,7 @@ class ProjectViewScreen extends StatelessWidget {
                 SizedBox(
                   height: context.getHeight(multiply: 0.02),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CustomeCampStatusProject(
-                      titleTextContainer:
-                          language.isArabic ? 'المعسكر' : 'BootCamp',
-                      continaerColor: const Color(0xffBB88FC).withOpacity(0.30),
-                      borderColor: const Color(0xffBB88FC).withOpacity(0.30),
-                      textContent: projectsModel.projectName ?? "no name",
-                      heightContainer: context.getHeight(multiply: 0.043),
-                      widthContainer: context.getWidth(multiply: 0.25),
-                      sizeText: 16,
-                    ),
-                    projectsModel.allowEdit == true
-                        ? CustomeCampStatusProject(
-                            titleTextContainer: language.isArabic
-                                ? 'حالة المشروع'
-                                : 'Project Status',
-                            continaerColor:
-                                const Color(0xff00FF19).withOpacity(0.30),
-                            borderColor:
-                                const Color(0xff00FF19).withOpacity(0.30),
-                            textContent: language.isArabic ? 'ساري' : 'OnGoing',
-                            heightContainer: context.getHeight(multiply: 0.043),
-                            widthContainer: context.getWidth(multiply: 0.25),
-                            sizeText: 16,
-                          )
-                        : CustomeCampStatusProject(
-                            continaerColor:
-                                const Color(0xffFF0000).withOpacity(0.30),
-                            borderColor:
-                                const Color(0xffFF0000).withOpacity(0.30),
-                            textContent: 'close',
-                            heightContainer: context.getHeight(multiply: 0.043),
-                            widthContainer: context.getWidth(multiply: 0.25),
-                            sizeText: 16,
-                          ),
-                  ],
-                ),
-                SizedBox(
-                  height: context.getHeight(multiply: 0.035),
-                ),
+                InfoCoulmn(language: language, projectsModel: projectsModel),
                 CostomeDetailsProject(
                   titleText:
                       language.isArabic ? 'وصف المشروع' : 'Project details',
