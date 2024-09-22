@@ -24,58 +24,28 @@ class ProfileScreen extends StatelessWidget {
       return BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
           if (state is ShowProfileState) {
-// <<<<<<< HEAD
-            // return Column(
-            //   children: [
-            //     SizedBox(
-            //       height: context.getHeight(multiply: 0.035),
-            //     ),
-            //     Align(
-            //       alignment: Alignment.centerRight,
-            //       child: Column(
-            //         children: [
-            //           IconButton(
-            //             onPressed: () {
-            //               context.read<ProfileCubit>().translate();
-            //             },
-            //             icon: const Icon(Icons.translate_sharp),
-            //             color: language.isArabic ? Colors.blue : Colors.grey,
-            //           ),
-            //           Text(
-            //             language.isArabic ? 'عربي' : 'English',
-            //             textDirection: TextDirection.rtl,
-            //           )
-            //         ],
-            //       ),
-            //     ),
-            //     InkWell(
-            //       onTap: () {
-            //         Navigator.of(context).push(
-            //           MaterialPageRoute(
-            //             builder: (context) {
-            //               return ProfileInformationScreen(
-            //                 profileModel: state.profileModel,
-            //               );
-            //             },
-            //           ),
-            //         );
-            //       },
-            //       child: Container(
-            //           padding: EdgeInsets.symmetric(
-            //               horizontal: context.getHeight(multiply: 0.03),
-            //               vertical: context.getWidth(multiply: 0.03)),
-            //           child: ListTile(
-            //             title: Text(
-            //               '${state.profileModel.firstName} ${state.profileModel.lastName}',
-            //               style: const TextStyle(
-            //                 fontSize: 16,
-            //                 fontWeight: FontWeight.bold,
-            //                 color: Colors.black,
-// =======
             return SingleChildScrollView(
                 child: Column(
               children: [
                 context.addSpacer(multiply: 0.008),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Column(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          context.read<ProfileCubit>().translate();
+                        },
+                        icon: const Icon(Icons.translate_sharp),
+                        color: language.isArabic ? Colors.blue : Colors.grey,
+                      ),
+                      Text(
+                        language.isArabic ? 'عربي' : 'English',
+                        textDirection: TextDirection.rtl,
+                      )
+                    ],
+                  ),
+                ),
                 InkWell(
                     onTap: () {
                       Navigator.of(context).push(
@@ -92,21 +62,14 @@ class ProfileScreen extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                           horizontal: context.getHeight(multiply: 0.03),
                           vertical: context.getWidth(multiply: 0.03)),
-                      // subtitle: Text(
-                      //   '${state.profileModel.role} /n ${state.profileModel.id}',
-                      //   style: const TextStyle(
-                      //     fontSize: 14,
-                      //     color: Color(0xff6E7386),
-                      //   ),
-                      // ),
-                      // trailing: const Icon(Icons.arrow_forward_ios,
-                      //     color: Colors.black),
-                      // leading: const CircleAvatar(
-                      //   radius: 30,
-                      //   backgroundImage:
-                      //       AssetImage('assets/image/Search-amico(1).png'),
-                      // ),
                       child: ListTile(
+                        trailing: const Icon(Icons.arrow_forward_ios,
+                            color: Colors.black),
+                        leading: const CircleAvatar(
+                          radius: 30,
+                          backgroundImage:
+                              AssetImage('assets/image/Search-amico(1).png'),
+                        ),
                         title: Text(
                           '${state.profileModel.firstName} ${state.profileModel.lastName}',
                           style: const TextStyle(
@@ -137,8 +100,6 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       rating: '${state.profileModel.projects.length}',
                       textTitle: language.isArabic ? 'المشاريع' : 'Projects',
-                      //language.isArabic ? 'عربي' : 'English',
-                      //  textDirection: TextDirection.rtl,
                     ),
                     CustomeStatusProfile(
                       textTitle: language.isArabic ? 'التقييم' : 'Rating',
@@ -226,7 +187,7 @@ class ProfileScreen extends StatelessWidget {
                         iconListTile: Icon(
                           Icons.notifications_none_outlined,
                           size: context.getHeight(multiply: 0.035),
-                          color: const Color(0xff0601B4).withOpacity(0.70),
+                          color: const Color(0x889B37FF).withOpacity(0.70),
                         ),
                         colorText: Colors.black,
                         text: language.isArabic
@@ -242,7 +203,7 @@ class ProfileScreen extends StatelessWidget {
                         iconListTile: Icon(
                           Icons.chrome_reader_mode,
                           size: context.getHeight(multiply: 0.035),
-                          color: const Color(0xff0601B4).withOpacity(0.70),
+                          color: const Color(0x889B37FF).withOpacity(0.70),
                         ),
                         colorText: Colors.black,
                         text: language.isArabic ? 'عن التطبيق' : 'About App',

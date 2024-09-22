@@ -1,10 +1,11 @@
 import 'dart:developer';
-
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:tuwaiq_project/data_layer/language_layer.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:tuwaiq_project/data_layer/auth_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/helper/method/open_url.dart';
@@ -18,7 +19,6 @@ import 'package:tuwaiq_project/widget/project_view_widget/custome_carousel_slide
 import 'package:tuwaiq_project/widget/project_view_widget/custome_member_of_project.dart';
 import 'package:tuwaiq_project/widget/project_view_widget/custome_status_project.dart';
 import 'package:tuwaiq_project/widget/project_view_widget/custome_top_action.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ProjectViewScreen extends StatelessWidget {
   const ProjectViewScreen({super.key, required this.projectsModel});
@@ -30,6 +30,7 @@ class ProjectViewScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => ProjectInfoCubit(),
       child: Builder(builder: (context) {
+        final language = languageLocaitor.get<LanguageLayer>();
         final cubit = context.read<ProjectInfoCubit>();
         final id = authLocator.get<AuthLayerData>().auth!.id;
         return Scaffold(
@@ -68,7 +69,9 @@ class ProjectViewScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12)),
                           child: Column(
                             children: [
-                              const Text('Rate me'),
+                              Text(language.isArabic
+                                  ? 'تقيم المشروع'
+                                  : 'Rate me'),
                               QrImageView(
                                 backgroundColor: Colors.white,
                                 data: projectsModel.projectId!,
@@ -97,6 +100,8 @@ class ProjectViewScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CustomeCampStatusProject(
+                      titleTextContainer:
+                          language.isArabic ? 'المعسكر' : 'BootCamp',
                       continaerColor: const Color(0xffBB88FC).withOpacity(0.30),
                       borderColor: const Color(0xffBB88FC).withOpacity(0.30),
                       textContent: projectsModel.projectName ?? "no name",
@@ -106,11 +111,14 @@ class ProjectViewScreen extends StatelessWidget {
                     ),
                     projectsModel.allowEdit == true
                         ? CustomeCampStatusProject(
+                            titleTextContainer: language.isArabic
+                                ? 'حالة المشروع'
+                                : 'Project Status',
                             continaerColor:
                                 const Color(0xff00FF19).withOpacity(0.30),
                             borderColor:
                                 const Color(0xff00FF19).withOpacity(0.30),
-                            textContent: 'OnGoing',
+                            textContent: language.isArabic ? 'ساري' : 'OnGoing',
                             heightContainer: context.getHeight(multiply: 0.043),
                             widthContainer: context.getWidth(multiply: 0.25),
                             sizeText: 16,
@@ -131,7 +139,9 @@ class ProjectViewScreen extends StatelessWidget {
                   height: context.getHeight(multiply: 0.035),
                 ),
                 CostomeDetailsProject(
-                  maxHeight: context.getHeight(multiply: 0.1),
+                  titleText:
+                      language.isArabic ? 'وصف المشروع' : 'Project details',
+                  maxHeight: context.getHeight(multiply: 0.2),
                   readOnly: true,
                   heightContainer: context.getHeight(multiply: 0.3),
                   widthContainer: context.getWidth(multiply: 0.8),
@@ -144,7 +154,8 @@ class ProjectViewScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CustomeCampStatusProject(
-                      titleTextContainer: 'Start Date',
+                      titleTextContainer:
+                          language.isArabic ? 'بداية المشروع' : 'Start Date',
                       continaerColor: const Color(0xff00FF19).withOpacity(0.30),
                       borderColor: const Color(0xff00FF19).withOpacity(0.30),
                       textContent: projectsModel.startDate ?? "not giveing",
@@ -153,7 +164,8 @@ class ProjectViewScreen extends StatelessWidget {
                       sizeText: 16,
                     ),
                     CustomeCampStatusProject(
-                      titleTextContainer: 'End Date',
+                      titleTextContainer:
+                          language.isArabic ? 'نهاية المشروع' : 'End Date',
                       continaerColor: const Color(0xffFF0000).withOpacity(0.30),
                       borderColor: const Color(0xffFF0000).withOpacity(0.30),
                       textContent: projectsModel.endDate ?? "not giveing",
@@ -166,11 +178,12 @@ class ProjectViewScreen extends StatelessWidget {
                 SizedBox(
                   height: context.getHeight(multiply: 0.035),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.center,
                   child: Text(
-                    'Project Images',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                    language.isArabic ? 'صور المشروع' : 'Project Images',
+                    style: const TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.w500),
                   ),
                 ),
                 BlocBuilder<ProjectInfoCubit, ProjectInfoState>(
@@ -225,10 +238,13 @@ class ProjectViewScreen extends StatelessWidget {
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          textDirection: language.isArabic
+                              ? TextDirection.rtl
+                              : TextDirection.ltr,
                           children: [
-                            const Text(
-                              'Presentation',
-                              style: TextStyle(
+                            Text(
+                              language.isArabic ? 'العرض' : 'Presentation',
+                              style: const TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.w500),
                             ),
                             CustomeCampStatusProject(
@@ -244,10 +260,15 @@ class ProjectViewScreen extends StatelessWidget {
                               widthContainer: context.getWidth(multiply: 0.25),
                               sizeText: 16,
                             ),
-                            Icon(
-                              Icons.chevron_right,
-                              size: context.getWidth(multiply: 0.06),
-                            )
+                            language.isArabic
+                                ? Icon(
+                                    Icons.chevron_left,
+                                    size: context.getWidth(multiply: 0.06),
+                                  )
+                                : Icon(
+                                    Icons.chevron_right,
+                                    size: context.getWidth(multiply: 0.06),
+                                  )
                           ],
                         )),
                   ),
@@ -255,11 +276,12 @@ class ProjectViewScreen extends StatelessWidget {
                 SizedBox(
                   height: context.getHeight(multiply: 0.035),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.center,
                   child: Text(
-                    'Project Links',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                    language.isArabic ? 'روابط المشروع' : 'Project Links',
+                    style: const TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.w500),
                   ),
                 ),
                 Wrap(
@@ -299,11 +321,12 @@ class ProjectViewScreen extends StatelessWidget {
                 SizedBox(
                   height: context.getHeight(multiply: 0.035),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.center,
                   child: Text(
-                    'Project Team',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                    language.isArabic ? 'اعضاء المشروع' : 'Project Team',
+                    style: const TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.w500),
                   ),
                 ),
                 SizedBox(

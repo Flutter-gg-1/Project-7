@@ -48,16 +48,9 @@ class MyApp extends StatelessWidget {
           create: (context) => CvHandleCubit(),
         ),
       ],
-// <<<<<<< HEAD
-//       child: const MaterialApp(
-//         //debugShowCheckedModeBanner: false,
-//         home: HomeScreen(),
-//       ),
-// =======
       child: MaterialApp(
           //debugShowCheckedModeBanner: false,
           home: HomeScreen()),
-// >>>>>>> 6d42ac97784047bf0d7a6a415abc15a887f50569
     );
   }
 }

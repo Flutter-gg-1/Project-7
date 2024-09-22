@@ -1,9 +1,5 @@
-// <<<<<<< HEAD
-// =======
 import 'dart:developer';
-
 import 'package:barcode_scan2/barcode_scan2.dart';
-// >>>>>>> 6d42ac97784047bf0d7a6a415abc15a887f50569
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -93,27 +89,6 @@ class HomeScreen extends StatelessWidget {
               );
             },
           ),
-// <<<<<<< HEAD
-//           body: SingleChildScrollView(
-//             child: Column(
-//               children: [
-//                 CustomPaint(
-//                   size: Size(context.getWidth(multiply: 1),
-//                       context.getHeight(multiply: 0.1)),
-//                   painter: AuthShape(),
-//                 ),
-//                 BlocBuilder<BottomnavBloc, BottomnavState>(
-//                   builder: (context, state) {
-//                     int selectedIndex = 0;
-//                     if (state is IndexChangeState) {
-//                       selectedIndex = state.index;
-//                     }
-//                     return tabs[selectedIndex];
-//                   },
-//                 ),
-//               ],
-//             ),
-// =======
           body: Column(
             children: [
               CustomPaint(
@@ -173,7 +148,6 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
             ],
-// >>>>>>> 6d42ac97784047bf0d7a6a415abc15a887f50569
           ),
         );
       }),

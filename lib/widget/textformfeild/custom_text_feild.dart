@@ -1,53 +1,6 @@
-// <<<<<<< HEAD:lib/screens/search_screen.dart
-// import 'package:flutter/material.dart';
-// 
-// import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
-// import 'package:tuwaiq_project/services/setup.dart';
-
-// class SearchScreen extends StatelessWidget {
-//   const SearchScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final language = languageLocaitor.get<LanguageLayer>();
-//     return Column(
-//       children: [
-//         SizedBox(
-//           height: context.getHeight(multiply: 0.045),
-//         ),
-//         SizedBox(
-//             width: context.getWidth(multiply: 0.9),
-//             child: CustomTextFeild(
-//               hintText: 'Search for Project',
-//               isArabic: language.isArabic,
-//             )),
-//         Image.asset(
-//           'assets/image/Search-amico(1).png',
-//           height: context.getHeight(multiply: 0.4),
-//         ),
-//         Center(
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               Icon(Icons.search_rounded),
-//               Text(
-//                 language.isArabic
-//                     ? '...بحث عن المشاريع'
-//                     : 'Search For Project...',
-//                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-//               ),
-//             ],
-//           ),
-//         )
-//       ],
-//     );
-//   }
-// }
-// =======
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-// >>>>>>> 6d42ac97784047bf0d7a6a415abc15a887f50569:lib/widget/textformfeild/custom_text_feild.dart
 
 class CustomTextFeild extends StatelessWidget {
   final bool isArabic;
@@ -60,20 +13,6 @@ class CustomTextFeild extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final String? initialValue;
   final Function(String)? onChanged;
-// <<<<<<< HEAD:lib/screens/search_screen.dart
-//   const CustomTextFeild({
-//     super.key,
-//     required this.hintText,
-//     this.maxLines,
-//     this.controller,
-//     this.validator,
-//     this.keyboardType,
-//     this.padding,
-//     this.initialValue,
-//     this.onChanged,
-//     required this.isArabic,
-//   });
-// =======
   final Function(String)? onFieldSubmitted;
   const CustomTextFeild(
       {super.key,
@@ -87,7 +26,6 @@ class CustomTextFeild extends StatelessWidget {
       this.onChanged,
       this.onFieldSubmitted,
       required this.isArabic});
-// >>>>>>> 6d42ac97784047bf0d7a6a415abc15a887f50569:lib/widget/textformfeild/custom_text_feild.dart
 
   @override
   Widget build(BuildContext context) {

@@ -6,6 +6,7 @@ import 'package:tuwaiq_project/screens/serch_screen/cubit/search_screen_cubit.da
 import 'package:tuwaiq_project/widget/container/project_container.dart';
 import 'package:tuwaiq_project/widget/search_screen/info_serch_coulm_widget.dart';
 import 'package:tuwaiq_project/widget/textformfeild/custom_text_feild.dart';
+import 'package:tuwaiq_project/data_layer/language_layer.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -16,7 +17,6 @@ class SearchScreen extends StatelessWidget {
       create: (context) => SearchScreenCubit(),
       child: Builder(builder: (context) {
         final cubit = context.read<SearchScreenCubit>();
-
         return SingleChildScrollView(
           child: Column(
             children: [
@@ -26,11 +26,14 @@ class SearchScreen extends StatelessWidget {
               SizedBox(
                   width: context.getWidth(multiply: 0.9),
                   child: CustomTextFeild(
+                      isArabic: cubit.language.isArabic,
                       onFieldSubmitted: (p0) {
                         cubit.serchProject(searchTex: p0);
                       },
                       maxLines: 1,
-                      hintText: 'Search for Project')),
+                      hintText: cubit.language.isArabic
+                          ? 'البحث عن المشروع'
+                          : 'Search for Project')),
               BlocBuilder<SearchScreenCubit, SearchScreenState>(
                 builder: (context, state) {
                   if (state is SearchScreenLodingState) {
@@ -67,13 +70,10 @@ class SearchScreen extends StatelessWidget {
                     );
                   }
 
-                  if(state is SearchScreenErorrState){
-
-                    return  InfoSerchCoulmWidget(
+                  if (state is SearchScreenErorrState) {
+                    return InfoSerchCoulmWidget(
                       tex: state.msg,
                     );
-
-
                   }
 
                   if (state is SearchScreenNotFoundState) {
@@ -82,8 +82,10 @@ class SearchScreen extends StatelessWidget {
                     );
                   }
 
-                  return const InfoSerchCoulmWidget(
-                    tex: "Search For Project...",
+                  return InfoSerchCoulmWidget(
+                    tex: cubit.language.isArabic
+                        ? "...البحث عن المشاريع"
+                        : "Search For Project...",
                   );
                 },
               ),
