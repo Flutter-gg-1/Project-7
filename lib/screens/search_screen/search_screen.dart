@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_judge/components/tab_bar/Opened_tab_bar.dart';
 import 'package:project_judge/components/text_field/custom_text_form_field.dart';
 import 'package:project_judge/data_layer/data_layer.dart';
 import 'package:project_judge/screens/search_screen/cubit/search_cubit.dart';
@@ -51,10 +52,8 @@ class _SearchScreenState extends State<SearchScreen> {
                       itemCount: state.filteredProjects.length,
                       itemBuilder: (context, index) {
                         final project = state.filteredProjects[index];
-                        return ListTile(
-                          title: Text(project.projectName ?? "No Title"),
-                          subtitle: Text(
-                              project.projectDescription ?? "No Description"),
+                        return MyProjectCardOpened(
+                          project: project,
                         );
                       },
                     );
