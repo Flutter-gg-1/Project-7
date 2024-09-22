@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:project_judge/components/tab_bar/Closed_tab_bar.dart';
 import 'package:project_judge/components/tab_bar/Opened_tab_bar.dart';
 import 'package:project_judge/data_layer/data_layer.dart';
-import 'package:project_judge/screens/add_project_screen/add_project_screen.dart';
+import 'package:project_judge/models/user_model.dart';
+import 'package:project_judge/screens/myproject/bloc/bloc_project_bloc.dart';
 import 'package:project_judge/setup/init_setup.dart';
 
 class MyProjectsScreen extends StatefulWidget {
@@ -23,73 +25,72 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
   }
 
   @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final currentProject = getIt.get<DataLayer>().projectInfo;
-    return Scaffold(
-      backgroundColor: const Color(0xFF4E2EB5),
-      appBar: AppBar(
+    return Builder(builder: (context) {
+      final projectBloc = GetIt.I<ProjectBloc>();
+      UserModel user = getIt.get<DataLayer>().userInfo!; // Get user info
+      late List<Projects> openProjects =
+          user.projects!.where((project) => project.allowEdit).toList();
+      late List<Projects> closedProjects =
+          user.projects!.where((project) => !project.allowEdit).toList();
+    
+      return Scaffold(
         backgroundColor: const Color(0xFF4E2EB5),
-        elevation: 0,
-        centerTitle: true,
-        title: const Text(
-          'My Projects',
-          style: TextStyle(color: Colors.white),
+        appBar: AppBar(
+          backgroundColor: const Color(0xFF4E2EB5),
+          elevation: 0,
+          centerTitle: true,
+          title: const Text(
+            'My Projects',
+            style: TextStyle(color: Colors.white),
+          ),
+          bottom: TabBar(
+            controller: tabController,
+            indicatorWeight: 8.0,
+            indicatorSize: TabBarIndicatorSize.tab,
+            indicatorColor: Colors.cyan,
+            labelColor: Colors.cyan,
+            labelStyle: const TextStyle(fontSize: 20, color: Colors.cyan),
+            unselectedLabelColor: Colors.grey,
+            tabs: const [
+              Tab(text: 'Opened'),
+              Tab(text: 'Closed'),
+            ],
+          ),
         ),
-        bottom: TabBar(
-          indicatorWeight: 8.0,
-          indicatorSize: TabBarIndicatorSize.tab,
+        body: TabBarView(
           controller: tabController,
-          indicatorColor: Colors.cyan,
-          labelColor: Colors.cyan,
-          labelStyle: const TextStyle(
-            fontSize: 20,
-            color: Colors.cyan,
-          ),
-          unselectedLabelStyle: const TextStyle(
-            fontSize: 20,
-          ),
-          unselectedLabelColor: Colors.grey,
-          tabs: const [
-            Tab(text: 'Open'),
-            Tab(text: 'Closed'),
+          children: [
+            buildProjectList(openProjects, true),
+            buildProjectList(closedProjects, false),
           ],
         ),
-      ),
-      body: TabBarView(
-        controller: tabController,
-        children: [
-          ListView.builder(
-              itemCount: 6,
-              itemBuilder: (context, index) {
-                return  Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: MyProjectCardOpened(project: currentProject![0],),
-                );
-              }),
-          ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return  Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: MyProjectCardClosed(project: currentProject![0],),
-                );
-              }),
-        ],
-      ),
-      floatingActionButton: getIt.get<DataLayer>().userInfo?.role != "user"
-          ? FloatingActionButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AddProjectScreen()));
-              },
-              backgroundColor: Colors.cyan,
-              shape: const CircleBorder(),
-              heroTag: 'unique_tag',
-              child: const Icon(Icons.add),
-            )
-          : null,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Colors.cyan,
+          child: const Icon(Icons.add),
+        ),
+      );
+    });
+  }
+
+  Widget buildProjectList(List<Projects> projects, bool isOpen) {
+    return ListView.builder(
+      itemCount: projects.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: isOpen
+              ? MyProjectCardOpened(project: projects[index])
+              : MyProjectCardClosed(project: projects[index]),
+        );
+      },
     );
   }
 }

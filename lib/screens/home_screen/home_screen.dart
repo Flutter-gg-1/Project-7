@@ -248,7 +248,7 @@ class CustomProjectCard extends StatelessWidget {
                   color: const Color(0xff4E2EB5),
                   borderRadius: BorderRadius.circular(20)),
               child: Image.asset(
-                img ?? "assets/images/defualt_img.png",
+                img ?? "assets/images/default_img.png",
                 // fit: BoxFit.cover, // PUT A COND HERE TO VIEW DEAFULT IF NO IMAGE IS STORED !!!!!!!!
               ),
             ),

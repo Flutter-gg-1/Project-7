@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:project_judge/components/buttons/bottomNavBar.dart';
 import 'package:project_judge/screens/browse_page/browsePage.dart';
 import 'package:project_judge/screens/home_screen/home_screen.dart';
 import 'package:project_judge/screens/myproject_page/myProjectsPage.dart';
 import 'package:project_judge/screens/profile_screen/profile_screen.dart';
+import 'package:project_judge/screens/rating/ratingPage.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({super.key});
@@ -14,11 +16,41 @@ class NavigationPage extends StatefulWidget {
 
 class NavigationPageState extends State<NavigationPage> {
   int selectedIndex = 0;
+  String qrCodeResult = "Not Yet Scanned";
+  String projectId = "12345";
+
+  Future<void> scanQRCode() async {
+    String scannedCode;
+    try {
+      scannedCode = await FlutterBarcodeScanner.scanBarcode(
+        '#ff6666', // Color of the scan line
+        'Cancel', // Text for the cancel button
+        false, // Show flash icon
+        ScanMode.QR, // Scan mode, can be QR or Barcode
+      );
+    } catch (e) {
+      scannedCode = "Failed to scan QR code.";
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      qrCodeResult = scannedCode != '-1' ? scannedCode : 'Scan cancelled';
+    });
+    if (scannedCode != '-1') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => RatingPage(projectID: qrCodeResult),
+        ),
+      );
+    }
+  }
 
   final List<Widget> pages = [
     const HomeScreen(),
     const BrowsePage(),
-    const Center(child:  Text("Middle Page")),
+    const Center(child: Text("Middle Page")),
     const MyProjectsScreen(),
     ProfileScreen()
   ];
@@ -30,9 +62,7 @@ class NavigationPageState extends State<NavigationPage> {
   }
 
   void onMiddleButtonTapped() {
-    setState(() {
-      selectedIndex = 0;
-    });
+    scanQRCode();
   }
 
   @override

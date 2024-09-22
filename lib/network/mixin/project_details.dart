@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:project_judge/models/user_model.dart';
 import 'package:project_judge/network/constant_network.dart';
 
-import '../../models/project_info_model.dart';
 
 mixin ProjectDetails on ConstantNetwork {
-  Future<List<ProjectsInfo>> getProjectDetails() async {
+  Future<List<Projects>> getProjectDetails() async {
     try {
       final response =
           await dio.get('$baseurl$getFirstHundredProjectsEndPoint');
@@ -12,8 +12,8 @@ mixin ProjectDetails on ConstantNetwork {
       print(response.data);
       List<dynamic> projectsData = response.data['data']['projects'];
       print(projectsData);
-      List<ProjectsInfo> firstHundredProjects =
-          projectsData.map((e) => ProjectsInfo.fromJson(e)).toList();
+      List<Projects> firstHundredProjects =
+          projectsData.map((e) => Projects.fromJson(e)).toList();
 
       print(firstHundredProjects);
 
@@ -21,7 +21,7 @@ mixin ProjectDetails on ConstantNetwork {
     } on DioException catch (e) {
       throw FormatException(e.response?.data['data']);
     } catch (e) {
-      throw const FormatException("unknown error");
+      throw  FormatException(e.toString());
     }
   }
 }

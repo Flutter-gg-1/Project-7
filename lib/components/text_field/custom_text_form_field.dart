@@ -18,7 +18,7 @@ class CustomTextFormField extends StatelessWidget {
   final String hintText;
   final IconData? icon;
   final String? Function(String?)? validator;
-  final String? Function(String?)? onChange;
+  final void Function(String)? onChange;
   final FloatingLabelBehavior? floatingLabelBehavior;
   final int maximumLines;
   final Color? fillColor;
@@ -52,21 +52,21 @@ class CustomTextFormField extends StatelessWidget {
               border: InputBorder.none,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: Colors.transparent),
+                borderSide: const BorderSide(color: Colors.transparent),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: Colors.transparent),
+                borderSide: const BorderSide(color: Colors.transparent),
               ),
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: Color(0xffFF8182)),
+                borderSide: const BorderSide(color: Color(0xffFF8182)),
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: Colors.transparent),
+                borderSide: const BorderSide(color: Colors.transparent),
               ),
-              errorStyle: TextStyle(color: Color(0xffFF8182))),
+              errorStyle: const TextStyle(color: Color(0xffFF8182))),
           validator: validator,
         ),
       ],

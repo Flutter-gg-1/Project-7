@@ -1,12 +1,12 @@
 
-import 'package:project_judge/models/project_info_model.dart';
+import 'package:project_judge/models/user_model.dart';
 
 abstract class ProjectState {}
 
 class ProjectLoading extends ProjectState {}
 
 class ProjectLoaded extends ProjectState {
-  final List<ProjectsInfo> projects;
+  final List<Projects> projects;
 
   ProjectLoaded(this.projects);
 }

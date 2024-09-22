@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:project_judge/models/project_info_model.dart';
+import 'package:project_judge/models/user_model.dart';
 
 class MyProjectCardClosed extends StatelessWidget {
 
   const MyProjectCardClosed({super.key,required this.project});
-   final ProjectsInfo project;
+   final Projects project;
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,8 @@ import 'package:project_judge/screens/rating/bloc/bloc_rating_event.dart';
 import 'package:project_judge/screens/rating/bloc/bloc_rating_state.dart';
 
 class RatingPage extends StatelessWidget {
-  const RatingPage({super.key});
+  const RatingPage({super.key, required this.projectID});
+  final String projectID;
 
   @override
   Widget build(BuildContext context) {

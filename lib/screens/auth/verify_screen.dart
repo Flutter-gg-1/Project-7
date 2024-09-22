@@ -104,7 +104,7 @@ class VerifyScreen extends StatelessWidget {
                                     children: [
                                       Container(
                                         width: 49,
-                                        height: 4611,
+                                        height: 46,
                                         decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:

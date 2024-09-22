@@ -3,14 +3,13 @@ import 'package:project_judge/models/auth_model.dart';
 import 'package:project_judge/models/user_model.dart';
 import 'package:project_judge/network/api_netowrok.dart';
 
-import '../models/project_info_model.dart';
 
 class DataLayer {
   ApiNetowrok api = ApiNetowrok();
 
   AuthModel? authUser;
   UserModel? userInfo;
-  List<ProjectsInfo>? projectInfo;
+  List<Projects>? projectInfo;
 
   final box = GetStorage();
 

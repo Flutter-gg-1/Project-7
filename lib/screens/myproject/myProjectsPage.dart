@@ -3,19 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:project_judge/components/tab_bar/Closed_tab_bar.dart';
 import 'package:project_judge/components/tab_bar/Opened_tab_bar.dart';
-import 'package:project_judge/models/project_info_model.dart';
+import 'package:project_judge/models/user_model.dart';
 import 'package:project_judge/screens/myproject/bloc/bloc_project_bloc.dart';
 import 'package:project_judge/screens/myproject/bloc/bloc_project_event.dart';
 import 'package:project_judge/screens/myproject/bloc/bloc_project_state.dart';
 
-class MyProjectsScreen extends StatefulWidget {
-  const MyProjectsScreen({super.key});
+class MyProjectPagee extends StatefulWidget {
+  const MyProjectPagee({super.key});
 
   @override
-  MyProjectsScreenState createState() => MyProjectsScreenState();
+  MyProjectPageeState createState() => MyProjectPageeState();
 }
 
-class MyProjectsScreenState extends State<MyProjectsScreen>
+class MyProjectPageeState extends State<MyProjectPagee>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
 
@@ -93,7 +93,7 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
     );
   }
 
-  Widget buildProjectList(List<ProjectsInfo> projects, bool isOpen) {
+  Widget buildProjectList(List<Projects> projects, bool isOpen) {
     return ListView.builder(
       itemCount: projects.length,
       itemBuilder: (context, index) {

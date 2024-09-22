@@ -2,20 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:project_judge/models/user_model.dart';
 import 'package:project_judge/screens/edit_project/edit_project_screen.dart';
-import 'package:project_judge/models/project_info_model.dart';
 
 class MyProjectCardOpened extends StatelessWidget {
-  final ProjectsInfo project;
+  final Projects project;
 
-  const MyProjectCardOpened({Key? key, required this.project})
-      : super(key: key);
+  const MyProjectCardOpened({super.key, required this.project});
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
     final imageHeight = screenHeight * 0.12;
-    final cardHeight = screenHeight * 0.12;
+    final cardHeight = screenHeight * 0.14;
     final padding = screenWidth * 0.02;
     final titleFontSize = screenWidth * 0.03;
     final descriptionFontSize = screenWidth * 0.038;

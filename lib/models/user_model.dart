@@ -1,4 +1,3 @@
-import 'project_info_model.dart';
 
 class UserModel {
   UserModel({
@@ -20,10 +19,9 @@ class UserModel {
   late final String? role;
   late final String? imageUrl;
   late final Link? link;
-  late final List<ProjectsInfo>? projects;
+  late final List<Projects>? projects;
   late final String? createdAt;
   late final String? updatedAt;
-
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -33,8 +31,9 @@ class UserModel {
     role = json['role'];
     imageUrl = json['imageUrl'];
     link = Link.fromJson(json['link']);
-    projects =
-        List.from(json['projects']).map((e) => ProjectsInfo.fromJson(e)).toList();
+    projects = List.from(json['projects'])
+        .map((e) => Projects.fromJson(e))
+        .toList();
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -83,7 +82,7 @@ class Link {
 class Projects {
   Projects({
     required this.projectId,
-    this.type,
+    required this.type,
     this.projectName,
     this.bootcampName,
     this.startDate,
@@ -101,33 +100,35 @@ class Projects {
     required this.rating,
     required this.createAt,
     required this.updateAt,
-    required this.imagesProject,
-    required this.linksProject,
-    required this.membersProject,
-  });
+    required List<dynamic>? imagesProject,
+    required List<Map<String,dynamic>>? linksProject,
+    required List<MembersProject>? membersProject,
+  })  : imagesProject = imagesProject ?? [],
+        linksProject = linksProject ?? [],
+        membersProject = membersProject ?? [];
 
-  final String? projectId;
-  final String? type;
-  final String? projectName;
-  final String? bootcampName;
-  final String? startDate;
-  final String? endDate;
-  final String? presentationDate;
-  final String? projectDescription;
-  final String? logoUrl;
-  final String? presentationUrl;
-  final String? userId;
-  final String? adminId;
-  final String? timeEndEdit;
-  final bool allowEdit; // Changed to non-nullable
-  final bool allowRating; // Changed to non-nullable
-  final bool isPublic; // Changed to non-nullable
-  final int rating; // Changed to non-nullable
-  final String createAt;
-  final String updateAt;
-  final List<dynamic> imagesProject; // Removed nullable
-  final List<Map<String, dynamic>> linksProject; // Removed nullable
-  final List<MembersProject> membersProject; // Removed nullable
+  late final String? projectId;
+  late final String? type;
+  late final String? projectName;
+  late final String? bootcampName;
+  late final String? startDate;
+  late final String? endDate;
+  late final String? presentationDate;
+  late final String? projectDescription;
+  late final String? logoUrl;
+  late final String? presentationUrl;
+  late final String? userId;
+  late final String? adminId;
+  late final String? timeEndEdit;
+  late final bool allowEdit; // Changed to non-nullable
+  late final bool allowRating; // Changed to non-nullable
+  late final bool isPublic; // Changed to non-nullable
+  late final double rating; // Changed to non-nullable
+  late final String createAt;
+  late final String updateAt;
+  late final List<dynamic>? imagesProject; // Removed nullable
+  late final List<Map<String, dynamic>>? linksProject; // Removed nullable
+  late final List<MembersProject>? membersProject; // Removed nullable
 
   Projects.fromJson(Map<String, dynamic> json)
       : projectId = json['project_id'],
@@ -146,7 +147,7 @@ class Projects {
         allowEdit = json['allow_edit'],
         allowRating = json['allow_rating'],
         isPublic = json['is_public'],
-        rating = json['rating'],
+        rating = 1.2,
         createAt = json['create_at'],
         updateAt = json['update_at'],
         imagesProject = List<dynamic>.from(json['images_project']),
@@ -177,7 +178,7 @@ class Projects {
       'update_at': updateAt,
       'images_project': imagesProject,
       'links_project': linksProject,
-      'members_project': membersProject.map((e) => e.toJson()).toList(),
+      'members_project': membersProject?.map((e) => e.toJson()).toList(),
     };
   }
 }
@@ -185,13 +186,14 @@ class Projects {
 class MembersProject {
   MembersProject({
     required this.id,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
+    this.firstName,
+    this.lastName,
+    this.email,
     required this.position,
     this.imageUrl,
-    required this.link,
+    this.link,
   });
+
   late final String? id;
   late final String? firstName;
   late final String? lastName;
@@ -206,7 +208,7 @@ class MembersProject {
     lastName = json['last_name'];
     email = json['email'];
     position = json['position'];
-    imageUrl = json['ImageUrl'];
+    imageUrl = json['image_url'];
     link = Link.fromJson(json['link']);
   }
 
@@ -221,5 +223,10 @@ class MembersProject {
     data['link'] = link?.toJson();
     return data;
   }
-  
+    @override
+  String toString() {
+    return '{"user_id" : "$id", "position": "$position"}';
+  }
 }
+
+

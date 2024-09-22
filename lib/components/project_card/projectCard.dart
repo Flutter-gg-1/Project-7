@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:project_judge/models/project_info_model.dart';
+import 'package:project_judge/models/user_model.dart';
 
 class ProjectCard extends StatelessWidget {
-  final ProjectsInfo project;
+  final Projects project;
 
   const ProjectCard({super.key, required this.project});
 
@@ -81,7 +81,7 @@ class ProjectCard extends StatelessWidget {
                       const SizedBox(height: 2),
                       RatingBar.builder(
                         itemSize: ratingItemSize,
-                        initialRating: project.rating?.toDouble() ?? 0,
+                        initialRating: project.rating ?? 0,
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: false,
