@@ -11,8 +11,9 @@ import 'package:tuwaiq_project/screens/all_project/all_project_screen.dart';
 import 'package:tuwaiq_project/screens/bottomNavBloc/bottomnav_bloc.dart';
 import 'package:tuwaiq_project/screens/profile/profile_screen.dart';
 import 'package:tuwaiq_project/screens/rating/rating_screen.dart';
-import 'package:tuwaiq_project/screens/search_screen.dart';
-import 'package:tuwaiq_project/screens/user_project_screen.dart';
+import 'package:tuwaiq_project/screens/serch_screen/search_screen.dart';
+import 'package:tuwaiq_project/screens/user_project/user_project_screen.dart';
+
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 
 class HomeScreen extends StatelessWidget {
