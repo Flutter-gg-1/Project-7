@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/models/profile_model.dart';
+import 'package:tuwaiq_project/models/projects_model.dart';
 
 class ProjectContainer extends StatelessWidget {
   final Function()? onTap;
-  // final String imagePath, bootcamp, rate, projectName;
-
   final ProjectsModel projectsModel;
   const ProjectContainer({
     super.key,
@@ -15,7 +14,6 @@ class ProjectContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(projectsModel.logoUrl);
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -49,7 +47,6 @@ class ProjectContainer extends StatelessWidget {
                     fit: BoxFit.cover,
                   )
                 : Image.asset("assets/image/flutter.png"),
-            //Later make sure for responsive
             Row(
               children: [
                 Text(

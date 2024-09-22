@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
@@ -18,15 +16,12 @@ class ImgHandleCubit extends Cubit<ImgHandleState> {
             (await NetworkAssetBundle(Uri.parse(imgUrl)).load(imgUrl))
                 .buffer
                 .asUint8List();
-        log("hi img is good");
         imageShow(imgFile);
       } else {
         throw Exception;
       }
     } catch (err) {
-      log("hi");
       imageShow(null);
-      print(err.toString());
     }
   }
 

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tuwaiq_project/screens/auth/login_screen.dart';
@@ -13,7 +15,7 @@ class SplachScreen extends StatelessWidget {
       create: (context) => SplachCubit()..checkLogin(),
       child: BlocListener<SplachCubit, SplachState>(
         listener: (context, state) async {
-          await Future.delayed(const Duration(seconds: 2));
+          await Future.delayed(const Duration(seconds: 3));
           if (state is LoginUserState) {
             Navigator.pushReplacement(
                 context,

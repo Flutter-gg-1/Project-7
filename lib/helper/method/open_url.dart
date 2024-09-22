@@ -3,7 +3,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 Future<void> openUrl(
     {required BuildContext context, required String? url}) async {
-  print(url);
   if (url != null) {
     final Uri uri = Uri.parse(url);
 

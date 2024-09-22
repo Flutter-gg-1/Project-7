@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
+import 'package:tuwaiq_project/models/members_project_model.dart';
 import 'package:tuwaiq_project/models/profile_model.dart';
 
 class CustomeMemberContainer extends StatelessWidget {
   const CustomeMemberContainer({
     super.key,
-   
-    this.onPressedIcon, required this.membersProject,
+    this.onPressedIcon,
+    required this.membersProject,
   });
 
-  final MembersProject membersProject;
-
-  // final String name;
-  // final String positions;
-  // final Image img;
+  final MembersProjectModel membersProject;
   final Function()? onPressedIcon;
   @override
   Widget build(BuildContext context) {
@@ -40,28 +37,25 @@ class CustomeMemberContainer extends StatelessWidget {
             width: context.getWidth(multiply: 0.2),
             decoration: const BoxDecoration(
                 color: Color(0xffCACACA), shape: BoxShape.circle),
-            child:  membersProject.imageUrl != null && membersProject.imageUrl!.isNotEmpty
+            child: membersProject.imageUrl != null &&
+                    membersProject.imageUrl!.isNotEmpty
                 ? Image.network(
                     membersProject.imageUrl!,
                     errorBuilder: (context, error, stackTrace) {
-                      
                       return Image.asset("assets/image/Search-amico(1).png");
                     },
                     loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null){
-                           return child; 
-
+                      if (loadingProgress == null) {
+                        return child;
                       }
-                     
+
                       return const Center(
-                        child:
-                            Center(child: CircularProgressIndicator()), 
+                        child: Center(child: CircularProgressIndicator()),
                       );
                     },
-                    fit: BoxFit.cover, 
+                    fit: BoxFit.cover,
                   )
                 : Image.asset("assets/image/Search-amico(1).png"),
-            
           ),
           Text(
             "${membersProject.firstName} ${membersProject.lastName}",
@@ -73,38 +67,41 @@ class CustomeMemberContainer extends StatelessWidget {
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                onPressed: onPressedIcon,
-                icon: const FaIcon(
-                  FontAwesomeIcons.discord,
-                  color: Colors.black,
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: onPressedIcon,
+                  icon: const FaIcon(
+                    FontAwesomeIcons.discord,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              IconButton(
-                onPressed: onPressedIcon,
-                icon: const FaIcon(
-                  FontAwesomeIcons.linkedinIn,
-                  color: Colors.black,
+                IconButton(
+                  onPressed: onPressedIcon,
+                  icon: const FaIcon(
+                    FontAwesomeIcons.linkedinIn,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              IconButton(
-                onPressed: onPressedIcon,
-                icon: const FaIcon(
-                  FontAwesomeIcons.whatsapp,
-                  color: Colors.black,
+                IconButton(
+                  onPressed: onPressedIcon,
+                  icon: const FaIcon(
+                    FontAwesomeIcons.whatsapp,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              IconButton(
-                onPressed: onPressedIcon,
-                icon: const FaIcon(
-                  FontAwesomeIcons.googleDrive,
-                  color: Colors.black,
+                IconButton(
+                  onPressed: onPressedIcon,
+                  icon: const FaIcon(
+                    FontAwesomeIcons.googleDrive,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
@@ -218,7 +220,6 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                                   final bytes = file.xFile;
                                   final fileName = file.name;
 
-                                  // need late to check if byte not null
                                   context.read<CvHandleCubit>().cvAdd(
                                       await bytes.readAsBytes(),
                                       fileName.substring(0, 5));
@@ -244,7 +245,6 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                                   final bytes = file.xFile;
                                   final fileName = file.name;
 
-                                  // need late to check if byte not null
                                   context.read<CvHandleCubit>().cvAdd(
                                       await bytes.readAsBytes(),
                                       fileName.substring(0, 5));
@@ -307,12 +307,6 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
             ),
             CustomButton(
               onPressed: () {
-                print(firstNameCon.text);
-                print(lastNameCon.text);
-                print(gitCon.text);
-                print(linkCon.text);
-                print(bidingCon.text);
-
                 context.read<ProfileCubit>().updateProfile(
                     firstName: firstNameCon.text,
                     lastName: lastNameCon.text,
@@ -321,8 +315,6 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                     githubLink: gitCon.text,
                     imgCubitFile: context.read<ImgHandleCubit>().imgCubitFile,
                     cvFile: context.read<CvHandleCubit>().cvCubitFile);
-
-                // Navigator.of(context).pop();
               },
               arabicTitle: 'تعديل',
               englishTitle: 'Update',

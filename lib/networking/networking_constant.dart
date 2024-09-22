@@ -14,12 +14,10 @@ abstract class NetworkingConstant {
 
   final String endProfile = "/user/profile";
   final String endProfileUpdate = "/user/update/profile";
+
+  //edit endpoint
   final String endProjectLogoEdit = "/user/edit/project/logo/";
-  // chnage this data
-
-  // "project_name" , "bootcamp_name" , type" "start_date" "end_date" "presentation_date" "project_description"
   final String endProjectBaseEdit = "/user/edit/project/base/";
-
   final String endPresentationEdit = "/user/edit/project/presentation/";
   final String endProjectImgEdit = "/user/edit/project/images/";
   final String endProjectLinksEdit = "/user/edit/project/link/";
@@ -27,9 +25,10 @@ abstract class NetworkingConstant {
   final String endProjectCreate = "/supervisor/create/project";
   final String endProjectChangeState = "/supervisor/change/status/";
 
+  // get end point
   final String endGetAllProject = "/projects";
 
+  //delete and rating endpoint
   final String endProjectDel = "/supervisor/delete/project/";
-
   final String endProjectRating = "/user/rating/project/";
 }

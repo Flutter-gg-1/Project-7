@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,69 +21,71 @@ class UserProjectScreen extends StatelessWidget {
         final cubit = context.read<UserProjectCubit>();
 
         cubit.showProjectUser();
-        return Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: context.getWidth(multiply: 0.1)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              context.addSpacer(),
-              Text(
-                language.isArabic ? 'مشاريعي' : 'My project',
-                style:
-                    const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-              const Divider(),
-              SizedBox(
-                height: context.getHeight(multiply: 0.65),
-                child: BlocBuilder<UserProjectCubit, UserProjectState>(
-                  builder: (context, state) {
-                    if (state is UserProjectSLoadingState) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-
-                    if (state is UserProjectErrState) {
-                      return InfoSerchCoulmWidget(
-                        tex: state.msg,
-                      );
-                    }
-
-                    if (state is UserProjectShowState) {
-                      log("in user project");
-                      return GridView.builder(
-                        shrinkWrap: true,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 8,
-                          childAspectRatio: 0.7,
-                        ),
-                        itemCount: state.projectList.length,
-                        itemBuilder: (context, index) {
-                          return ProjectContainer(
-                            projectsModel: state.projectList[index],
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) {
-                                  return ProjectViewScreen(
-                                    projectsModel: state.projectList[index],
-                                  );
-                                },
-                              ));
-                            },
-                          );
-                        },
-                      );
-                    }
-
-                    return const InfoSerchCoulmWidget(
-                      tex: "Not project...",
-                    );
-                  },
+        return SizedBox(
+          height: context.getHeight(multiply: 0.7),
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(
+                horizontal: context.getWidth(multiply: 0.1)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                context.addSpacer(),
+                Text(
+                  language.isArabic ? 'مشاريعي' : 'My project',
+                  style: const TextStyle(
+                      fontSize: 30, fontWeight: FontWeight.bold),
                 ),
-              ),
-            ],
+                const Divider(),
+                SizedBox(
+                  height: context.getHeight(multiply: 0.65),
+                  child: BlocBuilder<UserProjectCubit, UserProjectState>(
+                    builder: (context, state) {
+                      if (state is UserProjectSLoadingState) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+
+                      if (state is UserProjectErrState) {
+                        return InfoSerchCoulmWidget(
+                          tex: state.msg,
+                        );
+                      }
+
+                      if (state is UserProjectShowState) {
+                        return GridView.builder(
+                          shrinkWrap: true,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 8,
+                            childAspectRatio: 0.7,
+                          ),
+                          itemCount: state.projectList.length,
+                          itemBuilder: (context, index) {
+                            return ProjectContainer(
+                              projectsModel: state.projectList[index],
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) {
+                                    return ProjectViewScreen(
+                                      projectsModel: state.projectList[index],
+                                    );
+                                  },
+                                ));
+                              },
+                            );
+                          },
+                        );
+                      }
+
+                      return const InfoSerchCoulmWidget(
+                        tex: "Not project...",
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       }),

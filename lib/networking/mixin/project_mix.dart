@@ -1,9 +1,8 @@
-// ignore_for_file: avoid_print
-
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:tuwaiq_project/models/profile_model.dart';
+import 'package:tuwaiq_project/models/projects_model.dart';
 import 'package:tuwaiq_project/networking/networking_constant.dart';
 
 mixin ProjectMix on NetworkingConstant {
@@ -12,10 +11,10 @@ mixin ProjectMix on NetworkingConstant {
       final res = await dio.put("$baseUrl$endProjectLogoEdit$projectId",
           options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
           data: {"logo": logoImg});
-      log(res.data);
+
       return res.data;
     } on DioException catch (err) {
-      print(err.response?.data);
+      throw err.response?.data ?? 'Unknown error occurred';
     } catch (err) {
       throw Exception;
     }
@@ -43,11 +42,8 @@ mixin ProjectMix on NetworkingConstant {
             "presentation_date": presentationDate,
             "project_description": projectDescription
           });
-
-      print('hhhhh${res.data}');
       return res.data;
     } on DioException catch (err) {
-      print(err.response?.data);
       return err.response?.data['data'];
     } catch (err) {
       throw Exception;
@@ -62,10 +58,8 @@ mixin ProjectMix on NetworkingConstant {
       final res = await dio.put("$baseUrl$endPresentationEdit$projectId",
           options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
           data: {"presentation_file": presentationFile});
-
-      print(res.data);
     } on DioException catch (err) {
-      print(err.response?.data);
+      throw err.response?.data ?? 'Unknown error occurred';
     } catch (err) {
       throw Exception;
     }
@@ -79,10 +73,8 @@ mixin ProjectMix on NetworkingConstant {
       final res = await dio.put("$baseUrl$endProjectImgEdit$projectId",
           options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
           data: {"images": projectImgs});
-
-      print(res.data);
     } on DioException catch (err) {
-      print(err.response?.data);
+      throw err.response?.data ?? 'Unknown error occurred';
     } catch (err) {
       throw Exception;
     }
@@ -96,10 +88,8 @@ mixin ProjectMix on NetworkingConstant {
       final res = await dio.put("$baseUrl$endProjectLinksEdit$projectId",
           options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
           data: {"link": links});
-
-      print(res.data);
     } on DioException catch (err) {
-      print(err.response?.data);
+      throw err.response?.data ?? 'Unknown error occurred';
     } catch (err) {
       throw Exception;
     }
@@ -113,10 +103,8 @@ mixin ProjectMix on NetworkingConstant {
       final res = await dio.put("$baseUrl$endProjectMembersEdit$projectId",
           options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
           data: {"members": members});
-
-      print(res.data);
     } on DioException catch (err) {
-      print(err.response?.data);
+      throw err.response?.data ?? 'Unknown error occurred';
     } catch (err) {
       throw Exception;
     }
@@ -148,9 +136,8 @@ mixin ProjectMix on NetworkingConstant {
           'investment': investment.toInt(),
         },
       );
-      print(res.data);
     } on DioException catch (error) {
-      print(error.response?.data);
+      throw error.response?.data ?? 'Unknown error occurred';
     } catch (e) {
       throw Exception;
     }
@@ -158,30 +145,19 @@ mixin ProjectMix on NetworkingConstant {
 
   Future<List<ProjectsModel>> getAllProject() async {
     try {
-      print("$baseUrl$endGetAllProject");
       final res = await dio.get(
         "$baseUrl$endGetAllProject",
       );
-
-      print(res.data);
-
       List<ProjectsModel> lis = [];
 
       for (var val in res.data["data"]["projects"]) {
         lis.add(ProjectsModel.fromJson(val));
       }
-
-      log("hhhhhhhhhh");
-
-      print(lis);
-
       return lis;
     } on DioException catch (err) {
-      print(err.response?.data);
-
       throw "${err.response?.data}";
     } catch (err) {
-      throw "there was eorr";
+      throw "there was erorr";
     }
   }
 }

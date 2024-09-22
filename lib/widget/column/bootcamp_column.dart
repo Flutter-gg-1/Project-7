@@ -6,7 +6,8 @@ class BootcampColumn extends StatelessWidget {
   const BootcampColumn({
     super.key,
     required this.imagePath,
-    required this.title, this.onTap,
+    required this.title,
+    this.onTap,
   });
 
   @override

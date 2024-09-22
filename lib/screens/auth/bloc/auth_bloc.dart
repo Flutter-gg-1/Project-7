@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:tuwaiq_project/data_layer/auth_layer.dart';
@@ -30,7 +28,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             email: controllerEmail!.text,
             fName: controllerFName!.text,
             lName: controllerLName!.text);
-        print(emailCreate);
+
         emit(SuccessState());
       } on FormatException catch (error) {
         emit(ErrorState(msg: error.message));
@@ -46,7 +44,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final emailLogin = await api.userLogin(
           email: controllerEmail!.text,
         );
-        print(emailLogin);
+
         emit(SuccessState());
       } on FormatException catch (error) {
         emit(ErrorState(msg: error.message));
@@ -56,16 +54,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
     //=============otp verfication=================
     on<VerfieyEvent>((event, emit) async {
-    try {
-      emit(LoadingState());
-      log('loading');
-      final userAuth = await api.verifyOtp(email: event.email, otp: otp!);
-      log('2');
-      await authLocator.get<AuthLayerData>().saveAuth(authData: userAuth);
-      emit(SuccessState());
-    } catch (error) {
-      emit(ErrorState(msg: "There is error with on the server"));
-    }
+      try {
+        emit(LoadingState());
+        final userAuth = await api.verifyOtp(email: event.email, otp: otp!);
+
+        await authLocator.get<AuthLayerData>().saveAuth(authData: userAuth);
+        emit(SuccessState());
+      } catch (error) {
+        emit(ErrorState(msg: "There is error with on the server"));
+      }
     });
 
     //========Change Language============

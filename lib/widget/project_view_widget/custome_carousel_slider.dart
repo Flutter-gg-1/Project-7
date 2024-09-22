@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
+import 'package:tuwaiq_project/models/images_project_model.dart';
 import 'package:tuwaiq_project/models/profile_model.dart';
 
 class CarouselSliderCustome extends StatelessWidget {
@@ -13,7 +14,7 @@ class CarouselSliderCustome extends StatelessWidget {
   });
   final int currentIndex;
   final Function(int, CarouselPageChangedReason) onPageChanged;
-  final List<ImagesProject> carouselSliderWidget;
+  final List<ImagesProjectModel> carouselSliderWidget;
 
   @override
   Widget build(BuildContext context) {

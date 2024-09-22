@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/screens/project_info/project_view_screen.dart';
-import 'package:tuwaiq_project/screens/serch_screen/cubit/search_screen_cubit.dart';
+import 'package:tuwaiq_project/screens/search/cubit/search_screen_cubit.dart';
 import 'package:tuwaiq_project/widget/container/project_container.dart';
 import 'package:tuwaiq_project/widget/search_screen/info_serch_coulm_widget.dart';
 import 'package:tuwaiq_project/widget/textformfeild/custom_text_feild.dart';
@@ -21,7 +21,7 @@ class SearchScreen extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: context.getHeight(multiply: 0.035),
+                height: context.getHeight(multiply: 0.02),
               ),
               SizedBox(
                   width: context.getWidth(multiply: 0.9),
@@ -82,10 +82,12 @@ class SearchScreen extends StatelessWidget {
                     );
                   }
 
-                  return InfoSerchCoulmWidget(
-                    tex: cubit.language.isArabic
-                        ? "...البحث عن المشاريع"
-                        : "Search For Project...",
+                  return SingleChildScrollView(
+                    child: InfoSerchCoulmWidget(
+                      tex: cubit.language.isArabic
+                          ? "...البحث عن المشاريع"
+                          : "Search For Project...",
+                    ),
                   );
                 },
               ),

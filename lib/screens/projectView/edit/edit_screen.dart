@@ -1,5 +1,3 @@
-// ignore_for_file: unused_import
-
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -10,13 +8,13 @@ import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 
 import 'package:tuwaiq_project/screens/projectView/edit/bloc/edit_bloc.dart';
-import 'package:tuwaiq_project/screens/projectView/edit/edit_base.dart';
-import 'package:tuwaiq_project/screens/projectView/edit/edit_images.dart';
-import 'package:tuwaiq_project/screens/projectView/edit/edit_links.dart';
-import 'package:tuwaiq_project/screens/projectView/edit/edit_logo.dart';
-import 'package:tuwaiq_project/screens/projectView/edit/edit_members.dart';
-import 'package:tuwaiq_project/screens/projectView/edit/edit_presentation.dart';
-import 'package:tuwaiq_project/screens/projectView/edit/edit_status.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/componets/edit_base.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/componets/edit_images.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/componets/edit_links.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/componets/edit_logo.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/componets/edit_members.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/componets/edit_presentation.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/componets/edit_status.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
 import 'package:tuwaiq_project/widget/button/custom_button.dart';
@@ -41,13 +39,17 @@ class EditScreen extends StatelessWidget {
           listener: (context, state) {
             if (state is SucsessState) {
               Navigator.pop(context);
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(state.msg)));
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(state.msg),
+                backgroundColor: Colors.green,
+              ));
             }
             if (state is ErrorState) {
               Navigator.pop(context);
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(state.msg)));
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(state.msg),
+                backgroundColor: Colors.red,
+              ));
             }
             if (state is LoadingState) {
               showDialog(

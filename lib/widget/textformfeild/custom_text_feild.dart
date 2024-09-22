@@ -9,7 +9,6 @@ class CustomTextFeild extends StatelessWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
-  //final List<TextInputFormatter>? inputFormatters;
   final EdgeInsetsGeometry? padding;
   final String? initialValue;
   final Function(String)? onChanged;
@@ -32,14 +31,12 @@ class CustomTextFeild extends StatelessWidget {
     return TextFormField(
       style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
       keyboardType: keyboardType,
-      //inputFormatters: inputFormatters,
       validator: validator,
       controller: controller,
       minLines: maxLines,
       maxLines: maxLines,
       initialValue: initialValue,
       onChanged: onChanged,
-
       onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
           suffixIcon: const Icon(Icons.search),
