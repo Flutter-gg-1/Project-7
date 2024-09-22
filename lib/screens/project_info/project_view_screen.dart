@@ -44,7 +44,8 @@ class ProjectViewScreen extends StatelessWidget {
                   painter: AuthShape(),
                 ),
                 CustomeActionProject(
-                  isAuthraize: projectsModel.userId == id,
+                  isAuthraize:
+                      projectsModel.userId == id || projectsModel.adminId == id,
                   editClick: () {
                     Navigator.push(
                         context,
