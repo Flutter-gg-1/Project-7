@@ -15,33 +15,37 @@ class SearchScreenCubit extends Cubit<SearchScreenState> {
 
   serchProject({required String searchTex}) async {
     if (searchTex.isEmpty) {
-       emit(SearchScreenInitial());
+      emit(SearchScreenInitial());
       return;
     }
     emit(SearchScreenLodingState());
 
-    projectList = await NetworkingApi().getAllProject();
+    try {
+      projectList = await NetworkingApi().getAllProject();
 
-    log("good serach start");
-    log(searchTex);
+      log("good serach start");
+      log(searchTex);
 
-    final List<ProjectsModel> myProject = [];
+      final List<ProjectsModel> myProject = [];
 
-    for (var val in projectList) {
-      print(val.projectName);
+      for (var val in projectList) {
+        print(val.projectName);
 
-      if (val.projectName?.toLowerCase().contains(searchTex.toLowerCase()) ??
-          false) {
-        log("good serach found");
-        myProject.add(val);
+        if (val.projectName?.toLowerCase().contains(searchTex.toLowerCase()) ??
+            false) {
+          log("good serach found");
+          myProject.add(val);
+        }
       }
-    }
 
-    if (myProject.isNotEmpty) {
-      log("in show");
-      emit(SearchScreenShowFoundState(projectsLis: myProject));
-    } else {
-      emit(SearchScreenNotFoundState());
+      if (myProject.isNotEmpty) {
+        log("in show");
+        emit(SearchScreenShowFoundState(projectsLis: myProject));
+      } else {
+        emit(SearchScreenNotFoundState());
+      }
+    } catch (err) {
+      emit(SearchScreenErorrState(msg: err.toString()));
     }
 
     //  var user =  authLocator.get<AuthLayerData>().auth;
@@ -50,6 +54,4 @@ class SearchScreenCubit extends Cubit<SearchScreenState> {
     //   if (val.adminId == user.) {}
     // }
   }
-
- 
 }

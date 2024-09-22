@@ -67,6 +67,15 @@ class SearchScreen extends StatelessWidget {
                     );
                   }
 
+                  if(state is SearchScreenErorrState){
+
+                    return  InfoSerchCoulmWidget(
+                      tex: state.msg,
+                    );
+
+
+                  }
+
                   if (state is SearchScreenNotFoundState) {
                     return const InfoSerchCoulmWidget(
                       tex: "Not Found...",

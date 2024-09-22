@@ -13,5 +13,10 @@ final class SearchScreenShowFoundState extends SearchScreenState {
 
 final class SearchScreenNotFoundState extends SearchScreenState {}
 
-
 final class SearchScreenLodingState extends SearchScreenState {}
+
+final class SearchScreenErorrState extends SearchScreenState {
+  final String msg;
+
+  SearchScreenErorrState({required this.msg});
+}
