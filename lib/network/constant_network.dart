@@ -9,4 +9,10 @@ abstract class ConstantNetwork {
   final String resendOTPEndPoint = '/auth/resend';
   final String getProfileEndPoint = '/user/profile';
   final String getFirstHundredProjectsEndPoint = '/projects';
+  final String updateProjectLogoEndPoint = '/project/logo';
+  final String updateProjectBaseEndPoint = '/project/base';
+  final String updateProjectImagesEndPoint = '/project/images';
+  final String updateProjectPresentationEndPoint = '/project/presentation';
+  final String updateProjectLinksEndPoint = '/project/link';
+  final String updateProjectMembersEndPoint = '/project/members';
 }

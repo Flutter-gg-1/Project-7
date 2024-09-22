@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:project_judge/models/user_model.dart';
+import 'package:project_judge/screens/edit_project/edit_project_screen.dart';
 import 'package:project_judge/models/project_info_model.dart';
-
 
 class MyProjectCardOpened extends StatelessWidget {
   final ProjectsInfo project;
 
-  const MyProjectCardOpened({super.key, required this.project});
-
+  const MyProjectCardOpened({Key? key, required this.project})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -117,15 +118,21 @@ class MyProjectCardOpened extends StatelessWidget {
                 ),
               ),
               Center(
-                child: IconButton(
-                  onPressed: () {},
-                  icon:  Icon(
-                    Icons.edit_outlined,
-                    color: const Color(0xFF4E2EB5),
-                    size: iconSize,
-                  ),
-                ),
-              ),
+                  child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditProjectScreen(
+                                projectId:
+                                    project.projectId!), // Pass projectId
+                          ),
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.edit_outlined,
+                        color: Color(0xFF4E2EB5),
+                      )))
             ],
           ),
         ),
