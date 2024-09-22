@@ -27,7 +27,7 @@ mixin SupervisorApi on ConstantsApi {
     }
   }
 
-  Future<ProjectModel> changeProjectStatus({
+  changeProjectStatus({
     required String token,
     required String projectId,
     required String timeEndEdit,
@@ -35,8 +35,8 @@ mixin SupervisorApi on ConstantsApi {
     required bool isPublic,
   }) async {
     try {
-      final response = await dio.put(
-        '$baseUrl$changeProjectStatusEndpoint$projectId',
+       await dio.put(
+        '$baseUrl$changeProjectStatusEndpoint/$projectId',
         data: {
           'time_end_edit': timeEndEdit,
           'edit': isEditable,
@@ -48,13 +48,9 @@ mixin SupervisorApi on ConstantsApi {
           },
         ),
       );
-      return ProjectModel.fromJson(
-          Map<String, dynamic>.from(response.data['data']));
     } on DioException catch (error) {
-      log('DioException: ${error.message}');
-      throw const FormatException('Unknown error occurred');
+      throw  DioException(requestOptions: RequestOptions(), message: '${error.message}');
     } catch (error) {
-      log('Unknown error: $error');
       throw const FormatException(
           'Error occurred while changing project status');
     }
@@ -66,7 +62,7 @@ mixin SupervisorApi on ConstantsApi {
   }) async {
     try {
       final response = await dio.delete(
-        '$baseUrl$deleteProjectEndpoint$projectId',
+        '$baseUrl$deleteProjectEndpoint/$projectId',
         options: Options(
           headers: {
             'Authorization': 'Bearer $token',

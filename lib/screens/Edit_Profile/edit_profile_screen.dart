@@ -265,7 +265,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               'github': controllers[2].text,
               'linkedin': controllers[3].text,
               'bindlink': controllers[4].text,
-            });
+            },
+            projects: widget.profile.projects
+            );
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Updated successfully!')),
         );

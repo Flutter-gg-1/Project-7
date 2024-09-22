@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:intl/intl.dart';
 import 'package:project_management_app/data_layer/data_layer.dart';
 import 'package:project_management_app/models/member_model.dart';
 import 'package:project_management_app/models/project_link.dart';
@@ -16,7 +17,9 @@ import 'package:project_management_app/services/setup.dart';
 
 class EditProjectScreen extends StatefulWidget {
   final ProjectModel project;
-  const EditProjectScreen({super.key, required this.project});
+  final String userId;
+  const EditProjectScreen(
+      {super.key, required this.project, required this.userId});
 
   @override
   _EditProjectScreenState createState() => _EditProjectScreenState();
@@ -24,6 +27,9 @@ class EditProjectScreen extends StatefulWidget {
 
 class _EditProjectScreenState extends State<EditProjectScreen> {
   final ApiNetworking api = ApiNetworking();
+
+  // Edit End Time Controller
+  final TextEditingController editEndTimeController = TextEditingController();
 
   // Controllers for the form fields
   final TextEditingController projectNameController = TextEditingController();
@@ -35,6 +41,8 @@ class _EditProjectScreenState extends State<EditProjectScreen> {
       TextEditingController();
   final TextEditingController projectDescriptionController =
       TextEditingController();
+
+  // Link Controllers
   final TextEditingController githubController = TextEditingController();
   final TextEditingController figmaController = TextEditingController();
   final TextEditingController videoController = TextEditingController();
@@ -44,9 +52,13 @@ class _EditProjectScreenState extends State<EditProjectScreen> {
   final TextEditingController apkController = TextEditingController();
   final TextEditingController webLinkController = TextEditingController();
 
+  // Members Controllers
   List<MemberModel> members = [];
   List<TextEditingController> positionControllers = [];
   List<TextEditingController> userIdControllers = [];
+
+  bool? isEditable;
+  bool? isPublic;
 
   File? logoFile;
   File? presentationFile;
@@ -60,7 +72,30 @@ class _EditProjectScreenState extends State<EditProjectScreen> {
     super.initState();
     token = locator.get<DataLayer>().auth!.token;
     projectId = widget.project.projectId;
-    _addMemberField();
+
+    projectNameController.text = widget.project.projectName!.toString();
+    bootcampNameController.text = widget.project.bootcampName!.toString();
+    projectTypeController.text = widget.project.type!.toString();
+    startDateController.text = widget.project.startDate == null
+        ? DateFormat('dd/MM/yyyy')
+            .format(DateTime.parse(widget.project.startDate!))
+        : '';
+    endDateController.text = widget.project.endDate == null
+        ? DateFormat('dd/MM/yyyy')
+            .format(DateTime.parse(widget.project.endDate!))
+        : '';
+    presentationDateController.text = widget.project.presentationDate == null
+        ? DateFormat('dd/MM/yyyy')
+            .format(DateTime.parse(widget.project.presentationDate!))
+        : '';
+    projectDescriptionController.text =
+        widget.project.projectDescription!.toString();
+
+    editEndTimeController.text = DateFormat('dd/MM/yyyy')
+        .format(DateTime.parse(widget.project.timeEndEdit!));
+    isEditable = widget.project.allowEdit!;
+    isPublic = widget.project.isPublic!;
+    _addMemberField(isFirstTime: true);
   }
 
   @override
@@ -79,6 +114,60 @@ class _EditProjectScreenState extends State<EditProjectScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if (widget.userId == widget.project.adminId)
+                Column(
+                  children: [
+                    CustomEditTextfiled(
+                        label: "Edit End Time",
+                        controller: editEndTimeController),
+                    const Text('Editable: '),
+                    Switch(
+                      value: isEditable!,
+                      onChanged: (value) {
+                        setState(() {
+                          isEditable = value;
+                        });
+                      },
+                    ),
+                    const Text('is Public: '),
+                    Switch(
+                      value: isPublic!,
+                      onChanged: (value) {
+                        setState(() {
+                          isPublic = value;
+                        });
+                      },
+                    ),
+                    Center(
+                      child: SizedBox(
+                        height: 30,
+                        width: 170,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            api.changeProjectStatus(
+                                token: token,
+                                projectId: projectId!,
+                                timeEndEdit: editEndTimeController.text,
+                                isEditable: isEditable!,
+                                isPublic: isPublic!);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff4129B7),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          child: const Text("Save",
+                              style: TextStyle(color: Colors.white)),
+                        ),
+                      ),
+                    ),
+                    const Divider(),
+                    const SizedBox(
+                      height: 10,
+                    )
+                  ],
+                ),
               // Upload Logo Section
               UploadSection(
                 title: "Upload Logo",
@@ -431,11 +520,24 @@ class _EditProjectScreenState extends State<EditProjectScreen> {
     }
   }
 
-  void _addMemberField() {
+  void _addMemberField({bool isFirstTime = false}) {
     setState(() {
-      members.add(MemberModel(position: '', userId: ''));
-      positionControllers.add(TextEditingController());
-      userIdControllers.add(TextEditingController());
+      if (isFirstTime) {
+        if (widget.project.membersProject!.isNotEmpty) {
+          for (var teamMember in widget.project.membersProject!) {
+            members.add(MemberModel(
+                position: teamMember.position, userId: teamMember.userId));
+            positionControllers
+                .add(TextEditingController(text: teamMember.position));
+            userIdControllers
+                .add(TextEditingController(text: teamMember.userId));
+          }
+        }
+      } else {
+        members.add(MemberModel(position: '', userId: ''));
+        positionControllers.add(TextEditingController());
+        userIdControllers.add(TextEditingController());
+      }
     });
   }
 

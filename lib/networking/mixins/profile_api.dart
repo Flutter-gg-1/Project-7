@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:project_management_app/models/profile_model.dart';
+import 'package:project_management_app/models/project_model.dart';
 import 'package:project_management_app/networking/constants_api.dart';
 
 mixin ProfileApi on ConstantsApi {
@@ -32,6 +33,7 @@ mixin ProfileApi on ConstantsApi {
     required List<int>? image,
     required List<int>? cv,
     required Map<String,dynamic> accounts,
+    required List<ProjectModel> projects
   }) async {
    
     try {
@@ -43,6 +45,7 @@ mixin ProfileApi on ConstantsApi {
           "image": image,
           "cv": cv,
           "accounts": accounts,
+          "projects": projects
         },
         options: Options(
           headers: {

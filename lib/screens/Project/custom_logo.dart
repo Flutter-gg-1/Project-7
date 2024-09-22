@@ -26,31 +26,29 @@ class CustomLogo extends StatelessWidget {
             ),
           ],
         ),
-        child: Center(
-          child: 
-          isLogo ?
-          Image.network(
-            logoUrl!,
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) {
-              return const Icon(
-                Icons.image,
-                size: 28,
-                color: Colors.white,
-              );
-            },
-            loadingBuilder: (context, child, progress) {
-              if (progress == null) {
-                return child;
-              } else {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            },
-          ) : 
-          Image.asset('assets/1_5-aoK8IBmXve5whBQM90GA.png')
-        ),
+        child: SizedBox(
+            child: isLogo
+                ? Image.network(
+                    logoUrl!,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Icon(
+                        Icons.image,
+                        size: 28,
+                        color: Colors.white,
+                      );
+                    },
+                    loadingBuilder: (context, child, progress) {
+                      if (progress == null) {
+                        return child;
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+                  )
+                : Image.asset('assets/1_5-aoK8IBmXve5whBQM90GA.png')),
       ),
     );
   }

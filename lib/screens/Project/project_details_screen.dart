@@ -15,7 +15,6 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
   final ProjectModel project;
-
   const ProjectDetailsScreen({super.key, required this.project});
 
   @override
@@ -36,6 +35,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
   ];
 
   List<MemberModel> members = [];
+  Profile? profile;
   bool isEditAuthrized = false;
 
   @override
@@ -45,13 +45,13 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
   }
 
   Future<void> _checkEditAuthorization() async {
-    Profile profile = await getProfile();
+    profile = await getProfile();
     setState(() {
-      isEditAuthrized = profile.id == widget.project.adminId;
+      isEditAuthrized = profile!.id == widget.project.adminId;
 
       if (!isEditAuthrized) {
         for (var member in widget.project.membersProject!) {
-          if (member.userId == profile.id) {
+          if (member.userId == profile!.id) {
             isEditAuthrized = true;
           }
         }
@@ -79,6 +79,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                         MaterialPageRoute(
                             builder: (context) => EditProjectScreen(
                                   project: widget.project,
+                                  userId: profile!.id,
                                 )));
                   },
                   icon: const Icon(

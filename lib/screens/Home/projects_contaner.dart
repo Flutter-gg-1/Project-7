@@ -38,7 +38,7 @@ class Projects extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Center(
+              child: SizedBox(
                 child: (project.logoUrl == null || project.logoUrl == 'null')
                     ? const Icon(
                         Icons.image,
