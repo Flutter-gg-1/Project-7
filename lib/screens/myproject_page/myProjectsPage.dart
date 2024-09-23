@@ -39,67 +39,73 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF4E2EB5),
-      appBar: AppBar(
         backgroundColor: const Color(0xFF4E2EB5),
-        elevation: 0,
-        centerTitle: true,
-        title: const Text(
-          'My Projects',
-          style: TextStyle(color: Colors.white),
+        appBar: AppBar(
+          backgroundColor: const Color(0xFF4E2EB5),
+          elevation: 0,
+          centerTitle: true,
+          title: const Text(
+            'My Projects',
+            style: TextStyle(color: Colors.white),
+          ),
+          bottom: TabBar(
+            indicatorWeight: 8.0,
+            indicatorSize: TabBarIndicatorSize.tab,
+            controller: tabController,
+            indicatorColor: Colors.cyan,
+            labelColor: Colors.cyan,
+            labelStyle: const TextStyle(
+              fontSize: 20,
+              color: Colors.cyan,
+            ),
+            unselectedLabelStyle: const TextStyle(
+              fontSize: 20,
+            ),
+            unselectedLabelColor: Colors.grey,
+            tabs: const [
+              Tab(text: 'Open'),
+              Tab(text: 'Closed'),
+            ],
+          ),
         ),
-        bottom: TabBar(
-          indicatorWeight: 8.0,
-          indicatorSize: TabBarIndicatorSize.tab,
+        body: TabBarView(
           controller: tabController,
-          indicatorColor: Colors.cyan,
-          labelColor: Colors.cyan,
-          labelStyle: const TextStyle(
-            fontSize: 20,
-            color: Colors.cyan,
-          ),
-          unselectedLabelStyle: const TextStyle(
-            fontSize: 20,
-          ),
-          unselectedLabelColor: Colors.grey,
-          tabs: const [
-            Tab(text: 'Open'),
-            Tab(text: 'Closed'),
+          children: [
+            ListView.builder(
+              itemCount: openProjects.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: MyProjectCardOpened(
+                      project: openProjects[index]), // Pass project data
+                );
+              },
+            ),
+            ListView.builder(
+              itemCount: closedProjects.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: MyProjectCardOpened(
+                      project: openProjects[index]), // Pass project data
+                );
+              },
+            ),
           ],
         ),
-      ),
-      body: TabBarView(
-        controller: tabController,
-        children: [
-          ListView.builder(
-            itemCount: openProjects.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                child: MyProjectCardOpened(
-                    project: openProjects[index]), // Pass project data
-              );
-            },
-          ),
-          ListView.builder(
-            itemCount: closedProjects.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                child: MyProjectCardOpened(
-                    project: openProjects[index]), // Pass project data
-              );
-            },
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.cyan,
-        shape: const CircleBorder(),
-        heroTag: 'unique_tag',
-        child: const Icon(Icons.add),
-      ),
-    );
+        floatingActionButton: user.role == 'user'
+            ? FloatingActionButton(
+                onPressed: () {
+                  //  Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) => Add(), ));
+                },
+                backgroundColor: Colors.cyan,
+                shape: const CircleBorder(),
+                heroTag: 'unique_tag',
+                child: const Icon(Icons.add),
+              )
+            : null);
   }
 }
