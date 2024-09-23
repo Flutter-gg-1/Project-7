@@ -101,8 +101,9 @@ class BottomNavBar extends StatelessWidget {
             assetPath,
             width: 20,
             height: 20,
-            color:
-                selectedIndex == index ? const Color(0xFF4E2EB5) : const Color(0xFF848484),
+            color: selectedIndex == index
+                ? const Color(0xFF4E2EB5)
+                : const Color(0xFF848484),
           ),
           const SizedBox(height: 5),
           Text(

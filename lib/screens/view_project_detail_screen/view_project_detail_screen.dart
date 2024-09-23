@@ -1,9 +1,11 @@
+import 'package:barcode_widget/barcode_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project_judge/components/list_tiles/custom_project_detail_list_tile.dart';
 import 'package:project_judge/components/text/custom_text.dart';
+import 'package:project_judge/screens/rating/ratingPage.dart';
 import 'package:project_judge/screens/view_project_detail_screen/cubit/view_project_details_cubit.dart';
 import 'package:project_judge/setup/init_setup.dart';
 import 'package:simple_icons/simple_icons.dart';
@@ -33,8 +35,38 @@ class ViewProjectDetailScreen extends StatelessWidget {
             .projectInfo
             ?.firstWhere((e) => e.projectId == projectID);
         return Scaffold(
-          appBar: const CustomAppBar(
-            text: 'Project Details',
+          appBar: AppBar(
+            backgroundColor: const Color(0xff4E2EB5),
+            foregroundColor: Colors.white,
+            title: CustomText(
+              text: "Project Details",
+              size: 26,
+            ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                RatingPage(projectID: projectID)));
+                  },
+                  icon: Icon(Icons.rate_review)),
+              IconButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                              content: Container(
+                                width: 200,
+                                height: 200,
+                                child: BarcodeWidget(
+                                    data: projectID, barcode: Barcode.qrCode()),
+                              ),
+                            ));
+                  },
+                  icon: Icon(Icons.qr_code))
+            ],
           ),
           bottomNavigationBar: Stack(
             clipBehavior: Clip.none,
@@ -227,7 +259,8 @@ class ViewProjectDetailScreen extends StatelessWidget {
                             height: 8,
                           ),
                           CustomText(
-                            text: currentProject.projectDescription ?? "project description not provided",
+                            text: currentProject.projectDescription ??
+                                "project description not provided",
                             size: 12,
                             color: const Color(0xff848484),
                           ),
@@ -282,8 +315,7 @@ class ViewProjectDetailScreen extends StatelessWidget {
                                         (BuildContext context, Object error,
                                             StackTrace? stackTrace) {
                                   return Container(
-                                      color: Colors
-                                          .grey, 
+                                      color: Colors.grey,
                                       child: const Icon(
                                         Icons.error,
                                         color: Colors.red,

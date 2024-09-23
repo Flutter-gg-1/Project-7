@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_judge/components/buttons/custom_elevated_button.dart';
-import 'package:project_judge/components/text_field/custom_text_form_field.dart';
 import 'package:project_judge/data_layer/data_layer.dart';
 import 'package:project_judge/models/user_model.dart';
-import 'package:project_judge/network/api_netowrok.dart';
 import 'package:project_judge/screens/profile_screen/cubit/profile_screen_cubit.dart';
 import 'package:project_judge/setup/init_setup.dart';
 import 'package:simple_icons/simple_icons.dart';
-import '../../components/app_bar/custom_app_bar.dart';
 import '../../components/text/custom_text.dart';
-import 'dart:io';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {

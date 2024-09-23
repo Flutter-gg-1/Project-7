@@ -39,7 +39,7 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
           user.projects!.where((project) => project.allowEdit).toList();
       late List<Projects> closedProjects =
           user.projects!.where((project) => !project.allowEdit).toList();
-    
+
       return Scaffold(
         backgroundColor: const Color(0xFF4E2EB5),
         appBar: AppBar(
