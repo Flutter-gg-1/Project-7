@@ -32,7 +32,11 @@ class ManageUserScreen extends StatelessWidget {
             if (state is SuccessState) {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text("User role changed succesfully")));
+                  backgroundColor: Color(0xff4D2EB4),
+                  content: CustomText(
+                    text: "User role changed succesfully",
+                    size: 16,
+                  )));
             }
             if (state is ErrorState) {
               showErrorDialog(context, state.msg);
@@ -43,13 +47,13 @@ class ManageUserScreen extends StatelessWidget {
             appBar: CustomAppBar(
               text: 'Manage Users',
               actions: [
-            CustomIconButton(
-              icon: const Icon(Icons.check_rounded),
-              onPressed: () {
-                cubit.changeRole();
-              },
-            ),
-          ],
+                CustomIconButton(
+                  icon: const Icon(Icons.check_rounded),
+                  onPressed: () {
+                    cubit.changeRole();
+                  },
+                ),
+              ],
             ),
             body: BlocBuilder<MangeUserCubit, MangeUserState>(
               builder: (context, state) {
