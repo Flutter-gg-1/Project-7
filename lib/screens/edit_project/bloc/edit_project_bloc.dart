@@ -1,17 +1,12 @@
 import 'dart:io';
-import 'dart:math';
-import 'dart:typed_data';
 import 'package:project_judge/data_layer/data_layer.dart';
 import 'package:project_judge/models/user_model.dart';
 import 'package:project_judge/setup/init_setup.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:http/http.dart' as http;
+
 part 'edit_project_event.dart';
 part 'edit_project_state.dart';
 
@@ -46,10 +41,10 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
   List imgList = [];
 
   //save links
-  late List<Map<String, dynamic>> links = project.linksProject;
+  late List<Map<String, dynamic>>? links = project.linksProject;
 
   //save members
-  late List<MembersProject> members = project.membersProject;
+  late List<MembersProject>? members = project.membersProject;
 
   //
   File presention = File('');
@@ -61,8 +56,7 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
     });
 
     on<UpdatePresentationDateEvent>((event, emit) {
-      print(members.toString());
-      print(members);
+
       presentationDate = event.date;
       emit(UpdateProjectEntryState());
     });
@@ -73,7 +67,7 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
     });
     on<UpdateLinksEvent>((event, emit) {
       Map<String, String?> currentLinksMap = {
-        for (var link in links) link['type']: link['url']
+        for (var link in links!) link['type']: link['url']
       };
 
       // Update the links list based on the event
@@ -121,7 +115,7 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
     });
 
     on<AddMembersEvent>((event, emit) {
-      members.add(MembersProject(
+      members?.add(MembersProject(
         id: '',
         position: '',
       ));
@@ -129,20 +123,20 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
     });
 
     on<UpdateMembersEvent>((event, emit) {
-      members[event.index] = MembersProject(
+      members?[event.index] = MembersProject(
         id: event.id, // Update id
-        firstName: members[event.index].firstName, // Keep
-        lastName: members[event.index].lastName, // Keep
-        email: members[event.index].email,
+        firstName: members?[event.index].firstName, // Keep
+        lastName: members?[event.index].lastName, // Keep
+        email: members?[event.index].email,
         position: event.role, // Update position
-        imageUrl: members[event.index].imageUrl, // Keep
-        link: members[event.index].link, // Keep
+        imageUrl: members?[event.index].imageUrl, // Keep
+        link: members?[event.index].link, // Keep
       );
       emit(UpdateProjectEntryState());
     });
 
     on<DeleteMembersEvent>((event, emit) {
-      members.removeAt(event.index); // Remove member
+      members?.removeAt(event.index); // Remove member
       emit(UpdateProjectEntryState());
     });
     on<UpdateFileEvent>((event, emit) {

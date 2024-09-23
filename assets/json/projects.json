@@ -1,0 +1,80 @@
+[
+  {
+    "project_id": "1",
+    "project_name": "AI Bootcamp Project",
+    "bootcamp_name": "AI Bootcamp 2024",
+    "start_date": "2024-01-15",
+    "end_date": "2024-05-20",
+    "presentation_date": "2024-05-25",
+    "project_description": "An AI-powered application for healthcare diagnostics.",
+    "logo_url": "assets/logo.png",
+    "presentation_url": "assets/logo.png",
+    "user_id": "user_123",
+    "admin_id": "admin_456",
+    "time_end_edit": "2024-06-01",
+    "allow_edit": true,
+    "is_public": true,
+    "create_at": "2024-01-01",
+    "update_at": "2024-02-15",
+    "type": "AI Project",
+    "rating": 5,
+    "allow_rating": true,
+    "images_project": [
+      "assets/logo.png",
+      "assets/logo.png"
+    ],
+    "links_project": [
+      "https://github.com/example/repo1",
+      "https://example.com/project-page1"
+    ],
+    "members_project": [
+      {
+        "name": "John Doe",
+        "role": "Lead Developer"
+      },
+      {
+        "name": "Jane Smith",
+        "role": "Data Scientist"
+      }
+    ]
+  },
+  {
+    "project_id": "2",
+    "project_name": "Web Development Bootcamp",
+    "bootcamp_name": "Full Stack Bootcamp 2024",
+    "start_date": "2024-02-01",
+    "end_date": "2024-06-15",
+    "presentation_date": "2024-06-20",
+    "project_description": "A responsive web application for e-commerce.",
+    "logo_url": "assets/logo.png",
+    "presentation_url": "assets/logo.png",
+    "user_id": "user_789",
+    "admin_id": "admin_101",
+    "time_end_edit": "2024-06-30",
+    "allow_edit": false,
+    "is_public": true,
+    "create_at": "2024-02-01",
+    "update_at": "2024-04-10",
+    "type": "Web Project",
+    "rating": 4,
+    "allow_rating": true,
+    "images_project": [
+      "assets/logo.png",
+      "assets/logo.png"
+    ],
+    "links_project": [
+      "https://github.com/example/repo2",
+      "https://example.com/project-page2"
+    ],
+    "members_project": [
+      {
+        "name": "Alice Johnson",
+        "role": "Front-End Developer"
+      },
+      {
+        "name": "Bob Lee",
+        "role": "Back-End Developer"
+      }
+    ]
+  }
+]

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatelessWidget {
@@ -6,7 +5,8 @@ class BottomNavBar extends StatelessWidget {
   final ValueChanged<int> onItemTapped;
   final VoidCallback onMiddleButtonTapped;
 
-  const BottomNavBar({super.key, 
+  const BottomNavBar({
+    super.key,
     required this.selectedIndex,
     required this.onItemTapped,
     required this.onMiddleButtonTapped,
@@ -14,10 +14,15 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    const bottomNavBarHeight = 120.0;
+    const middleButtonSize = 100.0;
+
     return Stack(
       clipBehavior: Clip.none,
       children: [
         Container(
+          height: bottomNavBarHeight,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: const BorderRadius.only(
@@ -49,33 +54,34 @@ class BottomNavBar extends StatelessWidget {
                 buildBottomNavBarItem('assets/images/Call.png', 'Home', 0),
                 buildBottomNavBarItem('assets/images/browse.png', 'Browse', 1),
                 const BottomNavigationBarItem(
-                  icon: SizedBox.shrink(), 
+                  icon: SizedBox.shrink(),
                   label: '',
                 ),
-                buildBottomNavBarItem('assets/images/projects.png', 'My Projects', 3),
-                buildBottomNavBarItem('assets/images/profile.png', 'Profile', 4),
+                buildBottomNavBarItem(
+                    'assets/images/projects.png', 'My Projects', 3),
+                buildBottomNavBarItem(
+                    'assets/images/profile.png', 'Profile', 4),
               ],
             ),
           ),
         ),
         Positioned(
-          bottom: 60,
-          left: MediaQuery.of(context).size.width / 2 - 35,
+          bottom: bottomNavBarHeight / 2 - middleButtonSize / 70,
+          left: (screenWidth / 2) - (middleButtonSize / 2),
           child: GestureDetector(
             onTap: onMiddleButtonTapped,
             child: Container(
-              width: 80,
-              height: 80,
+              width: middleButtonSize,
+              height: middleButtonSize,
               decoration: const BoxDecoration(
                 color: Colors.transparent,
                 shape: BoxShape.circle,
-              
               ),
               child: ClipOval(
                 child: Image.asset(
                   'assets/images/FAB.png',
                   fit: BoxFit.cover,
-                  width: 48,
+                  width: 50,
                   height: 48,
                 ),
               ),
@@ -93,8 +99,8 @@ class BottomNavBar extends StatelessWidget {
         children: [
           Image.asset(
             assetPath,
-            width: 24,
-            height: 24,
+            width: 20,
+            height: 20,
             color:
                 selectedIndex == index ? const Color(0xFF4E2EB5) : const Color(0xFF848484),
           ),

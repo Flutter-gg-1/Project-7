@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:project_judge/components/tab_bar/Closed_tab_bar.dart';
 import 'package:project_judge/components/tab_bar/Opened_tab_bar.dart';
 import 'package:project_judge/data_layer/data_layer.dart';
 import 'package:project_judge/models/user_model.dart';
+import 'package:project_judge/screens/add_project_screen/add_project_screen.dart';
+import 'package:project_judge/screens/myproject/bloc/bloc_project_bloc.dart';
 import 'package:project_judge/setup/init_setup.dart';
 
 class MyProjectsScreen extends StatefulWidget {
@@ -15,8 +18,6 @@ class MyProjectsScreen extends StatefulWidget {
 class MyProjectsScreenState extends State<MyProjectsScreen>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
-  // List<Projects> openProjects = [];
-  // List<Projects> closedProjects = [];
 
   @override
   void initState() {
@@ -24,88 +25,83 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
     tabController = TabController(length: 2, vsync: this);
   }
 
-  UserModel user = getIt.get<DataLayer>().userInfo!; // Get user info
-  late List<Projects> openProjects =
-      user.projects!.where((project) => project.allowEdit!).toList();
-  late List<Projects> closedProjects =
-      user.projects!.where((project) => !project.allowEdit!).toList();
-
-  Future<void> loadProjects() async {
-    // Assume you have a method to get user info that includes projects
-    UserModel user = getIt.get<DataLayer>().userInfo!; // Get user info
-    setState(() {});
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final projectBloc = GetIt.I<ProjectBloc>();
+    UserModel user = getIt.get<DataLayer>().userInfo!; // Get user info
+
+    List<Projects> openProjects =
+        user.projects!.where((project) => project.allowEdit).toList();
+    List<Projects> closedProjects =
+        user.projects!.where((project) => !project.allowEdit).toList();
+
     return Scaffold(
+      backgroundColor: const Color(0xFF4E2EB5),
+      appBar: AppBar(
         backgroundColor: const Color(0xFF4E2EB5),
-        appBar: AppBar(
-          backgroundColor: const Color(0xFF4E2EB5),
-          elevation: 0,
-          centerTitle: true,
-          title: const Text(
-            'My Projects',
-            style: TextStyle(color: Colors.white),
-          ),
-          bottom: TabBar(
-            indicatorWeight: 8.0,
-            indicatorSize: TabBarIndicatorSize.tab,
-            controller: tabController,
-            indicatorColor: Colors.cyan,
-            labelColor: Colors.cyan,
-            labelStyle: const TextStyle(
-              fontSize: 20,
-              color: Colors.cyan,
-            ),
-            unselectedLabelStyle: const TextStyle(
-              fontSize: 20,
-            ),
-            unselectedLabelColor: Colors.grey,
-            tabs: const [
-              Tab(text: 'Open'),
-              Tab(text: 'Closed'),
-            ],
-          ),
+        elevation: 0,
+        centerTitle: true,
+        title: const Text(
+          'My Projects',
+          style: TextStyle(color: Colors.white),
         ),
-        body: TabBarView(
+        bottom: TabBar(
           controller: tabController,
-          children: [
-            ListView.builder(
-              itemCount: openProjects.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: MyProjectCardOpened(
-                      project: openProjects[index]), // Pass project data
-                );
-              },
-            ),
-            ListView.builder(
-              itemCount: closedProjects.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: MyProjectCardOpened(
-                      project: openProjects[index]), // Pass project data
-                );
-              },
-            ),
+          indicatorWeight: 8.0,
+          indicatorSize: TabBarIndicatorSize.tab,
+          indicatorColor: Color(0xff57E3D8),
+          labelColor: Color(0xff57E3D8),
+          labelStyle: const TextStyle(fontSize: 20),
+          unselectedLabelColor: Colors.grey,
+          tabs: const [
+            Tab(text: 'Opened'),
+            Tab(text: 'Closed'),
           ],
         ),
-        floatingActionButton: user.role == 'user'
-            ? FloatingActionButton(
-                onPressed: () {
-                  //  Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //         builder: (context) => Add(), ));
-                },
-                backgroundColor: Colors.cyan,
-                shape: const CircleBorder(),
-                heroTag: 'unique_tag',
-                child: const Icon(Icons.add),
-              )
-            : null);
+      ),
+      body: TabBarView(
+        controller: tabController,
+        children: [
+          buildProjectList(openProjects, true),
+          buildProjectList(closedProjects, false),
+        ],
+      ),
+      floatingActionButton: user.role == 'user'
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AddProjectScreen(),
+                  ),
+                );
+              },
+              backgroundColor: Color(0xff57E3D8),
+              shape: const CircleBorder(),
+              heroTag: 'unique_tag',
+              child: const Icon(Icons.add),
+            )
+          : null,
+    );
+  }
+
+  Widget buildProjectList(List<Projects> projects, bool isOpen) {
+    return ListView.builder(
+      itemCount: projects.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: isOpen
+              ? MyProjectCardOpened(project: projects[index])
+              : MyProjectCardClosed(project: projects[index]),
+        );
+      },
+    );
   }
 }

@@ -15,9 +15,9 @@ class bottomNavigationCustomPaint extends CustomPainter {
     path_0.lineTo(-5, 0.696921);
     path_0.close();
 
-    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.color = Color(0xff4E2EB5).withOpacity(1.0);
-    canvas.drawPath(path_0, paint_0_fill);
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = const Color(0xff4E2EB5).withOpacity(1.0);
+    canvas.drawPath(path_0, paint0Fill);
   }
 
   @override

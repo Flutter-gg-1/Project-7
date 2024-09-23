@@ -11,8 +11,10 @@ abstract class ConstantNetwork {
   final String updateProjectLogoEndPoint = '/user/edit/project/logo';
   final String updateProjectBaseEndPoint = '/user/edit/project/base';
   final String updateProjectImagesEndPoint = '/user/edit/project/images';
-  final String updateProjectPresentationEndPoint = '/user/edit/project/presentation';
+  final String updateProjectPresentationEndPoint =
+      '/user/edit/project/presentation';
   final String updateProjectLinksEndPoint = '/user/edit/project/link';
   final String updateProjectMembersEndPoint = '/user/edit/project/members';
+  final String getFirstHundredProjectsEndPoint = '/projects';
+  final String supervisorCreate = 'supervisor/create/project';
 }
-

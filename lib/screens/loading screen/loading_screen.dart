@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:project_judge/screens/home_screen/home_screen.dart';
 import 'package:project_judge/screens/loading%20screen/cubit/loading_screen_cubit.dart';
-import 'package:project_judge/screens/navigation_page/navigationPage.dart';
+import 'package:project_judge/screens/navigation/navigationPage.dart';
 import 'package:project_judge/screens/welcome_screen/welcome_screen.dart';
 
 class LoadingScreen extends StatelessWidget {

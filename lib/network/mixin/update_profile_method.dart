@@ -19,7 +19,7 @@ mixin UpdateProfileMethod on ConstantNetwork {
 
       Uint8List cvdata = await File(cv).readAsBytes();
 
-      final result = await dio.put("$baseurl/user/update/profile",
+       await dio.put("$baseurl/user/update/profile",
           data: {
             "first_name": firstName,
             "last_name": lastName,
@@ -32,7 +32,6 @@ mixin UpdateProfileMethod on ConstantNetwork {
             }
           },
           options: Options(headers: {"Authorization": "Bearer $token"}));
-      print(result);
     } on DioException catch (e) {
       print('dio $e');
       throw FormatException(e.response?.data['data']);

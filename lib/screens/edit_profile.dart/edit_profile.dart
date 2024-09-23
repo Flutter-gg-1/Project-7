@@ -87,8 +87,9 @@ class EditProfile extends StatelessWidget {
                               duration: Duration(seconds: 2),
                             ),
                           );
-
-                        bloc.add(UpdateAllProfileEvent());
+                        else {
+                          bloc.add(UpdateAllProfileEvent());
+                        }
                       }
                     },
                     icon: const Icon(Icons.done, color: Color(0xffffffff)),
@@ -117,7 +118,6 @@ class EditProfile extends StatelessWidget {
                                   radius: 40,
                                   backgroundImage: AssetImage(
                                       "assets/images/default_img.png"),
-                                  // Optionally show a loading indicator
                                 );
                               } else if (snapshot.hasError) {
                                 return const CircleAvatar(

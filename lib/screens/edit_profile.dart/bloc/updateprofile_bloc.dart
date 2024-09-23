@@ -28,7 +28,7 @@ class UpdateprofileBloc extends Bloc<UpdateprofileEvent, UpdateprofileState> {
   UpdateprofileBloc() : super(UpdateprofileInitial()) {
     imgFuture = convertUriToFile(); // Initialize the Future
     on<UploadImgEvent>((event, emit) async {
-      // Update the imgFuture with the new image file
+      print(user.imageUrl);
       imgFuture = Future.value(event.img); // Wrap the File in a Future
       emit(UpdatedState());
     });
@@ -50,8 +50,8 @@ class UpdateprofileBloc extends Bloc<UpdateprofileEvent, UpdateprofileState> {
           linkedin: linkedin,
           github: github,
           bindlink: bindlink,
-          img: img?.path ?? '', // Handle null safely
-          cv: file?.path ?? '', // Handle null safely
+          img: img?.path ?? '',
+          cv: file?.path ?? '',
         );
         emit(SuccessState());
       } on FormatException catch (e) {
@@ -80,14 +80,14 @@ class UpdateprofileBloc extends Bloc<UpdateprofileEvent, UpdateprofileState> {
         // Write the bytes to the file
         File file = File(filePath);
         await file.writeAsBytes(response.bodyBytes);
-        return file; // Return the created file
+        return file;
       } else {
         print('Failed to download file: ${response.statusCode}');
-        return null; // Return null if download fails
+        return null; 
       }
     } catch (e) {
       print('Error: $e');
-      return null; // Return null if an error occurs
+      return null; 
     }
   }
 }

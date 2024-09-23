@@ -3,6 +3,8 @@ import 'package:project_judge/components/slider_section/sliderSection.dart';
 import 'package:project_judge/components/text_field/noteSection_text.dart';
 
 class RatingPage extends StatefulWidget {
+  const RatingPage({super.key});
+
   @override
   RatingPageState createState() => RatingPageState();
 }
@@ -19,7 +21,7 @@ class RatingPageState extends State<RatingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:  Colors.white,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: const Color(0xFF4E2EB5),
@@ -39,8 +41,11 @@ class RatingPageState extends State<RatingPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('ProjectName', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
-              const Text('Rate this project on a scale from 1 (poor) to 10 (excellent).', style: TextStyle(color: Colors.grey, fontSize: 22)),
+              const Text('ProjectName',
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+              const Text(
+                  'Rate this project on a scale from 1 (poor) to 10 (excellent).',
+                  style: TextStyle(color: Colors.grey, fontSize: 22)),
               const SizedBox(height: 10),
 
               // Sliders
@@ -105,8 +110,8 @@ class RatingPageState extends State<RatingPage> {
                 },
               ),
 
-              const SizedBox(height: 10), 
-              NotesSection(),
+              const SizedBox(height: 10),
+              const NotesSection(),
             ],
           ),
         ),

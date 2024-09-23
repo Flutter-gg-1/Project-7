@@ -8,6 +8,7 @@ class DataLayer {
 
   AuthModel? authUser;
   UserModel? userInfo;
+  List<Projects>? projectInfo;
 
   final box = GetStorage();
 
@@ -25,18 +26,23 @@ class DataLayer {
   Future<void> getUserr() async {
     userInfo = await api.getUserProfile(token: authUser!.token);
     print(userInfo);
-     box.write("user", userInfo!.toJson());
+    box.write("user", userInfo!.toJson());
   }
 
-  
+  Future<void> getProjectInfo() async {
+    projectInfo = await api.getProjectDetails();
+  }
+
   loadData() {
-    if (box.hasData("auth")) {
-      Map<String, dynamic> loadedData = box.read("auth");
-      authUser = AuthModel.fromJson(loadedData);
-    }
-        if (box.hasData("user")) {
-      Map<String, dynamic> loadedData = box.read("user");
-      userInfo = UserModel.fromJson(loadedData);
+    loadData() async {
+      if (box.hasData("auth")) {
+        Map<String, dynamic> loadedData = box.read("auth");
+        authUser = AuthModel.fromJson(loadedData);
+      }
+      if (box.hasData("user")) {
+        Map<String, dynamic> loadedData = box.read("user");
+        userInfo = UserModel.fromJson(loadedData);
+      }
     }
   }
 }

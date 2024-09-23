@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_judge/components/buttons/custom_elevated_button.dart';
@@ -12,7 +11,6 @@ import 'package:simple_icons/simple_icons.dart';
 import '../../components/app_bar/custom_app_bar.dart';
 import '../../components/text/custom_text.dart';
 import 'dart:io';
-import 'package:open_filex/open_filex.dart';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
@@ -53,14 +51,13 @@ class ProfileScreen extends StatelessWidget {
               ),
               Center(
                   child: Container(
-                width: 140, // Double the radius for correct sizing
+                width: 140,
                 height: 140,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: Color(
-                        0xffffffff), // Change to your desired border color
-                    width: 4, // Set the border width
+                    color: Color(0xffffffff),
+                    width: 4,
                   ),
                 ),
                 child: CircleAvatar(
@@ -179,13 +176,17 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: 14,
               ),
-              if (user.role == 'admin')
+              if (user.role == 'user')
                 CustomElevatedButton(
                     onPressed: () {},
                     minimumSize: const Size(350, 63),
                     backgroundColor: Colors.white,
                     text: "Manage Users",
-                    textcolor: const Color(0xff5030B6))
+                    textcolor: const Color(0xff5030B6)),
+
+              SizedBox(
+                height: 20,
+              )
             ],
           ),
         ));
