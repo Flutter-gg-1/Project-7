@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:image/image.dart' as img;
 import 'package:zxing2/qrcode.dart';
 
-readQR() async {
-  var image = img.decodePng(File('tool/example.png').readAsBytesSync())!;
+readQR()  {
+  var image =  img.decodePng(File('assets/qr.png').readAsBytesSync())!;
 
   LuminanceSource source = RGBLuminanceSource(
       image.width,
