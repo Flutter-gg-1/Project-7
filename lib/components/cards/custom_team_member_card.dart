@@ -11,16 +11,28 @@ class CustomTeamMemberCard extends StatelessWidget {
       this.image,
       required this.name,
       required this.position,
-      required this.description});
+      required this.description,
+      this.githubOnPressed,
+      this.linkedinOnPressed,
+      this.bindLinkOnPressed,
+      this.cvOnPressed});
   final Widget? image;
   final String name;
   final String position;
   final String description;
+  final Function()? githubOnPressed;
+  final Function()? linkedinOnPressed;
+  final Function()? bindLinkOnPressed;
+  final Function()? cvOnPressed;
   @override
   Widget build(BuildContext context) {
     return ExpansionTileCard(
-      leading: ClipOval(
-        child: image,
+      leading: Container(
+        width: 50,
+        height: 50,
+        child: ClipOval(
+          child: image,
+        ),
       ),
       title: CustomText(
         text: name,
@@ -49,35 +61,34 @@ class CustomTeamMemberCard extends StatelessWidget {
               Row(
                 children: [
                   CustomIconButton(
-                      onPressed: () {},
-                      icon: const Icon(SimpleIcons.github,
-                          color: Color(0xff848484))),
+                      onPressed: githubOnPressed,
+                      icon: const Icon(
+                        SimpleIcons.github,
+                        color: Colors.black,
+                      )),
                   CustomIconButton(
-                    onPressed: () {},
+                    onPressed: linkedinOnPressed,
                     icon: const ClipOval(
                         child: Icon(
                       SimpleIcons.linkedin,
                       size: 24,
-                      color: Color(0xff848484),
+                      color: Color.fromARGB(255, 40, 70, 180),
                     )),
                   ),
                   CustomIconButton(
-                    onPressed: () {},
+                    onPressed: bindLinkOnPressed,
                     icon: const CircleAvatar(
                         minRadius: 12,
                         maxRadius: 12,
                         backgroundColor: Color(0xff848484),
                         foregroundColor: Colors.white,
                         child: Icon(
-                          Icons.email,
+                          Icons.link,
                           size: 18,
                         )),
                   ),
-                  const SizedBox(
-                    width: 4,
-                  ),
                   CustomIconButton(
-                    onPressed: () {},
+                    onPressed: cvOnPressed,
                     icon: CircleAvatar(
                         minRadius: 12,
                         maxRadius: 12,
