@@ -70,3 +70,5 @@ class DeleteMembersEvent extends EditProjectEvent {
 final class AddMembersEvent extends EditProjectEvent {
 }
 
+final class UpdateAllProjectEvent extends EditProjectEvent {
+}

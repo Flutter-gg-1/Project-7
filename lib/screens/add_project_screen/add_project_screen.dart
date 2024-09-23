@@ -30,6 +30,7 @@ class AddProjectScreen extends StatelessWidget {
                 ),
               );
             } else if (state is SuccessState) {
+              Navigator.pop(context);
               cubit.nextStep();
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
@@ -98,9 +99,7 @@ class AddProjectScreen extends StatelessWidget {
                                 cubit.selectDate(value);
                                 Navigator.pop(context);
                               },
-                              onPressed: () {
-                                
-                              },
+                              onPressed: () {},
                             ),
                           ),
                           Step(

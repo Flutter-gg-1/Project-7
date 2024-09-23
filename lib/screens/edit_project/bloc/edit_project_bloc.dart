@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:project_judge/data_layer/data_layer.dart';
 import 'package:project_judge/models/user_model.dart';
+import 'package:project_judge/network/api_netowrok.dart';
 import 'package:project_judge/setup/init_setup.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
   late Projects project = getIt.get<DataLayer>().userInfo!.projects!.firstWhere(
         (project) => project.projectId == id,
       );
-
+  ApiNetowrok api = ApiNetowrok();
   //save logo
   File? logoImg; // to save the img from gallary
   // late String savedLogo = project.logoUrl ?? '';
@@ -56,7 +57,6 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
     });
 
     on<UpdatePresentationDateEvent>((event, emit) {
-
       presentationDate = event.date;
       emit(UpdateProjectEntryState());
     });
@@ -142,6 +142,32 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
     on<UpdateFileEvent>((event, emit) {
       presention = event.presentation;
       emit(UpdateProjectEntryState());
+    });
+
+    on<UpdateAllProjectEvent>((event, emit) async {
+      emit(LoadingState());
+      try {
+        await api.updateProject(
+            projectID: id!,
+            token: getIt.get<DataLayer>().authUser!.token,
+            name: name,
+            bootcamp: bootcampName,
+            type: type,
+            start: DateFormat('dd/MM/yyyy').format(duration!.start),
+            end: DateFormat('dd/MM/yyyy').format(duration!.end),
+            presentationDate:
+                DateFormat('dd/MM/yyyy').format(presentationDate!),
+            desc: description,
+            link: links!,
+            logo: logoImg!.path,
+            members: members!,
+            imagesList: imgList);
+        emit(SuccessState());
+      } on FormatException catch (e) {
+        emit(ErrorState(msg: e.message));
+      } catch (e) {
+        emit(ErrorState(msg: e.toString()));
+      }
     });
   }
 }

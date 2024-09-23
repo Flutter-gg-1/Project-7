@@ -9,10 +9,7 @@ import 'package:project_judge/screens/add_project_screen/cubit/add_project_cubit
 import '../../components/text_field/custom_text_form_field.dart';
 
 class CreateNewProject extends StatelessWidget {
-  CreateNewProject(
-      {super.key,
-      required this.onDateSelected,
-      this.onPressed});
+  CreateNewProject({super.key, required this.onDateSelected, this.onPressed});
 
   final Function(DateTime) onDateSelected;
   final Function()? onPressed;
@@ -66,7 +63,6 @@ class CreateNewProject extends StatelessWidget {
                   const Spacer(),
                   TextButton(
                     onPressed: () {
-                      
                       showModalBottomSheet(
                         context: context,
                         isScrollControlled: true,
@@ -150,7 +146,22 @@ class CreateNewProject extends StatelessWidget {
             child: Column(
               children: [
                 ElevatedButton(
-                  onPressed: onPressed,
+                  onPressed: () {
+                    //create the project
+                    if (formKey.currentState?.validate() == true) {
+                      if (bloc.EndDate == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please Enter An End Date'),
+                            backgroundColor: Color(0xff4D2EB4),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      } else {
+                        bloc.createAccountMethod();
+                      }
+                    }
+                  },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(385, 63),
                     backgroundColor: const Color(0xff4D2EB4),

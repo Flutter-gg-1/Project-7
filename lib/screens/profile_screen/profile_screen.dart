@@ -155,12 +155,6 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              // user.link!.resume != null ?
-              //SHOW FILE
-              // : CustomText(
-              //     text: 'No resume',
-              //     size: 14,
-              //     color: const Color(0xffffffff)),
               const SizedBox(
                 height: 40,
               ),
@@ -183,7 +177,6 @@ class ProfileScreen extends StatelessWidget {
                     backgroundColor: Colors.white,
                     text: "Manage Users",
                     textcolor: const Color(0xff5030B6)),
-
               SizedBox(
                 height: 20,
               )
