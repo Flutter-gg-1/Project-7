@@ -10,6 +10,8 @@ class AdminHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController userIdController = TextEditingController();
+    String role = '';
     return BlocProvider(
       create: (context) =>
           AdminPageCubit(apiNetworking: ApiNetworking())..fetchProjects(),
@@ -109,7 +111,7 @@ class AdminHomeScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: TextField(
-                                  controller: TextEditingController(),
+                                  controller: userIdController,
                                   cursorColor: Colors.black,
                                   maxLines: 1,
                                   style: const TextStyle(fontSize: 16),
@@ -133,7 +135,7 @@ class AdminHomeScreen extends StatelessWidget {
                                 ),
                                 DropdownMenu(
                                   onSelected: (value) {
-                                    // Assign role logic here
+                                    role = value!;
                                   },
                                   dropdownMenuEntries: const [
                                     DropdownMenuEntry(
@@ -155,7 +157,8 @@ class AdminHomeScreen extends StatelessWidget {
                           width: 170,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Handle change user role
+                              ApiNetworking().changeRole(
+                                  userId: userIdController.text, role: role);
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xff4129B7),

@@ -9,7 +9,7 @@ mixin AdminApi on ConstantsApi {
         
     try {
       await dio.put(
-        baseUrl + updateProfileEndpoint,
+        baseUrl + changeRoleEndpoint,
         data: {"id_user": userId, "role": role},
         options: Options(
           headers: {
