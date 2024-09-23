@@ -68,26 +68,24 @@ class CreateAccountScreen extends StatelessWidget {
                               borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(40),
                                   topLeft: Radius.circular(40))),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              const SizedBox(
-                                height: 60,
-                              ),
-                              const Text(
-                                "Sign up",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 32),
-                              ),
-                              const SizedBox(
-                                height: 70,
-                              ),
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20),
-                                    child: CustomTextFormField(
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 60,
+                                ),
+                                const Text(
+                                  "Sign up",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 32),
+                                ),
+                                const SizedBox(
+                                  height: 70,
+                                ),
+                                Column(
+                                  children: [
+                                    CustomTextFormField(
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.never,
                                       controller: bloc.emailController,
@@ -102,14 +100,10 @@ class CreateAccountScreen extends StatelessWidget {
                                         return null;
                                       },
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 46,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20),
-                                    child: CustomTextFormField(
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    CustomTextFormField(
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.never,
                                       controller: bloc.fNameController,
@@ -122,14 +116,10 @@ class CreateAccountScreen extends StatelessWidget {
                                         return null;
                                       },
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 46,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20),
-                                    child: CustomTextFormField(
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    CustomTextFormField(
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.never,
                                       controller: bloc.lNameController,
@@ -142,45 +132,47 @@ class CreateAccountScreen extends StatelessWidget {
                                         return null;
                                       },
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 46,
-                                  ),
-                                  CustomElevatedButton(
-                                    minimumSize: Size(
-                                        MediaQuery.of(context).size.width, 63),
-                                    backgroundColor: const Color(0xff4D2EB4),
-                                    text: "Get OTP",
-                                    textcolor: Colors.white,
-                                    onPressed: () {
-                                      bloc.checkAccounts();
-                                    },
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Text(
-                                        "Already have an account?",
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      TextButton(
-                                          onPressed: () {
-                                            Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const LoginScreen()));
-                                          },
-                                          child: const Text(
-                                            "Log in",
-                                            style: TextStyle(
-                                                color: Color(0xff57E3D8)),
-                                          ))
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ],
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    CustomElevatedButton(
+                                      minimumSize: Size(
+                                          MediaQuery.of(context).size.width,
+                                          63),
+                                      backgroundColor: const Color(0xff4D2EB4),
+                                      text: "Get OTP",
+                                      textcolor: Colors.white,
+                                      onPressed: () {
+                                        bloc.checkAccounts();
+                                      },
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Text(
+                                          "Already have an account?",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pushReplacement(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const LoginScreen()));
+                                            },
+                                            child: const Text(
+                                              "Log in",
+                                              style: TextStyle(
+                                                  color: Color(0xff57E3D8)),
+                                            ))
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         Positioned(

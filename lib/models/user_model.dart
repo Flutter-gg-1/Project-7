@@ -1,4 +1,3 @@
-
 class UserModel {
   UserModel({
     required this.id,
@@ -29,11 +28,10 @@ class UserModel {
     lastName = json['last_name'];
     email = json['email'];
     role = json['role'];
-    imageUrl = json['imageUrl'];
+    imageUrl = json['image_url'];
     link = Link.fromJson(json['link']);
-    projects = List.from(json['projects'])
-        .map((e) => Projects.fromJson(e))
-        .toList();
+    projects =
+        List.from(json['projects']).map((e) => Projects.fromJson(e)).toList();
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -59,15 +57,18 @@ class Link {
     required this.github,
     required this.linkedin,
     required this.bindlink,
+    required this.resume,
   });
   late final String? github;
   late final String? linkedin;
   late final String? bindlink;
+  late final String? resume;
 
   Link.fromJson(Map<String, dynamic> json) {
     github = json['github'];
     linkedin = json['linkedin'];
     bindlink = json['bindlink'];
+    resume = json['resume'];
   }
 
   Map<String, dynamic> toJson() {
@@ -75,6 +76,7 @@ class Link {
     data['github'] = github;
     data['linkedin'] = linkedin;
     data['bindlink'] = bindlink;
+    data['resume'] = resume;
     return data;
   }
 }
@@ -101,7 +103,7 @@ class Projects {
     required this.createAt,
     required this.updateAt,
     required List<dynamic>? imagesProject,
-    required List<Map<String,dynamic>>? linksProject,
+    required List<Map<String, dynamic>>? linksProject,
     required List<MembersProject>? membersProject,
   })  : imagesProject = imagesProject ?? [],
         linksProject = linksProject ?? [],
@@ -223,10 +225,9 @@ class MembersProject {
     data['link'] = link?.toJson();
     return data;
   }
-    @override
+
+  @override
   String toString() {
     return '{"user_id" : "$id", "position": "$position"}';
   }
 }
-
-

@@ -7,12 +7,12 @@ class RatingBloc extends Bloc<RatingEvent, RatingState> {
   ApiNetowrok api = ApiNetowrok();
   RatingBloc()
       : super(RatingState(
-          ideaRating: 1,
-          designRating: 1,
-          toolsRating: 1,
-          practicesRating: 1,
-          presentationRating: 1,
-          investmentRating: 1,
+          ideaRating: 5,
+          designRating: 5,
+          toolsRating: 5,
+          practicesRating: 5,
+          presentationRating: 5,
+          investmentRating: 5,
         )) {
     on<UpdateRating>((event, emit) {
       switch (event.category) {

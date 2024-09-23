@@ -98,7 +98,7 @@ class VerifyScreen extends StatelessWidget {
                                   ]),
                                 ),
                               ),
-                              const SizedBox(height: 122),
+                              const SizedBox(height: 60),
                               Pinput(
                                   cursor: Column(
                                     children: [

@@ -56,7 +56,7 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
     });
 
     on<UpdatePresentationDateEvent>((event, emit) {
-      print(members?.toList());
+
       presentationDate = event.date;
       emit(UpdateProjectEntryState());
     });

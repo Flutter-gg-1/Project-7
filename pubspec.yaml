@@ -27,6 +27,11 @@ dependencies:
   expansion_tile_card: ^3.0.0
   flutter_rating_bar: ^4.0.1
   circular_countdown_timer: ^0.2.4
+  url_launcher: ^6.3.0
+  flutter_webview_plugin: ^0.4.0
+  webview_flutter: ^4.9.0
+  open_filex: ^4.5.0
+  uri_to_file: ^1.0.0
   flutter_barcode_scanner: ^2.0.0
   barcode_widget: ^2.0.4
 

@@ -56,7 +56,6 @@ class EditProjectForm extends StatelessWidget {
               onPressed: () {
                 if (formKey.currentState?.validate() == true) {
                   //go to api methods
-
                   if (bloc.logoImg == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -830,7 +829,7 @@ class ProjectMembersSection extends StatelessWidget {
                   const Row(
                     children: [
                       Expanded(
-                        child: Text("Member's Name",
+                        child: Text("Member's ID",
                             style: TextStyle(
                                 color: Color(0xff262626), fontSize: 16)),
                       ),

@@ -4,6 +4,7 @@ import 'package:project_judge/components/tab_bar/Closed_tab_bar.dart';
 import 'package:project_judge/components/tab_bar/Opened_tab_bar.dart';
 import 'package:project_judge/data_layer/data_layer.dart';
 import 'package:project_judge/models/user_model.dart';
+import 'package:project_judge/screens/add_project_screen/add_project_screen.dart';
 import 'package:project_judge/screens/myproject/bloc/bloc_project_bloc.dart';
 import 'package:project_judge/setup/init_setup.dart';
 
@@ -32,52 +33,62 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      final projectBloc = GetIt.I<ProjectBloc>();
-      UserModel user = getIt.get<DataLayer>().userInfo!; // Get user info
-      late List<Projects> openProjects =
-          user.projects!.where((project) => project.allowEdit).toList();
-      late List<Projects> closedProjects =
-          user.projects!.where((project) => !project.allowEdit).toList();
+    final projectBloc = GetIt.I<ProjectBloc>();
+    UserModel user = getIt.get<DataLayer>().userInfo!; // Get user info
 
-      return Scaffold(
+    List<Projects> openProjects =
+        user.projects!.where((project) => project.allowEdit).toList();
+    List<Projects> closedProjects =
+        user.projects!.where((project) => !project.allowEdit).toList();
+
+    return Scaffold(
+      backgroundColor: const Color(0xFF4E2EB5),
+      appBar: AppBar(
         backgroundColor: const Color(0xFF4E2EB5),
-        appBar: AppBar(
-          backgroundColor: const Color(0xFF4E2EB5),
-          elevation: 0,
-          centerTitle: true,
-          title: const Text(
-            'My Projects',
-            style: TextStyle(color: Colors.white),
-          ),
-          bottom: TabBar(
-            controller: tabController,
-            indicatorWeight: 8.0,
-            indicatorSize: TabBarIndicatorSize.tab,
-            indicatorColor: Colors.cyan,
-            labelColor: Colors.cyan,
-            labelStyle: const TextStyle(fontSize: 20, color: Colors.cyan),
-            unselectedLabelColor: Colors.grey,
-            tabs: const [
-              Tab(text: 'Opened'),
-              Tab(text: 'Closed'),
-            ],
-          ),
+        elevation: 0,
+        centerTitle: true,
+        title: const Text(
+          'My Projects',
+          style: TextStyle(color: Colors.white),
         ),
-        body: TabBarView(
+        bottom: TabBar(
           controller: tabController,
-          children: [
-            buildProjectList(openProjects, true),
-            buildProjectList(closedProjects, false),
+          indicatorWeight: 8.0,
+          indicatorSize: TabBarIndicatorSize.tab,
+          indicatorColor: Color(0xff57E3D8),
+          labelColor: Color(0xff57E3D8),
+          labelStyle: const TextStyle(fontSize: 20),
+          unselectedLabelColor: Colors.grey,
+          tabs: const [
+            Tab(text: 'Opened'),
+            Tab(text: 'Closed'),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: Colors.cyan,
-          child: const Icon(Icons.add),
-        ),
-      );
-    });
+      ),
+      body: TabBarView(
+        controller: tabController,
+        children: [
+          buildProjectList(openProjects, true),
+          buildProjectList(closedProjects, false),
+        ],
+      ),
+      floatingActionButton: user.role == 'user'
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AddProjectScreen(),
+                  ),
+                );
+              },
+              backgroundColor: Color(0xff57E3D8),
+              shape: const CircleBorder(),
+              heroTag: 'unique_tag',
+              child: const Icon(Icons.add),
+            )
+          : null,
+    );
   }
 
   Widget buildProjectList(List<Projects> projects, bool isOpen) {
