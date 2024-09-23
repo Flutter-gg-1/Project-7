@@ -39,8 +39,7 @@ class ProjectViewScreen extends StatelessWidget {
         final id = authLocator.get<AuthLayerData>().auth!.id;
         return Scaffold(
           backgroundColor: Colors.white,
-          body: SafeArea(
-              child: SingleChildScrollView(
+          body: SingleChildScrollView(
             child: Column(
               children: [
                 CustomPaint(
@@ -342,7 +341,7 @@ class ProjectViewScreen extends StatelessWidget {
                 ),
               ],
             ),
-          )),
+          ),
         );
       }),
     );

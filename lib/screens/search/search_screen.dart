@@ -34,6 +34,9 @@ class SearchScreen extends StatelessWidget {
                       hintText: cubit.language.isArabic
                           ? 'البحث عن المشروع'
                           : 'Search for Project')),
+              SizedBox(
+                height: context.getHeight(multiply: 0.02),
+              ),
               BlocBuilder<SearchScreenCubit, SearchScreenState>(
                 builder: (context, state) {
                   if (state is SearchScreenLodingState) {
@@ -90,6 +93,9 @@ class SearchScreen extends StatelessWidget {
                     ),
                   );
                 },
+              ),
+              SizedBox(
+                height: context.getHeight(multiply: 0.02),
               ),
             ],
           ),
