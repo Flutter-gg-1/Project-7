@@ -42,6 +42,7 @@ class ProfileScreen extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => const FirstScreen()),
                     (route) => false);
+                logout(context);
               },
             ),
           ],
@@ -325,5 +326,9 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void logout(BuildContext context) {
+    // إضافة وظيفة تسجيل الخروج هنا
   }
 }
