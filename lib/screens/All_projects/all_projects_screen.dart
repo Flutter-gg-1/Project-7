@@ -13,9 +13,11 @@ class AllProjectsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
+      
       create: (context) =>
           AllProjectsBloc(ApiNetworking())..add(FetchAllProjectsEvent()),
       child: Builder(builder: (context) {
+        
         return Scaffold(
           body: CustomScrollView(
             slivers: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:project_management_app/data_layer/data_layer.dart';
 import 'package:project_management_app/models/member_model.dart';
 import 'package:project_management_app/models/profile_model.dart';
@@ -15,6 +16,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
   final ProjectModel project;
+
   const ProjectDetailsScreen({super.key, required this.project});
 
   @override
@@ -42,26 +44,32 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
   void initState() {
     super.initState();
     _checkEditAuthorization();
+    logger.i(_checkEditAuthorization());
   }
 
-  Future<void> _checkEditAuthorization() async {
-    profile = await getProfile();
-    setState(() {
-      isEditAuthrized = profile!.id == widget.project.adminId;
-
-      if (!isEditAuthrized) {
-        for (var member in widget.project.membersProject!) {
-          if (member.userId == profile!.id) {
-            isEditAuthrized = true;
-          }
-        }
-      }
-    });
-  }
+  final logger = Logger();
 
   Future<Profile> getProfile() async {
     return await ApiNetworking()
         .getProfile(locator.get<DataLayer>().auth!.token);
+  }
+
+  Future<void> _checkEditAuthorization() async {
+    profile = await getProfile();
+    if (!mounted) return; // تأكد من أن الويدجت ما زالت موجودة
+
+    logger.i('User Role: ${profile!.role}'); // طباعة الـ role
+
+    setState(() {
+      isEditAuthrized = profile!.role.toLowerCase() == 'admin' ||
+          profile!.role.toLowerCase() == 'supervisor';
+      logger.i('isEditAuthrized: $isEditAuthrized');
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -71,40 +79,41 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.blueDark,
         actions: [
-          isEditAuthrized
-              ? IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => EditProjectScreen(
-                                  project: widget.project,
-                                  userId: profile!.id,
-                                )));
-                  },
-                  icon: const Icon(
-                    Icons.edit,
-                    color: Colors.white,
-                  ))
-              : const Text('')
+          if (isEditAuthrized)
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditProjectScreen(
+                      project: widget.project,
+                      userId: profile!.id,
+                    ),
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.edit,
+                color: Colors.white,
+              ),
+            ),
         ],
       ),
       body: ListView(
         padding:
             const EdgeInsets.only(left: 16, top: 16, bottom: 16, right: 30),
         children: [
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
                 ' Project Details ..',
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 21,
-                    color: Color(0xff57E3D8)),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 21,
+                  color: Color(0xff57E3D8),
+                ),
               ),
               if (widget.project.logoUrl != null &&
                   widget.project.logoUrl != 'null')
@@ -114,9 +123,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               Image.asset('assets/Group 10 (1).png')
             ],
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
 
           // project name
           CustomProjectInfo(
@@ -151,27 +158,21 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
             label: 'End Date  :',
             content: widget.project.endDate.toString(),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
 
           // Editing End Date
           CustomProjectInfo(
             label: 'Editing End Date :',
             content: widget.project.timeEndEdit.toString(),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
 
           // Presentation Date
           CustomProjectInfo(
             label: 'Presentaion Date :',
             content: widget.project.presentationDate.toString(),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
 
           // Presentation Url
           Row(
@@ -186,17 +187,15 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                 ),
               ),
               IconButton(
-                  onPressed: () {
-                    launchLink(widget.project.presentationUrl.toString());
-                  },
-                  icon: const Icon(Icons.link))
+                onPressed: () {
+                  launchLink(widget.project.presentationUrl.toString());
+                },
+                icon: const Icon(Icons.link),
+              ),
             ],
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
 
-          // Links dropdown button and image in a Row
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -216,8 +215,8 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                     style: TextStyle(color: Colors.white),
                   ),
                   icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
-                  iconSize: 24, // Adjust the icon size
-                  underline: Container(), // Remove default underline
+                  iconSize: 24,
+                  underline: Container(),
                   dropdownColor: const Color(0xff4129B7),
                   style: const TextStyle(color: Colors.white, fontSize: 16),
                   onChanged: (String? newValue) {
@@ -225,16 +224,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                       selectedLink = newValue;
                     });
                   },
-                  items: <String>[
-                    'GitHub',
-                    'Figma',
-                    'Video',
-                    'Pinterest Link',
-                    'PlayStore Link',
-                    'AppleStore Link',
-                    'Web Link',
-                    'Apk'
-                  ].map<DropdownMenuItem<String>>((String value) {
+                  items: links.map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
@@ -248,7 +238,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                 version: QrVersions.auto,
                 size: 100,
                 gapless: false,
-              )
+              ),
             ],
           ),
           if (selectedLink != null)
@@ -271,9 +261,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               )
             else
               const Text('No Link Added'),
-          const SizedBox(
-            height: 30,
-          ),
+          const SizedBox(height: 30),
 
           // Grid to display images
           if (widget.project.imagesProject!.isNotEmpty)
