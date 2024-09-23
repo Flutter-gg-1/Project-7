@@ -9,6 +9,7 @@ import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/helper/method/open_url.dart';
 import 'package:tuwaiq_project/screens/auth/bloc/auth_bloc.dart';
 import 'package:tuwaiq_project/screens/auth/login_screen.dart';
+import 'package:tuwaiq_project/screens/manage/manage_project_screen.dart';
 import 'package:tuwaiq_project/screens/profile/cubit_profile/profile_cubit.dart';
 import 'package:tuwaiq_project/screens/profile/profile_information_screen.dart';
 import 'package:tuwaiq_project/services/setup.dart';
@@ -76,19 +77,16 @@ class ProfileScreen extends StatelessWidget {
                           trailing: const Icon(Icons.arrow_forward_ios,
                               color: Colors.black),
                           leading: CircleAvatar(
-                            radius: 30,
-                            onBackgroundImageError: (exception, stackTrace) {
-                              const AssetImage(
-                                  'assets/image/Search-amico(1).png');
-                            },
-                            backgroundImage:
-                            state.profileModel.imageFile != null ?
-
-                                NetworkImage(state.profileModel.imageFile!) :
-                                AssetImage(
-                                  'assets/image/Search-amico(1).png')
-
-                          ),
+                              radius: 30,
+                              onBackgroundImageError: (exception, stackTrace) {
+                                const AssetImage(
+                                    'assets/image/Search-amico(1).png');
+                              },
+                              backgroundImage: state.profileModel.imageFile !=
+                                      null
+                                  ? NetworkImage(state.profileModel.imageFile!)
+                                  : AssetImage(
+                                      'assets/image/Search-amico(1).png')),
                           title: Text(
                             '${state.profileModel.firstName} ${state.profileModel.lastName}',
                             style: const TextStyle(
@@ -146,7 +144,8 @@ class ProfileScreen extends StatelessWidget {
                           log("${state.profileModel.link.linkedin}");
                           await openUrl(
                               context: context,
-                              url: "https://${state.profileModel.link.linkedin}");
+                              url:
+                                  "https://${state.profileModel.link.linkedin}");
                         },
                       ),
                       CustomeLinksProfile(
@@ -170,7 +169,8 @@ class ProfileScreen extends StatelessWidget {
                           log("${state.profileModel.link.bindlink}");
                           await openUrl(
                               context: context,
-                              url: "https://${state.profileModel.link.bindlink}");
+                              url:
+                                  "https://${state.profileModel.link.bindlink}");
                         },
                       ),
                       CustomeLinksProfile(
@@ -236,6 +236,37 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           colorText: Colors.black,
                           text: language.isArabic ? 'عن التطبيق' : 'About App',
+                          isArabic: language.isArabic,
+                        ),
+                        CustomeListTileProfile(
+                          onTap: () {
+                            if (state.profileModel.role != "user") {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) {
+                                  return const ManageProjectScreen();
+                                },
+                              ));
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text(
+                                  "you are not admin",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                backgroundColor: Colors.red,
+                              ));
+                            }
+                          },
+                          iconListTile: Icon(
+                            Icons.chrome_reader_mode,
+                            size: context.getHeight(multiply: 0.035),
+                            color: const Color(0x889B37FF).withOpacity(0.70),
+                          ),
+                          colorText: Colors.black,
+                          text:
+                              language.isArabic ? 'اضافة مشروع' : 'Add project',
                           isArabic: language.isArabic,
                         ),
                       ],
