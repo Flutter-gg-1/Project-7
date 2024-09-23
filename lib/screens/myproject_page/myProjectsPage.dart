@@ -5,7 +5,7 @@ import 'package:project_judge/components/tab_bar/Opened_tab_bar.dart';
 import 'package:project_judge/data_layer/data_layer.dart';
 import 'package:project_judge/models/user_model.dart';
 import 'package:project_judge/screens/add_project_screen/add_project_screen.dart';
-import 'package:project_judge/screens/myproject/bloc/bloc_project_bloc.dart';
+import 'package:project_judge/screens/myproject_page/bloc/bloc_project_bloc.dart';
 import 'package:project_judge/setup/init_setup.dart';
 
 class MyProjectsScreen extends StatefulWidget {
@@ -72,7 +72,7 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
           buildProjectList(closedProjects, false),
         ],
       ),
-      floatingActionButton: user.role == 'user'
+      floatingActionButton: user.role == 'supervisor' || user.role == "admin"
           ? FloatingActionButton(
               onPressed: () {
                 Navigator.push(

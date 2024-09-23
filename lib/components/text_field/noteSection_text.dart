@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 
 class NotesSection extends StatelessWidget {
-  const NotesSection({super.key});
+  const NotesSection({super.key, this.controller});
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +26,8 @@ class NotesSection extends StatelessWidget {
             color: Colors.grey[200],
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const TextField(
-            decoration: InputDecoration(
+          child:  TextField(controller: controller,
+            decoration: const InputDecoration(
               hintText: 'Add any additional notes',
               border: InputBorder.none,
             ),

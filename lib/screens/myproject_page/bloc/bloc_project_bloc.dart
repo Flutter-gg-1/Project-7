@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_judge/models/user_model.dart';
 import 'package:project_judge/network/api_netowrok.dart';
-import 'package:project_judge/screens/myproject/bloc/bloc_project_event.dart';
-import 'package:project_judge/screens/myproject/bloc/bloc_project_state.dart';
+import 'package:project_judge/screens/myproject_page/bloc/bloc_project_event.dart';
+import 'package:project_judge/screens/myproject_page/bloc/bloc_project_state.dart';
 
 class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   ProjectBloc() : super(ProjectLoading()) {

@@ -39,8 +39,30 @@ class ViewProjectDetailScreen extends StatelessWidget {
             text: 'Project Details',
             actions: [
               IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset("assets/svg/bracode_icon.svg"))
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                              content: Container(
+                                height: 200,
+                                width: 200,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4)),
+                                child: BarcodeWidget(
+                                    data: projectID, barcode: Barcode.qrCode()),
+                              ),
+                            ));
+                  },
+                  icon: Icon(Icons.qr_code_2_rounded)),
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                RatingPage(projectID: projectID)));
+                  },
+                  icon: Icon(Icons.rate_review_outlined)),
             ],
           ),
           body: BlocBuilder<ViewProjectDetailsCubit, ViewProjectDetailsState>(

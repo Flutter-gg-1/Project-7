@@ -10,7 +10,8 @@ mixin RatingProjectMethod on ConstantNetwork {
       required int practices,
       required int presentation,
       required int investment,
-      required String note}) async {
+      required String note,
+      required String token}) async {
     try {
       await dio.post("$baseurl$ratingProjectEndPoint/$projectID", data: {
         "idea": idea,
@@ -20,7 +21,7 @@ mixin RatingProjectMethod on ConstantNetwork {
         "presentation": presentation,
         "investment": investment,
         "note": note
-      });
+      },options: Options(headers: {"Authorization": "Bearer $token"}));
     } on DioException catch (e) {
       throw FormatException(e.response?.data['data']);
     } catch (e){
