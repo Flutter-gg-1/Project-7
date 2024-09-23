@@ -1,5 +1,5 @@
 <center>
-<img src="https://github.com/user-attachments/assets/e8606ed3-b550-47b5-b03a-c2d527af10bc" width="600" />
+<img src="https://github.com/user-attachments/assets/e8606ed3-b550-47b5-b03a-c2d527af10bc" width="550" />
 </center>
 
 
@@ -163,6 +163,19 @@ This project utilizes a variety of packages and libraries to enhance its functio
 
 ## Acknowledgments
 Special thanks to the Flutter community and contributors for their invaluable resources and support in developing this application.
+
+
+
+## Team Members
+Muhannad Al-Thaher
+
+
+Abdulaziz Alamri
+
+
+Rawan Al Riyad
+
+
 
 # 🇸🇦Happy national day🇸🇦
 

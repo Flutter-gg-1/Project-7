@@ -267,6 +267,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         ...List.generate(profile.projects.length, (index) {
+                         
                           return ListTile(
                               trailing: profile.role == 'supervisor'
                                   ? IconButton(
@@ -293,12 +294,15 @@ class ProfileScreen extends StatelessWidget {
                                                                 const SnackBar(
                                                                     content: Text(
                                                                         'Project Deleted Successfully')));
-                                                        Navigator.pop(context);
+                                                        Navigator.pop(
+                                                            context);
                                                       },
-                                                      child: const Text('YES')),
+                                                      child:
+                                                          const Text('YES')),
                                                   TextButton(
                                                       onPressed: () {
-                                                        Navigator.pop(context);
+                                                        Navigator.pop(
+                                                            context);
                                                       },
                                                       child: const Text('No'))
                                                 ],
