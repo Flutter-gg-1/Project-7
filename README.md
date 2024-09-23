@@ -1,6 +1,6 @@
-# Projects BootCamp App
+# Tuwaiq Projects BootCamp App
 
-
+![alt text](assets/readme/FigmaDesign.png)
 ## Overview
 
 ### Purpose
@@ -114,14 +114,11 @@ The purpose of this app is to allow Supervisors to manage their projects. Superv
 
 ### Screenshot
 
-![alt text](assets/readme/image.png)
-![alt text](assets/readme/image-1.png)
-![alt text](assets/readme/image-2.png)
-![alt text](assets/readme/image-3.png)
-![alt text](assets/readme/image-4.png)
-![alt text](assets/readme/image-5.png)
-![alt text](assets/readme/image-6.png)
-![alt text](assets/readme/image-7.png)
+![alt text](assets/readme/Home_all_Project_Img.png)
+![alt text](assets/readme/My_Project_Img.png)
+![alt text](assets/readme/Search_Project_Img.png)
+![alt text](assets/readme/View_Project_Img1.png)
+
 
 
 ### Demo GIF
@@ -130,15 +127,6 @@ The purpose of this app is to allow Supervisors to manage their projects. Superv
 
 ## Team
 
-- **Basel** 
-
-- **Anas**
-
-- **Ammar** 
-
-## Contact
-
-For more information, feel free to contact us via:
 - [Basel](https://github.com/Basel-75)
 - [Anas Aljuhani](https://github.com/Anas-Aljuhani)
 - [Ammar](https://github.com/Ammarx9)

@@ -91,65 +91,67 @@ class HomeScreen extends StatelessWidget {
               );
             },
           ),
-          body: Column(
-            children: [
-              CustomPaint(
-                size: Size(context.getWidth(multiply: 1),
-                    context.getHeight(multiply: 0.1)),
-                painter: AuthShape(),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: IconButton(
-                    onPressed: () async {
-                      try {
-                        final result = await BarcodeScanner.scan(
-                          options: ScanOptions(
-                            strings: {
-                              'cancel': _cancelController.text,
-                              'flash_on': _flashOnController.text,
-                              'flash_off': _flashOffController.text,
-                            },
-                            restrictFormat: [BarcodeFormat.qr],
-                            useCamera: _selectedCamera,
-                            autoEnableFlash: _autoEnableFlash,
-                            android: AndroidOptions(
-                              aspectTolerance: _aspectTolerance,
-                              useAutoFocus: _useAutoFocus,
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                CustomPaint(
+                  size: Size(context.getWidth(multiply: 1),
+                      context.getHeight(multiply: 0.1)),
+                  painter: AuthShape(),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                      onPressed: () async {
+                        try {
+                          final result = await BarcodeScanner.scan(
+                            options: ScanOptions(
+                              strings: {
+                                'cancel': _cancelController.text,
+                                'flash_on': _flashOnController.text,
+                                'flash_off': _flashOffController.text,
+                              },
+                              restrictFormat: [BarcodeFormat.qr],
+                              useCamera: _selectedCamera,
+                              autoEnableFlash: _autoEnableFlash,
+                              android: AndroidOptions(
+                                aspectTolerance: _aspectTolerance,
+                                useAutoFocus: _useAutoFocus,
+                              ),
                             ),
-                          ),
-                        );
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  RatingScreen(projectId: result.rawContent),
-                            ));
-                      } on PlatformException catch (e) {
-                        scanResult = ScanResult(
-                          rawContent: e.code ==
-                                  BarcodeScanner.cameraAccessDenied
-                              ? 'The user did not grant the camera permission!'
-                              : 'Unknown error: $e',
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(scanResult!.rawContent),
-                          backgroundColor: Colors.red[300],
-                        ));
-                      }
-                    },
-                    icon: const Icon(Iconsax.scan_barcode_outline)),
-              ),
-              BlocBuilder<BottomnavBloc, BottomnavState>(
-                builder: (context, state) {
-                  int selectedIndex = 0;
-                  if (state is IndexChangeState) {
-                    selectedIndex = state.index;
-                  }
-                  return tabs[selectedIndex];
-                },
-              ),
-            ],
+                          );
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    RatingScreen(projectId: result.rawContent),
+                              ));
+                        } on PlatformException catch (e) {
+                          scanResult = ScanResult(
+                            rawContent: e.code ==
+                                    BarcodeScanner.cameraAccessDenied
+                                ? 'The user did not grant the camera permission!'
+                                : 'Unknown error: $e',
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(scanResult!.rawContent),
+                            backgroundColor: Colors.red[300],
+                          ));
+                        }
+                      },
+                      icon: const Icon(Iconsax.scan_barcode_outline)),
+                ),
+                BlocBuilder<BottomnavBloc, BottomnavState>(
+                  builder: (context, state) {
+                    int selectedIndex = 0;
+                    if (state is IndexChangeState) {
+                      selectedIndex = state.index;
+                    }
+                    return tabs[selectedIndex];
+                  },
+                ),
+              ],
+            ),
           ),
         );
       }),

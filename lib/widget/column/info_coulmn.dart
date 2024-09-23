@@ -23,9 +23,10 @@ class InfoCoulmn extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             CustomeCampStatusProject(
-              titleTextContainer: language.isArabic ? 'المعسكر' : 'BootCamp',
-              continaerColor: const Color(0xffBB88FC).withOpacity(0.30),
-              borderColor: const Color(0xffBB88FC).withOpacity(0.30),
+              titleTextContainer:
+                  language.isArabic ? 'المعسكر' : 'Project Name',
+              continaerColor: const Color(0xfff4a664).withOpacity(0.30),
+              borderColor: const Color(0xfff4a664).withOpacity(0.30),
               textContent: projectsModel.projectName ?? "no name",
               heightContainer: context.getHeight(multiply: 0.043),
               widthContainer: context.getWidth(multiply: 0.25),
@@ -70,8 +71,8 @@ class InfoCoulmn extends StatelessWidget {
             CustomeCampStatusProject(
               titleTextContainer:
                   language.isArabic ? 'نوع المشروع' : 'Project type',
-              continaerColor: const Color(0xff00FF19).withOpacity(0.30),
-              borderColor: const Color(0xff00FF19).withOpacity(0.30),
+              continaerColor: const Color(0xff57e3d8).withOpacity(0.30),
+              borderColor: const Color(0xff57e3d8).withOpacity(0.30),
               textContent: projectsModel.type ?? 'no type',
               heightContainer: context.getHeight(multiply: 0.043),
               widthContainer: context.getWidth(multiply: 0.25),

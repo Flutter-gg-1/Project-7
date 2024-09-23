@@ -76,8 +76,7 @@ class RatingScreen extends StatelessWidget {
           final bloc = context.read<RatingBloc>();
           return Scaffold(
             backgroundColor: Colors.white,
-            body: SafeArea(
-                child: SingleChildScrollView(
+            body: SingleChildScrollView(
               child: Column(
                 children: [
                   CustomPaint(
@@ -230,7 +229,7 @@ class RatingScreen extends StatelessWidget {
                   context.addSpacer()
                 ],
               ),
-            )),
+            ),
           );
         }),
       ),
