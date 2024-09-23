@@ -81,6 +81,7 @@ class Link {
   }
 }
 
+
 class Projects {
   Projects({
     required this.projectId,
@@ -149,7 +150,7 @@ class Projects {
         allowEdit = json['allow_edit'],
         allowRating = json['allow_rating'],
         isPublic = json['is_public'],
-        rating = 1.2,
+        rating = (json['rating'] is int) ? (json['rating'] as int).toDouble() : (json['rating'] as double) ,
         createAt = json['create_at'],
         updateAt = json['update_at'],
         imagesProject = List<dynamic>.from(json['images_project']),

@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:project_judge/data_layer/data_layer.dart';
+import 'package:project_judge/models/project_info_model.dart';
 import 'package:project_judge/setup/init_setup.dart';
 
 import '../../../network/api_netowrok.dart';
@@ -15,7 +16,7 @@ class ViewProjectDetailsCubit extends Cubit<ViewProjectDetailsState> {
   loadProjectDetail() async {
     emit(LoadingState());
     try{
-      getIt.get<DataLayer>().projectInfo = await api.getProjectDetails();
+      getIt.get<DataLayer>().projectInfo = (await api.getProjectDetails());
       emit(SuccessState());
     }on FormatException catch (e) {
       emit(ErrorState(msg: e.message));
