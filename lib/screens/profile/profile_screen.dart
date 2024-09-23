@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tuwaiq_project/data_layer/auth_layer.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
+import 'package:tuwaiq_project/helper/method/open_url.dart';
 import 'package:tuwaiq_project/screens/auth/bloc/auth_bloc.dart';
 import 'package:tuwaiq_project/screens/auth/login_screen.dart';
 import 'package:tuwaiq_project/screens/profile/cubit_profile/profile_cubit.dart';
@@ -72,10 +75,19 @@ class ProfileScreen extends StatelessWidget {
                         child: ListTile(
                           trailing: const Icon(Icons.arrow_forward_ios,
                               color: Colors.black),
-                          leading: const CircleAvatar(
+                          leading: CircleAvatar(
                             radius: 30,
+                            onBackgroundImageError: (exception, stackTrace) {
+                              const AssetImage(
+                                  'assets/image/Search-amico(1).png');
+                            },
                             backgroundImage:
-                                AssetImage('assets/image/Search-amico(1).png'),
+                            state.profileModel.imageFile != null ?
+
+                                NetworkImage(state.profileModel.imageFile!) :
+                                AssetImage(
+                                  'assets/image/Search-amico(1).png')
+
                           ),
                           title: Text(
                             '${state.profileModel.firstName} ${state.profileModel.lastName}',
@@ -86,7 +98,7 @@ class ProfileScreen extends StatelessWidget {
                             ),
                           ),
                           subtitle: Text(
-                            '${state.profileModel.role} /n ${state.profileModel.id}',
+                            '${state.profileModel.role}  ${state.profileModel.id}',
                             style: const TextStyle(
                               fontSize: 14,
                               color: Color(0xff6E7386),
@@ -131,10 +143,10 @@ class ProfileScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                         onTap: () async {
-                          await launchUrl(
-                              Uri.parse(state.profileModel.link.linkedin ??
-                                  "fake_url"),
-                              mode: LaunchMode.externalApplication);
+                          log("${state.profileModel.link.linkedin}");
+                          await openUrl(
+                              context: context,
+                              url: "https://${state.profileModel.link.linkedin}");
                         },
                       ),
                       CustomeLinksProfile(
@@ -143,8 +155,10 @@ class ProfileScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                         onTap: () async {
-                          await launchUrl(
-                              Uri.parse(state.profileModel.link.github ?? " "));
+                          log("${state.profileModel.link.github}");
+                          await openUrl(
+                              context: context,
+                              url: "https://${state.profileModel.link.github}");
                         },
                       ),
                       CustomeLinksProfile(
@@ -153,13 +167,21 @@ class ProfileScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                         onTap: () async {
-                          await launchUrl(Uri.parse(
-                              state.profileModel.link.bindlink ?? " "));
+                          log("${state.profileModel.link.bindlink}");
+                          await openUrl(
+                              context: context,
+                              url: "https://${state.profileModel.link.bindlink}");
                         },
                       ),
                       CustomeLinksProfile(
                         text: 'CV',
-                        onTap: () {},
+                        onTap: () async {
+                          log("${state.profileModel.link.resumeFile}");
+
+                          await openUrl(
+                              context: context,
+                              url: state.profileModel.link.resumeFile);
+                        },
                       ),
                     ],
                   ),

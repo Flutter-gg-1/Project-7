@@ -39,6 +39,11 @@ class OtpScreen extends StatelessWidget {
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(state.msg)));
             }
+
+            if(state is ReSendOtpState){
+              Navigator.pop(context);
+
+            }
           },
           child: Container(
             decoration: const BoxDecoration(
@@ -98,7 +103,10 @@ class OtpScreen extends StatelessWidget {
                                 padding:
                                     WidgetStateProperty.all(EdgeInsets.zero),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                
+                                 bloc.add(ReSendOtpEvent(email: email));
+                              },
                               child: Text(
                                 bloc.language.isArabic
                                     ? 'اعادة ارسال رمز التحقق'

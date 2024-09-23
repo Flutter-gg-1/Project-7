@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -25,25 +27,5 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(ArabicState(isArabic: language.isArabic));
   }
 
-  updateProfile(
-      {required String firstName,
-      required String lastName,
-      required String bindLink,
-      required String linkedinLink,
-      required String githubLink,
-      required List<int>? imgCubitFile,
-      required List<int>? cvFile}) async {
-    await NetworkingApi().updateProfile(
-        firstName: firstName,
-        lastName: lastName,
-        profileImg: imgCubitFile,
-        cvImg: cvFile,
-        bindLink: bindLink,
-        linkedinLink: linkedinLink,
-        githubLink: githubLink);
-
-    getProfile();
-
-    try {} catch (_) {}
-  }
+  
 }

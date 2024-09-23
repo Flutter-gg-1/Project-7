@@ -1,15 +1,18 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:tuwaiq_project/data_layer/auth_layer.dart';
 import 'package:tuwaiq_project/models/profile_model.dart';
 import 'package:tuwaiq_project/models/projects_model.dart';
 import 'package:tuwaiq_project/networking/networking_constant.dart';
+import 'package:tuwaiq_project/services/setup.dart';
 
 mixin ProjectMix on NetworkingConstant {
   chnagelogo({required List<int> logoImg, required String projectId}) async {
     try {
+      String token = authLocator.get<AuthLayerData>().auth!.token!;
       final res = await dio.put("$baseUrl$endProjectLogoEdit$projectId",
-          options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
+          options: Options(headers: {'Authorization': 'Bearer $token'}),
           data: {"logo": logoImg});
 
       return res.data;
@@ -31,8 +34,9 @@ mixin ProjectMix on NetworkingConstant {
     required String projectDescription,
   }) async {
     try {
+      String token = authLocator.get<AuthLayerData>().auth!.token!;
       final res = await dio.put("$baseUrl$endProjectBaseEdit$projectId",
-          options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
+          options: Options(headers: {'Authorization': 'Bearer $token'}),
           data: {
             "project_name": projectName,
             "bootcamp_name": bootcampName,
@@ -55,8 +59,9 @@ mixin ProjectMix on NetworkingConstant {
     required String projectId,
   }) async {
     try {
+      String token = authLocator.get<AuthLayerData>().auth!.token!;
       final res = await dio.put("$baseUrl$endPresentationEdit$projectId",
-          options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
+          options: Options(headers: {'Authorization': 'Bearer $token'}),
           data: {"presentation_file": presentationFile});
     } on DioException catch (err) {
       throw err.response?.data ?? 'Unknown error occurred';
@@ -70,8 +75,9 @@ mixin ProjectMix on NetworkingConstant {
     required String projectId,
   }) async {
     try {
+      String token = authLocator.get<AuthLayerData>().auth!.token!;
       final res = await dio.put("$baseUrl$endProjectImgEdit$projectId",
-          options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
+          options: Options(headers: {'Authorization': 'Bearer $token'}),
           data: {"images": projectImgs});
     } on DioException catch (err) {
       throw err.response?.data ?? 'Unknown error occurred';
@@ -85,8 +91,9 @@ mixin ProjectMix on NetworkingConstant {
     required String projectId,
   }) async {
     try {
+      String token = authLocator.get<AuthLayerData>().auth!.token!;
       final res = await dio.put("$baseUrl$endProjectLinksEdit$projectId",
-          options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
+          options: Options(headers: {'Authorization': 'Bearer $token'}),
           data: {"link": links});
     } on DioException catch (err) {
       throw err.response?.data ?? 'Unknown error occurred';
@@ -100,8 +107,9 @@ mixin ProjectMix on NetworkingConstant {
     required String projectId,
   }) async {
     try {
+      String token = authLocator.get<AuthLayerData>().auth!.token!;
       final res = await dio.put("$baseUrl$endProjectMembersEdit$projectId",
-          options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
+          options: Options(headers: {'Authorization': 'Bearer $token'}),
           data: {"members": members});
     } on DioException catch (err) {
       throw err.response?.data ?? 'Unknown error occurred';
@@ -121,10 +129,11 @@ mixin ProjectMix on NetworkingConstant {
     required double investment,
   }) async {
     try {
+      String token = authLocator.get<AuthLayerData>().auth!.token!;
       final res = await dio.post(
         '$baseUrl$endProjectRating$projectId',
         options: Options(
-          headers: {'Authorization': 'Bearer $currentToken'},
+          headers: {'Authorization': 'Bearer $token'},
         ),
         data: {
           'note': note,

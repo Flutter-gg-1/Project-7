@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:tuwaiq_project/data_layer/auth_layer.dart';
 import 'package:tuwaiq_project/networking/networking_constant.dart';
+import 'package:tuwaiq_project/services/setup.dart';
 
 mixin SupervisorMix on NetworkingConstant {
   createProject({
@@ -8,8 +10,9 @@ mixin SupervisorMix on NetworkingConstant {
     required bool isEdit,
   }) async {
     try {
+      String token = authLocator.get<AuthLayerData>().auth!.token!;
       final res = await dio.post("$baseUrl$endProjectCreate",
-          options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
+          options: Options(headers: {'Authorization': 'Bearer $token'}),
           data: {
             "user_id": userId,
             "time_end_edit": timeEditEnd,
@@ -32,8 +35,9 @@ mixin SupervisorMix on NetworkingConstant {
     required String projectId,
   }) async {
     try {
+      String token = authLocator.get<AuthLayerData>().auth!.token!;
       final res = await dio.put("$baseUrl$endProjectChangeState$projectId",
-          options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
+          options: Options(headers: {'Authorization': 'Bearer $token'}),
           data: {
             "time_end_edit": timeEndEdit,
             "edit": allowEdit,
@@ -51,9 +55,10 @@ mixin SupervisorMix on NetworkingConstant {
     required String projectId,
   }) async {
     try {
+      String token = authLocator.get<AuthLayerData>().auth!.token!;
       final res = await dio.delete(
         "$baseUrl$endProjectDel$projectId",
-        options: Options(headers: {'Authorization': 'Bearer $currentToken'}),
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
     } on DioException catch (err) {
       throw DioException(

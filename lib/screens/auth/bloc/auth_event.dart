@@ -14,3 +14,9 @@ class VerfieyEvent extends AuthEvent {
 
   VerfieyEvent({required this.email});
 }
+
+class ReSendOtpEvent extends AuthEvent {
+  final String email;
+
+  ReSendOtpEvent({required this.email});
+}

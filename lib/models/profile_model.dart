@@ -42,7 +42,7 @@ class ProfileModel {
         .toList();
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    resumeFile = json['resume_url'];
+    resumeFile = json['resume'];
   }
 
   Map<String, dynamic> toJson() {
@@ -57,7 +57,7 @@ class ProfileModel {
     data['projects'] = projects.map((e) => e.toJson()).toList();
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
-    data['resume_url'] = resumeFile;
+    data['resume'] = resumeFile;
     return data;
   }
 }
