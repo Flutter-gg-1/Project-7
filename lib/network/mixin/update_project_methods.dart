@@ -18,23 +18,23 @@ mixin UpdateProjectMethods on ConstantNetwork {
       required String desc,
       required List link,
       required String logo,
-      required List members,
+      required List<MembersProject> members,
       required List imagesList}) async {
-    //update logo
-    // try {
-    //   Uint8List data = await File(logo).readAsBytes();
-    //   final response =
-    //       await dio.put("$baseurl$updateProjectLogoEndPoint/$projectID",
-    //           data: {
-    //             "logo": data.toList(),
-    //           },
-    //           options: Options(headers: {"Authorization": "Bearer $token"}));
-    //   print('logo $response');
-    // } on DioException catch (e) {
-    //   throw FormatException(e.response?.data['data']);
-    // } catch (e) {
-    //   throw FormatException(e.toString());
-    // }
+    // update logo
+    try {
+      Uint8List data = await File(logo).readAsBytes();
+      final response =
+          await dio.put("$baseurl$updateProjectLogoEndPoint/$projectID",
+              data: {
+                "logo": data.toList(),
+              },
+              options: Options(headers: {"Authorization": "Bearer $token"}));
+      print('logo $response');
+    } on DioException catch (e) {
+      throw FormatException(e.response?.data['data']);
+    } catch (e) {
+      throw FormatException(e.toString());
+    }
 
     // //update base
     // try {
@@ -112,17 +112,20 @@ mixin UpdateProjectMethods on ConstantNetwork {
 
     // update members
     try {
-
+      print(members.toString());
       final response =
          await dio.put("$baseurl$updateProjectMembersEndPoint/$projectID",
               data: {
-                "members": members,
+                "members": members
               },
               options: Options(headers: {"Authorization": "Bearer $token"}));
       print('members $response');
     } on DioException catch (e) {
+            print('dio ${e.response?.data}');
+
       throw FormatException(e.response?.data['data']);
     } catch (e) {
+       print('error $e');
       throw FormatException(e.toString());
     }
   }

@@ -59,7 +59,6 @@ class EditProjectForm extends StatelessWidget {
               onPressed: () {
                 if (formKey.currentState?.validate() == true) {
                   //go to api methods
-
                   if (bloc.logoImg == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
@@ -104,7 +103,7 @@ class EditProjectForm extends StatelessWidget {
                         desc: bloc.description,
                         link: bloc.links,
                         logo: bloc.logoImg!.path,
-                        members: bloc.members,
+                        members: bloc.members.toList(),
                         imagesList: bloc.imgList);
                   }
                 }
@@ -819,7 +818,7 @@ class ProjectMembersSection extends StatelessWidget {
                   const Row(
                     children: [
                       Expanded(
-                        child: Text("Member's Name",
+                        child: Text("Member's ID",
                             style: TextStyle(
                                 color: Color(0xff262626), fontSize: 16)),
                       ),

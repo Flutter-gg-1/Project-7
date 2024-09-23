@@ -1,30 +1,43 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
 import 'package:project_judge/network/constant_network.dart';
 
 mixin UpdateProfileMethod on ConstantNetwork {
   updateProfile(
       {required String token,
-      required String first_name,
-      required String last_name,
-      required String bindlink,required List<int> img}) async {
+      required String firstName,
+      required String lastName,
+      required String linkedin,
+      required String github,
+      required String bindlink,
+      required String img,
+      required String cv}) async {
     try {
-      await dio.put("$baseurl/user/update/profile",
+      Uint8List imgdata = await File(img).readAsBytes();
+
+      Uint8List cvdata = await File(cv).readAsBytes();
+
+      final result = await dio.put("$baseurl/user/update/profile",
           data: {
-            "first_name": first_name,
-            "last_name": last_name,
-            "image": img,
-            "cv": null,
+            "first_name": firstName,
+            "last_name": lastName,
+            "image": imgdata.toList(growable: false),
+            "cv": cvdata.toList(growable: false),
             "accounts": {
               "bindlink": bindlink,
-              "linkedin": "rahaf-alshahrani-20bb67239",
-              "github": "mohammed_19994",
-              "resume": "okooijiojoko"
+              "linkedin": linkedin,
+              "github": github
             }
           },
           options: Options(headers: {"Authorization": "Bearer $token"}));
+      print(result);
     } on DioException catch (e) {
+      print('dio $e');
       throw FormatException(e.response?.data['data']);
     } catch (e) {
+      print('error $e');
       throw FormatException(e.toString());
     }
   }
