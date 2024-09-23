@@ -8,7 +8,7 @@ mixin CreateProjecttMethod on ConstantNetwork {
       required String date,
       required String edit}) async {
     try {
-      final respose = await dio.post(
+       await dio.post(
           "https://tuwaiq-gallery.onrender.com/v1/supervisor/create/project",
           data: {"user_id": userID, "time_end_edit": date, "edit": edit},
           options: Options(headers: {

@@ -17,7 +17,6 @@ class BrowseProjectsPage extends StatelessWidget {
     final titleFontSize = screenWidth * 0.03;
     final descriptionFontSize = screenWidth * 0.038;
     final ratingItemSize = screenWidth * 0.04;
-    final iconSize = screenWidth * 0.06;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: padding, vertical: padding),
@@ -91,7 +90,7 @@ class BrowseProjectsPage extends StatelessWidget {
                       const SizedBox(height: 2),
                       RatingBar.builder(
                         itemSize: ratingItemSize,
-                        initialRating: project.rating.toDouble() ?? 0,
+                        initialRating: project.rating.toDouble() ,
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: false,

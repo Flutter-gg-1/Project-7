@@ -95,8 +95,7 @@ class ViewProjectDetailScreen extends StatelessWidget {
                         CustomProjectDetailListTile(
                           title: currentProject.projectName ??
                               "project's name not provided",
-                          type: "${currentProject.type}" ??
-                              "project's type not provided",
+                          type: "${currentProject.type}" ,
                           bootcampName: currentProject.bootcampName ??
                               "bootcamp name not provided",
                           leading: Image.network(
@@ -304,10 +303,8 @@ class ViewProjectDetailScreen extends StatelessWidget {
                           if (currentProject.membersProject!.isNotEmpty)
                             ...currentProject.membersProject!.map((member) {
                               return CustomTeamMemberCard(
-                                name: "${member.firstName}" ??
-                                    "member's name not provided",
-                                position: "${member.position}" ??
-                                    "member's position not provided",
+                                name: "${member.firstName}" ,
+                                position: "${member.position}" ,
                                 description:
                                     member.email ?? "email not provided",
                                 image: Image.network(errorBuilder:

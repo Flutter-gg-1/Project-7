@@ -103,7 +103,7 @@ class MemberRow extends StatelessWidget {
                 onChange: (value) {
                   bloc.add(UpdateMembersEvent(
                     index: index,
-                    id: value!,
+                    id: value,
                     role: bloc.members![index].position!,
                   ));
                   return null;
@@ -125,7 +125,7 @@ class MemberRow extends StatelessWidget {
                   bloc.add(UpdateMembersEvent(
                     index: index,
                     id: bloc.members![index].id!,
-                    role: value!,
+                    role: value,
                   ));
                   return null;
                 },
