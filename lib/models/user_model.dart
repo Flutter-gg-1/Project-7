@@ -59,15 +59,18 @@ class Link {
     required this.github,
     required this.linkedin,
     required this.bindlink,
+    required this.resume,
   });
   late final String? github;
   late final String? linkedin;
   late final String? bindlink;
+  late final String? resume;
 
   Link.fromJson(Map<String, dynamic> json) {
     github = json['github'];
     linkedin = json['linkedin'];
     bindlink = json['bindlink'];
+    resume = json['resume'];
   }
 
   Map<String, dynamic> toJson() {
@@ -75,9 +78,11 @@ class Link {
     data['github'] = github;
     data['linkedin'] = linkedin;
     data['bindlink'] = bindlink;
+    data['resume'] = resume;
     return data;
   }
 }
+
 
 class Projects {
   Projects({
@@ -147,7 +152,7 @@ class Projects {
         allowEdit = json['allow_edit'],
         allowRating = json['allow_rating'],
         isPublic = json['is_public'],
-        rating = 1.2,
+        rating = (json['rating'] is int) ? (json['rating'] as int).toDouble() : (json['rating'] as double) ,
         createAt = json['create_at'],
         updateAt = json['update_at'],
         imagesProject = List<dynamic>.from(json['images_project']),
