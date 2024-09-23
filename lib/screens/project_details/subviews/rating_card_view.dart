@@ -7,6 +7,8 @@ import 'package:tuwaiq_project_pulse/reusable_components/rating_stars_view.dart'
 import 'package:tuwaiq_project_pulse/screens/project_details/project_details_cubit.dart';
 import 'package:tuwaiq_project_pulse/utils/typedefs.dart';
 
+import '../../rating/rating_screen.dart';
+
 class RatingCardView extends StatelessWidget {
   const RatingCardView({super.key, required this.rating, required this.cubit});
   final double rating;
@@ -30,7 +32,7 @@ class RatingCardView extends StatelessWidget {
                     .styled(color: C.black, weight: FW.w300),
               ],
             ),
-            ElevatedBtnView(title: 'Rating QR', callBack: () => ())
+            ElevatedBtnView(title: 'Rating QR', callBack: () => readQR())
           ],
         ),
       ),
