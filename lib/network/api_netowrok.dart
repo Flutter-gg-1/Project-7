@@ -7,6 +7,8 @@ import 'package:project_judge/network/mixin/update_profile_method.dart';
 import 'package:project_judge/network/mixin/update_project_methods.dart';
 import 'package:project_judge/network/mixin/verify_account_method.dart';
 
+import 'mixin/update_user_role.dart';
+
 class ApiNetowrok extends ConstantNetwork
     with
         CreateAccountMethod,
@@ -15,4 +17,5 @@ class ApiNetowrok extends ConstantNetwork
         UpdateProfileMethod,
         UpdateProjectMethods,
         ProjectDetails,
-        CreateProjecttMethod {}
+        CreateProjecttMethod,
+        ManegeUserRole {}
