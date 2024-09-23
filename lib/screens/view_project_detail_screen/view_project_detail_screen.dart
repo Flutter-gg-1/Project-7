@@ -13,6 +13,7 @@ import '../../components/buttons/custom_icon_button.dart';
 import '../../components/cards/custom_team_member_card.dart';
 import '../../components/containers/custom_slider_containers.dart';
 import '../../components/custom_paints/tuwaiq_logo_paint.dart';
+import '../../components/icons/custom_rate_icon.dart';
 import '../../data_layer/data_layer.dart';
 
 class ViewProjectDetailScreen extends StatelessWidget {
@@ -206,7 +207,7 @@ class ViewProjectDetailScreen extends StatelessWidget {
                               const SizedBox(
                                 width: 14,
                               ),
-                              buildStarRating(currentProject.rating),
+                              starRating(currentProject.rating),
                             ],
                           ),
                         ],
@@ -351,26 +352,4 @@ Future<void> launchURL(String url) async {
   } catch (e) {
     'Error launching URL: $e';
   }
-}
-
-Widget buildStarRating(double rating) {
-  int fullStars = rating.floor();
-  int halfStars = (rating - fullStars >= 0.5) ? 1 : 0;
-  int emptyStars = 5 - (fullStars + halfStars);
-
-  List<Widget> stars = [];
-
-  for (int i = 0; i < fullStars; i++) {
-    stars.add(const Icon(Icons.star, color: Colors.yellow));
-  }
-
-  for (int i = 0; i < halfStars; i++) {
-    stars.add(const Icon(Icons.star_half, color: Colors.yellow));
-  }
-
-  for (int i = 0; i < emptyStars; i++) {
-    stars.add(const Icon(Icons.star_outline, color: Colors.grey));
-  }
-
-  return Row(children: stars);
 }
