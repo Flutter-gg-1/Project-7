@@ -27,7 +27,7 @@ mixin VerifyAccountMethod on ConstantNetwork {
     try {
       final responseUser = await dio.get(baseurl + getProfileEndPoint,
           options: Options(headers: {"Authorization": "Bearer $token"}));
-          print(responseUser);
+
       UserModel userModel = UserModel.fromJson(responseUser.data["data"]);
 
       return userModel;

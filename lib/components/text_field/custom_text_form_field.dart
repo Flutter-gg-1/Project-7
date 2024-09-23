@@ -1,39 +1,75 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField(
-      {super.key,
-      this.controller,
-      required this.hintText,
-      required this.icon,
-      this.validator,
-      this.floatingLabelBehavior});
+  const CustomTextFormField({
+    super.key,
+    this.controller,
+    required this.hintText,
+    this.icon,
+    this.validator,
+    this.floatingLabelBehavior,
+    this.label,
+    this.maximumLines = 1,
+    this.onChange, this.fillColor,
+  });
+
+  final String? label;
   final TextEditingController? controller;
   final String hintText;
-  final IconData icon;
+  final IconData? icon;
   final String? Function(String?)? validator;
+  final void Function(String)? onChange;
   final FloatingLabelBehavior? floatingLabelBehavior;
+  final int maximumLines;
+  final Color? fillColor;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: TextFormField(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        controller: controller,
-        decoration: InputDecoration(
-            floatingLabelBehavior: floatingLabelBehavior,
-            filled: true,
-            fillColor: const Color(0xffEDEDED),
-            hintText: hintText,
-            hintStyle: const TextStyle(color: Color(0xff848484)),
-            prefixIcon: Icon(
-              icon,
-              color: const Color(0xff848484),
-            ),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
-        validator: validator,
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        label != null
+            ? Text(
+                label!,
+                style: const TextStyle(
+                  color: Color(0xff262626),
+                  fontSize: 16,
+                ),
+              )
+            : const SizedBox.shrink(),
+        TextFormField(
+          onChanged: onChange,
+          maxLines: maximumLines,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          controller: controller,
+          decoration: InputDecoration(
+              floatingLabelBehavior: floatingLabelBehavior,
+              filled: true,
+              fillColor: const Color.fromARGB(255, 232, 232, 232),
+              hintText: hintText,
+              hintStyle: const TextStyle(fontSize: 12),
+              prefixIcon: icon != null ? Icon(icon) : null,
+              border: InputBorder.none,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: Colors.transparent),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: Colors.transparent),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: Color(0xffFF8182)),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: Colors.transparent),
+              ),
+              errorStyle: const TextStyle(color: Color(0xffFF8182))),
+          validator: validator,
+        ),
+      ],
     );
   }
 }

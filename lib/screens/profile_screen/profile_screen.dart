@@ -2,126 +2,197 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_judge/components/buttons/custom_elevated_button.dart';
 import 'package:project_judge/components/text_field/custom_text_form_field.dart';
-import 'package:project_judge/screens/profile_screen/cubit/profile_cubit.dart';
+import 'package:project_judge/data_layer/data_layer.dart';
+import 'package:project_judge/models/user_model.dart';
+import 'package:project_judge/network/api_netowrok.dart';
+import 'package:project_judge/screens/profile_screen/cubit/profile_screen_cubit.dart';
+import 'package:project_judge/setup/init_setup.dart';
 import 'package:simple_icons/simple_icons.dart';
-
 import '../../components/app_bar/custom_app_bar.dart';
 import '../../components/text/custom_text.dart';
+import 'dart:io';
 
+// ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    UserModel user = getIt.get<DataLayer>().userInfo!; // Get user info
+
     return BlocProvider(
-      create: (context) => ProfileCubit(),
-      child: Builder(
-        builder: (context) {
-          final cubit = context.read<ProfileCubit>();
-          return Scaffold(
-            backgroundColor: const Color(0xff4E2EB5),
-            appBar: const CustomAppBar(
-              text: 'Profile',
-            ),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 25,
-              ),
+      create: (context) => ProfileScreenCubit(),
+      child: Scaffold(
+        backgroundColor: const Color(0xff4E2EB5),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: const Color(0xFF4E2EB5),
+          elevation: 0,
+          centerTitle: true,
+          title: const Text(
+            'Profile',
+            style: TextStyle(color: Colors.white),
+          ),
+          actions: [
+            IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.exit_to_app,
+                  color: Color(0xffffffff),
+                ))
+          ],
+        ),
+        body: BlocBuilder<ProfileScreenCubit, ProfileScreenState>(
+          builder: (context, state) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ListView(
                 children: [
-                  Container(
-                    height: 150,
-                    width: 150,
-                    decoration: const BoxDecoration(
-                        color: Colors.white, shape: BoxShape.circle),
-                    child: Center(
-                      child: Image.asset(
-                        "assets/images/profile_logo.png",
-                        fit: BoxFit.contain,
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Center(
+                      child: Container(
+                    width: 140, // Double the radius for correct sizing
+                    height: 140,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Color(
+                            0xffffffff), // Change to your desired border color
+                        width: 4, // Set the border width
                       ),
                     ),
+                    child: CircleAvatar(
+                      radius: 70,
+                      backgroundImage: user.imageUrl == null
+                          ? const AssetImage("assets/images/default_img.png")
+                          : NetworkImage(user.imageUrl!) as ImageProvider,
+                    ),
+                  )),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Center(
+                      child: CustomText(
+                    text: user.id!,
+                    size: 12,
+                    color: const Color.fromARGB(133, 255, 255, 255),
+                    weight: FontWeight.w500,
+                  )),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Row(
+                    children: [
+                      CustomText(
+                        text: user.firstName!,
+                        size: 24,
+                        color: Colors.white,
+                        weight: FontWeight.w500,
+                      ),
+                      CustomText(text: ' '),
+                      CustomText(
+                        text: user.lastName!,
+                        size: 24,
+                        color: Colors.white,
+                        weight: FontWeight.w500,
+                      )
+                    ],
                   ),
                   const SizedBox(
-                    height: 32,
-                  ),
-                  CustomTextFormField(
-                      controller: cubit.firstNameController,
-                      hintText: "First Name",
-                      icon: Icons.person_outline_rounded),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  CustomTextFormField(
-                    controller: cubit.lastNameController,
-                      hintText: "Last Name", icon: Icons.person_outline_rounded),
-                  const SizedBox(
-                    height: 32,
+                    height: 10,
                   ),
                   Divider(
                     color: const Color(0xff848484).withOpacity(0.5848484),
                   ),
                   const SizedBox(
-                    height: 16,
+                    height: 10,
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40),
-                    child: CustomText(
-                      text: "My Accounts",
-                      size: 24,
-                      color: Colors.white,
-                      weight: FontWeight.w500,
+                  ListTile(
+                    leading: Icon(
+                      SimpleIcons.github,
+                      color: Color(0XFFFFFFFF),
                     ),
+                    title: CustomText(
+                        text: user.link!.github ?? 'Not added yet',
+                        size: 14,
+                        color: const Color(0xffffffff)),
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      SimpleIcons.linkedin,
+                      color: Color(0XFFFFFFFF),
+                    ),
+                    title: CustomText(
+                        text: user.link!.linkedin ?? 'Not added yet',
+                        size: 14,
+                        color: const Color(0xffffffff)),
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      SimpleIcons.github,
+                      color: Color(0XFFFFFFFF),
+                    ),
+                    title: CustomText(
+                        text: user.link!.bindlink ?? 'Not added yet',
+                        size: 14,
+                        color: const Color(0xffffffff)),
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.email,
+                      color: Color(0XFFFFFFFF),
+                    ),
+                    title: CustomText(
+                        text: user.email ?? 'Not added yet',
+                        size: 14,
+                        color: const Color(0xffffffff)),
                   ),
                   const SizedBox(
-                    height: 25,
+                    height: 10,
                   ),
-                   CustomTextFormField(
-                    controller: cubit.githubController,
-                      hintText: "Example//example.com", icon: SimpleIcons.github),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                   CustomTextFormField(
-                    controller: cubit.linkedinController,
-                      hintText: "Example//example.com", icon: SimpleIcons.linkedin),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  CustomTextFormField(
-                    controller: cubit.emailController,
-                    hintText: "Example//example.com",
-                    icon: Icons.email,
+                  Divider(
+                    color: const Color(0xff848484).withOpacity(0.5848484),
                   ),
                   const SizedBox(
-                    height: 8,
+                    height: 10,
                   ),
-                  CustomTextFormField(
-                    controller: cubit.cvController,
-                      hintText: "Example//example.com",
-                      icon: Icons.sticky_note_2_rounded),
+                  // user.link!.resume != null ?
+                  //SHOW FILE
+                  // : CustomText(
+                  //     text: 'No resume',
+                  //     size: 14,
+                  //     color: const Color(0xffffffff)),
                   const SizedBox(
-                    height: 25,
+                    height: 40,
                   ),
                   CustomElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => EditProfile()));
+                      },
                       minimumSize: const Size(350, 63),
                       backgroundColor: const Color(0xff58E4D9),
-                      text: "Save Changes",
+                      text: "Edit Profile",
                       textcolor: const Color(0xff5030B6)),
                   const SizedBox(
-                    height: 16,
+                    height: 14,
                   ),
-                  CustomElevatedButton(
-                      onPressed: () {},
-                      minimumSize: const Size(350, 63),
-                      backgroundColor: Colors.white,
-                      text: "Manage Users",
-                      textcolor: const Color(0xff5030B6))
+                  if (user.role == 'admin')
+                    CustomElevatedButton(
+                        onPressed: () {},
+                        minimumSize: const Size(350, 63),
+                        backgroundColor: Colors.white,
+                        text: "Manage Users",
+                        textcolor: const Color(0xff5030B6))
                 ],
               ),
-            ),
-          );
-        }
+            );
+          },
+        ),
       ),
     );
   }

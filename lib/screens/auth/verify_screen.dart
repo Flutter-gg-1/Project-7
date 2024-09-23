@@ -6,7 +6,7 @@ import 'package:pinput/pinput.dart';
 import 'package:project_judge/components/dialog/error_dialog.dart';
 import 'package:project_judge/components/text/custom_text.dart';
 import 'package:project_judge/screens/auth/cubit/auth_cubit.dart';
-import 'package:project_judge/screens/home_screen/home_screen.dart';
+import 'package:project_judge/screens/navigation/navigationPage.dart';
 
 class VerifyScreen extends StatelessWidget {
   const VerifyScreen({super.key, required this.email});
@@ -30,14 +30,15 @@ class VerifyScreen extends StatelessWidget {
                       ));
             }
             if (state is SuccessState) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const NavigationPage()));
             }
             if (state is ResendOtpState) {
               Navigator.pop(context);
             }
             if (state is ErrorState) {
-              Navigator.pop(context);
               showErrorDialog(context, state.msg);
             }
           },
@@ -103,7 +104,7 @@ class VerifyScreen extends StatelessWidget {
                                     children: [
                                       Container(
                                         width: 49,
-                                        height: 4611,
+                                        height: 46,
                                         decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:
