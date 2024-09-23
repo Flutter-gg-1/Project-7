@@ -19,9 +19,8 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
       );
   ApiNetowrok api = ApiNetowrok();
   //save logo
-  File? logoImg; // to save the img from gallary
-  // late String savedLogo = project.logoUrl ?? '';
-
+  File? logoImg;
+  late Future<File?> imgFuture;
   //save base info
   late String name = project.projectName ?? '';
   late String bootcampName = project.bootcampName ?? '';
@@ -48,7 +47,7 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
   late List<MembersProject>? members = project.membersProject;
 
   //
-  File presention = File('');
+  File? presention;
 
   EditProjectBloc() : super(EditProjectInitial()) {
     on<UpdateLogoEvent>((event, emit) {
@@ -161,7 +160,23 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
             link: links!,
             logo: logoImg!.path,
             members: members!,
+            pres: presention!,
             imagesList: imgList);
+        emit(SuccessState());
+      } on FormatException catch (e) {
+        emit(ErrorState(msg: e.message));
+      } catch (e) {
+        emit(ErrorState(msg: e.toString()));
+      }
+    });
+
+    on<DeleteProjectEvent>((event, emit) async {
+      emit(LoadingState());
+      try {
+        await api.deleteProject(
+          projectID: id!,
+           token: getIt.get<DataLayer>().authUser!.token,
+        );
         emit(SuccessState());
       } on FormatException catch (e) {
         emit(ErrorState(msg: e.message));

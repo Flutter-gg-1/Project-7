@@ -15,7 +15,7 @@ class ViewProjectDetailsCubit extends Cubit<ViewProjectDetailsState> {
   loadProjectDetail() async {
     emit(LoadingState());
     try{
-      getIt.get<DataLayer>().projectInfo = await api.getProjectDetails();
+      getIt.get<DataLayer>().projectInfo = (await api.getProjectDetails());
       emit(SuccessState());
     }on FormatException catch (e) {
       emit(ErrorState(msg: e.message));

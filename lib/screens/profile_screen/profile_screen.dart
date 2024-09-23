@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_judge/components/buttons/custom_elevated_button.dart';
-import 'package:project_judge/components/text_field/custom_text_form_field.dart';
 import 'package:project_judge/data_layer/data_layer.dart';
 import 'package:project_judge/models/user_model.dart';
-import 'package:project_judge/network/api_netowrok.dart';
 import 'package:project_judge/screens/edit_profile.dart/edit_profile.dart';
 import 'package:project_judge/setup/init_setup.dart';
 import 'package:simple_icons/simple_icons.dart';
-import '../../components/app_bar/custom_app_bar.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../../components/text/custom_text.dart';
-import 'dart:io';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
@@ -128,7 +124,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
-                  SimpleIcons.github,
+                  Icons.note,
                   color: Color(0XFFFFFFFF),
                 ),
                 title: CustomText(
@@ -155,6 +151,21 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
+              user.link!.resume != null
+                  ? TextButton(
+                      onPressed: () {
+                        launchURL(user.link!.resume!);
+                      },
+                      child: const CustomText(
+                        text: "Tap To View Resume",
+                        color: Color(0xff59E2DB),
+                        size: 14,
+                      ))
+                  : CustomText(
+                      text: "CV not uploaded yet",
+                      size: 14,
+                      color: const Color(0xffffffffff),
+                    ),
               const SizedBox(
                 height: 40,
               ),
@@ -170,7 +181,7 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: 14,
               ),
-              if (user.role == 'user')
+              if (user.role == 'admin')
                 CustomElevatedButton(
                     onPressed: () {},
                     minimumSize: const Size(350, 63),
@@ -183,5 +194,22 @@ class ProfileScreen extends StatelessWidget {
             ],
           ),
         ));
+  }
+}
+
+Future<void> launchURL(String url) async {
+  try {
+    Uri? uri = Uri.tryParse(url);
+    if (uri != null && (uri.hasScheme || uri.hasAuthority)) {
+      if (await canLaunchUrlString(url)) {
+        await launchUrlString(url);
+      } else {
+        await launchUrlString('http://google.com');
+      }
+    } else {
+      await launchUrlString('http://google.com');
+    }
+  } catch (e) {
+    'Error launching URL: $e';
   }
 }

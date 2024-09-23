@@ -8,16 +8,23 @@ import 'package:project_judge/screens/profile_screen/profile_screen.dart';
 import 'package:project_judge/screens/rating/ratingPage.dart';
 
 class NavigationPage extends StatefulWidget {
-  const NavigationPage({super.key});
+  const NavigationPage({super.key, required this.slectedPage});
+  final int slectedPage;
 
   @override
   NavigationPageState createState() => NavigationPageState();
 }
 
 class NavigationPageState extends State<NavigationPage> {
-  int selectedIndex = 0;
+  late int selectedIndex;
   String qrCodeResult = "Not Yet Scanned";
   String projectId = "12345";
+
+  @override
+  void initState() {
+    super.initState();
+    selectedIndex = widget.slectedPage; // Initialize with the passed index
+  }
 
   Future<void> scanQRCode() async {
     String scannedCode;

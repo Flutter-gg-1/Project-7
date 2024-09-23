@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_judge/components/text/custom_text.dart';
 import 'package:project_judge/data_layer/data_layer.dart';
+import 'package:project_judge/models/user_model.dart';
 import 'package:project_judge/screens/home_screen/cubit/home_cubit.dart';
+import 'package:project_judge/screens/navigation/navigationPage.dart';
+import 'package:project_judge/screens/view_project_detail_screen/view_project_detail_screen.dart';
 import 'package:project_judge/setup/init_setup.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -58,7 +61,7 @@ class HomeScreen extends StatelessWidget {
                             const CircleAvatar(
                               radius: 30,
                               backgroundImage: AssetImage(
-                                "assets/images/defualt_img.png",
+                                "assets/images/default_img.png",
                               ),
                             )
                           ],
@@ -106,7 +109,12 @@ class HomeScreen extends StatelessWidget {
                                             MediaQuery.of(context).size.width,
                                             63)),
                                     onPressed: () {
-                                      //push to my projects
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  NavigationPage(
+                                                      slectedPage: 3)));
                                     },
                                     child: const Center(
                                       child: Text(
@@ -145,7 +153,11 @@ class HomeScreen extends StatelessWidget {
                           fixedSize:
                               Size(MediaQuery.of(context).size.width, 63)),
                       onPressed: () {
-                        //push to browse
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    NavigationPage(slectedPage: 1)));
                       },
                       child: const Center(
                         child: Text(
@@ -155,6 +167,9 @@ class HomeScreen extends StatelessWidget {
                         ),
                       )),
                 ),
+                SizedBox(
+                  height: 40,
+                )
               ],
             ),
           ),
@@ -169,48 +184,31 @@ class CustomProjectsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Projects> allProjects = getIt.get<DataLayer>().projectInfo!;
+
+    final List<Projects> firstFifeProjects = allProjects.take(5).toList();
     return SizedBox(
       height: 200,
       child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: [
-          const SizedBox(
-            width: 20,
-          ),
-          CustomProjectCard(
-            img: null,
-            projectName: "Long Project Name",
-            bootcampName: "bootcamp name",
-          ),
-          const SizedBox(width: 10),
-          CustomProjectCard(
-            img: null,
-            projectName: "Long Project Name",
-            bootcampName: "bootcamp name",
-          ),
-          const SizedBox(width: 10),
-          CustomProjectCard(
-            img: null,
-            projectName: "Long Project Name",
-            bootcampName: "bootcamp name",
-          ),
-          const SizedBox(width: 10),
-          CustomProjectCard(
-            img: null,
-            projectName: "Long Project Name",
-            bootcampName: "bootcamp name",
-          ),
-          const SizedBox(width: 10),
-          CustomProjectCard(
-            img: null,
-            projectName: "Long Project Name",
-            bootcampName: "bootcamp name",
-          ),
-          const SizedBox(
-            width: 20,
-          ),
-        ],
-      ),
+          scrollDirection: Axis.horizontal,
+          children: firstFifeProjects
+              .map((e) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ViewProjectDetailScreen(
+                                    projectID: e.projectId!)));
+                      },
+                      child: CustomProjectCard(
+                          img: e.logoUrl,
+                          projectName: e.projectName ?? "No Project name",
+                          bootcampName: e.bootcampName ?? "No Bootcamp Name"),
+                    ),
+                  ))
+              .toList()),
     );
   }
 }
@@ -247,22 +245,22 @@ class CustomProjectCard extends StatelessWidget {
               decoration: BoxDecoration(
                   color: const Color(0xff4E2EB5),
                   borderRadius: BorderRadius.circular(20)),
-              child: Image.asset(
-                img ?? "assets/images/default_img.png",
+              child: Image.network(
+                img ?? "https://static.thenounproject.com/png/4595376-200.png",
                 // fit: BoxFit.cover, // PUT A COND HERE TO VIEW DEAFULT IF NO IMAGE IS STORED !!!!!!!!
               ),
             ),
             const SizedBox(
               height: 10,
             ),
-            const CustomText(
-              text: 'Long Project Name',
+            CustomText(
+              text: projectName,
               size: 16,
               color: Color(0xff4D2EB4),
               allowOverflow: true,
             ),
-            const CustomText(
-              text: "Bootcamp name",
+            CustomText(
+              text: bootcampName,
               size: 12,
               color: Color(0xffC4C4C4),
             ),

@@ -17,6 +17,7 @@ mixin UpdateProjectMethods on ConstantNetwork {
       required String presentationDate,
       required String desc,
       required List link,
+      required File pres,
       required String logo,
       required List<MembersProject> members,
       required List imagesList}) async {
@@ -57,18 +58,19 @@ mixin UpdateProjectMethods on ConstantNetwork {
       throw FormatException(e.toString());
     }
 
-    //   //update presentation
-    //   try {
-    //     await dio.put("$baseurl$updateProjectPresentationEndPoint/$id",
-    //         data: {
-    //           "presentation_file": presentation,
-    //         },
-    //         options: Options(headers: {"Authorization": "Bearer $token"}));
-    //   } on DioException catch (e) {
-    //     throw FormatException(e.response?.data['data']);
-    //   } catch (e) {
-    //     throw FormatException(e.toString());
-    //   }
+    //update presentation
+    try {
+      Uint8List presentation = await File(pres.path).readAsBytes();
+      await dio.put("$baseurl$updateProjectPresentationEndPoint/$projectID",
+          data: {
+            "presentation_file": presentation,
+          },
+          options: Options(headers: {"Authorization": "Bearer $token"}));
+    } on DioException catch (e) {
+      throw FormatException(e.response?.data['data']);
+    } catch (e) {
+      throw FormatException(e.toString());
+    }
 
     //   //update images
     try {

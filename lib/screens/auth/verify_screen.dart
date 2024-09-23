@@ -33,7 +33,7 @@ class VerifyScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const NavigationPage()));
+                      builder: (context) => const NavigationPage(slectedPage: 0,)));
             }
             if (state is ResendOtpState) {
               Navigator.pop(context);

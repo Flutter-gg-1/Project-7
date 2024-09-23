@@ -1,6 +1,5 @@
 part of 'edit_project_screen.dart';
 
-
 // --------------- edit presentation file --------------------
 
 class ProjectPresentationSection extends StatelessWidget {
@@ -36,14 +35,9 @@ class ProjectPresentationSection extends StatelessWidget {
         ),
         BlocBuilder<EditProjectBloc, EditProjectState>(
           builder: (context, state) {
-            if (bloc.presention.path.isNotEmpty) {
+            if (bloc.presention != null) {
               return Center(
-                child: Container(
-                    height: 100,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: const Color(0xff4E2EB5))),
-                    child: Text("hiiiiii")),
+                child: Text("file uploaded"),
               );
             }
             return const Center(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_judge/components/tab_bar/Opened_tab_bar.dart';
+import 'package:project_judge/components/tab_bar/browse_projects_page.dart';
 
 import 'package:project_judge/components/tab_bar/tab_bar_browse.dart';
-import 'package:project_judge/components/text_field/custom_text_form_field.dart';
 import 'package:project_judge/data_layer/data_layer.dart';
 import 'package:project_judge/screens/search_screen/search_screen.dart';
 import 'package:project_judge/screens/view_project_detail_screen/view_project_detail_screen.dart';
@@ -55,6 +55,7 @@ class BrowsePageState extends State<BrowsePage>
     return Scaffold(
       backgroundColor: const Color(0xFF4E2EB5),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: const Color(0xFF4E2EB5),
         title: const Text("Browse", style: TextStyle(color: Colors.white)),
         centerTitle: true,
@@ -66,14 +67,37 @@ class BrowsePageState extends State<BrowsePage>
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SearchScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SearchScreen()));
                 },
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 48,
-                  child: Center(
-                    child: Icon(Icons.search),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(8)),
+                    height: 48,
+                    child: const Row(
+                      children: [
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Icon(
+                          Icons.search,
+                          size: 22,
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          "Search",
+                          style: TextStyle(fontSize: 16),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -104,7 +128,7 @@ class BrowsePageState extends State<BrowsePage>
                               builder: (context) => ViewProjectDetailScreen(
                                   projectID: e.projectId!)));
                     },
-                    child: MyProjectCardOpened(project: e)))
+                    child: BrowseProjectsPage(project: e)))
                 .toList(),
           );
         }),

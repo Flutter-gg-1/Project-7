@@ -16,5 +16,7 @@ abstract class ConstantNetwork {
   final String updateProjectLinksEndPoint = '/user/edit/project/link';
   final String updateProjectMembersEndPoint = '/user/edit/project/members';
   final String getFirstHundredProjectsEndPoint = '/projects';
+  final String ratingProjectEndPoint = '/user/rating/project';
   final String supervisorCreate = 'supervisor/create/project';
+   final String delete ='/supervisor/delete/project';
 }

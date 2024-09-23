@@ -26,7 +26,7 @@ class RatingPage extends StatelessWidget {
               actions: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Image.asset("assets/images/send.png"),
+                  child: GestureDetector(onTap: (){}, child: Image.asset("assets/images/send.png")),
                 ),
               ],
             ),
@@ -56,6 +56,7 @@ class RatingPage extends StatelessWidget {
                                     category: 'Idea',
                                     value: newValue,
                                   ));
+                                  
                             },
                           ),
                           SliderSection(

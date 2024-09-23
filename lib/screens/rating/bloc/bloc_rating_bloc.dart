@@ -1,8 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_judge/network/api_netowrok.dart';
 import 'package:project_judge/screens/rating/bloc/bloc_rating_event.dart';
 import 'package:project_judge/screens/rating/bloc/bloc_rating_state.dart';
 
 class RatingBloc extends Bloc<RatingEvent, RatingState> {
+  ApiNetowrok api = ApiNetowrok();
   RatingBloc()
       : super(RatingState(
           ideaRating: 5,

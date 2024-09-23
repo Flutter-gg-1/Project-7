@@ -6,3 +6,7 @@ class UpdateRating extends RatingEvent {
 
   UpdateRating({required this.category, required this.value});
 }
+
+class SendRatingEvent extends RatingEvent{
+  
+}
