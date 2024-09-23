@@ -7,10 +7,10 @@ import 'package:project_judge/setup/init_setup.dart';
 part 'search_state.dart';
 
 class SearchCubit extends Cubit<SearchInitial> {
-  SearchCubit() : super(SearchInitial(allProjects: [],filteredProjects: []));
+  SearchCubit() : super(SearchInitial(allProjects: const [],filteredProjects: const []));
 
   void loadProjects(List<Projects> projects) {
-    emit(SearchInitial(filteredProjects: [], allProjects: projects));
+    emit(SearchInitial(filteredProjects: const [], allProjects: projects));
   }
   void filterProjects(String query) {
     final allProjects = getIt.get<DataLayer>().projectInfo;

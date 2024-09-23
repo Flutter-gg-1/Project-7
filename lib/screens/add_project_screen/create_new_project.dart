@@ -1,9 +1,7 @@
 import 'package:date_picker_plus/date_picker_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
 import 'package:project_judge/components/buttons/custom_elevated_button.dart';
-import 'package:project_judge/components/dialog/error_dialog.dart';
 import 'package:project_judge/components/text/custom_text.dart';
 import 'package:project_judge/screens/add_project_screen/cubit/add_project_cubit.dart';
 import '../../components/text_field/custom_text_form_field.dart';
@@ -115,7 +113,7 @@ class CreateNewProject extends StatelessWidget {
 
           // Dropdown for edit option
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -127,8 +125,8 @@ class CreateNewProject extends StatelessWidget {
                 value: bloc.canEdit,
                 hint: const Text('Select option'),
                 items: [
-                  DropdownMenuEntry(value: 0, label: "Yes"),
-                  DropdownMenuEntry(value: 1, label: "No"),
+                  const DropdownMenuEntry(value: 0, label: "Yes"),
+                  const DropdownMenuEntry(value: 1, label: "No"),
                 ].map((entry) {
                   return DropdownMenuItem<int>(
                     value: entry.value,

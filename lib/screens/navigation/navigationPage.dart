@@ -59,7 +59,7 @@ class NavigationPageState extends State<NavigationPage> {
     const BrowsePage(),
     const Center(child: Text("Middle Page")),
     const MyProjectsScreen(),
-    ProfileScreen()
+    const ProfileScreen()
   ];
 
   void onItemTapped(int index) {

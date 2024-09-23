@@ -13,6 +13,8 @@ class LoadingScreenCubit extends Cubit<LoadingScreenState> {
     await Future.delayed(const Duration(seconds: 2));
 
     if (userAuth != null) {
+      await getIt.get<DataLayer>().getProjectInfo();
+
       emit(LoggedInState());
     } else {
       emit(NotLoggedInState());

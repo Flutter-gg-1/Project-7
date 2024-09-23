@@ -55,8 +55,8 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
           controller: tabController,
           indicatorWeight: 8.0,
           indicatorSize: TabBarIndicatorSize.tab,
-          indicatorColor: Color(0xff57E3D8),
-          labelColor: Color(0xff57E3D8),
+          indicatorColor: const Color(0xff57E3D8),
+          labelColor: const Color(0xff57E3D8),
           labelStyle: const TextStyle(fontSize: 20),
           unselectedLabelColor: Colors.grey,
           tabs: const [
@@ -82,7 +82,7 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
                   ),
                 );
               },
-              backgroundColor: Color(0xff57E3D8),
+              backgroundColor: const Color(0xff57E3D8),
               shape: const CircleBorder(),
               heroTag: 'unique_tag',
               child: const Icon(Icons.add),

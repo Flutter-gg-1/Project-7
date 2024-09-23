@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_judge/components/tab_bar/Opened_tab_bar.dart';
 import 'package:project_judge/components/tab_bar/browse_projects_page.dart';
 
 import 'package:project_judge/components/tab_bar/tab_bar_browse.dart';

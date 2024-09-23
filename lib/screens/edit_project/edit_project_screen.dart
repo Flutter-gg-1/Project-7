@@ -252,7 +252,7 @@ class BasicInformation extends StatelessWidget {
           controller: nameController,
           onChange: (value) {
             bloc.name = nameController.text;
-            return null;
+            return;
           },
         ),
         const SizedBox(height: 10),
@@ -268,7 +268,7 @@ class BasicInformation extends StatelessWidget {
           controller: bootcampController,
           onChange: (value) {
             bloc.bootcampName = bootcampController.text;
-            return null;
+            return;
           },
         ),
         const SizedBox(height: 10),
@@ -284,7 +284,7 @@ class BasicInformation extends StatelessWidget {
           controller: typeController,
           onChange: (value) {
             bloc.type = typeController.text;
-            return null;
+            return;
           },
         ),
         const SizedBox(height: 10),
@@ -309,7 +309,7 @@ class BasicInformation extends StatelessWidget {
           controller: descController,
           onChange: (value) {
             bloc.description = descController.text;
-            return null;
+            return;
           },
         ),
       ],
@@ -664,7 +664,7 @@ class ProjectLinksSection extends StatelessWidget {
           controller: githubController,
           onChange: (value) {
             bloc.add(UpdateLinksEvent(github: value));
-            return null;
+            return;
           },
         ),
         const SizedBox(height: 10),
@@ -674,7 +674,7 @@ class ProjectLinksSection extends StatelessWidget {
           controller: figmaController,
           onChange: (value) {
             bloc.add(UpdateLinksEvent(figma: value));
-            return null;
+            return;
           },
         ),
         const SizedBox(height: 10),
@@ -684,7 +684,7 @@ class ProjectLinksSection extends StatelessWidget {
           controller: youtubeController,
           onChange: (value) {
             bloc.add(UpdateLinksEvent(video: value));
-            return null;
+            return;
           },
         ),
         const SizedBox(height: 10),
@@ -694,7 +694,7 @@ class ProjectLinksSection extends StatelessWidget {
           controller: pinterestController,
           onChange: (value) {
             bloc.add(UpdateLinksEvent(pinterest: value));
-            return null;
+            return;
           },
         ),
         const SizedBox(height: 10),
@@ -704,7 +704,7 @@ class ProjectLinksSection extends StatelessWidget {
           controller: playstoreController,
           onChange: (value) {
             bloc.add(UpdateLinksEvent(playstore: value));
-            return null;
+            return;
           },
         ),
         const SizedBox(height: 10),
@@ -714,7 +714,7 @@ class ProjectLinksSection extends StatelessWidget {
           controller: appstoreController,
           onChange: (value) {
             bloc.add(UpdateLinksEvent(applestore: value));
-            return null;
+            return;
           },
         ),
         const SizedBox(height: 10),
@@ -724,7 +724,7 @@ class ProjectLinksSection extends StatelessWidget {
           controller: apkController,
           onChange: (value) {
             bloc.add(UpdateLinksEvent(apk: value));
-            return null;
+            return;
           },
         ),
         const SizedBox(height: 10),
@@ -734,7 +734,7 @@ class ProjectLinksSection extends StatelessWidget {
           controller: webController,
           onChange: (value) {
             bloc.add(UpdateLinksEvent(web: value));
-            return null;
+            return;
           },
         ),
       ],
@@ -784,7 +784,7 @@ class ProjectPresentationSection extends StatelessWidget {
                     width: double.infinity,
                     decoration: BoxDecoration(
                         border: Border.all(color: const Color(0xff4E2EB5))),
-                    child: Text("hiiiiii")),
+                    child: const Text("hiiiiii")),
               );
             }
             return const Center(
@@ -903,10 +903,10 @@ class MemberRow extends StatelessWidget {
                 onChange: (value) {
                   bloc.add(UpdateMembersEvent(
                     index: index,
-                    id: value!,
+                    id: value,
                     role: bloc.members![index].position!,
                   ));
-                  return null;
+                  return;
                 },
               ),
             ),
@@ -925,9 +925,9 @@ class MemberRow extends StatelessWidget {
                   bloc.add(UpdateMembersEvent(
                     index: index,
                     id: bloc.members![index].id!,
-                    role: value!,
+                    role: value,
                   ));
-                  return null;
+                  return;
                 },
               ),
             ),

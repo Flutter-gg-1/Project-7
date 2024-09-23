@@ -9,7 +9,7 @@ import '../../components/text/custom_text.dart';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
-  ProfileScreen({super.key});
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class ProfileScreen extends StatelessWidget {
                 onPressed: () {
                   //sign out logic
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.exit_to_app,
                   color: Color(0xffffffff),
                 ))
@@ -51,7 +51,7 @@ class ProfileScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: Color(0xffffffff),
+                    color: const Color(0xffffffff),
                     width: 4,
                   ),
                 ),
@@ -83,7 +83,7 @@ class ProfileScreen extends StatelessWidget {
                     color: Colors.white,
                     weight: FontWeight.w500,
                   ),
-                  CustomText(text: ' '),
+                  const CustomText(text: ' '),
                   CustomText(
                     text: user.lastName!,
                     size: 24,
@@ -102,7 +102,7 @@ class ProfileScreen extends StatelessWidget {
                 height: 10,
               ),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   SimpleIcons.github,
                   color: Color(0XFFFFFFFF),
                 ),
@@ -112,7 +112,7 @@ class ProfileScreen extends StatelessWidget {
                     color: const Color(0xffffffff)),
               ),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   SimpleIcons.linkedin,
                   color: Color(0XFFFFFFFF),
                 ),
@@ -122,7 +122,7 @@ class ProfileScreen extends StatelessWidget {
                     color: const Color(0xffffffff)),
               ),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   SimpleIcons.github,
                   color: Color(0XFFFFFFFF),
                 ),
@@ -132,7 +132,7 @@ class ProfileScreen extends StatelessWidget {
                     color: const Color(0xffffffff)),
               ),
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.email,
                   color: Color(0XFFFFFFFF),
                 ),
@@ -162,7 +162,7 @@ class ProfileScreen extends StatelessWidget {
               CustomElevatedButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => EditProfile()));
+                        MaterialPageRoute(builder: (context) => const EditProfile()));
                   },
                   minimumSize: const Size(350, 63),
                   backgroundColor: const Color(0xff58E4D9),
@@ -179,7 +179,7 @@ class ProfileScreen extends StatelessWidget {
                     text: "Manage Users",
                     textcolor: const Color(0xff5030B6)),
 
-              SizedBox(
+              const SizedBox(
                 height: 20,
               )
             ],

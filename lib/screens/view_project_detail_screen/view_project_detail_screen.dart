@@ -53,7 +53,7 @@ class ViewProjectDetailScreen extends StatelessWidget {
                               ),
                             ));
                   },
-                  icon: Icon(Icons.qr_code_2_rounded)),
+                  icon: const Icon(Icons.qr_code_2_rounded)),
               IconButton(
                   onPressed: () {
                     Navigator.push(
@@ -62,7 +62,7 @@ class ViewProjectDetailScreen extends StatelessWidget {
                             builder: (context) =>
                                 RatingPage(projectID: projectID)));
                   },
-                  icon: Icon(Icons.rate_review_outlined)),
+                  icon: const Icon(Icons.rate_review_outlined)),
             ],
           ),
           body: BlocBuilder<ViewProjectDetailsCubit, ViewProjectDetailsState>(

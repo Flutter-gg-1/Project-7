@@ -92,7 +92,7 @@ class MyProjectCardOpened extends StatelessWidget {
                       const SizedBox(height: 2),
                       RatingBar.builder(
                         itemSize: ratingItemSize,
-                        initialRating: project.rating?.toDouble() ?? 0,
+                        initialRating: project.rating.toDouble() ?? 0,
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: false,

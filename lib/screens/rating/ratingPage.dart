@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:project_judge/components/dialog/error_dialog.dart';
 import 'package:project_judge/components/slider_section/sliderSection.dart';
-import 'package:project_judge/components/text_field/noteSection_text.dart';
 import 'package:project_judge/screens/navigation/navigationPage.dart';
 import 'package:project_judge/screens/rating/cubit/rating_cubit.dart';
 
@@ -32,7 +31,7 @@ class RatingPage extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => NavigationPage(slectedPage: 4)));
+                      builder: (context) => const NavigationPage(slectedPage: 4)));
             }
             if (state is ErrorState) {
               showErrorDialog(context, state.msg);

@@ -22,7 +22,7 @@ class WelcomeScreen extends StatelessWidget {
           Positioned.fill(child: Container(color: const Color(0x204D2EB4))),
           Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -33,7 +33,7 @@ class WelcomeScreen extends StatelessWidget {
                     height: 3,
                   ),
                   SvgPicture.asset("assets/svg/Gallery.svg"),
-                  CustomText(
+                  const CustomText(
                     text: 'Dream. Design. Deliver.',
                     color: Color(0xffffffff),
                   ),

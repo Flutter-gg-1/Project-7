@@ -11,7 +11,7 @@ import '../../components/text/custom_text.dart';
 import 'dart:io';
 
 class EditProfile extends StatelessWidget {
-  EditProfile({super.key});
+  const EditProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +21,7 @@ class EditProfile extends StatelessWidget {
         final bloc = context.read<UpdateprofileBloc>();
         final picker = ImagePicker();
         final formKey = GlobalKey<FormState>();
+        bool isImagePickerActive = false;
 
         // Initialize controllers
         TextEditingController fNameController =
@@ -79,7 +80,7 @@ class EditProfile extends StatelessWidget {
                   child: IconButton(
                     onPressed: () {
                       if (formKey.currentState?.validate() == true) {
-                        if (bloc.file == null)
+                        if (bloc.file == null) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text('Please import a resume file.'),
@@ -87,7 +88,7 @@ class EditProfile extends StatelessWidget {
                               duration: Duration(seconds: 2),
                             ),
                           );
-                        else {
+                        } else {
                           bloc.add(UpdateAllProfileEvent());
                         }
                       }
@@ -143,10 +144,26 @@ class EditProfile extends StatelessWidget {
                         }),
                         TextButton(
                           onPressed: () async {
-                            final image = await picker.pickImage(
-                                source: ImageSource.gallery);
-                            if (image != null) {
-                              bloc.add(UploadImgEvent(img: File(image.path)));
+                            if (!isImagePickerActive) {
+                              isImagePickerActive = true; // Mark picker as active
+                              try {
+                                final image = await picker.pickImage(
+                                    source: ImageSource.gallery);
+                                if (image != null) {
+                                  bloc.add(UploadImgEvent(img: File(image.path)));
+                                }
+                              } catch (e) {
+                                // Handle the case where image picking fails
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                        'Failed to pick an image. Please try again.'),
+                                  ),
+                                );
+                              } finally {
+                                // Reset the flag once the picker is done
+                                isImagePickerActive = false;
+                              }
                             }
                           },
                           child: const Text('Change Profile Icon'),

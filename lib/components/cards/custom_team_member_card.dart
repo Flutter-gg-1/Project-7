@@ -27,7 +27,7 @@ class CustomTeamMemberCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTileCard(
-      leading: Container(
+      leading: SizedBox(
         width: 50,
         height: 50,
         child: ClipOval(

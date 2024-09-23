@@ -46,7 +46,7 @@ class AddProjectScreen extends StatelessWidget {
             }
           },
           child: Scaffold(
-            backgroundColor: Color(0xffFBFBFB),
+            backgroundColor: const Color(0xffFBFBFB),
             appBar: const CustomAppBar(
               text: 'Add a new Project',
             ),

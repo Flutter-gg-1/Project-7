@@ -113,7 +113,7 @@ class HomeScreen extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  NavigationPage(
+                                                  const NavigationPage(
                                                       slectedPage: 3)));
                                     },
                                     child: const Center(
@@ -157,7 +157,7 @@ class HomeScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    NavigationPage(slectedPage: 1)));
+                                    const NavigationPage(slectedPage: 1)));
                       },
                       child: const Center(
                         child: Text(
@@ -253,13 +253,13 @@ class CustomProjectCard extends StatelessWidget {
             CustomText(
               text: projectName,
               size: 16,
-              color: Color(0xff4D2EB4),
+              color: const Color(0xff4D2EB4),
               allowOverflow: true,
             ),
             CustomText(
               text: bootcampName,
               size: 12,
-              color: Color(0xffC4C4C4),
+              color: const Color(0xffC4C4C4),
             ),
           ],
         ),
