@@ -9,25 +9,23 @@ final class EditImagesEvent extends EditProjectEvent {
 }
 
 final class UpdateLogoEvent extends EditProjectEvent {
-    final File logo;
-    UpdateLogoEvent({required this.logo});
+  final File logo;
+  UpdateLogoEvent({required this.logo});
 }
 
 final class UpdatePresentationDateEvent extends EditProjectEvent {
-    final DateTime date;
-    UpdatePresentationDateEvent({required this.date});
+  final DateTime date;
+  UpdatePresentationDateEvent({required this.date});
 }
 
 final class UpdateProjectDurationEvent extends EditProjectEvent {
-    final DateTimeRange date;
-    UpdateProjectDurationEvent({required this.date});
+  final DateTimeRange date;
+  UpdateProjectDurationEvent({required this.date});
 }
-
 
 final class DeleteImagesEvent extends EditProjectEvent {
   final int imgsInt;
   DeleteImagesEvent({required this.imgsInt});
-
 }
 
 class UpdateMembersEvent extends EditProjectEvent {
@@ -35,23 +33,29 @@ class UpdateMembersEvent extends EditProjectEvent {
   final String id;
   final String role;
 
-  UpdateMembersEvent({required this.index, required this.id, required this.role});
+  UpdateMembersEvent(
+      {required this.index, required this.id, required this.role});
 }
 
-
 class UpdateLinksEvent extends EditProjectEvent {
-
   final String? github;
   final String? figma;
   final String? video;
   final String? pinterest;
   final String? playstore;
   final String? applestore;
-    final String? apk;
+  final String? apk;
   final String? web;
 
-
-  UpdateLinksEvent({this.figma, this.video, this.pinterest, this.playstore, this.applestore, this.apk, this.web, this.github});
+  UpdateLinksEvent(
+      {this.figma,
+      this.video,
+      this.pinterest,
+      this.playstore,
+      this.applestore,
+      this.apk,
+      this.web,
+      this.github});
 }
 
 class UpdateFileEvent extends EditProjectEvent {
@@ -66,7 +70,8 @@ class DeleteMembersEvent extends EditProjectEvent {
   DeleteMembersEvent({required this.index});
 }
 
+final class AddMembersEvent extends EditProjectEvent {}
 
-final class AddMembersEvent extends EditProjectEvent {
-}
+final class UpdateAllProjectEvent extends EditProjectEvent {}
 
+final class DeleteProjectEvent extends EditProjectEvent {}

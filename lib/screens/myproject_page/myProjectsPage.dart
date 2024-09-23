@@ -44,6 +44,7 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
     return Scaffold(
       backgroundColor: const Color(0xFF4E2EB5),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: const Color(0xFF4E2EB5),
         elevation: 0,
         centerTitle: true,
@@ -72,7 +73,7 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
           buildProjectList(closedProjects, false),
         ],
       ),
-      floatingActionButton: user.role == 'supervisor' || user.role == "admin"
+      floatingActionButton: user.role != 'user'
           ? FloatingActionButton(
               onPressed: () {
                 Navigator.push(

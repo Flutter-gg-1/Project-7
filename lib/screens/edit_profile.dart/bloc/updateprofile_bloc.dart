@@ -26,9 +26,8 @@ class UpdateprofileBloc extends Bloc<UpdateprofileEvent, UpdateprofileState> {
   late String bindlink = user.link?.bindlink ?? '';
 
   UpdateprofileBloc() : super(UpdateprofileInitial()) {
-    imgFuture = convertUriToFile(); // Initialize the Future
+    imgFuture = convertUriToFile(user.imageUrl ?? ''); // Initialize the Future
     on<UploadImgEvent>((event, emit) async {
-      print(user.imageUrl);
       imgFuture = Future.value(event.img); // Wrap the File in a Future
       emit(UpdatedState());
     });
@@ -62,10 +61,10 @@ class UpdateprofileBloc extends Bloc<UpdateprofileEvent, UpdateprofileState> {
     });
   }
 
-  Future<File?> convertUriToFile() async {
+  Future<File?> convertUriToFile(String file) async {
     try {
       String uriString =
-          user.imageUrl ?? 'https://avatar.iran.liara.run/public';
+          file == '' ? 'https://i.postimg.cc/CKzV6S98/defualt-img.png' : file;
 
       // Get the temporary directory
       final directory = await getTemporaryDirectory();
@@ -83,11 +82,11 @@ class UpdateprofileBloc extends Bloc<UpdateprofileEvent, UpdateprofileState> {
         return file;
       } else {
         print('Failed to download file: ${response.statusCode}');
-        return null; 
+        return null;
       }
     } catch (e) {
       print('Error: $e');
-      return null; 
+      return null;
     }
   }
 }

@@ -281,8 +281,7 @@ class ViewProjectDetailScreen extends StatelessWidget {
                                     size: 12,
                                   ))
                               : CustomText(
-                                  text: currentProject.projectDescription ??
-                                      "preseentaion not uploaded yet",
+                                  text: "preseentaion not uploaded yet",
                                   size: 12,
                                   color: const Color(0xff848484),
                                 ),
