@@ -13,7 +13,8 @@ class CustomButton extends StatelessWidget {
     required this.englishTitle,
     this.arabic,
     required this.arabicTitle,
-    required this.onPressed, this.color,
+    required this.onPressed,
+    this.color,
   });
 
   @override
@@ -24,7 +25,7 @@ class CustomButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
           fixedSize: Size(context.getWidth(multiply: 0.5),
               context.getHeight(multiply: 0.05)),
-          backgroundColor:color ?? const Color(0xff4D2EB4)),
+          backgroundColor: color ?? const Color(0xff4D2EB4)),
       child: Text(
         arabic! || language.isArabic ? arabicTitle : englishTitle,
         style: const TextStyle(

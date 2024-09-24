@@ -1,16 +1,16 @@
-// ignore_for_file: avoid_print
-
 import 'package:dio/dio.dart';
+import 'package:tuwaiq_project/data_layer/auth_layer.dart';
 import 'package:tuwaiq_project/networking/networking_constant.dart';
+import 'package:tuwaiq_project/services/setup.dart';
 
 mixin SupervisorMix on NetworkingConstant {
   createProject({
-    required String token,
     required String userId,
     required String timeEditEnd,
     required bool isEdit,
   }) async {
     try {
+      String token = authLocator.get<AuthLayerData>().auth!.token!;
       final res = await dio.post("$baseUrl$endProjectCreate",
           options: Options(headers: {'Authorization': 'Bearer $token'}),
           data: {
@@ -18,8 +18,6 @@ mixin SupervisorMix on NetworkingConstant {
             "time_end_edit": timeEditEnd,
             "edit": isEdit.toString()
           });
-
-      print(res.data);
     } on DioException catch (err) {
       throw DioException(
           requestOptions: RequestOptions(),
@@ -30,7 +28,6 @@ mixin SupervisorMix on NetworkingConstant {
   }
 
   changeProjectState({
-    required String token,
     required String timeEndEdit,
     required bool allowEdit,
     required bool allowRating,
@@ -38,6 +35,7 @@ mixin SupervisorMix on NetworkingConstant {
     required String projectId,
   }) async {
     try {
+      String token = authLocator.get<AuthLayerData>().auth!.token!;
       final res = await dio.put("$baseUrl$endProjectChangeState$projectId",
           options: Options(headers: {'Authorization': 'Bearer $token'}),
           data: {
@@ -46,26 +44,22 @@ mixin SupervisorMix on NetworkingConstant {
             "rating": allowRating,
             "public": allowPublic
           });
-
-      print(res.data);
     } on DioException catch (err) {
-      print(err.response?.data);
+      throw err.response?.data ?? 'Unknown error occurred';
     } catch (err) {
       throw Exception;
     }
   }
 
   delproject({
-    required String token,
     required String projectId,
   }) async {
     try {
+      String token = authLocator.get<AuthLayerData>().auth!.token!;
       final res = await dio.delete(
         "$baseUrl$endProjectDel$projectId",
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
-
-      print(res.data);
     } on DioException catch (err) {
       throw DioException(
           requestOptions: RequestOptions(),

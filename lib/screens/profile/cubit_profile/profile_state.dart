@@ -4,6 +4,7 @@ part of 'profile_cubit.dart';
 sealed class ProfileState {}
 
 final class ProfileInitial extends ProfileState {}
+final class LodaingState extends ProfileState {}
 
 final class ShowProfileState extends ProfileState {
   final ProfileModel profileModel;
@@ -17,20 +18,8 @@ final class ErorrState extends ProfileState {
   ErorrState({required this.msg});
 }
 
+final class ArabicState extends ProfileState {
+  final bool isArabic;
 
-
-
-// final class ImageHereState extends ProfileState {
-//   final List<int> imgFile;
-//    final String? imagUrl;
-
-//   ImageHereState({this.imagUrl ,required this.imgFile});
-// }
-
-
-// final class ImageNoState extends ProfileState {
-  
-
-//   ImageNoState();
-// }
-
+  ArabicState({required this.isArabic});
+}

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,8 +33,12 @@ class SignupScreen extends StatelessWidget {
 
             if (state is SuccessState) {
               Navigator.pop(context);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) =>  OtpScreen(email: bloc.controllerEmail!.text,)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => OtpScreen(
+                            email: bloc.controllerEmail!.text,
+                          )));
             }
             if (state is ErrorState) {
               Navigator.pop(context);

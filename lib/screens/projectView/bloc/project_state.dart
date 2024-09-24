@@ -11,9 +11,9 @@ final class SucsessState extends ProjectState {
   SucsessState({required this.msg});
 }
 
-class EditChangeState extends ProjectState {
+class EditStatusState extends ProjectState {
   final bool isEdit;
-  EditChangeState({required this.isEdit});
+  EditStatusState({required this.isEdit});
 }
 
 final class ErrorState extends ProjectState {

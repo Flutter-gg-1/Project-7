@@ -51,7 +51,7 @@ class CreateColumn extends StatelessWidget {
             BlocBuilder<ProjectBloc, ProjectState>(
               builder: (context, state) {
                 return Checkbox(
-                  value: state is EditChangeState ? state.isEdit : bloc.isEdit,
+                  value: state is EditStatusState ? state.isEdit : bloc.isEdit,
                   onChanged: (value) {
                     bloc.add(IsEditEvent(isEdit: value!));
                   },

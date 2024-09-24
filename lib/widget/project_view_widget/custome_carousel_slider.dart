@@ -2,16 +2,19 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
+import 'package:tuwaiq_project/models/images_project_model.dart';
+
 
 class CarouselSliderCustome extends StatelessWidget {
-  CarouselSliderCustome({
+  const CarouselSliderCustome({
     super.key,
     required this.currentIndex,
     required this.onPageChanged,
+    required this.carouselSliderWidget,
   });
   final int currentIndex;
   final Function(int, CarouselPageChangedReason) onPageChanged;
-  final List carouselSliderList = [1, 2, 3];
+  final List<ImagesProjectModel> carouselSliderWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +33,28 @@ class CarouselSliderCustome extends StatelessWidget {
               viewportFraction: 1,
               onPageChanged: onPageChanged,
             ),
-            items: carouselSliderList.map((i) {
+            items: carouselSliderWidget.map((i) {
               return Builder(
                 builder: (BuildContext context) {
                   return ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.asset(
-                      'assets/image/data_science.png',
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                    ),
-                  );
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.network(
+                        i.url,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                              "assets/image/Search-amico(1).png");
+                        },
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          }
+
+                          return const Center(
+                            child: Center(child: CircularProgressIndicator()),
+                          );
+                        },
+                        fit: BoxFit.cover,
+                      ));
                 },
               );
             }).toList(),
@@ -65,7 +79,7 @@ class CarouselSliderCustome extends StatelessWidget {
                   ),
                 ),
                 activeIndex: currentIndex,
-                count: carouselSliderList.length,
+                count: carouselSliderWidget.length,
               ),
             ),
           ),

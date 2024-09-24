@@ -24,9 +24,7 @@ class DeleteColumn extends StatelessWidget {
             child: Text(
               'Option : Delete',
               style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red),
+                  fontSize: 20, fontWeight: FontWeight.bold, color: Colors.red),
             )),
         context.addSpacer(multiply: 0.01),
         NormalTextFormFeild(
@@ -38,8 +36,7 @@ class DeleteColumn extends StatelessWidget {
             englishTitle: 'Delete',
             arabicTitle: 'حذف',
             arabic: languageLayer.isArabic,
-            color:
-                const Color(0xffE12727).withOpacity(0.81),
+            color: const Color(0xffE12727).withOpacity(0.81),
             onPressed: () {
               bloc.add(DeleteProjectEvent());
             })

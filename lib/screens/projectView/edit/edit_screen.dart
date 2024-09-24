@@ -1,29 +1,25 @@
-// ignore_for_file: unused_import
 
-import 'dart:io';
-
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 
 import 'package:tuwaiq_project/screens/projectView/edit/bloc/edit_bloc.dart';
-import 'package:tuwaiq_project/screens/projectView/edit/edit_base.dart';
-import 'package:tuwaiq_project/screens/projectView/edit/edit_images.dart';
-import 'package:tuwaiq_project/screens/projectView/edit/edit_links.dart';
-import 'package:tuwaiq_project/screens/projectView/edit/edit_logo.dart';
-import 'package:tuwaiq_project/screens/projectView/edit/edit_members.dart';
-import 'package:tuwaiq_project/screens/projectView/edit/edit_presentation.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/componets/edit_base.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/componets/edit_images.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/componets/edit_links.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/componets/edit_logo.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/componets/edit_members.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/componets/edit_presentation.dart';
+import 'package:tuwaiq_project/screens/projectView/edit/componets/edit_status.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
-import 'package:tuwaiq_project/widget/button/custom_button.dart';
-import 'package:tuwaiq_project/widget/row/date_row.dart';
-import 'package:tuwaiq_project/widget/textformfeild/normal_text_form_feild.dart';
 
 class EditScreen extends StatelessWidget {
-  const EditScreen({super.key});
+  final String projectId;
+  final bool isAuthraize;
+  const EditScreen(
+      {super.key, required this.projectId, required this.isAuthraize});
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +27,23 @@ class EditScreen extends StatelessWidget {
       create: (context) => EditBloc(),
       child: Builder(builder: (context) {
         final bloc = context.read<EditBloc>();
-
+        bloc.projectId = projectId;
         var languageLayer = languageLocaitor.get<LanguageLayer>();
         return BlocListener<EditBloc, EditState>(
           listener: (context, state) {
             if (state is SucsessState) {
               Navigator.pop(context);
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(state.msg)));
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(state.msg),
+                backgroundColor: Colors.green,
+              ));
             }
             if (state is ErrorState) {
               Navigator.pop(context);
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(state.msg)));
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(state.msg),
+                backgroundColor: Colors.red,
+              ));
             }
             if (state is LoadingState) {
               showDialog(
@@ -60,6 +60,19 @@ class EditScreen extends StatelessWidget {
           child: Scaffold(
             backgroundColor: Colors.white,
             resizeToAvoidBottomInset: true,
+            floatingActionButton: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xff4D2EB4)),
+                onPressed: () {
+
+                  
+                  Navigator.pop(context, true);
+                },
+                child: Text(
+                  languageLayer.isArabic ? 'تم' : 'Done',
+                  style: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                )),
             body: SingleChildScrollView(
               child: Column(
                 children: [
@@ -81,7 +94,11 @@ class EditScreen extends StatelessWidget {
                     height: context.getHeight(multiply: 0.75),
                     child: PageView(
                       children: [
-                        EditLogo(bloc: bloc, languageLayer: languageLayer),
+                        EditLogo(
+                          bloc: bloc,
+                          languageLayer: languageLayer,
+                          projectId: projectId,
+                        ),
                         EditBase(languageLayer: languageLayer, bloc: bloc),
                         EditPresentation(
                             bloc: bloc, languageLayer: languageLayer),
@@ -91,6 +108,12 @@ class EditScreen extends StatelessWidget {
                           bloc: bloc,
                           languageLayer: languageLayer,
                         ),
+                        EditStatus(
+                          languageLayer: languageLayer,
+                          bloc: bloc,
+                          projectId: projectId,
+                          isAuthraize: isAuthraize,
+                        )
                       ],
                     ),
                   ),

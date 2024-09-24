@@ -17,18 +17,15 @@ class ProjectMembersColumn extends StatelessWidget {
       children: [
         Text(
           languageLayer.isArabic ? 'الاعضاء' : 'Members',
-          style: const TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w500),
+          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
         ),
         const Divider(),
         const Text(
           'ID member',
-          style: TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
         ),
         const NormalTextFormFeild(
-            hintText:
-                '10545b55-4875-441d-88e8-f835acc72374')
+            hintText: '10545b55-4875-441d-88e8-f835acc72374')
       ],
     );
   }

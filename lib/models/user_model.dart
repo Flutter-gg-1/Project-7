@@ -1,27 +1,23 @@
-
-
-//  save token of the user to use later and save it in getStorge
 class UserModel {
-  UserModel({
-    required this.token,
-    required this.refreshToken,
-    required this.expiresAt,
-  });
-  late final String token;
-  late final String refreshToken;
-  late final int expiresAt;
-  
-  UserModel.fromJson(Map<String, dynamic> json){
+  UserModel({this.token, this.refreshToken, this.expiresAt, this.id});
+  late final String? token;
+  late final String? refreshToken;
+  late final int? expiresAt;
+  late  String? id;
+
+  UserModel.fromJson(Map<String, dynamic> json) {
     token = json['token'];
     refreshToken = json['refreshToken'];
     expiresAt = json['expiresAt'];
+    id = json['id'];
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['token'] = token;
-    _data['refreshToken'] = refreshToken;
-    _data['expiresAt'] = expiresAt;
-    return _data;
+    final data = <String, dynamic>{};
+    data['token'] = token;
+    data['refreshToken'] = refreshToken;
+    data['expiresAt'] = expiresAt;
+    data['id'] = id;
+    return data;
   }
 }

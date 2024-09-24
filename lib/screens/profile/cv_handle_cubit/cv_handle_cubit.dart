@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
@@ -9,34 +7,31 @@ part 'cv_handle_state.dart';
 class CvHandleCubit extends Cubit<CvHandleState> {
   CvHandleCubit() : super(CvHandleInitial());
 
-
-
-
   List<int>? cvCubitFile;
 
   cvfileConvort({required String? cvUrl}) async {
     try {
       if (cvUrl != null) {
-        List<int> cvFile =
-            (await NetworkAssetBundle(Uri.parse("https://www.princexml.com/samples/invoice/invoicesample.pdf")).load("https://www.princexml.com/samples/invoice/invoicesample.pdf"))
-                .buffer
-                .asUint8List();
-        log("hi img is good");
-        cvShow(cvFile , "CV");
+        List<int> cvFile = (await NetworkAssetBundle(Uri.parse(
+                    "https://www.princexml.com/samples/invoice/invoicesample.pdf"))
+                .load(
+                    "https://www.princexml.com/samples/invoice/invoicesample.pdf"))
+            .buffer
+            .asUint8List();
+
+        cvShow(cvFile, "CV");
       } else {
         throw Exception;
       }
     } catch (err) {
-      log("hi");
-      print(err);
-      cvShow(null , null);
+      cvShow(null, null);
     }
   }
 
-  cvShow(List<int>? cVFile , String? name) {
+  cvShow(List<int>? cVFile, String? name) {
     if (cVFile != null) {
       cvCubitFile = cVFile;
-      emit(CvHereState( cVFile: cVFile, name!));
+      emit(CvHereState(cVFile: cVFile, name!));
     }
 
     if (cVFile == null) {
@@ -44,9 +39,9 @@ class CvHandleCubit extends Cubit<CvHandleState> {
     }
   }
 
-  cvAdd(List<int> cvFile , String cvName) {
+  cvAdd(List<int> cvFile, String cvName) {
     cvCubitFile = cvFile;
-    emit(CvHereState( cVFile: cvFile,cvName));
+    emit(CvHereState(cVFile: cvFile, cvName));
   }
 
   cvDel() {

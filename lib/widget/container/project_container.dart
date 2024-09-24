@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 
+import 'package:tuwaiq_project/models/projects_model.dart';
+
 class ProjectContainer extends StatelessWidget {
   final Function()? onTap;
-  final String imagePath, bootcamp, rate, projectName;
+  final ProjectsModel projectsModel;
   const ProjectContainer({
     super.key,
     this.onTap,
-    required this.bootcamp,
-    required this.rate,
-    required this.imagePath,
-    required this.projectName,
+    required this.projectsModel,
   });
 
   @override
@@ -27,16 +26,35 @@ class ProjectContainer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              imagePath,
-              width: double.infinity,
-            ),
-            //Later make sure for responsive
-             Row(
+            projectsModel.logoUrl != null && projectsModel.logoUrl!.isNotEmpty
+                ? Image.network(
+                    projectsModel.logoUrl!,
+                    height: context.getHeight(multiply: 0.2),
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        "assets/image/flutter.png",
+                      );
+                    },
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      }
+
+                      return const Center(
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    },
+                    fit: BoxFit.cover,
+                  )
+                : Image.asset("assets/image/flutter.png"),
+            Row(
               children: [
                 Text(
-                  projectName,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  projectsModel.projectName == null
+                      ? "no name"
+                      : '${projectsModel.projectName?.substring(0, projectsModel.projectName!.length > 8 ? 8 : projectsModel.projectName?.length)}...',
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 const Spacer(),
                 const Icon(
@@ -44,13 +62,14 @@ class ProjectContainer extends StatelessWidget {
                   color: Colors.amberAccent,
                 ),
                 Text(
-                  '$rate/5',
-                  style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                  '${projectsModel.rating}/5',
+                  style: const TextStyle(
+                      fontSize: 13, fontWeight: FontWeight.bold),
                 )
               ],
             ),
-             Text(
-              bootcamp,
+            Text(
+              projectsModel.bootcampName ?? "no name",
               style: const TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.bold,

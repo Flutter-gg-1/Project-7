@@ -32,12 +32,17 @@ class OtpScreen extends StatelessWidget {
             if (state is SuccessState) {
               Navigator.pop(context);
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()));
+                  MaterialPageRoute(builder: (context) => HomeScreen()));
             }
             if (state is ErrorState) {
               Navigator.pop(context);
               ScaffoldMessenger.of(context)
-                  .showSnackBar( SnackBar(content: Text(state.msg)));
+                  .showSnackBar(SnackBar(content: Text(state.msg)));
+            }
+
+            if(state is ReSendOtpState){
+              Navigator.pop(context);
+
             }
           },
           child: Container(
@@ -86,7 +91,7 @@ class OtpScreen extends StatelessWidget {
                           ],
                         ),
                         context.addSpacer(multiply: 0.02),
-                         Pinput(
+                        Pinput(
                           length: 6,
                           onCompleted: (value) => bloc.otp = value,
                         ),
@@ -98,7 +103,10 @@ class OtpScreen extends StatelessWidget {
                                 padding:
                                     WidgetStateProperty.all(EdgeInsets.zero),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                
+                                 bloc.add(ReSendOtpEvent(email: email));
+                              },
                               child: Text(
                                 bloc.language.isArabic
                                     ? 'اعادة ارسال رمز التحقق'

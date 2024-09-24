@@ -4,8 +4,10 @@ import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/widget/button/custom_button.dart';
 
-dialog({required BuildContext context, Function()? onDone , required TextEditingController? controller }) {
-  // TextEditingController? controller;
+dialog(
+    {required BuildContext context,
+    Function()? onDone,
+    required TextEditingController? controller}) {
   String? Function(String?)? validate;
   final language = languageLocaitor.get<LanguageLayer>();
   return showDialog(
@@ -15,27 +17,33 @@ dialog({required BuildContext context, Function()? onDone , required TextEditing
             content: Container(
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(25)),
-              height: context.getWidth(multiply: 0.5),
+              height: context.getWidth(multiply: 0.55),
               width: context.getHeight(multiply: 0.9),
               padding: const EdgeInsets.all(16),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Update URL',
-                    style: TextStyle(fontSize: 20, color: Colors.black),
+                  Text(
+                    language.isArabic ? 'تحديث الرابط' : 'Update URL',
+                    style: const TextStyle(fontSize: 20, color: Colors.black),
                   ),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Row(
+                      textDirection: language.isArabic
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
                       children: [
                         SizedBox(
                           width: context.getWidth(multiply: 0.05),
                         ),
-                        const Text(
+                        Text(
                           'Discord ',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w500),
+                          textDirection: language.isArabic
+                              ? TextDirection.rtl
+                              : TextDirection.ltr,
                         ),
                       ],
                     ),
@@ -43,15 +51,18 @@ dialog({required BuildContext context, Function()? onDone , required TextEditing
                   SizedBox(
                     width: context.getWidth(multiply: 0.7),
                     child: TextFormField(
-                      // initialValue: controller?.text ,
-
+                      textDirection: language.isArabic
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
                       validator: validate,
                       controller: controller,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintStyle: TextStyle(color: Colors.black38),
-                        hintText: 'https://discord.imaha.com',
-                      ),
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          hintStyle: const TextStyle(color: Colors.black38),
+                          hintText: 'https://discord.imaha.com',
+                          hintTextDirection: language.isArabic
+                              ? TextDirection.rtl
+                              : TextDirection.ltr),
                     ),
                   ),
                   SizedBox(

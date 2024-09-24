@@ -14,6 +14,8 @@ final class LoadingState extends AuthState {}
 
 final class SuccessState extends AuthState {}
 
+final class ReSendOtpState extends AuthState {}
+
 final class ErrorState extends AuthState {
   final String msg;
 

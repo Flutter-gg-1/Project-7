@@ -13,9 +13,29 @@ class ProjectImagesChangeEvent extends EditEvent {
   ProjectImagesChangeEvent({required this.selectedImages});
 }
 
+class IsEditEvent extends EditEvent {
+  final bool isEdit;
+
+  IsEditEvent({required this.isEdit});
+}
+
+class IsPublicEvent extends EditEvent {
+  final bool isPublic;
+
+  IsPublicEvent({required this.isPublic});
+}
+
+class AllowRatingEvent extends EditEvent {
+  final bool allowRating;
+
+  AllowRatingEvent({required this.allowRating});
+}
+
 class ChangeLogoEvent extends EditEvent {}
 
 class ChangeImagesEvent extends EditEvent {}
+
+class DefaultEvent extends EditEvent {}
 
 class ChangeBaseEvent extends EditEvent {}
 
@@ -28,19 +48,17 @@ class ChangePresentationEvent extends EditEvent {}
 
 class ChangeLinksEvent extends EditEvent {}
 
+class ChangeStatusEvent extends EditEvent {
+  final String projectId;
 
-
+  ChangeStatusEvent({required this.projectId});
+}
 
 class AddMembersEvent extends EditEvent {}
 
-
 class ChangeMembersEvent extends EditEvent {
-
   //  final List<String> names;
   // final List<String> position;
 
   // ChangeMembersEvent({required this.names, required this.position});
 }
-
-
-

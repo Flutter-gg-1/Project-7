@@ -46,7 +46,7 @@ class CustomeCampStatusProject extends StatelessWidget {
           ),
           child: Center(
               child: Text(
-            textContent,
+            '${textContent.substring(0, textContent.length > 9 ? 9 : textContent.length)}...',
             style: TextStyle(fontSize: sizeText, color: Colors.black),
           )),
         ),

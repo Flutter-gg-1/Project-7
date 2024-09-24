@@ -8,12 +8,14 @@ class CustomeTextFormProfile extends StatelessWidget {
     this.validator,
     this.contentText,
     required this.hint,
+    required this.isArabic,
   });
 
   final TextEditingController? controller;
   final String Function(String?)? validator;
   final String? contentText;
   final String hint;
+  final bool isArabic;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,11 +27,12 @@ class CustomeTextFormProfile extends StatelessWidget {
       ),
       child: Center(
         child: TextFormField(
-          // initialValue: contentText,
           validator: validator,
           controller: controller,
+          textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
           decoration: InputDecoration(
             hintText: hint,
+            hintTextDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
             hintStyle: const TextStyle(color: Color(0xffA2A0A0)),
             border: InputBorder.none,
             contentPadding: const EdgeInsets.symmetric(horizontal: 16),
