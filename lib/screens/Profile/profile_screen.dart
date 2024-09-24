@@ -99,7 +99,7 @@ class ProfileScreen extends StatelessWidget {
                                     border: Border.all(
                                         color: Colors.white, width: 4)),
                                 child: ClipOval(
-                                    child: profile.imageUrl == null
+                                    child: profile.imageUrl == 'null'
                                         ? Image.asset(
                                             'assets/pfp.png',
                                             width: 68,
