@@ -6,7 +6,7 @@ import 'package:tuwaiq_project/screens/search/cubit/search_screen_cubit.dart';
 import 'package:tuwaiq_project/widget/container/project_container.dart';
 import 'package:tuwaiq_project/widget/search_screen/info_serch_coulm_widget.dart';
 import 'package:tuwaiq_project/widget/textformfeild/custom_text_feild.dart';
-import 'package:tuwaiq_project/data_layer/language_layer.dart';
+
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});

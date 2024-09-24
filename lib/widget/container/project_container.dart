@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
-import 'package:tuwaiq_project/models/profile_model.dart';
+
 import 'package:tuwaiq_project/models/projects_model.dart';
 
 class ProjectContainer extends StatelessWidget {

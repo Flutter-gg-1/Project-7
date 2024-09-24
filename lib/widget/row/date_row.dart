@@ -24,7 +24,7 @@ class DateRow extends StatelessWidget {
             const Text('Start Date'),
             context.addSpacer(multiply: 0.008),
             SizedBox(
-                height: context.getHeight(multiply: 0.06),
+                height: context.getHeight(multiply: 0.09),
                 width: context.getWidth(multiply: 0.26),
                 child: NormalTextFormFeild(
                     controller: startDateController,
@@ -38,7 +38,7 @@ class DateRow extends StatelessWidget {
             const Text('End Date'),
             context.addSpacer(multiply: 0.008),
             SizedBox(
-                height: context.getHeight(multiply: 0.06),
+                height: context.getHeight(multiply: 0.09),
                 width: context.getWidth(multiply: 0.26),
                 child: NormalTextFormFeild(
                   controller: endDateController,
@@ -53,7 +53,7 @@ class DateRow extends StatelessWidget {
             const Text('Presentation Date'),
             context.addSpacer(multiply: 0.008),
             SizedBox(
-                height: context.getHeight(multiply: 0.06),
+                height: context.getHeight(multiply: 0.09),
                 width: context.getWidth(multiply: 0.26),
                 child: NormalTextFormFeild(
                   controller: presentationDateController,

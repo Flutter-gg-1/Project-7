@@ -1,7 +1,6 @@
-import 'package:tuwaiq_project/models/images_project_model.dart';
+
 import 'package:tuwaiq_project/models/link_model.dart';
-import 'package:tuwaiq_project/models/links_project_model.dart';
-import 'package:tuwaiq_project/models/members_project_model.dart';
+
 import 'package:tuwaiq_project/models/projects_model.dart';
 
 class ProfileModel {
@@ -42,7 +41,7 @@ class ProfileModel {
         .toList();
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    resumeFile = json['resume_url'];
+    resumeFile = json['resume'];
   }
 
   Map<String, dynamic> toJson() {
@@ -57,7 +56,7 @@ class ProfileModel {
     data['projects'] = projects.map((e) => e.toJson()).toList();
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
-    data['resume_url'] = resumeFile;
+    data['resume'] = resumeFile;
     return data;
   }
 }

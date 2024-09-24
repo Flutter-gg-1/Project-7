@@ -9,5 +9,8 @@ final authLocator = GetIt.instance;
 Future<void> setup() async {
   await GetStorage.init();
   languageLocaitor.registerSingleton<LanguageLayer>(LanguageLayer());
+
   authLocator.registerSingleton<AuthLayerData>(AuthLayerData());
+  print(authLocator.get<AuthLayerData>().auth?.token);
+  print(authLocator.get<AuthLayerData>().auth?.id);
 }

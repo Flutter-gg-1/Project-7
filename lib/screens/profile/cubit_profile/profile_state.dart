@@ -4,6 +4,7 @@ part of 'profile_cubit.dart';
 sealed class ProfileState {}
 
 final class ProfileInitial extends ProfileState {}
+final class LodaingState extends ProfileState {}
 
 final class ShowProfileState extends ProfileState {
   final ProfileModel profileModel;

@@ -1,11 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tuwaiq_project/data_layer/auth_layer.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
-import 'package:tuwaiq_project/screens/auth/bloc/auth_bloc.dart';
+import 'package:tuwaiq_project/helper/method/open_url.dart';
+
 import 'package:tuwaiq_project/screens/auth/login_screen.dart';
+import 'package:tuwaiq_project/screens/manage/manage_project_screen.dart';
 import 'package:tuwaiq_project/screens/profile/cubit_profile/profile_cubit.dart';
 import 'package:tuwaiq_project/screens/profile/profile_information_screen.dart';
 import 'package:tuwaiq_project/services/setup.dart';
@@ -13,7 +17,7 @@ import 'package:tuwaiq_project/widget/links_profile/custome_links_profile.dart';
 import 'package:tuwaiq_project/widget/links_profile/custome_title_text_profile.dart';
 import 'package:tuwaiq_project/widget/list_tile/custome_listtile_profile.dart';
 import 'package:tuwaiq_project/widget/status_profile/custome_status_profile.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -72,11 +76,17 @@ class ProfileScreen extends StatelessWidget {
                         child: ListTile(
                           trailing: const Icon(Icons.arrow_forward_ios,
                               color: Colors.black),
-                          leading: const CircleAvatar(
-                            radius: 30,
-                            backgroundImage:
-                                AssetImage('assets/image/Search-amico(1).png'),
-                          ),
+                          leading: CircleAvatar(
+                              radius: 30,
+                              onBackgroundImageError: (exception, stackTrace) {
+                                const AssetImage(
+                                    'assets/image/Search-amico(1).png');
+                              },
+                              backgroundImage: state.profileModel.imageFile !=
+                                      null
+                                  ? NetworkImage(state.profileModel.imageFile!)
+                                  : AssetImage(
+                                      'assets/image/Search-amico(1).png')),
                           title: Text(
                             '${state.profileModel.firstName} ${state.profileModel.lastName}',
                             style: const TextStyle(
@@ -86,7 +96,7 @@ class ProfileScreen extends StatelessWidget {
                             ),
                           ),
                           subtitle: Text(
-                            '${state.profileModel.role} /n ${state.profileModel.id}',
+                            '${state.profileModel.role}  ${state.profileModel.id}',
                             style: const TextStyle(
                               fontSize: 14,
                               color: Color(0xff6E7386),
@@ -131,10 +141,11 @@ class ProfileScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                         onTap: () async {
-                          await launchUrl(
-                              Uri.parse(state.profileModel.link.linkedin ??
-                                  "fake_url"),
-                              mode: LaunchMode.externalApplication);
+                          log("${state.profileModel.link.linkedin}");
+                          await openUrl(
+                              context: context,
+                              url:
+                                  "https://${state.profileModel.link.linkedin}");
                         },
                       ),
                       CustomeLinksProfile(
@@ -143,8 +154,10 @@ class ProfileScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                         onTap: () async {
-                          await launchUrl(
-                              Uri.parse(state.profileModel.link.github ?? " "));
+                          log("${state.profileModel.link.github}");
+                          await openUrl(
+                              context: context,
+                              url: "https://${state.profileModel.link.github}");
                         },
                       ),
                       CustomeLinksProfile(
@@ -153,13 +166,22 @@ class ProfileScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                         onTap: () async {
-                          await launchUrl(Uri.parse(
-                              state.profileModel.link.bindlink ?? " "));
+                          log("${state.profileModel.link.bindlink}");
+                          await openUrl(
+                              context: context,
+                              url:
+                                  "https://${state.profileModel.link.bindlink}");
                         },
                       ),
                       CustomeLinksProfile(
                         text: 'CV',
-                        onTap: () {},
+                        onTap: () async {
+                          log("${state.profileModel.link.resumeFile}");
+
+                          await openUrl(
+                              context: context,
+                              url: state.profileModel.link.resumeFile);
+                        },
                       ),
                     ],
                   ),
@@ -214,6 +236,37 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           colorText: Colors.black,
                           text: language.isArabic ? 'عن التطبيق' : 'About App',
+                          isArabic: language.isArabic,
+                        ),
+                        CustomeListTileProfile(
+                          onTap: () {
+                            if (state.profileModel.role != "user") {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) {
+                                  return const ManageProjectScreen();
+                                },
+                              ));
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text(
+                                  "you are not admin",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                backgroundColor: Colors.red,
+                              ));
+                            }
+                          },
+                          iconListTile: Icon(
+                            Icons.chrome_reader_mode,
+                            size: context.getHeight(multiply: 0.035),
+                            color: const Color(0x889B37FF).withOpacity(0.70),
+                          ),
+                          colorText: Colors.black,
+                          text:
+                              language.isArabic ? 'اضافة مشروع' : 'Add project',
                           isArabic: language.isArabic,
                         ),
                       ],

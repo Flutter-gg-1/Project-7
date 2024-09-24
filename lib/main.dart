@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tuwaiq_project/data_layer/auth_layer.dart';
-import 'package:tuwaiq_project/screens/home_screen.dart';
+
 import 'package:tuwaiq_project/screens/profile/cubit_profile/profile_cubit.dart';
 import 'package:tuwaiq_project/screens/profile/cv_handle_cubit/cv_handle_cubit.dart';
 import 'package:tuwaiq_project/screens/profile/img_handle_cubit/img_handle_cubit.dart';
-import 'package:tuwaiq_project/screens/projectView/edit/edit_screen.dart';
+
 import 'package:tuwaiq_project/screens/splach/splach_screen.dart';
 
 import 'package:tuwaiq_project/services/setup.dart';

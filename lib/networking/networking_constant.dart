@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:tuwaiq_project/data_layer/auth_layer.dart';
-import 'package:tuwaiq_project/services/setup.dart';
+
 
 abstract class NetworkingConstant {
   Dio dio = Dio();
-  String? currentToken = authLocator.get<AuthLayerData>().auth!.token;
+  // String? currentToken = authLocator.get<AuthLayerData>().auth!.token;
   final String baseUrl = "https://tuwaiq-gallery.onrender.com/v1";
   final String endCreateUser = "/auth/create/new/account";
   final String endLogin = "/auth/login";
