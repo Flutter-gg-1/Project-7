@@ -8,6 +8,7 @@ final class ViewProjectDetailsInitial extends ViewProjectDetailsState {}
 final class LoadingState extends ViewProjectDetailsState {}
 
 final class SuccessState extends ViewProjectDetailsState {}
+final class SuccessDeleteState extends ViewProjectDetailsState {}
 
 final class ErrorState extends ViewProjectDetailsState {
   final String msg;

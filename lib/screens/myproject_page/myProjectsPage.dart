@@ -77,7 +77,7 @@ class MyProjectsScreenState extends State<MyProjectsScreen>
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const AddProjectScreen(),
+                    builder: (context) =>  AddProjectScreen(),
                   ),
                 );
               },

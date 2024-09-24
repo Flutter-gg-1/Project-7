@@ -115,10 +115,11 @@ mixin UpdateProjectMethods on ConstantNetwork {
 
     // update members
     try {
-      print(members.toString());
+      List<dynamic> membersList = members.map((member) => member).toList();
+      print(membersList);
       final response = await dio.put(
           "$baseurl$updateProjectMembersEndPoint/$projectID",
-          data: {"members": members},
+          data: {"members": membersList},
           options: Options(headers: {"Authorization": "Bearer $token"}));
       print('members $response');
     } on DioException catch (e) {

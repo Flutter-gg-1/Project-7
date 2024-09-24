@@ -47,8 +47,8 @@ class EditProfile extends StatelessWidget {
                 ),
               );
             } else if (state is SuccessState) {
-              Navigator.pop(context);
-              Navigator.pop(context); //x2
+              Navigator.pop(context, true);
+              Navigator.pop(context, true); //x2
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text(
@@ -145,12 +145,14 @@ class EditProfile extends StatelessWidget {
                         TextButton(
                           onPressed: () async {
                             if (!isImagePickerActive) {
-                              isImagePickerActive = true; // Mark picker as active
+                              isImagePickerActive =
+                                  true; // Mark picker as active
                               try {
                                 final image = await picker.pickImage(
                                     source: ImageSource.gallery);
                                 if (image != null) {
-                                  bloc.add(UploadImgEvent(img: File(image.path)));
+                                  bloc.add(
+                                      UploadImgEvent(img: File(image.path)));
                                 }
                               } catch (e) {
                                 // Handle the case where image picking fails

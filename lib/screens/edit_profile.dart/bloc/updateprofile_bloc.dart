@@ -52,6 +52,7 @@ class UpdateprofileBloc extends Bloc<UpdateprofileEvent, UpdateprofileState> {
           img: img?.path ?? '',
           cv: file?.path ?? '',
         );
+        await getIt.get<DataLayer>().getUserr();
         emit(SuccessState());
       } on FormatException catch (e) {
         emit(ErrorState(msg: e.message));

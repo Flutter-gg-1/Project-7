@@ -23,4 +23,18 @@ class ViewProjectDetailsCubit extends Cubit<ViewProjectDetailsState> {
       emit(ErrorState(msg: e.toString()));
     }
   }
+
+  deleteProject(String id) async {
+    try {
+      await api.deleteProject(
+        projectID: id,
+        token: getIt.get<DataLayer>().authUser!.token,
+      );
+      emit(SuccessDeleteState());
+    } on FormatException catch (e) {
+      emit(ErrorState(msg: e.message));
+    } catch (e) {
+      emit(ErrorState(msg: e.toString()));
+    }
+  }
 }

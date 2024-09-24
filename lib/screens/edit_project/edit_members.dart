@@ -1,6 +1,5 @@
 part of 'edit_project_screen.dart';
 
-
 // --------------- edit members --------------------
 
 class ProjectMembersSection extends StatelessWidget {
@@ -13,7 +12,7 @@ class ProjectMembersSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Modify Projects Members',
+        const Text('Modify Project Members',
             style: TextStyle(
                 color: Color(0xff262626),
                 fontSize: 18,
@@ -71,20 +70,39 @@ class ProjectMembersSection extends StatelessWidget {
   }
 }
 
-class MemberRow extends StatelessWidget {
+class MemberRow extends StatefulWidget {
   final int index;
 
   const MemberRow({super.key, required this.index});
 
   @override
+  _MemberRowState createState() => _MemberRowState();
+}
+
+class _MemberRowState extends State<MemberRow> {
+  late TextEditingController memberIdController;
+  late TextEditingController memberRoleController;
+
+  @override
+  void initState() {
+    super.initState();
+    final bloc = context.read<EditProjectBloc>();
+    memberIdController =
+        TextEditingController(text: bloc.members?[widget.index].id ?? '');
+    memberRoleController =
+        TextEditingController(text: bloc.members?[widget.index].position ?? '');
+  }
+
+  @override
+  void dispose() {
+    memberIdController.dispose();
+    memberRoleController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final bloc = context.read<EditProjectBloc>();
-    TextEditingController memberIdController = TextEditingController();
-    TextEditingController memberRoleController = TextEditingController();
-
-    memberIdController.text = bloc.members?[index].id ?? '';
-
-    memberRoleController.text = bloc.members?[index].position ?? '';
 
     return Column(
       children: [
@@ -102,9 +120,9 @@ class MemberRow extends StatelessWidget {
                 },
                 onChange: (value) {
                   bloc.add(UpdateMembersEvent(
-                    index: index,
+                    index: widget.index,
                     id: value,
-                    role: bloc.members![index].position!,
+                    role: bloc.members![widget.index].position!,
                   ));
                   return null;
                 },
@@ -123,8 +141,8 @@ class MemberRow extends StatelessWidget {
                 },
                 onChange: (value) {
                   bloc.add(UpdateMembersEvent(
-                    index: index,
-                    id: bloc.members![index].id!,
+                    index: widget.index,
+                    id: bloc.members![widget.index].id!,
                     role: value,
                   ));
                   return null;
@@ -133,7 +151,7 @@ class MemberRow extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {
-                bloc.add(DeleteMembersEvent(index: index));
+                bloc.add(DeleteMembersEvent(index: widget.index));
               },
               icon: const Icon(Icons.delete, color: Color(0xffFF8182)),
             ),
@@ -141,7 +159,7 @@ class MemberRow extends StatelessWidget {
         ),
         const SizedBox(
           height: 10,
-        )
+        ),
       ],
     );
   }

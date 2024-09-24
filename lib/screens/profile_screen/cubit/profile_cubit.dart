@@ -17,4 +17,8 @@ class ProfileCubit extends Cubit<ProfileState> {
       String linkedin, String email, String cv) {
         emit(getProfileData(firstName, lastName, github, linkedin, email, cv));
       }
+
+      refreshPage(){
+        emit(ProfileInitial());
+      }
 }

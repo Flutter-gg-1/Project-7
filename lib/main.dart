@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:project_judge/screens/loading%20screen/loading_screen.dart';
 import 'package:project_judge/setup/init_setup.dart';
@@ -6,15 +5,7 @@ import 'package:project_judge/setup/init_setup.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setup();
-  runApp(
-    DevicePreview(
-      enabled: true,
-      tools: const [
-        ...DevicePreview.defaultTools,
-      ],
-      builder: (context) => const MainApp(),
-    ),
-  );
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
