@@ -8,6 +8,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/models/projects_model.dart';
 import 'package:tuwaiq_project/networking/networking_api.dart';
+import 'package:tuwaiq_project/screens/home_screen.dart';
 import 'package:tuwaiq_project/widget/column/info_coulmn.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:tuwaiq_project/data_layer/auth_layer.dart';
@@ -61,20 +62,12 @@ class ProjectViewScreen extends StatelessWidget {
                         )).then(
                       (value) async {
                         if (value == true) {
-                          var list = await NetworkingApi().profileGet();
-                          for (var element in list.projects) {
-                            if (element.projectId == projectsModel.projectId) {
-                              projectsModel = element;
-                              Navigator.pop(context);
-                              Navigator.pushReplacement(
+                         Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ProjectViewScreen(
-                                        projectsModel: projectsModel),
+                                    builder: (context) => HomeScreen(
+                                        ),
                                   ));
-                              break;
-                            }
-                          }
                         }
                       },
                     );

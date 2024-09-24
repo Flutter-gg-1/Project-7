@@ -3,7 +3,7 @@ class UserModel {
   late final String? token;
   late final String? refreshToken;
   late final int? expiresAt;
-  late final String? id;
+  late  String? id;
 
   UserModel.fromJson(Map<String, dynamic> json) {
     token = json['token'];
@@ -17,6 +17,7 @@ class UserModel {
     data['token'] = token;
     data['refreshToken'] = refreshToken;
     data['expiresAt'] = expiresAt;
+    data['id'] = id;
     return data;
   }
 }

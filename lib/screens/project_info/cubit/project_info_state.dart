@@ -11,4 +11,10 @@ final class ImgChangeState extends ProjectInfoState {
   ImgChangeState({required this.imgIndex});
 }
 
-final class PageUpdateState extends ProjectInfoState {}
+final class PageUpdateState extends ProjectInfoState {
+  final ProjectsModel projectsModel;
+
+  PageUpdateState({required this.projectsModel});
+}
+
+final class LodingState extends ProjectInfoState {}
