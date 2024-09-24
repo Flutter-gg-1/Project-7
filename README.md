@@ -183,9 +183,5 @@ Rawan Al Riyad
 
 ![Screenshot 1446-03-21 at 12 55 38 AM](https://github.com/user-attachments/assets/464fb044-ec72-421f-a183-bc968a3fda39)
 =======
-### 📝 Deadline: 
-- One week from today, by 9:59 AM.
 
-### ✨ Motivational Note: 
-- This is your chance to bring your creativity and skills together—let's build something amazing!
 
