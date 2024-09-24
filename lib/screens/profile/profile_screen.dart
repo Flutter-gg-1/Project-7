@@ -7,7 +7,7 @@ import 'package:tuwaiq_project/data_layer/auth_layer.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/helper/method/open_url.dart';
-import 'package:tuwaiq_project/screens/auth/bloc/auth_bloc.dart';
+
 import 'package:tuwaiq_project/screens/auth/login_screen.dart';
 import 'package:tuwaiq_project/screens/manage/manage_project_screen.dart';
 import 'package:tuwaiq_project/screens/profile/cubit_profile/profile_cubit.dart';
@@ -17,7 +17,7 @@ import 'package:tuwaiq_project/widget/links_profile/custome_links_profile.dart';
 import 'package:tuwaiq_project/widget/links_profile/custome_title_text_profile.dart';
 import 'package:tuwaiq_project/widget/list_tile/custome_listtile_profile.dart';
 import 'package:tuwaiq_project/widget/status_profile/custome_status_profile.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

@@ -1,7 +1,6 @@
-import 'package:tuwaiq_project/models/images_project_model.dart';
+
 import 'package:tuwaiq_project/models/link_model.dart';
-import 'package:tuwaiq_project/models/links_project_model.dart';
-import 'package:tuwaiq_project/models/members_project_model.dart';
+
 import 'package:tuwaiq_project/models/projects_model.dart';
 
 class ProfileModel {

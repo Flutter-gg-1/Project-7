@@ -120,12 +120,17 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                           );
+
+                          log("scan is ${result.type}");
+
+                          if(result.rawContent.isNotEmpty){
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
                                     RatingScreen(projectId: result.rawContent),
                               ));
+                        }
                         } on PlatformException catch (e) {
                           scanResult = ScanResult(
                             rawContent: e.code ==

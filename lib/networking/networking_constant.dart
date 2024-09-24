@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:tuwaiq_project/data_layer/auth_layer.dart';
-import 'package:tuwaiq_project/services/setup.dart';
+
 
 abstract class NetworkingConstant {
   Dio dio = Dio();

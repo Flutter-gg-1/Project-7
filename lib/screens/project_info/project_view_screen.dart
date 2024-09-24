@@ -1,20 +1,18 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:carousel_slider/carousel_options.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/models/projects_model.dart';
-import 'package:tuwaiq_project/networking/networking_api.dart';
+
 import 'package:tuwaiq_project/screens/home_screen.dart';
 import 'package:tuwaiq_project/widget/column/info_coulmn.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 import 'package:tuwaiq_project/data_layer/auth_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 import 'package:tuwaiq_project/helper/method/open_url.dart';
-import 'package:tuwaiq_project/models/profile_model.dart';
+
 import 'package:tuwaiq_project/screens/projectView/edit/edit_screen.dart';
 import 'package:tuwaiq_project/screens/project_info/cubit/project_info_cubit.dart';
 import 'package:tuwaiq_project/services/setup.dart';
@@ -106,7 +104,32 @@ class ProjectViewScreen extends StatelessWidget {
                   width: context.getWidth(multiply: 0.3),
                   decoration: const BoxDecoration(
                       color: Color(0xffCACACA), shape: BoxShape.circle),
-                  child: Image.asset('assets/image/Search-amico(1).png'),
+                      
+                  child:
+
+                   ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.network(
+                        projectsModel.logoUrl ?? " ",
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset('assets/image/Search-amico(1).png');
+                        },
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          }
+
+                          return const Center(
+                            child: Center(child: CircularProgressIndicator()),
+                          );
+                        },
+                        fit: BoxFit.cover,
+                      ))
+                  
+                  
+                  
+                  
+                   ,
                 ),
                 SizedBox(
                   height: context.getHeight(multiply: 0.02),
