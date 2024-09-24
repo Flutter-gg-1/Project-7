@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
@@ -121,16 +120,14 @@ class HomeScreen extends StatelessWidget {
                             ),
                           );
 
-                          log("scan is ${result.type}");
-
-                          if(result.rawContent.isNotEmpty){
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    RatingScreen(projectId: result.rawContent),
-                              ));
-                        }
+                          if (result.rawContent.isNotEmpty) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => RatingScreen(
+                                      projectId: result.rawContent),
+                                ));
+                          }
                         } on PlatformException catch (e) {
                           scanResult = ScanResult(
                             rawContent: e.code ==

@@ -60,12 +60,11 @@ class ProjectViewScreen extends StatelessWidget {
                         )).then(
                       (value) async {
                         if (value == true) {
-                         Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => HomeScreen(
-                                        ),
-                                  ));
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomeScreen(),
+                              ));
                         }
                       },
                     );
@@ -104,15 +103,13 @@ class ProjectViewScreen extends StatelessWidget {
                   width: context.getWidth(multiply: 0.3),
                   decoration: const BoxDecoration(
                       color: Color(0xffCACACA), shape: BoxShape.circle),
-                      
-                  child:
-
-                   ClipRRect(
+                  child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Image.network(
                         projectsModel.logoUrl ?? " ",
                         errorBuilder: (context, error, stackTrace) {
-                          return Image.asset('assets/image/Search-amico(1).png');
+                          return Image.asset(
+                              'assets/image/Search-amico(1).png');
                         },
                         loadingBuilder: (context, child, loadingProgress) {
                           if (loadingProgress == null) {
@@ -124,12 +121,7 @@ class ProjectViewScreen extends StatelessWidget {
                           );
                         },
                         fit: BoxFit.cover,
-                      ))
-                  
-                  
-                  
-                  
-                   ,
+                      )),
                 ),
                 SizedBox(
                   height: context.getHeight(multiply: 0.02),

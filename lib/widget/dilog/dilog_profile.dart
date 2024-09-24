@@ -57,8 +57,8 @@ dialog(
                       validator: validate,
                       controller: controller,
                       decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintStyle: TextStyle(color: Colors.black38),
+                          border: const OutlineInputBorder(),
+                          hintStyle: const TextStyle(color: Colors.black38),
                           hintText: 'https://discord.imaha.com',
                           hintTextDirection: language.isArabic
                               ? TextDirection.rtl

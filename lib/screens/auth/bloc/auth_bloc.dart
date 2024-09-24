@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:tuwaiq_project/data_layer/auth_layer.dart';
@@ -63,20 +61,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final UserModel userAuth =
             await api.verifyOtp(email: event.email, otp: otp!);
 
-                    log("pre");
-
-
         await authLocator.get<AuthLayerData>().saveAuth(authData: userAuth);
         var temp = await api.profileGet();
-        log("after");
 
         userAuth.id = temp.id;
 
         await authLocator.get<AuthLayerData>().saveAuth(authData: userAuth);
 
         emit(SuccessState());
-      }
-       catch (error) {
+      } catch (error) {
         emit(ErrorState(msg: "There is error with on the server"));
       }
     });
@@ -89,8 +82,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<ReSendOtpEvent>((event, emit) async {
       emit(LoadingState());
-
-      print(event.email);
 
       try {
         final emailLogin = await api.userLogin(

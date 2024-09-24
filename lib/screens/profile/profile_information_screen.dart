@@ -104,6 +104,7 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
             }
           },
           child: Scaffold(
+            backgroundColor: Colors.white,
             body: SafeArea(
                 child: SingleChildScrollView(
               child: Column(
@@ -276,7 +277,7 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                                     language.isArabic
                                         ? "لا يوجد ملفات"
                                         : "no file",
-                                    style: TextStyle(fontSize: 16)),
+                                    style: const TextStyle(fontSize: 16)),
                             trailing: language.isArabic
                                 ? const Text("لا يوجد ملفات",
                                     style: TextStyle(fontSize: 16))

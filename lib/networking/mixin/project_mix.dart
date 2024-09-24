@@ -1,8 +1,6 @@
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:tuwaiq_project/data_layer/auth_layer.dart';
-import 'package:tuwaiq_project/models/profile_model.dart';
 import 'package:tuwaiq_project/models/projects_model.dart';
 import 'package:tuwaiq_project/networking/networking_constant.dart';
 import 'package:tuwaiq_project/services/setup.dart';

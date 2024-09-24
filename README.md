@@ -4,7 +4,7 @@
 ## Overview
 
 ### Purpose
-The purpose of this app is to allow Supervisors to manage their projects. Supervisors can promote users to Team Lead to manage project details and assign tasks to members who participate. 
+The purpose of this app is to allow Supervisors to manage their projects. Supervisors can promote users to Team Lead to manage project details and assign tasks to members who participate.
 
 ### Features
 - **API Integration**: The project connects to an API for data storage on the server.
@@ -31,6 +31,8 @@ The purpose of this app is to allow Supervisors to manage their projects. Superv
 - **Create Project**: The TeamLead can only create a Project and fill all the requirements about project as a Team Lead and  can links it with other Members.
   
 - **Update Project**: The TeamLead can only update all his Project.
+
+- **Edit Logo, Base, and assets/readme/Images...**: Team Leads can edit the project’s logo, base, and assets/readme/images and more.
 
 
 ## Widgets & External Packages
@@ -59,15 +61,15 @@ The purpose of this app is to allow Supervisors to manage their projects. Superv
 
 - **Font Awesome Flutter**: A package to use Font Awesome icons in Flutter apps.
 
-- **image_picker**: A tool for picking images from the gallery or camera.
+- **assets/readme/image_picker**: A tool for picking assets/readme/images from the gallery or camera.
 
 - **url_launcher**: A Flutter plugin for launching a URL.
 
-- **network_to_file_image**: Downloads images from the internet and stores them as files for future use.
+- **network_to_file_assets/readme/image**: Downloads assets/readme/images from the internet and stores them as files for future use.
 
 - **file_picker**: Helps in picking files from the user's device.
 
-- **image**: The Dart Image Library provides the ability to load, save, and manipulate images in a variety of image file formats.
+- **assets/readme/image**: The Dart assets/readme/Image Library provides the ability to load, save, and manipulate assets/readme/images in a variety of assets/readme/image file formats.
 
 - **smooth_page_indicator**:Customizable animated page indicator with a set of built-in effects.
 
@@ -75,7 +77,7 @@ The purpose of this app is to allow Supervisors to manage their projects. Superv
 
 - **flutter_rating_bar**:A simple yet fully customizable ratingbar for flutter which also include a rating bar indicator, supporting any fraction of rating.
 
-- **cached_network_image**:Flutter library to load and cache network images. Can also be used with placeholder and error widgets.
+- **cached_network_assets/readme/image**:Flutter library to load and cache network assets/readme/images. Can also be used with placeholder and error widgets.
 
 - **qr_flutter**:QR.Flutter is a Flutter library for simple and fast QR code rendering via a Widget or custom painter.
 
@@ -114,19 +116,36 @@ The purpose of this app is to allow Supervisors to manage their projects. Superv
 
 ### Screenshot
 
-![alt text](assets/readme/Home_all_Project_Img.png)
-![alt text](assets/readme/My_Project_Img.png)
-![alt text](assets/readme/Search_Project_Img.png)
-![alt text](assets/readme/View_Project_Img1.png)
+![alt text](assets/readme/image-7.png)
+![alt text](assets/readme/image-8.png)
+![alt text](assets/readme/image-9.png)
+![alt text](assets/readme/image.png)
+![alt text](assets/readme/image-1.png)
+![alt text](assets/readme/image-2.png)
+![alt text](assets/readme/image-3.png)
+![alt text](assets/readme/image-4.png)
+![alt text](assets/readme/image-5.png)
+![alt text](assets/readme/image-6.png)
 
 
+### Demo Video
 
-### Demo GIF
-
-![assets/readme/blogGif.gif](assets/readme/clotheGif.gif)
+![Demo video](assets/readme/vedio.mp4)
 
 ## Team
 
 - [Basel](https://github.com/Basel-75)
 - [Anas Aljuhani](https://github.com/Anas-Aljuhani)
 - [Ammar](https://github.com/Ammarx9)
+
+## Additional Features
+
+### Team Lead Capabilities
+
+- **Edit Logo, Base, and assets/readme/Images..**: Team Leads can now edit the project’s logo, base, and assets/readme/images.
+
+#### Rating Features:
+
+- **QR Code Scanner**: Users can rate projects by scanning a QR code.
+
+- **QR Code Generator**: Generate QR codes for projects to facilitate rating.

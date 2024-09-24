@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,7 +15,6 @@ import 'package:tuwaiq_project/widget/links_profile/custome_links_profile.dart';
 import 'package:tuwaiq_project/widget/links_profile/custome_title_text_profile.dart';
 import 'package:tuwaiq_project/widget/list_tile/custome_listtile_profile.dart';
 import 'package:tuwaiq_project/widget/status_profile/custome_status_profile.dart';
-
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -85,7 +82,7 @@ class ProfileScreen extends StatelessWidget {
                               backgroundImage: state.profileModel.imageFile !=
                                       null
                                   ? NetworkImage(state.profileModel.imageFile!)
-                                  : AssetImage(
+                                  : const AssetImage(
                                       'assets/image/Search-amico(1).png')),
                           title: Text(
                             '${state.profileModel.firstName} ${state.profileModel.lastName}',
@@ -141,7 +138,6 @@ class ProfileScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                         onTap: () async {
-                          log("${state.profileModel.link.linkedin}");
                           await openUrl(
                               context: context,
                               url:
@@ -154,7 +150,6 @@ class ProfileScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                         onTap: () async {
-                          log("${state.profileModel.link.github}");
                           await openUrl(
                               context: context,
                               url: "https://${state.profileModel.link.github}");
@@ -166,7 +161,6 @@ class ProfileScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                         onTap: () async {
-                          log("${state.profileModel.link.bindlink}");
                           await openUrl(
                               context: context,
                               url:
@@ -176,8 +170,6 @@ class ProfileScreen extends StatelessWidget {
                       CustomeLinksProfile(
                         text: 'CV',
                         onTap: () async {
-                          log("${state.profileModel.link.resumeFile}");
-
                           await openUrl(
                               context: context,
                               url: state.profileModel.link.resumeFile);

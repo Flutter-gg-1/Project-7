@@ -1,9 +1,6 @@
-import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:tuwaiq_project/data_layer/language_layer.dart';
 import 'package:tuwaiq_project/helper/extinsion/size_config.dart';
 
@@ -17,9 +14,6 @@ import 'package:tuwaiq_project/screens/projectView/edit/componets/edit_presentat
 import 'package:tuwaiq_project/screens/projectView/edit/componets/edit_status.dart';
 import 'package:tuwaiq_project/services/setup.dart';
 import 'package:tuwaiq_project/shape/auth_shape.dart';
-import 'package:tuwaiq_project/widget/button/custom_button.dart';
-import 'package:tuwaiq_project/widget/row/date_row.dart';
-import 'package:tuwaiq_project/widget/textformfeild/normal_text_form_feild.dart';
 
 class EditScreen extends StatelessWidget {
   final String projectId;
